@@ -18,8 +18,8 @@ int	ft_memcmp(const void *address1, const void *address2, size_t n)
 	unsigned char	*bytes2;
 	unsigned int	i;
 
-	bytes1 = (unsigned char *)address1;
-	bytes2 = (unsigned char *)address2;
+	bytes1 = address1;
+	bytes2 = address2;
 	i = 0;
 	while (i < n)
 	{

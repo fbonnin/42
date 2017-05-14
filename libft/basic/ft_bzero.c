@@ -12,7 +12,7 @@
 
 #include "../libft.h"
 
-void	ft_bzero(void *address, size_t nb_bytes)
+void	ft_bzero(void *address, size_t n)
 {
 	ft_memset(address, 0, nb_bytes);
 }

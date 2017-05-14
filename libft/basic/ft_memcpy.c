@@ -18,8 +18,8 @@ void	*ft_memcpy(void *destination, const void *source, size_t n)
 	char			*src;
 	unsigned int	i;
 
-	dst = (char *)destination;
-	src = (char *)source;
+	dst = destination;
+	src = source;
 	i = 0;
 	while (i < n)
 	{

@@ -41,8 +41,8 @@ void		*ft_memmove(void *destination, const void *source, size_t n)
 	char *dst;
 	char *src;
 
-	dst = (char *)destination;
-	src = (char *)source;
+	dst = destination;
+	src = source;
 	if (destination < source)
 		ft_memmove1(dst, src, n);
 	else

@@ -12,12 +12,12 @@
 
 #include "../libft.h"
 
-char	*ft_strncpy(char *dst, const char *src, size_t len)
+char	*ft_strncpy(char *dst, const char *src, size_t n)
 {
 	unsigned int i;
 
 	i = 0;
-	while (i < len)
+	while (i < n)
 	{
 		if (src[i] == 0)
 			while (i < len)
