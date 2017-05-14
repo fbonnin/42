@@ -14,9 +14,9 @@
 
 int	ft_memcmp(const void *address1, const void *address2, size_t n)
 {
-	unsigned char	*bytes1;
-	unsigned char	*bytes2;
-	unsigned int	i;
+	const unsigned char	*bytes1;
+	const unsigned char	*bytes2;
+	unsigned int		i;
 
 	bytes1 = address1;
 	bytes2 = address2;

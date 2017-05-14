@@ -14,5 +14,5 @@
 
 void	ft_bzero(void *address, size_t n)
 {
-	ft_memset(address, 0, nb_bytes);
+	ft_memset(address, 0, n);
 }

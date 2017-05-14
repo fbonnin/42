@@ -38,8 +38,8 @@ static void	ft_memmove2(char *dst, char *src, size_t n)
 
 void		*ft_memmove(void *destination, const void *source, size_t n)
 {
-	char *dst;
-	char *src;
+	char 		*dst;
+	const char *src;
 
 	dst = destination;
 	src = source;

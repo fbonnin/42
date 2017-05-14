@@ -12,7 +12,7 @@
 
 #include "../libft.h"
 
-static int	ft_is_whitespace(char c)
+static int	ft_to_remove(char c)
 {
 	return (c == ' ' || c == '\n' || c == '\t');
 }
@@ -26,10 +26,10 @@ char		*ft_strtrim(char const *s)
 	if (s == NULL)
 		return (NULL);
 	i_first = 0;
-	while (ft_is_whitespace(s[i_first]))
+	while (ft_to_remove(s[i_first]))
 		i_first++;
 	i_last = ft_strlen(s) - 1;
-	while (i_last >= 0 && ft_is_whitespace(s[i_last]))
+	while (i_last >= 0 && ft_to_remove(s[i_last]))
 		i_last--;
 	len_result = i_last - i_first + 1;
 	if (len_result < 0)

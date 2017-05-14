@@ -14,12 +14,12 @@
 
 void	*ft_memchr(const void *address, int value, size_t n)
 {
-	unsigned char	*bytes;
-	unsigned int	i;
+	const unsigned char	*bytes;
+	unsigned int		i;
 
 	bytes = address;
 	i = 0;
-	while (i < nb_bytes)
+	while (i < n)
 	{
 		if (bytes[i] == value)
 			return (&bytes[i]);

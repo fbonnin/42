@@ -12,7 +12,7 @@
 
 #include "../libft.h"
 
-static char	**ft_alloc_words(char *s, char c)
+static char	**ft_alloc_words(char const *s, char c)
 {
 	char	**result;
 	int		i_s;
@@ -46,7 +46,7 @@ static int  ft_free_result(char **result, int i_word)
 }
 
 
-static int	ft_alloc_letters(char *s, char c, char **result)
+static int	ft_alloc_letters(char const *s, char c, char **result)
 {
 	int i_s;
 	int i_word;
@@ -75,7 +75,7 @@ static int	ft_alloc_letters(char *s, char c, char **result)
 	return (0);
 }
 
-static void	ft_copy(char *s, char c, char **result)
+static void	ft_copy(char const *s, char c, char **result)
 {
 	int i_s;
 	int i_word;
@@ -107,11 +107,11 @@ char		**ft_strsplit(char const *s, char c)
 
 	if (s == NULL)
 		return (NULL);
-	result = ft_alloc_words((char *)s, c);
+	result = ft_alloc_words(s, c);
 	if (result == NULL)
 		return (NULL);
-	if (ft_alloc_letters((char *)s, c, result) == -1)
+	if (ft_alloc_letters(s, c, result) == -1)
 		return (NULL);
-	ft_copy((char *)s, c, result);
+	ft_copy(s, c, result);
 	return (result);
 }

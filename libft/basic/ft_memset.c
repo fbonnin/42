@@ -19,7 +19,7 @@ void	*ft_memset(void *address, int value, size_t n)
 
 	bytes = address;
 	i = 0;
-	while (i < nb_bytes)
+	while (i < n)
 	{
 		bytes[i] = value;
 		i++;
