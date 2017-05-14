@@ -22,7 +22,7 @@ void	*ft_memchr(const void *address, int value, size_t n)
 	while (i < n)
 	{
 		if (bytes[i] == value)
-			return (&bytes[i]);
+			return ((void *)&bytes[i]);
 		i++;
 	}
 	return (NULL);

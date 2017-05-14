@@ -12,7 +12,7 @@
 
 #include "../libft.h"
 
-static void	ft_memmove1(char *dst, char *src, size_t n)
+static void	ft_memmove1(char *dst, const char *src, size_t n)
 {
 	unsigned int i;
 
@@ -24,7 +24,7 @@ static void	ft_memmove1(char *dst, char *src, size_t n)
 	}
 }
 
-static void	ft_memmove2(char *dst, char *src, size_t n)
+static void	ft_memmove2(char *dst, const char *src, size_t n)
 {
 	long long i;
 
