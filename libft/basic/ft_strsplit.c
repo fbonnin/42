@@ -33,6 +33,19 @@ static char	**ft_alloc_words(char *s, char c)
 	return (result);
 }
 
+static int  ft_free_result(char **result, int i_word)
+{
+	i_word--;
+	while (i_word >= 0)
+	{
+		free(result[i_word]);
+		i_word--;
+	}
+	free(result);
+	return (-1);
+}
+
+
 static int	ft_alloc_letters(char *s, char c, char **result)
 {
 	int i_s;
@@ -53,7 +66,7 @@ static int	ft_alloc_letters(char *s, char c, char **result)
 			}
 			result[i_word] = ft_strnew(len_word);
 			if (result[i_word] == NULL)
-				return (-1);
+				return (ft_free_result(result, i_word));
 			i_word++;
 		}
 		else
