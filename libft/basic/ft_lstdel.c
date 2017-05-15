@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 20:20:54 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/04/22 17:48:44 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/05/15 13:52:59 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
 	t_list *next;
 
 	if (alst == NULL || del == NULL)
-		return;
+		return ;
 	elem = *alst;
 	while (elem != NULL)
 	{

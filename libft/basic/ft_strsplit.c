@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 15:34:27 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/04/14 19:13:03 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/05/15 13:56:05 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	**ft_alloc_words(char const *s, char c)
 	return (result);
 }
 
-static int  ft_free_result(char **result, int i_word)
+static int	ft_free_result(char **result, int i_word)
 {
 	i_word--;
 	while (i_word >= 0)
@@ -44,7 +44,6 @@ static int  ft_free_result(char **result, int i_word)
 	free(result);
 	return (-1);
 }
-
 
 static int	ft_alloc_letters(char const *s, char c, char **result)
 {
