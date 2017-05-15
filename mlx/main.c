@@ -10,15 +10,21 @@ typedef struct	s_s
 	int		height;
 }				t_s;
 
-void			put_pixel_to_image(t_s *s, int x, int y, int color)
+void			put_pixel_to_image(void *image, int x, int y, int color)
 {
 	int *pixels;
 	int bits_per_pixel;
 	int size_line;
 	int endian;
 
-	pixels = (int *)mlx_get_data_addr(s->image, &bits_per_pixel, &size_line, &endian);
-	pixels[y * s->width + x] = mlx_get_color_value(s->mlx, color);
+	pixels = (int *)mlx_get_data_addr(image, &bits_per_pixel, &size_line, &endian);
+	pixels[y * size_line / 4 + x] = color;
+}
+
+int				expose(t_s *s)
+{
+	mlx_put_image_to_window(s->mlx, s->window, s->image, 50, 50);
+	return (0);
 }
 
 int				end(int keycode, t_s *s)
@@ -49,12 +55,12 @@ int				main()
 		x = 0;
 		while (x < s.width)
 		{
-			put_pixel_to_image(&s, x, y, 0x00FFFFFF);
+			put_pixel_to_image(s.image, x, y, 0x00FFFFFF);
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(s.mlx, s.window, s.image, 50, 50);
+	mlx_expose_hook(s.window, &expose, &s);
 	mlx_key_hook(s.window, &end, &s);
 	mlx_loop(s.mlx);
 	return (0);
