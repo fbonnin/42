@@ -24,7 +24,7 @@ int	ft_memcmp(const void *address1, const void *address2, size_t n)
 	while (i < n)
 	{
 		if (bytes1[i] != bytes2[i])
-			return (bytes1[i] - bytes2[i]);
+			return ((int)bytes1[i] - (int)bytes2[i]);
 		i++;
 	}
 	return (0);
