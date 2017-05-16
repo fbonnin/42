@@ -40,8 +40,8 @@ typdef struct s_s
 	int		nb_rows;
 	int		nb_cols;
 	t_point	**points;
-	t_xyz	u;
-	t_xyz	v;
+	t_xyz_double	u;
+	t_xyz_double	v;
 	double	max_x3;
 	double	max_y3;
 }			t_s;

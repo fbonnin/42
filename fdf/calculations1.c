@@ -25,8 +25,10 @@ void	find_position1(t_s *s)
 		col = 0;
 		while (col < s->nb_cols)
 		{
-			s->points[row][col].position1.x = col - (double)(s->nb_cols - 1) / 2;
-			s->points[row][col].position1.y = -row + (double)(s->nb_rows - 1) / 2;
+			s->points[row][col].position1.x =
+			col - (double)(s->nb_cols - 1) / 2;
+			s->points[row][col].position1.y =
+			-row + (double)(s->nb_rows - 1) / 2;
 			col++;
 		}
 		row++;
@@ -50,7 +52,6 @@ void	find_position2(t_s *s)
 			s->pov.y * s->points[row][col].position1.y +
 			s->pov.z * s->points[row][col].position1.z) /
 			(pow(s->pov.x, 2) + pow(s->pov.y, 2) + pow(s->pov.z, 2));
-			
 			s->points[row][col].position2.x =
 			s->points[row][col].position1.x + k * s->pov.x;
 			s->points[row][col].position2.y =
@@ -68,12 +69,16 @@ void	find_u(t_s *s)
 	if (s->pov.x == 0 && s->pov.y == 0)
 	{
 		if (s->pov.z > 0)
-			s->u = {1, 0, 0};
+			s->u.x = 1;
 		else
-			s->u = {-1, 0, 0};
+			s->u.x = -1;
+		s->u.y = 0;
+		s->u.z = 0;
 		return ;
 	}
-	s->u = {-s->pov.y, s->pov.x, 0};
+	s->u.x = -s->pov.y;
+	s->u.y = s->pov.x;
+	s->u.z = 0;
 	s->u = normalize(s->u);
 }
 
