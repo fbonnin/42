@@ -1,3 +1,5 @@
+#include "fdf.h"
+
 void	draw_result(t_s *s)
 {
 	clear_image(s);
@@ -25,18 +27,24 @@ void	draw_segments(t_s *s)
 	}	
 }
 
-void	draw_segment(t_s *s, t_xy pixel1, t_xy pixel2)
+void	draw_segment(t_s *s, t_xy_double pixel1, t_xy_double pixel2)
 {
-	if (fabs(pixel1.x - pixel2.x) > fabs(pixel1.y - pixel2.y))
+	pixel1.x += 0.5;
+	pixel1.y += 0.5;
+	pixel2.x += 0.5;
+	pixel2.y += 0.5;
+	if (pixel1 == pixel2)
+		put_pixel_to_image(s->image, pixel1.x, pixel1.y, s->color);
+	else if (fabs(pixel1.x - pixel2.x) > fabs(pixel1.y - pixel2.y))
 		draw_segment_horizontal(s, pixel1, pixel2);
 	else
 		draw_segment_vertical(s, pixel1, pixel2);
 }
 
-void	draw_segment_horizontal(t_s *s, t_xy pixel1, t_xy pixel2)
+void	draw_segment_horizontal(t_s *s, t_xy_double pixel1, t_xy_double pixel2)
 {
-	t_xy	left;
-	t_xy	right;
+	t_xy_double	left;
+	t_xy_double	right;
 	double	a;
 	double	b;
 	double	x;
@@ -56,12 +64,12 @@ void	draw_segment_horizontal(t_s *s, t_xy pixel1, t_xy pixel2)
 	x = left.x;
 	while (x <= right.x)
 	{
-		image_pixel_put(x, a * x + b);
+		put_pixel_to_image(s->image, x, a * x + b, s->color);
 		x++;
 	}
 }
 
-void	draw_segment_vertical(t_s *s, t_xy pixel1, t_xy pixel2)
+void	draw_segment_vertical(t_s *s, t_xy_double pixel1, t_xy_double pixel2)
 {
 	t_xy	top;
 	t_xy	bottom;
@@ -84,7 +92,7 @@ void	draw_segment_vertical(t_s *s, t_xy pixel1, t_xy pixel2)
 	y = top.y;
 	while (y <= bottom.y)
 	{
-		image_pixel_put(a * y + b, y);
+		put_pixel_to_image(s->image, a * y + b, y, s->color);
 		y++;
 	}
 }
