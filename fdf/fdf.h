@@ -1,4 +1,4 @@
-#define ERROR -1
+#define FDF_ERROR -1
 
 typedef struct	s_xy_int
 {
@@ -21,18 +21,27 @@ typedef struct	s_xyz_double
 
 typedef struct s_point
 {
-	t_xyz_double position1;
-	t_xyz_double position2;
-	t_xy_double position3;
-	t_xy_int position4;
+	t_xyz_double	position1;
+	t_xyz_double	position2;
+	t_xy_double		position3;
+	t_xy_int		position4;
 }				t_point;
 
 typdef struct s_s
 {
-	int nb_rows;
-	int nb_cols;
-	t_point **points;
-	t_xyz pov;
-	t_xyz u;
-	t_xyz v;
-}
+	t_xyz_double pov;
+	int		width;
+	int		height;
+	void	*mlx;
+	void	*window;
+	void	*image;
+	char	*file_name;
+	int		fd;
+	int		nb_rows;
+	int		nb_cols;
+	t_point	**points;
+	t_xyz	u;
+	t_xyz	v;
+	double	max_x3;
+	double	max_y3;
+}			t_s;

@@ -2,7 +2,6 @@
 
 void	draw_result(t_s *s)
 {
-	clear_image(s);
 	draw_segments(s);
 }
 
