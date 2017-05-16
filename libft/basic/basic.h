@@ -17,7 +17,7 @@
 # include "stdlib.h"
 # include "string.h"
 
-# include "get_next_line.h"
+# include "ft_get_next_line.h"
 
 void			*ft_memset(void *address, int value, size_t n);
 void			ft_bzero(void *address, size_t n);

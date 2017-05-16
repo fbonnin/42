@@ -21,7 +21,7 @@ static int	ft_get_i_buff(t_s *s, int fd)
 		i_buff++;
 	if (i_buff < s->nb_files)
 		return (i_buff);
-	if (s->nb_files == MAX_NB_FILES)
+	if (s->nb_files == GNL_MAX_NB_FILES)
 		return (-1);
 	s->files[s->nb_files++] = fd;
 	return (i_buff);
@@ -37,7 +37,7 @@ static int	ft_update_buff(t_s *s, int i_buff)
 	if (ft_buff_is_empty(s, i_buff))
 	{
 		s->nb_bytes_read[i_buff] =
-		read(s->files[i_buff], s->buff[i_buff], BUFF_SIZE);
+		read(s->files[i_buff], s->buff[i_buff], GNL_BUFF_SIZE);
 		s->i_byte[i_buff] = 0;
 		return (s->nb_bytes_read[i_buff]);
 	}
@@ -50,7 +50,7 @@ static int	ft_load_line(t_s *s, int i_buff)
 	while (s->buff[i_buff][s->i_byte[i_buff]] != '\n'
 	&& !ft_buff_is_empty(s, i_buff))
 	{
-		if (s->line_size >= MAX_LINE_SIZE)
+		if (s->line_size >= GNL_MAX_LINE_SIZE)
 			return (-1);
 		s->line[s->line_size++] = s->buff[i_buff][s->i_byte[i_buff]];
 		s->i_byte[i_buff]++;
@@ -67,7 +67,7 @@ int			get_next_line(const int fd, char **line)
 	int			i_buff;
 	int			i_line;
 
-	if (BUFF_SIZE < 1 || MAX_NB_FILES < 1 || MAX_LINE_SIZE < 1)
+	if (GNL_BUFF_SIZE < 1 || GNL_MAX_NB_FILES < 1 || GNL_MAX_LINE_SIZE < 1)
 		return (-1);
 	i_buff = ft_get_i_buff(&s, fd);
 	if (i_buff == -1)
