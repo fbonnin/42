@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-int		alloc_points(t_s *s)
+int			alloc_points(t_s *s)
 {
 	int row;
 
@@ -25,7 +25,7 @@ int		alloc_points(t_s *s)
 	return (0);
 }
 
-void	free_points(t_s *s)
+void		free_points(t_s *s)
 {
 	int row;
 
@@ -38,12 +38,11 @@ void	free_points(t_s *s)
 	free(s->points);
 }
 
-int	load_file(t_s *s)
-{
-	int		row;
-	int		col;
-	char	*line;
-	char	**split_line;
+int			load_file(t_s *s)
+{   
+	int     row;
+	char    *line;
+	char    **split_line;
 
 	if ((s->fd = open(s->file_name, O_RDONLY)) == -1)
 		return (FDF_ERROR);
@@ -52,15 +51,11 @@ int	load_file(t_s *s)
 	{
 		if (ft_get_next_line(s->fd, &line) == -1)
 			return (file_error(s));
-		if ((split_line = ft_strsplit(line, ' ')) == NULL)
-			return (file_error(s));
+		split_line = ft_strsplit(line, ' ');
 		free(line);
-		col = 0;
-		while (col < s->nb_cols)
-		{
-			points[row][col].z = ft_atoi(split_line[col]);
-			col++;
-		}
+		if (split_line == NULL)
+			return (error_file(s));
+		convert_line(s, row);
 		free_split_line(split_line);
 		row++;
 	}
@@ -68,16 +63,20 @@ int	load_file(t_s *s)
 	return (0);
 }
 
-int	check_and_load_file(t_s *s)
+static int	convert_line(t_s *s, int row)
 {
-	if (check_file(s) == FDF_ERROR)
-		return (FDF_ERROR);
-	if (alloc_points(s) == FDF_ERROR)
-		return (FDF_ERROR);
-	if (load_file(s) == FDF_ERROR)
+	int col;
+
+	col = 0;
+	while (col < s->nb_cols)
 	{
-		free_points(s);
-		return (FDF_ERROR);
+		points[row][col].z = ft_atoi(split_line[col]);
+		col++;
 	}
-	return (0);
+}
+
+int			error_file(t_s *s) 
+{
+	close(s->fd);
+	return (FDF_ERROR);
 }

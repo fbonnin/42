@@ -23,6 +23,7 @@ int		end(int keycode, t_s *s)
 	{
 		mlx_destroy_image(s->mlx, s->image);
 		mlx_destroy_window(s->mlx, s->window);
+		free_points(s);
 		exit(0);
 	}
 	return (0);
