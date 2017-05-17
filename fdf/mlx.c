@@ -7,7 +7,8 @@ void	put_pixel_to_image(void *image, int x, int y, int color)
 	int size_line;
 	int endian;
 
-	pixels = (int *)mlx_get_data_addr(image, &bits_per_pixel, &size_line, &endian);
+	pixels = (int *)mlx_get_data_addr(image,
+	&bits_per_pixel, &size_line, &endian);
 	pixels[y * size_line / 4 + x] = color;
 }
 
@@ -17,7 +18,7 @@ int		expose(t_s *s)
 	return (0);
 }
 
-int		end(int keycode, t_s *s)
+int		key(int keycode, t_s *s)
 {
 	if (keycode == 53)
 	{

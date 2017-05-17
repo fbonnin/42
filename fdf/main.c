@@ -13,7 +13,7 @@ void	initialize_s(t_s *s)
 	s->image = NULL;
 }
 
-void	error(t_s *s)
+int		error(t_s *s)
 {
 	if (s->image != NULL)
 		mlx_destroy_image(s->mlx, s->image);
@@ -44,7 +44,7 @@ int	main(int ac, char **av)
 	make_calculations(&s);
 	draw_result(&s);
 	mlx_expose_hook(s.window, &expose, &s);
-	mlx_key_hook(s.window, &end, &s);
+	mlx_key_hook(s.window, &key, &s);
 	mlx_loop(s.mlx);
 	return (0);
 }
