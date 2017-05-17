@@ -49,13 +49,13 @@ int			load_file(t_s *s)
 	row = 0;
 	while (row < s->nb_rows)
 	{
-		if (ft_get_next_line(s->fd, &line) == -1)
+		if (ft_get_next_line(s->fd, &line) <= 0)
 			return (file_error(s));
 		split_line = ft_strsplit(line, ' ');
 		free(line);
 		if (split_line == NULL)
 			return (error_file(s));
-		convert_line(s, row);
+		convert_line(s, row, split_line);
 		free_split_line(split_line);
 		row++;
 	}
@@ -63,7 +63,7 @@ int			load_file(t_s *s)
 	return (0);
 }
 
-static int	convert_line(t_s *s, int row)
+static void	convert_line(t_s *s, int row, char **split_line)
 {
 	int col;
 

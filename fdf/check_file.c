@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-int		check_and_load_file(t_s *s)
+int			check_and_load_file(t_s *s)
 {
 	if (check_file(s) == FDF_ERROR)
 		return (FDF_ERROR);
@@ -14,10 +14,10 @@ int		check_and_load_file(t_s *s)
 	return (0);
 }
 
-int    		check_file(t_s *s)
+int			check_file(t_s *s)
 {
-    char *line;
-    char **split_line;
+	char *line;
+	char **split_line;
 
 	if ((s->fd = open(s->file_name, O_RDONLY)) == -1)
 		return (FDF_ERROR);
