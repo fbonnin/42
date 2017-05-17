@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-void	make_calculations(t_s *s)
+void			make_calculations(t_s *s)
 {
 	find_position1(s);
 	find_position2(s);
@@ -14,7 +14,7 @@ void	make_calculations(t_s *s)
 	find_position4(s);
 }
 
-void	find_position1(t_s *s)
+void			find_position1(t_s *s)
 {
 	int row;
 	int col;
@@ -35,11 +35,26 @@ void	find_position1(t_s *s)
 	}
 }
 
-void	find_position2(t_s *s)
+t_xyz_double	find_projection(t_s *s, t_xyz_double position)
+{
+	t_xyz_double	result;
+	double			k;
+
+	k = 1 - (
+	s->pov.x * position.x +
+	s->pov.y * position.y +
+	s->pov.z * position.z) /
+	(pow(s->pov.x, 2) + pow(s->pov.y, 2) + pow(s->pov.z, 2));
+	result.x = position.x + k * s->pov.x;
+	result.y = position.y + k * s->pov.y;
+	result.z = position.z + k * s->pov.z;
+	return (result);
+}
+
+void			find_position2(t_s *s)
 {
 	int		row;
 	int		col;
-	double	k;
 
 	row = 0;
 	while (row < s->nb_rows)
@@ -47,24 +62,15 @@ void	find_position2(t_s *s)
 		col = 0;
 		while (col < s->nb_cols)
 		{
-			k = 1 - (
-			s->pov.x * s->points[row][col].position1.x +
-			s->pov.y * s->points[row][col].position1.y +
-			s->pov.z * s->points[row][col].position1.z) /
-			(pow(s->pov.x, 2) + pow(s->pov.y, 2) + pow(s->pov.z, 2));
-			s->points[row][col].position2.x =
-			s->points[row][col].position1.x + k * s->pov.x;
-			s->points[row][col].position2.y =
-			s->points[row][col].position1.y + k * s->pov.y;
-			s->points[row][col].position2.z =
-			s->points[row][col].position1.z + k * s->pov.z;
+			points[row][col].position2 =
+			find_projection(points[row][col].position1);
 			col++;
 		}
 		row++;
 	}
 }
 
-void	find_u(t_s *s)
+void			find_u(t_s *s)
 {
 	if (s->pov.x == 0 && s->pov.y == 0)
 	{
@@ -82,27 +88,24 @@ void	find_u(t_s *s)
 	s->u = normalize(s->u);
 }
 
-void	find_v(t_s *s)
+void			find_v(t_s *s)
 {
-	t_xyz vector_pov_i;
+	t_xyz_double p001;
+	t_xyz_double projection;
 
 	if (s->pov.x == 0 && s->pov.y == 0)
 	{
-		s->v = {0, 1, 0};
+		s->v.x = 0;
+		s->v.y = 1;
+		s->v.z = 0;
 		return ;
 	}
-	if (s->pov.z > -1 && s->pov.z < 1)
-	{
-		s->pov.z = 0;
-		s->v = {0, 0, 1};
-		return ;
-	}
-	vector_pov_i = {-s->pov.x, -s->pov.y, (pow(s->pov.x, 2) + pow(s->pov.y, 2)) / s->pov.z};
-	s->v = normalize(vector_pov_i);
-	if (s->pov.z < 0)
-	{
-		s->v.x *= -1;
-		s->v.y *= -1;
-		s->v.z *= -1;
-	}
+	p001.x = 0;
+	p001.y = 0;
+	p001.z = 1;
+	projection = find_projection(p001);
+	s->v.x = projection.x - s->pov.x;
+	s->v.y = projection.y - s->pov.y;
+	s->v.z = projection.z - s->pov.z;
+	s->v = normalize(s->v);
 }
