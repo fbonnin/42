@@ -40,10 +40,8 @@ t_xyz_double	find_projection(t_s *s, t_xyz_double position)
 	t_xyz_double	result;
 	double			k;
 
-	k = 1 - (
-	s->pov.x * position.x +
-	s->pov.y * position.y +
-	s->pov.z * position.z) /
+	k = 1 -
+	(s->pov.x * position.x + s->pov.y * position.y + s->pov.z * position.z) /
 	(pow(s->pov.x, 2) + pow(s->pov.y, 2) + pow(s->pov.z, 2));
 	result.x = position.x + k * s->pov.x;
 	result.y = position.y + k * s->pov.y;

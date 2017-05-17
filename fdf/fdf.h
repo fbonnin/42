@@ -32,6 +32,7 @@ typdef struct s_s
 	t_xyz_double pov;
 	int		width;
 	int		height;
+	int		color;
 	void	*mlx;
 	void	*window;
 	void	*image;

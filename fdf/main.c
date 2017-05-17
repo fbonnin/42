@@ -7,6 +7,7 @@ void	initialize_s(t_s *s)
 	s->pov.z = 0;
 	s->width = 400;
 	s->height = 400;
+	s->color = 0x00FFFFFF
 	s->mlx = NULL;
 	s->window = NULL;
 	s->image = NULL;

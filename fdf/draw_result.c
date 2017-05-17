@@ -17,24 +17,29 @@ void	draw_segments(t_s *s)
 		while (col < s->nb_cols)
 		{
 			if (col < s->nb_cols - 1)
-				draw_segment(s, s->points[row][col].position4, s->points[row][col + 1].position4);
+				draw_segment(s, s->points[row][col].position4,
+				s->points[row][col + 1].position4);
 			if (row < s->nb_rows - 1)
-				draw_segment(s, s->points[row][col].position4, s->points[row + 1][col].position4);
+				draw_segment(s, s->points[row][col].position4,
+				s->points[row + 1][col].position4);
 			col++;
 		}
 		row++;
 	}	
 }
 
-void	draw_segment(t_s *s, t_xy_double pixel1, t_xy_double pixel2)
+void	draw_segment(t_s *s, t_xy_int p1, t_xy_int p2)
 {
-	pixel1.x += 0.5;
-	pixel1.y += 0.5;
-	pixel2.x += 0.5;
-	pixel2.y += 0.5;
-	if (pixel1 == pixel2)
-		put_pixel_to_image(s->image, pixel1.x, pixel1.y, s->color);
-	else if (fabs(pixel1.x - pixel2.x) > fabs(pixel1.y - pixel2.y))
+	t_xy_double pixel1;
+	t_xy_double pixel2;
+
+	pixel1.x = (double)p1.x + 0.5;
+	pixel1.y = (double)p1.y + 0.5;
+	pixel2.x = (double)p2.x + 0.5;
+	pixel2.y = (double)p2.y + 0.5;
+	if (p1.x == p2.x && p1.y == p2.y)
+		put_pixel_to_image(s->image, p1.x, p1.y, s->color);
+	else if (fabs(p1.x - p2.x) > fabs(p1.y - p2.y))
 		draw_segment_horizontal(s, pixel1, pixel2);
 	else
 		draw_segment_vertical(s, pixel1, pixel2);
@@ -44,9 +49,9 @@ void	draw_segment_horizontal(t_s *s, t_xy_double pixel1, t_xy_double pixel2)
 {
 	t_xy_double	left;
 	t_xy_double	right;
-	double	a;
-	double	b;
-	double	x;
+	double		a;
+	double		b;
+	double		x;
 
 	if (pixel1.x < pixel2.x)
 	{
@@ -70,11 +75,11 @@ void	draw_segment_horizontal(t_s *s, t_xy_double pixel1, t_xy_double pixel2)
 
 void	draw_segment_vertical(t_s *s, t_xy_double pixel1, t_xy_double pixel2)
 {
-	t_xy	top;
-	t_xy	bottom;
-	double	a;
-	double	b;
-	double	y;
+	t_xy_double	top;
+	t_xy_double	bottom;
+	double		a;
+	double		b;
+	double		y;
 
 	if (pixel1.y < pixel2.y)
 	{

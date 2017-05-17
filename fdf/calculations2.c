@@ -86,10 +86,8 @@ void	find_max_position3(t_s *s)
 		col = 0;
 		while (col < s->nb_cols)
 		{
-			s->max_x3 = fmax(s->max_x3,
-			fabs(s->points[row][col].position3.x));
-			s->max_y3 = fmax(s->max_y3,
-			fabs(s->points[row][col].position3.y));
+			s->max_x3 = fmax(s->max_x3, fabs(s->points[row][col].position3.x));
+			s->max_y3 = fmax(s->max_y3, fabs(s->points[row][col].position3.y));
 			col++;
 		}
 		row++;
@@ -98,9 +96,9 @@ void	find_max_position3(t_s *s)
 
 void	find_position4(t_s *s)
 {
-	double m;
-	int row;
-	int col;
+	double	m;
+	int		row;
+	int		col;
 
 	m = fmin(s->width / (s->max_x3 * 2), s->height / (s->max_y3 * 2));
 	row = 0;
