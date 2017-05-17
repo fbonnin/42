@@ -87,25 +87,3 @@ void			find_u(t_s *s)
 	s->u.z = 0;
 	s->u = normalize(s->u);
 }
-
-void			find_v(t_s *s)
-{
-	t_xyz_double p001;
-	t_xyz_double projection;
-
-	if (s->pov.x == 0 && s->pov.y == 0)
-	{
-		s->v.x = 0;
-		s->v.y = 1;
-		s->v.z = 0;
-		return ;
-	}
-	p001.x = 0;
-	p001.y = 0;
-	p001.z = 1;
-	projection = find_projection(p001);
-	s->v.x = projection.x - s->pov.x;
-	s->v.y = projection.y - s->pov.y;
-	s->v.z = projection.z - s->pov.z;
-	s->v = normalize(s->v);
-}

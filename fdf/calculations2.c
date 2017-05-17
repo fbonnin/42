@@ -1,3 +1,28 @@
+#include "fdf.h"
+
+void	find_v(t_s *s)
+{
+	t_xyz_double p001;
+	t_xyz_double projection;
+
+	if (s->pov.x == 0 && s->pov.y == 0)
+	{
+		s->v.x = 0;
+		s->v.y = 1;
+		s->v.z = 0;
+		return ;
+	}
+	p001.x = 0;
+	p001.y = 0;
+	p001.z = 1;
+	projection = find_projection(p001);
+	s->v.x = projection.x - s->pov.x;
+	s->v.y = projection.y - s->pov.y;
+	s->v.z = projection.z - s->pov.z;
+	s->v = normalize(s->v);
+}
+
+
 void    find_position3(t_s *s)
 {
 	int row;
@@ -36,10 +61,12 @@ void	find_position3_2(t_s *s)
 		col = 0;
 		while (col < s->nb_cols)
 		{
-			s->points[row][col].position3.x = s->points[row][col].position2.x;
+			s->points[row][col].position3.x =
+			s->points[row][col].position2.x;
 			if (s->pov.z < 0)
 				s->points[row][col].position3.x *= -1;
-			s->points[row][col].position3.y = s->points[row][col].position2.y;
+			s->points[row][col].position3.y =
+			s->points[row][col].position2.y;
 			col++;
 		}
 		row++;
@@ -59,8 +86,10 @@ void	find_max_position3(t_s *s)
 		col = 0;
 		while (col < s->nb_cols)
 		{
-			s->max_x3 = fmax(s->max_x3, fabs(s->points[row][col].position3.x));
-			s->max_y3 = fmax(s->max_y3, fabs(s->points[row][col].position3.y));
+			s->max_x3 = fmax(s->max_x3,
+			fabs(s->points[row][col].position3.x));
+			s->max_y3 = fmax(s->max_y3,
+			fabs(s->points[row][col].position3.y));
 			col++;
 		}
 		row++;
@@ -80,10 +109,12 @@ void	find_position4(t_s *s)
 		col = 0;
 		while (col < s->nb_cols)
 		{
-			s->points[row][col].position4.x = (double)s->width / 2 + m * s->points[row][col].position3.x;
+			s->points[row][col].position4.x =
+			(double)s->width / 2 + m * s->points[row][col].position3.x;
 			if (s->points[row][col].position4.x == s->width)
 				s->points[row][col].position4.x--;
-			s->points[row][col].position4.y = (double)s->height / 2 - m * s->points[row][col].position3.y;
+			s->points[row][col].position4.y =
+			(double)s->height / 2 - m * s->points[row][col].position3.y;
 			if (s->points[row][col].position4.y == s->height)
 				s->points[row][col].position4.y--;
 			col++;
