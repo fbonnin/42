@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/18 16:35:51 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/05/18 16:36:10 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/05/18 17:14:50 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int		main(int ac, char **av)
 	initialize_s(&s);
 	if (ac != 7)
 		return (error(&s));
-	ft_putendl("ici");
 	set_parameters(av, &s);
 	if (s.pov.x == 0 && s.pov.y == 0 && s.pov.z == 0)
 		return (error(&s));
