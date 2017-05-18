@@ -30,6 +30,12 @@ void	set_parameters(char **av, t_s *s)
 	s->height = ft_atoi(av[6]);
 }
 
+int		usage(void)
+{
+	ft_putendl("usage : ./fdf pov.x pov.y pov.z window_width window_height");
+	return (0);
+}
+
 int		error(t_s *s)
 {
 	if (s->image != NULL)
@@ -46,7 +52,7 @@ int		main(int ac, char **av)
 
 	initialize_s(&s);
 	if (ac != 7)
-		return (error(&s));
+		return (usage());
 	set_parameters(av, &s);
 	if (s.pov.x == 0 && s.pov.y == 0 && s.pov.z == 0)
 		return (error(&s));

@@ -63,8 +63,8 @@ t_xyz_double	find_projection(t_s *s, t_xyz_double position)
 
 void			find_position2(t_s *s)
 {
-	int		row;
-	int		col;
+	int row;
+	int col;
 
 	row = 0;
 	while (row < s->nb_rows)
