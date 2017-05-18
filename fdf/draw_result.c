@@ -39,7 +39,7 @@ void	draw_segment(t_s *s, t_xy_int p1, t_xy_int p2)
 	pixel2.y = (double)p2.y + 0.5;
 	if (p1.x == p2.x && p1.y == p2.y)
 		put_pixel_to_image(s->image, p1.x, p1.y, s->color);
-	else if (fabs(p1.x - p2.x) > fabs(p1.y - p2.y))
+	else if (abs(p1.x - p2.x) > abs(p1.y - p2.y))
 		draw_segment_horizontal(s, pixel1, pixel2);
 	else
 		draw_segment_vertical(s, pixel1, pixel2);

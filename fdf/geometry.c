@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   geometry.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/12 17:54:06 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/04/13 14:11:59 by fbonnin          ###   ########.fr       */
+/*   Created: 2017/05/18 13:31:23 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/05/18 13:38:05 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "fdf.h"
 
-size_t	ft_strlen(const char *s)
+t_xyz_double	normalize(t_xyz_double vector)
 {
-	size_t len;
+	double magnitude;
 
-	len = 0;
-	while (s[len] != 0)
-		len++;
-	return (len);
+	magnitude = sqrt(pow(vector.x, 2) + pow(vector.y, 2) + pow(vector.z, 2));
+	vector.x /= magnitude;
+	vector.y /= magnitude;
+	vector.z /= magnitude;
+	return (vector);
 }

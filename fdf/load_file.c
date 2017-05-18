@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-int			alloc_points(t_s *s)
+int		alloc_points(t_s *s)
 {
 	int row;
 
@@ -25,7 +25,7 @@ int			alloc_points(t_s *s)
 	return (0);
 }
 
-void		free_points(t_s *s)
+void	free_points(t_s *s)
 {
 	int row;
 
@@ -38,7 +38,7 @@ void		free_points(t_s *s)
 	free(s->points);
 }
 
-int			load_file(t_s *s)
+int		load_file(t_s *s)
 {   
 	int     row;
 	char    *line;
@@ -50,7 +50,7 @@ int			load_file(t_s *s)
 	while (row < s->nb_rows)
 	{
 		if (ft_get_next_line(s->fd, &line) <= 0)
-			return (file_error(s));
+			return (error_file(s));
 		split_line = ft_strsplit(line, ' ');
 		free(line);
 		if (split_line == NULL)
@@ -63,19 +63,19 @@ int			load_file(t_s *s)
 	return (0);
 }
 
-static void	convert_line(t_s *s, int row, char **split_line)
+void	convert_line(t_s *s, int row, char **split_line)
 {
 	int col;
 
 	col = 0;
 	while (col < s->nb_cols)
 	{
-		points[row][col].z = ft_atoi(split_line[col]);
+		s->points[row][col].position1.z = ft_atoi(split_line[col]);
 		col++;
 	}
 }
 
-int			error_file(t_s *s) 
+int		error_file(t_s *s) 
 {
 	close(s->fd);
 	return (FDF_ERROR);

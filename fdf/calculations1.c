@@ -60,8 +60,8 @@ void			find_position2(t_s *s)
 		col = 0;
 		while (col < s->nb_cols)
 		{
-			points[row][col].position2 =
-			find_projection(points[row][col].position1);
+			s->points[row][col].position2 =
+			find_projection(s, s->points[row][col].position1);
 			col++;
 		}
 		row++;

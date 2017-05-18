@@ -1,7 +1,12 @@
 #ifndef FDF_H
 # define FDF_H
 
-#define FDF_ERROR -1
+# include "fcntl.h"
+# include "math.h"
+# include "mlx.h"
+# include "libft/libft.h"
+
+# define FDF_ERROR -1
 
 typedef struct	s_xy_int
 {
@@ -52,12 +57,16 @@ typedef struct	s_s
 
 int				check_and_load_file(t_s *s);
 int				check_file(t_s *s);
+int				check_file2(t_s *s);
 int				find_nb_cols(char **split_line);
 void			free_split_line(char **split_line);
 int				alloc_points(t_s *s);
 void			free_points(t_s *s);
 int				load_file(t_s *s);
+void			convert_line(t_s *s, int row, char **split_line);
 int				error_file(t_s *s);
+
+t_xyz_double	normalize(t_xyz_double vector);
 
 void			make_calculations(t_s *s);
 void			find_position1(t_s *s);

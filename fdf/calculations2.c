@@ -15,7 +15,7 @@ void	find_v(t_s *s)
 	p001.x = 0;
 	p001.y = 0;
 	p001.z = 1;
-	projection = find_projection(p001);
+	projection = find_projection(s, p001);
 	s->v.x = projection.x - s->pov.x;
 	s->v.y = projection.y - s->pov.y;
 	s->v.z = projection.z - s->pov.z;

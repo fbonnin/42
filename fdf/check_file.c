@@ -1,6 +1,6 @@
 #include "fdf.h"
 
-int			check_and_load_file(t_s *s)
+int		check_and_load_file(t_s *s)
 {
 	if (check_file(s) == FDF_ERROR)
 		return (FDF_ERROR);
@@ -14,7 +14,7 @@ int			check_and_load_file(t_s *s)
 	return (0);
 }
 
-int			check_file(t_s *s)
+int		check_file(t_s *s)
 {
 	char *line;
 	char **split_line;
@@ -35,7 +35,7 @@ int			check_file(t_s *s)
 	return (check_file2(s));
 }
 
-static int	check_file2(t_s *s)
+int		check_file2(t_s *s)
 {
 	char	*line;
 	int		r;
@@ -60,7 +60,7 @@ static int	check_file2(t_s *s)
 	return (0);
 }
 
-int			find_nb_cols(char **split_line)
+int		find_nb_cols(char **split_line)
 {
 	int nb_cols;
 
@@ -70,7 +70,7 @@ int			find_nb_cols(char **split_line)
 	return (nb_cols);
 }
 
-void		free_split_line(char **split_line)
+void	free_split_line(char **split_line)
 {
 	int col;
 

@@ -6,13 +6,13 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/02 13:05:14 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/05/05 18:26:43 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/05/18 13:18:30 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-static int	ft_get_i_buff(t_s *s, int fd)
+static int	ft_get_i_buff(t_gnl *s, int fd)
 {
 	int i_buff;
 
@@ -27,12 +27,12 @@ static int	ft_get_i_buff(t_s *s, int fd)
 	return (i_buff);
 }
 
-static int	ft_buff_is_empty(t_s *s, int i_buff)
+static int	ft_buff_is_empty(t_gnl *s, int i_buff)
 {
 	return (s->i_byte[i_buff] >= s->nb_bytes_read[i_buff]);
 }
 
-static int	ft_update_buff(t_s *s, int i_buff)
+static int	ft_update_buff(t_gnl *s, int i_buff)
 {
 	if (ft_buff_is_empty(s, i_buff))
 	{
@@ -44,7 +44,7 @@ static int	ft_update_buff(t_s *s, int i_buff)
 	return (0);
 }
 
-static int	ft_load_line(t_s *s, int i_buff)
+static int	ft_load_line(t_gnl *s, int i_buff)
 {
 	s->line_size = 0;
 	while (s->buff[i_buff][s->i_byte[i_buff]] != '\n'
@@ -63,9 +63,9 @@ static int	ft_load_line(t_s *s, int i_buff)
 
 int			ft_get_next_line(const int fd, char **line)
 {
-	static t_s	s;
-	int			i_buff;
-	int			i_line;
+	static t_gnl	s;
+	int				i_buff;
+	int				i_line;
 
 	if (GNL_BUFF_SIZE < 1 || GNL_MAX_NB_FILES < 1 || GNL_MAX_LINE_SIZE < 1)
 		return (-1);
