@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_file.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/18 16:34:14 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/05/18 16:37:39 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
 int		alloc_points(t_s *s)
@@ -39,10 +51,10 @@ void	free_points(t_s *s)
 }
 
 int		load_file(t_s *s)
-{   
-	int     row;
-	char    *line;
-	char    **split_line;
+{
+	int		row;
+	char	*line;
+	char	**split_line;
 
 	if ((s->fd = open(s->file_name, O_RDONLY)) == -1)
 		return (FDF_ERROR);
@@ -75,7 +87,7 @@ void	convert_line(t_s *s, int row, char **split_line)
 	}
 }
 
-int		error_file(t_s *s) 
+int		error_file(t_s *s)
 {
 	close(s->fd);
 	return (FDF_ERROR);
