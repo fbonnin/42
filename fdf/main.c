@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/18 16:35:51 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/05/18 17:14:50 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/05/19 15:17:56 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	set_parameters(char **av, t_s *s)
 
 int		usage(void)
 {
-	ft_putendl("usage : ./fdf pov.x pov.y pov.z window_width window_height");
+	ft_putstr("usage : ./fdf file_name pov.x pov.y pov.z ");
+	ft_putendl("window_width window_height");
 	return (0);
 }
 
@@ -55,6 +56,8 @@ int		main(int ac, char **av)
 		return (usage());
 	set_parameters(av, &s);
 	if (s.pov.x == 0 && s.pov.y == 0 && s.pov.z == 0)
+		return (error(&s));
+	if (s.width < 1 || s.height < 1)
 		return (error(&s));
 	if (check_and_load_file(&s) == FDF_ERROR)
 		return (error(&s));
