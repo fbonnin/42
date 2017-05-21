@@ -14,5 +14,6 @@
 # define LIBFT_H
 
 # include "basic/basic.h"
+# include "simple/simple.h"
 
 #endif

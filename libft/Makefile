@@ -80,9 +80,15 @@ ft_strtrim \
 ft_tolower \
 ft_toupper
 
-BASIC_FILES = $(addprefix basic/, $(BASIC_FUNCTIONS))
+SIMPLE_FUNCTIONS = \
+ft_ullint_to_string
 
-ALL_FILES = $(BASIC_FILES)
+BASIC_FILES = $(addprefix basic/, $(BASIC_FUNCTIONS))
+SIMPLE_FILES = $(addprefix simple/, $(SIMPLE_FUNCTIONS))
+
+ALL_FILES = \
+$(BASIC_FILES) \
+$(SIMPLE_FILES)
 
 O_FILES = $(addsuffix .o, $(ALL_FILES))
 
