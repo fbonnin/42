@@ -1,3 +1,5 @@
+#include "ft_printf.h"
+
 static void	ft_flag_sharp(t_printf *s)
 {
 	if (s->flag_sharp && s->ullint != 0)
@@ -52,5 +54,44 @@ static void	ft_flag_minus(t_printf *s)
 			i++;
 		}
 	}
+	return (0);
+}
+
+int			ft_printf_ullint(t_printf *s)
+{
+	char	*number;
+	int		i;
+
+	if ((number = ft_ullint_to_str(s->ullint, s->base, s->uppercase)) == NULL)
+		return (PRINTF_ERROR);
+	s->len_number = ft_strlen(number);
+	if (s->precision == 0 && s->ullint == 0)
+		s->len_number = 0;
+	ft_flag_sharp(s);
+	s->nb_zeroes = ft_max(s->precision - s->len_number, 0);
+	if (ft_width(s) == PRINTF_ERROR)
+		return (PRINTF_ERROR);
+	i = 0;
+	while (i < s->len_prefix)
+		if (ft_putchar_to_buffer(s->prefix[i++]) == PRINTF_ERROR)
+			return (PRINTF_ERROR);
+	return (ft_printf_ullint2(s));
+}
+
+int			ft_printf_ullint2(t_printf *s, char *number)
+{
+	int i;
+
+	i = 0;
+	while (i++ < s->nb_zeroes)
+		if (ft_putchar_to_buffer('0') == PRINTF_ERROR)
+			return (PRINTF_ERROR);
+	i = 0;
+	while (i < s->len_number)
+		if (ft_putchar_to_buffer(number[i++]) == PRINTF_ERROR)
+			return (PRINTF_ERROR);
+	if (ft_flag_minus(s) == PRINTF_ERROR)
+		return (PRINTF_ERROR);
+	free (number);
 	return (0);
 }
