@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "../libft.h"
 
 static	int	ft_is_flag(char c)
 {
@@ -76,7 +76,7 @@ int			ft_get_precision(t_printf *s)
 		return (0);
 	}
 	i = 0;
-	while (ft_digit(s->format[s->i_format]))
+	while (ft_isdigit(s->format[s->i_format]))
 	{
 		if (i == PRINTF_MAX_PRECISION_LEN)
 			return (PRINTF_ERROR);

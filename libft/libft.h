@@ -15,5 +15,6 @@
 
 # include "basic/basic.h"
 # include "simple/simple.h"
+# include "printf/ft_printf.h"
 
 #endif

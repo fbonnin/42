@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "../libft.h"
 
 static int	ft_width(t_printf *s)
 {
@@ -7,7 +7,7 @@ static int	ft_width(t_printf *s)
 	i = 0;
 	while (i < s->width - 1)
 	{
-		if (ft_putchar_to_buffer(' ') == PRINTF_ERROR)
+		if (ft_putchar_to_buffer(s, ' ') == PRINTF_ERROR)
 			return (PRINTF_ERROR);
 		i++;
 	}
@@ -16,12 +16,10 @@ static int	ft_width(t_printf *s)
 
 int			ft_printf_c(t_printf *s)
 {
-	int i;
-
 	if (!s->flag_minus)
 		if (ft_width(s) == PRINTF_ERROR)
 			return (PRINTF_ERROR);
-	if (ft_putchar_to_buffer(s->c) == PRINTF_ERROR)
+	if (ft_putchar_to_buffer(s, s->c) == PRINTF_ERROR)
 		return (PRINTF_ERROR);
 	if (s->flag_minus)
 		if (ft_width(s) == PRINTF_ERROR)

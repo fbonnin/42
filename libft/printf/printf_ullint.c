@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "../libft.h"
 
 static void	ft_flag_sharp(t_printf *s)
 {
@@ -12,13 +12,13 @@ static void	ft_flag_sharp(t_printf *s)
 		else if (s->base == 16)
 		{
 			s->prefix[0] = '0';
-			s->prefix[1] = (uppercase ? 'X' : 'x');
+			s->prefix[1] = (s->uppercase ? 'X' : 'x');
 			s->len_prefix = 2;
 		}
 	}
 }
 
-static void	ft_width(t_printf *s)
+static int	ft_width(t_printf *s)
 {
 	int i;
 
@@ -29,9 +29,9 @@ static void	ft_width(t_printf *s)
 		else
 		{
 			i = 0;
-			while (s->len_prefix + s->nb_zeros + s->len_number + i < s->width)
+			while (s->len_prefix + s->nb_zeroes + s->len_number + i < s->width)
 			{
-				if (ft_putchar_to_buffer(' ') == PRINTF_ERROR)
+				if (ft_putchar_to_buffer(s, ' ') == PRINTF_ERROR)
 					return (PRINTF_ERROR);
 				i++;
 			}
@@ -40,16 +40,16 @@ static void	ft_width(t_printf *s)
 	return (0);
 }
 
-static void	ft_flag_minus(t_printf *s)
+static int	ft_flag_minus(t_printf *s)
 {
 	int i;
 
 	if (s->flag_minus)
 	{
 		i = 0;
-		while (s->len_prefix + s->nb_zeros + s->len_number + i < s->width)
+		while (s->len_prefix + s->nb_zeroes + s->len_number + i < s->width)
 		{
-			if (ft_putchar_to_buffer(' ') == PRINTF_ERROR)
+			if (ft_putchar_to_buffer(s, ' ') == PRINTF_ERROR)
 				return (PRINTF_ERROR);
 			i++;
 		}
@@ -62,7 +62,7 @@ int			ft_printf_ullint(t_printf *s)
 	char	*number;
 	int		i;
 
-	if ((number = ft_ullint_to_str(s->ullint, s->base, s->uppercase)) == NULL)
+	if ((number = ft_ullint_to_string(s->ullint, s->base, s->uppercase)) == NULL)
 		return (PRINTF_ERROR);
 	s->len_number = ft_strlen(number);
 	if (s->precision == 0 && s->ullint == 0)
@@ -73,9 +73,9 @@ int			ft_printf_ullint(t_printf *s)
 		return (PRINTF_ERROR);
 	i = 0;
 	while (i < s->len_prefix)
-		if (ft_putchar_to_buffer(s->prefix[i++]) == PRINTF_ERROR)
+		if (ft_putchar_to_buffer(s, s->prefix[i++]) == PRINTF_ERROR)
 			return (PRINTF_ERROR);
-	return (ft_printf_ullint2(s));
+	return (ft_printf_ullint2(s, number));
 }
 
 int			ft_printf_ullint2(t_printf *s, char *number)
@@ -84,11 +84,11 @@ int			ft_printf_ullint2(t_printf *s, char *number)
 
 	i = 0;
 	while (i++ < s->nb_zeroes)
-		if (ft_putchar_to_buffer('0') == PRINTF_ERROR)
+		if (ft_putchar_to_buffer(s, '0') == PRINTF_ERROR)
 			return (PRINTF_ERROR);
 	i = 0;
 	while (i < s->len_number)
-		if (ft_putchar_to_buffer(number[i++]) == PRINTF_ERROR)
+		if (ft_putchar_to_buffer(s, number[i++]) == PRINTF_ERROR)
 			return (PRINTF_ERROR);
 	if (ft_flag_minus(s) == PRINTF_ERROR)
 		return (PRINTF_ERROR);

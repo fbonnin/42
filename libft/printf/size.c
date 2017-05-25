@@ -1,8 +1,8 @@
-#include "ft_printf.h"
+#include "../libft.h"
 
 void	ft_get_size(t_printf *s)
 {
-	char *size;
+	const char *size;
 
 	size = &s->format[s->i_format];
 	if (ft_strnequ(size, "hh", 2))
@@ -29,7 +29,7 @@ void	ft_get_size(t_printf *s)
 		ft_get_size2(s, size);
 }
 
-void	ft_get_size2(t_printf *s)
+void	ft_get_size2(t_printf *s, const char *size)
 {
 	if (size[0] == 'j')
 	{

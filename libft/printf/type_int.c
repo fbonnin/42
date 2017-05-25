@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "../libft.h"
 
 int	ft_printf_llint(t_printf *s)
 {
@@ -36,9 +36,9 @@ int	ft_type_int(t_printf *s)
 	if (s->type == 'D')
 		s->llint = va_arg(s->params, long int);
 	else if (s->size == -2)
-		s->llint = va_arg(s->params, char);
+		s->llint = va_arg(s->params, /*char*/ int);
 	else if (s->size == -1)
-		s->llint = va_arg(s->params, short int);
+		s->llint = va_arg(s->params, /*short*/ int);
 	else if (s->size == 0)
 		s->llint = va_arg(s->params, int);
 	else if (s->size == 1)

@@ -12,7 +12,7 @@
 
 NAME = libft.a
 
-BASIC_FUNCTIONS = \
+BASIC_NAMES = \
 ft_atoi \
 ft_bzero \
 ft_get_next_line \
@@ -80,15 +80,29 @@ ft_strtrim \
 ft_tolower \
 ft_toupper
 
-SIMPLE_FUNCTIONS = \
+SIMPLE_NAMES = \
 ft_ullint_to_string
 
-BASIC_FILES = $(addprefix basic/, $(BASIC_FUNCTIONS))
-SIMPLE_FILES = $(addprefix simple/, $(SIMPLE_FUNCTIONS))
+PRINTF_NAMES = \
+ft_printf \
+flags_width_precision \
+size \
+type_c \
+type_str \
+printf_ullint \
+type_uint \
+type_int \
+type_n \
+type_unknown
+
+BASIC_FILES = $(addprefix basic/, $(BASIC_NAMES))
+SIMPLE_FILES = $(addprefix simple/, $(SIMPLE_NAMES))
+PRINTF_FILES = $(addprefix printf/, $(PRINTF_NAMES))
 
 ALL_FILES = \
 $(BASIC_FILES) \
-$(SIMPLE_FILES)
+$(SIMPLE_FILES) \
+$(PRINTF_FILES)
 
 O_FILES = $(addsuffix .o, $(ALL_FILES))
 
