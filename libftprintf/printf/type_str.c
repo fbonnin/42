@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/26 14:28:19 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/05/26 17:02:23 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/05/26 21:09:48 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,17 @@ static int	ft_width(t_printf *s)
 {
 	int i;
 
-	i = 0;
-	while (s->len_str + i < s->width)
+	if (s->flag_zero)
+		s->nb_zeroes = ft_max(s->width - s->len_str, 0);
+	else
 	{
-		if (ft_putchar_to_buffer(s, ' ') == PRINTF_ERROR)
-			return (PRINTF_ERROR);
-		i++;
+		i = 0;
+		while (s->len_str + i < s->width)
+		{
+			if (ft_putchar_to_buffer(s, ' ') == PRINTF_ERROR)
+				return (PRINTF_ERROR);
+			i++;
+		}
 	}
 	return (0);
 }
@@ -45,6 +50,10 @@ int			ft_printf_str(t_printf *s)
 		s->len_str = ft_min(s->len_str, s->precision);
 	if (!s->flag_minus)
 		if (ft_width(s) == PRINTF_ERROR)
+			return (PRINTF_ERROR);
+	i = 0;
+	while (i++ < s->nb_zeroes)
+		if (ft_putchar_to_buffer(s, '0') == PRINTF_ERROR)
 			return (PRINTF_ERROR);
 	i = 0;
 	while (i < s->len_str)
@@ -65,6 +74,10 @@ int			ft_printf_wstr(t_printf *s)
 		s->len_str = ft_min(s->len_str, s->precision);
 	if (!s->flag_minus)
 		if (ft_width(s) == PRINTF_ERROR)
+			return (PRINTF_ERROR);
+	i = 0;
+	while (i++ < s->nb_zeroes)
+		if (ft_putchar_to_buffer(s, '0') == PRINTF_ERROR)
 			return (PRINTF_ERROR);
 	i = 0;
 	while (i < s->len_str)

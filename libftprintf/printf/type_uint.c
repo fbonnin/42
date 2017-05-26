@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/26 14:28:34 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/05/26 18:41:03 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/05/26 22:13:09 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@ int	ft_type_uint(t_printf *s)
 	if (s->type == 'u' || s->type == 'U')
 		s->base = 10;
 	else if (s->type == 'o' || s->type == 'O')
+	{
+		if (s->flag_sharp)
+			s->precision--;
 		s->base = 8;
+	}
 	else if (s->type == 'x' || s->type == 'X')
 	{
 		s->base = 16;

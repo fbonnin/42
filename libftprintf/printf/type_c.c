@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/26 14:24:36 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/05/26 15:07:30 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/05/26 21:45:08 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,31 @@ static int	ft_width(t_printf *s)
 {
 	int i;
 
-	i = 0;
-	while (i < s->width - 1)
+	if (s->flag_zero)
+		s->nb_zeroes = ft_max(s->width - 1, 0);
+	else
 	{
-		if (ft_putchar_to_buffer(s, ' ') == PRINTF_ERROR)
-			return (PRINTF_ERROR);
-		i++;
+		i = 0;
+		while (i < s->width - 1)
+		{
+			if (ft_putchar_to_buffer(s, ' ') == PRINTF_ERROR)
+				return (PRINTF_ERROR);
+			i++;
+		}
 	}
 	return (0);
 }
 
 int			ft_printf_c(t_printf *s)
 {
+	int i;
+
 	if (!s->flag_minus)
 		if (ft_width(s) == PRINTF_ERROR)
+			return (PRINTF_ERROR);
+	i = 0;
+	while (i++ < s->nb_zeroes)
+		if (ft_putchar_to_buffer(s, '0') == PRINTF_ERROR)
 			return (PRINTF_ERROR);
 	if (ft_putchar_to_buffer(s, s->c) == PRINTF_ERROR)
 		return (PRINTF_ERROR);

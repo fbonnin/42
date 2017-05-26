@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/26 13:58:05 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/05/26 20:37:17 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/05/26 22:02:41 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ int	ft_putstr_to_buffer(t_printf *s, char *str)
 int	ft_convert(t_printf *s)
 {
 	s->len_prefix = 0;
+	s->nb_zeroes = 0;
 	ft_get_flags(s);
+	s->width = 0;
 	while (ft_isdigit(s->format[s->i_format]) || s->format[s->i_format] == '*')
 		if (ft_get_width(s) == PRINTF_ERROR)
 			return (PRINTF_ERROR);
