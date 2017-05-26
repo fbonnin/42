@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/26 13:59:25 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/05/26 18:42:31 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/05/26 20:23:42 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	ft_width(t_printf *s)
 
 	if (!s->flag_minus)
 	{
-		if (s->flag_zero && s->precision == -1)
+		if (s->flag_zero && s->precision <= -1)
 			s->nb_zeroes =
 			ft_max(s->width - (s->len_prefix + s->len_number), 0);
 		else

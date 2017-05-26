@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/26 13:58:05 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/05/26 18:19:00 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/05/26 20:37:17 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,9 @@ int	ft_convert(t_printf *s)
 {
 	s->len_prefix = 0;
 	ft_get_flags(s);
-	if (ft_get_width(s) == PRINTF_ERROR)
-		return (PRINTF_ERROR);
+	while (ft_isdigit(s->format[s->i_format]) || s->format[s->i_format] == '*')
+		if (ft_get_width(s) == PRINTF_ERROR)
+			return (PRINTF_ERROR);
 	if (ft_get_precision(s) == PRINTF_ERROR)
 		return (PRINTF_ERROR);
 	ft_get_size(s);

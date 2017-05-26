@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/26 13:59:01 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/05/26 14:49:37 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/05/26 19:33:23 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,6 @@ int				ft_type_int(t_printf *s);
 void			ft_type_n(t_printf *s);
 void			ft_type_n2(t_printf *s);
 
-void			ft_type_unknown(t_printf *s);
+int				ft_type_unknown(t_printf *s);
 
 #endif

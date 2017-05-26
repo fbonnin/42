@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/26 13:57:43 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/05/26 13:57:50 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/05/26 19:11:48 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ int			ft_get_width(t_printf *s)
 	{
 		s->i_format++;
 		s->width = va_arg(s->params, int);
-		return (0);
-	}
-	if (!ft_isdigit(s->format[s->i_format]))
-	{
-		s->width = -1;
+		if (s->width < 0)
+		{
+			s->flag_minus = 1;
+			s->width *= -1;
+		}
 		return (0);
 	}
 	i = 0;
