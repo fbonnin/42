@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   type_uint.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/26 14:28:34 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/05/26 14:29:03 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../libft.h"
 
 int	ft_type_uint(t_printf *s)
@@ -27,9 +39,9 @@ int	ft_type_uint2(t_printf *s)
 	else if (s->type == 'p')
 		s->ullint = (unsigned long long int)va_arg(s->params, void *);
 	else if (s->type == -2)
-		s->ullint = va_arg(s->params, unsigned /*char*/int);
+		s->ullint = va_arg(s->params, unsigned int);
 	else if (s->type == -1)
-		s->ullint = va_arg(s->params, unsigned /*short*/ int);
+		s->ullint = va_arg(s->params, unsigned int);
 	else if (s->type == 0)
 		s->ullint = va_arg(s->params, unsigned int);
 	else if (s->type == 1)

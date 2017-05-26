@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/26 13:58:05 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/05/26 13:58:46 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../libft.h"
 
 int	ft_putchar_to_buffer(t_printf *s, char c)
@@ -54,7 +66,7 @@ int	ft_printf(const char *format, ...)
 			if (ft_putchar_to_buffer(&s, format[s.i_format++]) == PRINTF_ERROR)
 				return (PRINTF_ERROR);
 		if (format[s.i_format++] == 0)
-			break;
+			break ;
 		if (ft_convert(&s) == PRINTF_ERROR)
 			return (PRINTF_ERROR);
 	}

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   type_int.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/26 14:24:54 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/05/26 14:27:03 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../libft.h"
 
 int	ft_printf_llint(t_printf *s)
@@ -36,9 +48,9 @@ int	ft_type_int(t_printf *s)
 	if (s->type == 'D')
 		s->llint = va_arg(s->params, long int);
 	else if (s->size == -2)
-		s->llint = va_arg(s->params, /*char*/ int);
+		s->llint = va_arg(s->params, int);
 	else if (s->size == -1)
-		s->llint = va_arg(s->params, /*short*/ int);
+		s->llint = va_arg(s->params, int);
 	else if (s->size == 0)
 		s->llint = va_arg(s->params, int);
 	else if (s->size == 1)
