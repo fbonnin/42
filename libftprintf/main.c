@@ -1,15 +1,8 @@
+#include "stdio.h"
 #include "libft.h"
 
 int main()
 {
-	ft_printf("%#.3o", 1);
-	//ft_printf("{%3*p}", 10, 0);
-	//ft_printf("%05.s", "A");
-	//ft_printf("{%05.c}", 0);
-	ft_putendl("");
-	printf("%#.3o", 1);
-	//printf("{%3*p}", 10, 0);
-	//printf("%05.s", "A");
-	//printf("{%05.c}", 0);
+	printf("%llu\n", ft_string_to_ullint("1354", 8));
 	return (0);
 }

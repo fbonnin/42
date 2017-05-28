@@ -4,17 +4,17 @@ static unsigned int		ft_digit_to_int(char c)
 {
 	if (ft_isdigit(c))
 		return (c - 48);
-	else if (c == 'A')
+	else if (c == 'a' || c == 'A')
 		return (10);
-	else if (c == 'B')
+	else if (c == 'b' || c == 'B')
 		return (11);
-	else if (c == 'C')
+	else if (c == 'c' || c == 'C')
 		return (12);
-	else if (c == 'D')
+	else if (c == 'd' || c == 'D')
 		return (13);
-	else if (c == 'E')
+	else if (c == 'e' || c == 'E')
 		return (14);
-	else if (c == 'F')
+	else if (c == 'f' || c == 'F')
 		return (15);
 	else
 		return (1000);

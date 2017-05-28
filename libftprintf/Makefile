@@ -81,7 +81,8 @@ ft_tolower \
 ft_toupper
 
 SIMPLE_NAMES = \
-ft_ullint_to_string
+ft_ullint_to_string \
+ft_string_to_ullint
 
 PRINTF_NAMES = \
 ft_printf \
