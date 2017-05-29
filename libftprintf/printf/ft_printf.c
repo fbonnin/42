@@ -12,7 +12,7 @@
 
 #include "../libft.h"
 
-int	ft_putchar_to_buffer(t_printf *s, char c)
+/*int	ft_putchar_to_buffer(t_printf *s, char c)
 {
 	s->buffer[s->i_buffer++] = c;
 	if (s->i_buffer == PRINTF_BUFFER_SIZE)
@@ -23,18 +23,7 @@ int	ft_putchar_to_buffer(t_printf *s, char c)
 	}
 	s->nb_chars_written++;
 	return (0);
-}
-
-int	ft_putstr_to_buffer(t_printf *s, char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i] != 0)
-		if (ft_putchar_to_buffer(s, str[i++]) == PRINTF_ERROR)
-			return (PRINTF_ERROR);
-	return (0);
-}
+}*/
 
 int	ft_convert(t_printf *s)
 {
@@ -76,7 +65,7 @@ int	ft_printf(const char *format, ...)
 	while (format[s.i_format] != 0)
 	{
 		while (format[s.i_format] != '%' && format[s.i_format] != 0)
-			if (ft_putchar_to_buffer(&s, format[s.i_format++]) == PRINTF_ERROR)
+			if (ft_putwchar_to_buffer(&s, format[s.i_format++]) == PRINTF_ERROR)
 				return (PRINTF_ERROR);
 		if (format[s.i_format++] == 0)
 			break ;

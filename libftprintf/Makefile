@@ -94,7 +94,8 @@ printf_ullint \
 type_uint \
 type_int \
 type_n \
-type_unknown
+type_unknown \
+unicode
 
 BASIC_FILES = $(addprefix basic/, $(BASIC_NAMES))
 SIMPLE_FILES = $(addprefix simple/, $(SIMPLE_NAMES))

@@ -1,8 +1,13 @@
 #include "stdio.h"
 #include "libft.h"
+#include "locale.h"
 
 int main()
 {
-	printf("%llu\n", ft_string_to_ullint("1354", 8));
+	wchar_t c;
+	//setlocale(LC_ALL, "");
+	c = 945;
+	ft_printf("%lc\n", c);
+	printf("%lc\n", c);
 	return (0);
 }

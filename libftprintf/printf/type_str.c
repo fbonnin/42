@@ -33,7 +33,7 @@ static int	ft_width(t_printf *s)
 		i = 0;
 		while (s->len_str + i < s->width)
 		{
-			if (ft_putchar_to_buffer(s, ' ') == PRINTF_ERROR)
+			if (ft_putwchar_to_buffer(s, ' ') == PRINTF_ERROR)
 				return (PRINTF_ERROR);
 			i++;
 		}
@@ -53,11 +53,11 @@ int			ft_printf_str(t_printf *s)
 			return (PRINTF_ERROR);
 	i = 0;
 	while (i++ < s->nb_zeroes)
-		if (ft_putchar_to_buffer(s, '0') == PRINTF_ERROR)
+		if (ft_putwchar_to_buffer(s, '0') == PRINTF_ERROR)
 			return (PRINTF_ERROR);
 	i = 0;
 	while (i < s->len_str)
-		if (ft_putchar_to_buffer(s, s->str[i++]) == PRINTF_ERROR)
+		if (ft_putwchar_to_buffer(s, s->str[i++]) == PRINTF_ERROR)
 			return (PRINTF_ERROR);
 	if (s->flag_minus)
 		if (ft_width(s) == PRINTF_ERROR)
@@ -77,11 +77,11 @@ int			ft_printf_wstr(t_printf *s)
 			return (PRINTF_ERROR);
 	i = 0;
 	while (i++ < s->nb_zeroes)
-		if (ft_putchar_to_buffer(s, '0') == PRINTF_ERROR)
+		if (ft_putwchar_to_buffer(s, '0') == PRINTF_ERROR)
 			return (PRINTF_ERROR);
 	i = 0;
 	while (i < s->len_str)
-		if (ft_putchar_to_buffer(s, s->wstr[i++]) == PRINTF_ERROR)
+		if (ft_putwchar_to_buffer(s, s->wstr[i++]) == PRINTF_ERROR)
 			return (PRINTF_ERROR);
 	if (s->flag_minus)
 		if (ft_width(s) == PRINTF_ERROR)

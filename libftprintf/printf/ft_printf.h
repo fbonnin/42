@@ -28,8 +28,13 @@ typedef struct	s_printf
 	int						i_format;
 	va_list					params;
 	int						nb_chars_written;
-	char					buffer[PRINTF_BUFFER_SIZE];
+	unsigned char			buffer[PRINTF_BUFFER_SIZE];
 	int						i_buffer;
+	char					*bits;
+	int						nb_bits;
+	int						i_bit;
+	char					unicode[9];
+	int						i_unicode;
 
 	int						flag_minus;
 	int						flag_zero;
@@ -41,7 +46,7 @@ typedef struct	s_printf
 	int						size;
 	char					type;
 
-	char					c;
+	wchar_t					c;
 
 	char					*str;
 	wchar_t					*wstr;
@@ -59,7 +64,7 @@ typedef struct	s_printf
 }				t_printf;
 
 int				ft_printf(const char *format, ...);
-int				ft_putchar_to_buffer(t_printf *s, char c);
+int				ft_putwchar_to_buffer(t_printf *s, unsigned int c);
 int				ft_convert(t_printf *s);
 
 void			ft_get_flags(t_printf *s);
