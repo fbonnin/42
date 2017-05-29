@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/26 14:24:36 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/05/29 20:44:38 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/05/29 21:25:08 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	ft_type_c(t_printf *s)
 	w = 0;
 	if (s->type == '%')
 		s->c = 37;
-	else if (s->type == 'C' || s->type == 1)
+	else if (s->type == 'C' || s->size == 1)
 	{
 		s->c = va_arg(s->params, wint_t);
 		w = 1;
