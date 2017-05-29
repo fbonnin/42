@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/26 13:58:05 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/05/26 22:02:41 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/05/29 20:47:14 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,12 @@ int	ft_printf(const char *format, ...)
 	s.i_format = 0;
 	va_start(s.params, format);
 	s.nb_chars_written = 0;
+	s.nb_bytes_written = 0;
 	s.i_buffer = 0;
 	while (format[s.i_format] != 0)
 	{
 		while (format[s.i_format] != '%' && format[s.i_format] != 0)
-			if (ft_putwchar_to_buffer(&s, format[s.i_format++]) == PRINTF_ERROR)
+			if (ft_putwchar_to_buffer(&s, format[s.i_format++], 0) == PRINTF_ERROR)
 				return (PRINTF_ERROR);
 		if (format[s.i_format++] == 0)
 			break ;
@@ -74,5 +75,6 @@ int	ft_printf(const char *format, ...)
 	}
 	va_end(s.params);
 	write(1, s.buffer, s.i_buffer);
-	return (s.nb_chars_written);
+	s.nb_bytes_written += s.i_buffer;
+	return (s.nb_bytes_written);
 }

@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/26 13:59:25 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/05/26 20:56:57 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/05/29 20:46:43 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	ft_width(t_printf *s)
 			i = 0;
 			while (s->len_prefix + s->nb_zeroes + s->len_number + i < s->width)
 			{
-				if (ft_putwchar_to_buffer(s, ' ') == PRINTF_ERROR)
+				if (ft_putwchar_to_buffer(s, ' ', 0) == PRINTF_ERROR)
 					return (PRINTF_ERROR);
 				i++;
 			}
@@ -62,7 +62,7 @@ static int	ft_flag_minus(t_printf *s)
 		i = 0;
 		while (s->len_prefix + s->nb_zeroes + s->len_number + i < s->width)
 		{
-			if (ft_putwchar_to_buffer(s, ' ') == PRINTF_ERROR)
+			if (ft_putwchar_to_buffer(s, ' ', 0) == PRINTF_ERROR)
 				return (PRINTF_ERROR);
 			i++;
 		}
@@ -88,7 +88,7 @@ int			ft_printf_ullint(t_printf *s)
 		return (PRINTF_ERROR);
 	i = 0;
 	while (i < s->len_prefix)
-		if (ft_putwchar_to_buffer(s, s->prefix[i++]) == PRINTF_ERROR)
+		if (ft_putwchar_to_buffer(s, s->prefix[i++], 0) == PRINTF_ERROR)
 			return (PRINTF_ERROR);
 	return (ft_printf_ullint2(s, number));
 }
@@ -99,11 +99,11 @@ int			ft_printf_ullint2(t_printf *s, char *number)
 
 	i = 0;
 	while (i++ < s->nb_zeroes)
-		if (ft_putwchar_to_buffer(s, '0') == PRINTF_ERROR)
+		if (ft_putwchar_to_buffer(s, '0', 0) == PRINTF_ERROR)
 			return (PRINTF_ERROR);
 	i = 0;
 	while (i < s->len_number)
-		if (ft_putwchar_to_buffer(s, number[i++]) == PRINTF_ERROR)
+		if (ft_putwchar_to_buffer(s, number[i++], 0) == PRINTF_ERROR)
 			return (PRINTF_ERROR);
 	if (ft_flag_minus(s) == PRINTF_ERROR)
 		return (PRINTF_ERROR);

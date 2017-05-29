@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/26 13:59:01 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/05/26 19:33:23 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/05/29 20:48:29 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct	s_printf
 	int						nb_chars_written;
 	unsigned char			buffer[PRINTF_BUFFER_SIZE];
 	int						i_buffer;
+	int						nb_bytes_written;
 	char					*bits;
 	int						nb_bits;
 	int						i_bit;
@@ -64,7 +65,7 @@ typedef struct	s_printf
 }				t_printf;
 
 int				ft_printf(const char *format, ...);
-int				ft_putwchar_to_buffer(t_printf *s, unsigned int c);
+int				ft_putwchar_to_buffer(t_printf *s, unsigned int c, int w);
 int				ft_convert(t_printf *s);
 
 void			ft_get_flags(t_printf *s);
@@ -73,7 +74,7 @@ int				ft_get_precision(t_printf *s);
 void			ft_get_size(t_printf *s);
 void			ft_get_size2(t_printf *s, const char *size);
 
-int				ft_printf_c(t_printf *s);
+int				ft_printf_c(t_printf *s, int w);
 int				ft_type_c(t_printf *s);
 
 int				ft_printf_str(t_printf *s);

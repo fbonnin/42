@@ -89,13 +89,18 @@ static int	ft_unicode1(t_printf *s)
 	return (0);
 }
 
-int			ft_putwchar_to_buffer(t_printf *s, unsigned int c)
+int			ft_putwchar_to_buffer(t_printf *s, unsigned int c, int w)
 {
+	if (!w)
+	{
+		s->buffer[s->i_buffer++] = c;
+	}
+	else{
 	if (MB_CUR_MAX == 1)
 	{
-		if (c > 127)
+		if (c > 255)
 		{
-			write(1, s->buffer, s->i_buffer);
+			//write(1, s->buffer, s->i_buffer);
 			return (PRINTF_ERROR);
 		}
 		s->buffer[s->i_buffer++] = c;
@@ -110,11 +115,12 @@ int			ft_putwchar_to_buffer(t_printf *s, unsigned int c)
 		ft_unicode3(s);
 		ft_unicode2(s);
 		ft_unicode1(s);
-	}
+	}}
 	if (s->i_buffer > PRINTF_BUFFER_SIZE - 4)
 	{
 		if (write(1, s->buffer, s->i_buffer) == -1)
 			return (PRINTF_ERROR);
+		s->nb_bytes_written += s->i_buffer;
 		s->i_buffer = 0;
 	}
 	s->nb_chars_written++;
