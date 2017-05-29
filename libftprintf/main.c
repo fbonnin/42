@@ -6,8 +6,8 @@ int main()
 {
 	wchar_t c;
 	//setlocale(LC_ALL, "");
-	c = 945;
-	ft_printf("%lc\n", c);
-	printf("%lc\n", c);
+	c = 128;
+	printf("ft returned : %d\n", ft_printf("ft : %S\n", L"é"));
+	printf("std returned : %d\n", printf("std : %S\n", L"é"));
 	return (0);
 }

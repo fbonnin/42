@@ -91,12 +91,26 @@ static int	ft_unicode1(t_printf *s)
 
 int			ft_putwchar_to_buffer(t_printf *s, unsigned int c)
 {
-	s->bits = ft_ullint_to_string(c, 2, 0);
-	s->nb_bits = ft_strlen(s->bits);
-	ft_unicode4(s);
-	ft_unicode3(s);
-	ft_unicode2(s);
-	ft_unicode1(s);
+	if (MB_CUR_MAX == 1)
+	{
+		if (c > 127)
+		{
+			write(1, s->buffer, s->i_buffer);
+			return (PRINTF_ERROR);
+		}
+		s->buffer[s->i_buffer++] = c;
+	}
+	else
+	{
+		if ((s->bits = ft_ullint_to_string(c, 2, 0)) == NULL)
+			return (PRINTF_ERROR);
+		if ((s->nb_bits = ft_strlen(s->bits)) > 21)
+			return (PRINTF_ERROR);
+		ft_unicode4(s);
+		ft_unicode3(s);
+		ft_unicode2(s);
+		ft_unicode1(s);
+	}
 	if (s->i_buffer > PRINTF_BUFFER_SIZE - 4)
 	{
 		if (write(1, s->buffer, s->i_buffer) == -1)
