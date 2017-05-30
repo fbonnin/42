@@ -1,6 +1,6 @@
 #include "../libft.h"
 
-static unsigned int		ft_digit_to_int(char c)
+static unsigned int		ft_uint(char c)
 {
 	if (ft_isdigit(c))
 		return (c - 48);
@@ -31,10 +31,10 @@ unsigned long long int	ft_str_to_ullint(char *s, unsigned int base)
 	while (s[i] == ' ' || (s[i] >= '\t' && s[i] <= '\r'))
 		i++;
 	result = 0;
-	while (ft_digit_to_int(s[i]) < base)
+	while (ft_uint(s[i]) < base)
 	{
 		result *= base;
-		result += ft_digit_to_int(s[i]);
+		result += ft_uint(s[i]);
 		i++;
 	}
 	return (result);

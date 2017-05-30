@@ -14,7 +14,7 @@
 # define SIMPLE_H
 
 char					*ft_ullint_to_str(unsigned long long int n,
-						unsigned long long int base, int uppercase);
+						unsigned int base, int uppercase);
 
 unsigned long long int	ft_str_to_ullint(char *s, unsigned int base);
 

@@ -30,7 +30,7 @@ static char	ft_digit(unsigned int n, int uppercase)
 }
 
 char		*ft_ullint_to_str(unsigned long long int n,
-unsigned long long int base, int uppercase)
+unsigned int base, int uppercase)
 {
 	char					*result;
 	int						i;
