@@ -18,7 +18,7 @@ static int	ft_byte4(t_printf *s)
 			while (s->i_bit >= 0)
 				s->utf8[s->i_utf8--] = s->bits[s->i_bit--];
 		}
-		s->buffer[s->i_buffer++] = ft_string_to_ullint(s->utf8, 2);
+		s->buffer[s->i_buffer++] = ft_str_to_ullint(s->utf8, 2);
 	}
 	return (0);
 }
@@ -41,7 +41,7 @@ static int	ft_byte3(t_printf *s)
 			while (s->i_bit >= 0)
 				s->utf8[s->i_utf8--] = s->bits[s->i_bit--];
 		}
-		s->buffer[s->i_buffer++] = ft_string_to_ullint(s->utf8, 2);
+		s->buffer[s->i_buffer++] = ft_str_to_ullint(s->utf8, 2);
 	}
 	return (0);
 }
@@ -64,7 +64,7 @@ static int	ft_byte2(t_printf *s)
 			while (s->i_bit >= 0)
 				s->utf8[s->i_utf8--] = s->bits[s->i_bit--];
 		}
-		s->buffer[s->i_buffer++] = ft_string_to_ullint(s->utf8, 2);
+		s->buffer[s->i_buffer++] = ft_str_to_ullint(s->utf8, 2);
 	}
 	return (0);
 }
@@ -85,7 +85,7 @@ static int	ft_byte1(t_printf *s)
 		while (s->i_bit >= 0)
 			s->utf8[s->i_utf8--] = s->bits[s->i_bit--];
 	}
-	s->buffer[s->i_buffer++] = ft_string_to_ullint(s->utf8, 2);
+	s->buffer[s->i_buffer++] = ft_str_to_ullint(s->utf8, 2);
 	return (0);
 }
 

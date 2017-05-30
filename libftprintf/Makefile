@@ -81,8 +81,8 @@ ft_tolower \
 ft_toupper
 
 SIMPLE_NAMES = \
-ft_ullint_to_string \
-ft_string_to_ullint
+ft_ullint_to_str \
+ft_str_to_ullint
 
 PRINTF_NAMES = \
 ft_printf \
@@ -95,7 +95,8 @@ type_uint \
 type_int \
 type_n \
 type_unknown \
-utf8
+utf8 \
+utf8_2
 
 BASIC_FILES = $(addprefix basic/, $(BASIC_NAMES))
 SIMPLE_FILES = $(addprefix simple/, $(SIMPLE_NAMES))

@@ -20,7 +20,7 @@ static unsigned int		ft_digit_to_int(char c)
 		return (1000);
 }
 
-unsigned long long int	ft_string_to_ullint(char *s, unsigned int base)
+unsigned long long int	ft_str_to_ullint(char *s, unsigned int base)
 {
 	unsigned long long int	result;
 	int						i;

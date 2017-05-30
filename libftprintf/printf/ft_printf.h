@@ -95,5 +95,6 @@ void			ft_type_n2(t_printf *s);
 int				ft_type_unknown(t_printf *s);
 
 int				ft_put_utf8_to_buffer(t_printf *s);
+int				ft_size_wchar(wchar_t c);
 
 #endif

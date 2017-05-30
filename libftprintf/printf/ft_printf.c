@@ -22,7 +22,7 @@ int			ft_put_wchar_to_buffer(t_printf *s, unsigned int c, int w)
 	}
 	else
 	{
-		if ((s->bits = ft_ullint_to_string(c, 2, 0)) == NULL)
+		if ((s->bits = ft_ullint_to_str(c, 2, 0)) == NULL)
 			return (PRINTF_ERROR);
 		if ((s->nb_bits = ft_strlen(s->bits)) > 21)
 			return (PRINTF_ERROR);

@@ -75,8 +75,7 @@ int			ft_printf_ullint(t_printf *s)
 	char	*number;
 	int		i;
 
-	if ((number = ft_ullint_to_string(s->ullint, s->base, s->uppercase)) ==
-	NULL)
+	if ((number = ft_ullint_to_str(s->ullint, s->base, s->uppercase)) == NULL)
 		return (PRINTF_ERROR);
 	s->len_number = ft_strlen(number);
 	if (s->precision == 0 && s->ullint == 0)

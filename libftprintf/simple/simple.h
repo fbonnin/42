@@ -13,9 +13,9 @@
 #ifndef SIMPLE_H
 # define SIMPLE_H
 
-char					*ft_ullint_to_string(unsigned long long int n,
-							unsigned long long int base, int uppercase);
+char					*ft_ullint_to_str(unsigned long long int n,
+						unsigned long long int base, int uppercase);
 
-unsigned long long int	ft_string_to_ullint(char *s, unsigned int base);
+unsigned long long int	ft_str_to_ullint(char *s, unsigned int base);
 
 #endif
