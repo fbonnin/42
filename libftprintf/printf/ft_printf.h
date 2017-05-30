@@ -71,8 +71,8 @@ int				ft_put_wchar_to_buffer(t_printf *s, unsigned int c, int w);
 void			ft_get_flags(t_printf *s);
 int				ft_get_width(t_printf *s);
 int				ft_get_precision(t_printf *s);
-void			ft_get_size(t_printf *s);
-void			ft_get_size2(t_printf *s, const char *size);
+void			ft_get_size_modifier(t_printf *s);
+void			ft_get_size_modifier_2(t_printf *s, const char *size);
 
 int				ft_printf_c(t_printf *s, int w);
 int				ft_type_c(t_printf *s);

@@ -40,10 +40,8 @@ int			ft_put_wchar_to_buffer(t_printf *s, unsigned int c, int w)
 	return (0);
 }
 
-static int	ft_convert(t_printf *s)
+static int	ft_replace(t_printf *s)
 {
-	s->len_prefix = 0;
-	s->nb_zeroes = 0;
 	ft_get_flags(s);
 	s->width = -1;
 	while (ft_isdigit(s->format[s->i_format]) || s->format[s->i_format] == '*')
@@ -51,8 +49,12 @@ static int	ft_convert(t_printf *s)
 			return (PRINTF_ERROR);
 	if (ft_get_precision(s) == PRINTF_ERROR)
 		return (PRINTF_ERROR);
-	ft_get_size(s);
+	ft_get_size_modifier(s);
 	s->type = s->format[s->i_format];
+	if (s->type != 0)
+		s->i_format++;
+	s->len_prefix = 0;
+	s->nb_zeroes = 0;
 	if (ft_type_c(s) == PRINTF_ERROR)
 		return (PRINTF_ERROR);
 	if (ft_type_str(s) == PRINTF_ERROR)
@@ -64,7 +66,6 @@ static int	ft_convert(t_printf *s)
 	ft_type_n(s);
 	if (ft_type_unknown(s) == PRINTF_ERROR)
 		return (PRINTF_ERROR);
-	s->i_format++;
 	return (0);
 }
 
@@ -88,7 +89,7 @@ int			ft_printf(const char *format, ...)
 				return (PRINTF_ERROR);
 		if (format[s.i_format++] == 0)
 			break ;
-		if (ft_convert(&s) == PRINTF_ERROR)
+		if (ft_replace(&s) == PRINTF_ERROR)
 			return (PRINTF_ERROR);
 	}
 	va_end(s.params);

@@ -87,7 +87,7 @@ ft_str_to_ullint
 PRINTF_NAMES = \
 ft_printf \
 get_flags_width_precision \
-get_size \
+get_size_modifier \
 type_c \
 type_str \
 printf_ullint \

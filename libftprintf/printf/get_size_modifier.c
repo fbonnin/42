@@ -12,7 +12,7 @@
 
 #include "../libft.h"
 
-void	ft_get_size(t_printf *s)
+void	ft_get_size_modifier(t_printf *s)
 {
 	const char *size;
 
@@ -38,10 +38,10 @@ void	ft_get_size(t_printf *s)
 		s->i_format++;
 	}
 	else
-		ft_get_size2(s, size);
+		ft_get_size_modifier_2(s, size);
 }
 
-void	ft_get_size2(t_printf *s, const char *size)
+void	ft_get_size_modifier_2(t_printf *s, const char *size)
 {
 	if (size[0] == 'j')
 	{
