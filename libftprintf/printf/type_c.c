@@ -16,9 +16,29 @@ static int	ft_width(t_printf *s)
 {
 	int i;
 
-	if (s->flag_zero)
-		s->nb_zeroes = ft_max(s->width - 1, 0);
-	else
+	if (!s->flag_minus)
+	{
+		if (s->flag_zero)
+			s->nb_zeroes = ft_max(s->width - 1, 0);
+		else
+		{
+			i = 0;
+			while (i < s->width - 1)
+			{
+				if (ft_put_wchar_to_buffer(s, ' ', 0) == PRINTF_ERROR)
+					return (PRINTF_ERROR);
+				i++;
+			}
+		}
+	}
+	return (0);
+}
+
+static int	ft_flag_minus(t_printf *s)
+{
+	int i;
+
+	if (s->flag_minus)
 	{
 		i = 0;
 		while (i < s->width - 1)
@@ -35,22 +55,20 @@ int			ft_printf_c(t_printf *s, int w)
 {
 	int i;
 
-	if (!s->flag_minus)
-		if (ft_width(s) == PRINTF_ERROR)
-			return (PRINTF_ERROR);
+	if (ft_width(s) == PRINTF_ERROR)
+		return (PRINTF_ERROR);
 	i = 0;
 	while (i++ < s->nb_zeroes)
 		if (ft_put_wchar_to_buffer(s, '0', 0) == PRINTF_ERROR)
 			return (PRINTF_ERROR);
 	if (ft_put_wchar_to_buffer(s, s->c, w) == PRINTF_ERROR)
 		return (PRINTF_ERROR);
-	if (s->flag_minus)
-		if (ft_width(s) == PRINTF_ERROR)
-			return (PRINTF_ERROR);
+	if (ft_flag_minus(s) == PRINTF_ERROR)
+		return (PRINTF_ERROR);
 	return (0);
 }
 
-int	ft_type_c(t_printf *s)
+int			ft_type_c(t_printf *s)
 {
 	int w;
 
@@ -58,7 +76,7 @@ int	ft_type_c(t_printf *s)
 		return (0);
 	w = 0;
 	if (s->type == '%')
-		s->c = 37;
+		s->c = '%';
 	else if (s->type == 'C' || s->size == 1)
 	{
 		s->c = va_arg(s->params, wint_t);
