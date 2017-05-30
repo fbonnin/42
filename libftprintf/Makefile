@@ -86,8 +86,8 @@ ft_string_to_ullint
 
 PRINTF_NAMES = \
 ft_printf \
-flags_width_precision \
-size \
+get_flags_width_precision \
+get_size \
 type_c \
 type_str \
 printf_ullint \
@@ -95,7 +95,7 @@ type_uint \
 type_int \
 type_n \
 type_unknown \
-unicode
+utf8
 
 BASIC_FILES = $(addprefix basic/, $(BASIC_NAMES))
 SIMPLE_FILES = $(addprefix simple/, $(SIMPLE_NAMES))

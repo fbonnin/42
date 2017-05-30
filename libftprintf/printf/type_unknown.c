@@ -23,13 +23,9 @@ int	ft_type_unknown(t_printf *s)
 		s->type == 'd' || s->type == 'D' ||
 		s->type == 'i' || s->type == 'n' ||
 		s->type == '%')
-		s->i_format++;
-	else if (s->type != 0)
-	{
-		s->c = s->type;
-		if (ft_printf_c(s, 0) == PRINTF_ERROR)
-			return (PRINTF_ERROR);
-		s->i_format++;
-	}
+		return (0);
+	s->c = s->type;
+	if (ft_printf_c(s, 0) == PRINTF_ERROR)
+		return (PRINTF_ERROR);
 	return (0);
 }

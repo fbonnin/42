@@ -23,7 +23,7 @@ static int	ft_width(t_printf *s)
 		i = 0;
 		while (i < s->width - 1)
 		{
-			if (ft_putwchar_to_buffer(s, ' ', 0) == PRINTF_ERROR)
+			if (ft_put_wchar_to_buffer(s, ' ', 0) == PRINTF_ERROR)
 				return (PRINTF_ERROR);
 			i++;
 		}
@@ -40,9 +40,9 @@ int			ft_printf_c(t_printf *s, int w)
 			return (PRINTF_ERROR);
 	i = 0;
 	while (i++ < s->nb_zeroes)
-		if (ft_putwchar_to_buffer(s, '0', 0) == PRINTF_ERROR)
+		if (ft_put_wchar_to_buffer(s, '0', 0) == PRINTF_ERROR)
 			return (PRINTF_ERROR);
-	if (ft_putwchar_to_buffer(s, s->c, w) == PRINTF_ERROR)
+	if (ft_put_wchar_to_buffer(s, s->c, w) == PRINTF_ERROR)
 		return (PRINTF_ERROR);
 	if (s->flag_minus)
 		if (ft_width(s) == PRINTF_ERROR)
