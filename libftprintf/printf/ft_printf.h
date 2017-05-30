@@ -82,9 +82,9 @@ int				ft_printf_wstr(t_printf *s);
 int				ft_type_str(t_printf *s);
 
 int				ft_printf_ullint(t_printf *s);
-int				ft_printf_ullint2(t_printf *s, char *number);
+int				ft_printf_ullint_2(t_printf *s, char *number);
 int				ft_type_uint(t_printf *s);
-int				ft_type_uint2(t_printf *s);
+int				ft_type_uint_2(t_printf *s);
 
 int				ft_printf_llint(t_printf *s);
 int				ft_type_int(t_printf *s);

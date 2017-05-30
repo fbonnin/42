@@ -38,10 +38,10 @@ int	ft_type_uint(t_printf *s)
 		s->base = 2;
 	else
 		return (0);
-	return (ft_type_uint2(s));
+	return (ft_type_uint_2(s));
 }
 
-int	ft_type_uint2(t_printf *s)
+int	ft_type_uint_2(t_printf *s)
 {
 	if (s->type == 'U' || s->type == 'O')
 		s->ullint = va_arg(s->params, unsigned long int);

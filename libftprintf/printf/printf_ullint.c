@@ -89,10 +89,10 @@ int			ft_printf_ullint(t_printf *s)
 	while (i < s->len_prefix)
 		if (ft_put_wchar_to_buffer(s, s->prefix[i++], 0) == PRINTF_ERROR)
 			return (PRINTF_ERROR);
-	return (ft_printf_ullint2(s, number));
+	return (ft_printf_ullint_2(s, number));
 }
 
-int			ft_printf_ullint2(t_printf *s, char *number)
+int			ft_printf_ullint_2(t_printf *s, char *number)
 {
 	int i;
 
