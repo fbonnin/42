@@ -14,8 +14,8 @@
 # define FT_PRINTF_H
 
 # include "stdarg.h"
-# include "wchar.h"
 # include "stdint.h"
+# include "wchar.h"
 
 # define PRINTF_BUFFER_SIZE 1000
 # define PRINTF_MAX_WIDTH_LEN 10
@@ -26,11 +26,11 @@ typedef struct	s_printf
 {
 	const char				*format;
 	int						i_format;
-	va_list					params;
+	va_list					params;	
+	int						nb_bytes_written;
 	int						nb_chars_written;
 	unsigned char			buffer[PRINTF_BUFFER_SIZE];
 	int						i_buffer;
-	int						nb_bytes_written;
 
 	int						flag_minus;
 	int						flag_zero;

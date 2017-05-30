@@ -22,7 +22,7 @@ int	ft_type_unknown(t_printf *s)
 		s->type == 'p' || s->type == 'b' ||
 		s->type == 'd' || s->type == 'D' ||
 		s->type == 'i' || s->type == 'n' ||
-		s->type == '%')
+		s->type == '%' || s->type == 0)
 		return (0);
 	s->c = s->type;
 	if (ft_printf_c(s, 0) == PRINTF_ERROR)

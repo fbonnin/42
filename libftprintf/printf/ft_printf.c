@@ -45,7 +45,7 @@ static int	ft_convert(t_printf *s)
 	s->len_prefix = 0;
 	s->nb_zeroes = 0;
 	ft_get_flags(s);
-	s->width = 0;
+	s->width = -1;
 	while (ft_isdigit(s->format[s->i_format]) || s->format[s->i_format] == '*')
 		if (ft_get_width(s) == PRINTF_ERROR)
 			return (PRINTF_ERROR);
@@ -62,7 +62,8 @@ static int	ft_convert(t_printf *s)
 	if (ft_type_int(s) == PRINTF_ERROR)
 		return (PRINTF_ERROR);
 	ft_type_n(s);
-	ft_type_unknown(s);
+	if (ft_type_unknown(s) == PRINTF_ERROR)
+		return (PRINTF_ERROR);
 	s->i_format++;
 	return (0);
 }
@@ -76,13 +77,14 @@ int			ft_printf(const char *format, ...)
 	s.format = format;
 	s.i_format = 0;
 	va_start(s.params, format);
-	s.nb_chars_written = 0;
 	s.nb_bytes_written = 0;
+	s.nb_chars_written = 0;
 	s.i_buffer = 0;
 	while (format[s.i_format] != 0)
 	{
 		while (format[s.i_format] != '%' && format[s.i_format] != 0)
-			if (ft_put_wchar_to_buffer(&s, format[s.i_format++], 0) == PRINTF_ERROR)
+			if (ft_put_wchar_to_buffer(&s, format[s.i_format++], 0) ==
+			PRINTF_ERROR)
 				return (PRINTF_ERROR);
 		if (format[s.i_format++] == 0)
 			break ;
