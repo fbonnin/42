@@ -50,10 +50,10 @@ typedef struct	s_printf
 
 	unsigned long long int	ullint;
 	long long int			llint;
-	unsigned char			prefix[2];
-	int						len_prefix;
 	int						base;
 	int						uppercase;
+	unsigned char			prefix[2];
+	int						len_prefix;
 	int						len_number;
 	int						nb_zeroes;
 
@@ -90,7 +90,7 @@ int				ft_printf_llint(t_printf *s);
 int				ft_type_int(t_printf *s);
 
 void			ft_type_n(t_printf *s);
-void			ft_type_n2(t_printf *s);
+void			ft_type_n_2(t_printf *s);
 
 int				ft_type_unknown(t_printf *s);
 

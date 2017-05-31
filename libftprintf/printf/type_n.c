@@ -36,10 +36,10 @@ void	ft_type_n(t_printf *s)
 		*pint = s->nb_chars_written;
 	}
 	else
-		ft_type_n2(s);
+		ft_type_n_2(s);
 }
 
-void	ft_type_n2(t_printf *s)
+void	ft_type_n_2(t_printf *s)
 {
 	long int		*pl;
 	long long int	*pll;

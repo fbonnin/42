@@ -75,6 +75,7 @@ int			ft_printf_ullint(t_printf *s)
 	unsigned char	*number;
 	int				i;
 
+	ft_flag_sharp(s);
 	if ((number = (unsigned char *)ft_ullint_to_str(s->ullint,
 	s->base, s->uppercase)) == NULL)
 		return (PRINTF_ERROR);
@@ -82,7 +83,6 @@ int			ft_printf_ullint(t_printf *s)
 	if (s->precision == 0 && s->ullint == 0)
 		if ((s->type != 'o' && s->type != 'O') || !s->flag_sharp)
 			s->len_number = 0;
-	ft_flag_sharp(s);
 	s->nb_zeroes = ft_max(s->precision - s->len_number, 0);
 	if (ft_width(s) == PRINTF_ERROR)
 		return (PRINTF_ERROR);

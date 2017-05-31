@@ -14,6 +14,8 @@
 
 int	ft_printf_llint(t_printf *s)
 {
+	s->base = 10;
+	s->uppercase = 0;
 	if (s->llint >= 0)
 	{
 		if (s->flag_plus)
@@ -34,8 +36,6 @@ int	ft_printf_llint(t_printf *s)
 		s->len_prefix = 1;
 		s->ullint = -s->llint;
 	}
-	s->base = 10;
-	s->uppercase = 0;
 	return (ft_printf_ullint(s));
 }
 
