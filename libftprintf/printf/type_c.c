@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/26 14:24:36 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/05/29 21:25:08 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/05/31 19:28:12 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,6 @@ int			ft_type_c(t_printf *s)
 		w = 1;
 	}
 	else
-		s->c = va_arg(s->params, int);
+		s->c = (unsigned char)(char)va_arg(s->params, int);
 	return (ft_printf_c(s, w));
 }

@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/26 13:59:25 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/05/29 20:46:43 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/05/31 20:17:54 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,13 @@ static int	ft_flag_minus(t_printf *s)
 
 int			ft_printf_ullint(t_printf *s)
 {
-	char	*number;
-	int		i;
+	unsigned char	*number;
+	int				i;
 
-	if ((number = ft_ullint_to_str(s->ullint, s->base, s->uppercase)) == NULL)
+	if ((number = (unsigned char *)ft_ullint_to_str(s->ullint,
+	s->base, s->uppercase)) == NULL)
 		return (PRINTF_ERROR);
-	s->len_number = ft_strlen(number);
+	s->len_number = ft_strlen((void *)number);
 	if (s->precision == 0 && s->ullint == 0)
 		if ((s->type != 'o' && s->type != 'O') || !s->flag_sharp)
 			s->len_number = 0;
@@ -92,7 +93,7 @@ int			ft_printf_ullint(t_printf *s)
 	return (ft_printf_ullint_2(s, number));
 }
 
-int			ft_printf_ullint_2(t_printf *s, char *number)
+int			ft_printf_ullint_2(t_printf *s, unsigned char *number)
 {
 	int i;
 

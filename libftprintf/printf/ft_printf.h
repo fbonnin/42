@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/26 13:59:01 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/05/29 20:48:29 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/05/31 20:21:29 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@
 
 typedef struct	s_printf
 {
-	const char				*format;
+	const unsigned char		*format;
 	int						i_format;
-	va_list					params;	
+	va_list					params;
 	int						nb_bytes_written;
 	int						nb_chars_written;
 	unsigned char			buffer[PRINTF_BUFFER_SIZE];
@@ -40,21 +40,20 @@ typedef struct	s_printf
 	int						width;
 	int						precision;
 	int						size;
-	char					type;
+	unsigned char			type;
 
 	wchar_t					c;
 
-	char					*str;
+	unsigned char			*str;
 	wchar_t					*wstr;
 	int						len_str;
 
 	unsigned long long int	ullint;
 	long long int			llint;
-	char					prefix[2];
+	unsigned char			prefix[2];
 	int						len_prefix;
 	int						base;
 	int						uppercase;
-	char					*number;
 	int						len_number;
 	int						nb_zeroes;
 
@@ -72,7 +71,7 @@ void			ft_get_flags(t_printf *s);
 int				ft_get_width(t_printf *s);
 int				ft_get_precision(t_printf *s);
 void			ft_get_size_modifier(t_printf *s);
-void			ft_get_size_modifier_2(t_printf *s, const char *size);
+void			ft_get_size_modifier_2(t_printf *s, const unsigned char *size);
 
 int				ft_printf_c(t_printf *s, int w);
 int				ft_type_c(t_printf *s);
@@ -80,9 +79,10 @@ int				ft_type_c(t_printf *s);
 int				ft_printf_str(t_printf *s);
 int				ft_printf_wstr(t_printf *s);
 int				ft_type_str(t_printf *s);
+void			ft_null_str(unsigned char *null_str, wchar_t *null_wstr);
 
 int				ft_printf_ullint(t_printf *s);
-int				ft_printf_ullint_2(t_printf *s, char *number);
+int				ft_printf_ullint_2(t_printf *s, unsigned char *number);
 int				ft_type_uint(t_printf *s);
 int				ft_type_uint_2(t_printf *s);
 
@@ -94,7 +94,7 @@ void			ft_type_n2(t_printf *s);
 
 int				ft_type_unknown(t_printf *s);
 
-int				ft_put_utf8_to_buffer(t_printf *s);
+void			ft_put_utf8_to_buffer(t_printf *s);
 int				ft_size_wchar(wchar_t c);
 
 #endif

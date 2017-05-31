@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/26 14:27:48 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/05/26 14:27:50 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/05/31 20:19:14 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_type_n(t_printf *s)
 
 	if (s->type != 'n')
 		return ;
-	if (s->type == -2)
+	if (s->size == -2)
 	{
 		pchar = va_arg(s->params, char *);
 		*pchar = s->nb_chars_written;

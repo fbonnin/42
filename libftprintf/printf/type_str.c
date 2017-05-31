@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/26 14:28:19 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/05/29 22:17:12 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/05/31 19:37:37 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ static int	ft_flag_minus(t_printf *s)
 	if (s->flag_minus)
 	{
 		i = 0;
-		while (s->len_str + i< s->width)
-		{	
+		while (s->len_str + i < s->width)
+		{
 			if (ft_put_wchar_to_buffer(s, ' ', 0) == PRINTF_ERROR)
 				return (PRINTF_ERROR);
 			i++;
@@ -55,7 +55,7 @@ int			ft_printf_str(t_printf *s)
 {
 	int i;
 
-	s->len_str = ft_strlen(s->str);
+	s->len_str = ft_strlen((void *)s->str);
 	if (s->precision > -1)
 		s->len_str = ft_min(s->len_str, s->precision);
 	if (ft_width(s) == PRINTF_ERROR)
@@ -103,11 +103,12 @@ int			ft_printf_wstr(t_printf *s)
 
 int			ft_type_str(t_printf *s)
 {
-	char	null_str[7] = "(null)";
-	wchar_t	null_wstr[7] = L"(null)";
+	unsigned char	null_str[7];
+	wchar_t			null_wstr[7];
 
 	if (s->type != 's' && s->type != 'S')
 		return (0);
+	ft_null_str(null_str, null_wstr);
 	if (s->type == 'S' || s->size == 1)
 	{
 		if ((s->wstr = va_arg(s->params, wchar_t *)) == NULL)
@@ -117,7 +118,7 @@ int			ft_type_str(t_printf *s)
 	}
 	else
 	{
-		if ((s->str = va_arg(s->params, char *)) == NULL)
+		if ((s->str = (unsigned char *)va_arg(s->params, char *)) == NULL)
 			s->str = null_str;
 		if (ft_printf_str(s) == PRINTF_ERROR)
 			return (PRINTF_ERROR);

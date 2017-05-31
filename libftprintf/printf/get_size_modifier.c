@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   size.c                                             :+:      :+:    :+:   */
+/*   get_size_modifier.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/26 14:24:02 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/05/26 14:24:04 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/05/31 19:07:27 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void	ft_get_size_modifier(t_printf *s)
 {
-	const char *size;
+	const unsigned char *size;
 
 	size = &s->format[s->i_format];
-	if (ft_strnequ(size, "hh", 2))
+	if (ft_strnequ((void *)size, "hh", 2))
 	{
 		s->size = -2;
 		s->i_format += 2;
 	}
-	else if (ft_strnequ(size, "ll", 2))
+	else if (ft_strnequ((void *)size, "ll", 2))
 	{
 		s->size = 2;
 		s->i_format += 2;
@@ -41,7 +41,7 @@ void	ft_get_size_modifier(t_printf *s)
 		ft_get_size_modifier_2(s, size);
 }
 
-void	ft_get_size_modifier_2(t_printf *s, const char *size)
+void	ft_get_size_modifier_2(t_printf *s, const unsigned char *size)
 {
 	if (size[0] == 'j')
 	{
