@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/26 13:58:05 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/05/31 19:36:01 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/06/01 16:12:29 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int			ft_put_wchar_to_buffer(t_printf *s, unsigned int c, int w)
 		if ((s->nb_bits = ft_strlen(s->bits)) > 21)
 			return (PRINTF_ERROR);
 		ft_put_utf8_to_buffer(s);
+		free(s->bits);
 	}
 	if (s->i_buffer > PRINTF_BUFFER_SIZE - 4)
 	{
@@ -99,13 +100,7 @@ int			ft_printf(const char *format, ...)
 
 void		ft_null_str(unsigned char *null_str, wchar_t *null_wstr)
 {
-	null_str[0] = '(';
-	null_str[1] = 'n';
-	null_str[2] = 'u';
-	null_str[3] = 'l';
-	null_str[4] = 'l';
-	null_str[5] = ')';
-	null_str[6] = 0;
+	ft_strcpy((void *)null_str, "(null)");
 	null_wstr[0] = L'(';
 	null_wstr[1] = L'n';
 	null_wstr[2] = L'u';
