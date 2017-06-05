@@ -1,33 +1,20 @@
 CHECKER_NAME = checker
 
-CHECKER_NAMES = \
-checker \
-check_numbers \
-list1 \
-list2 \
-list3 \
-check_operations
-
-CHECKER_FILES = $(addprefix checker/, $CHECKER_NAMES))
-
-ALL_FILES = \
-$(CHECKER_FILES)
-
-O_FILES = $(addsuffix .o, $(ALL_FILES))
-
-$(CHECKER_NAME): $(O_FILES)
+all:
 	cd libft && make
-	gcc $(O_FILES) libft/libft.a -o $(CHECKER_NAME)
+	cd checker_sources && make
+	mv checker_sources/checker checker
 
-all: $(CHECKER_NAME) $(O_FILES)
-%.o: %.c
-	gcc -c $< -o $@ -Wall -Werror -Wextra
+$(CHECKER_NAME):
+	cd checker && make
+	mv checker_sources/checker checker
 
 clean:
 	cd libft && make clean
+	cd checker_sources && make clean
 
-fclean: clean
+fclean:
 	cd libft && make fclean
-	rm -f $(CHECKER_NAME)
+	cd checker_sources && make fclean
 
 re: fclean all

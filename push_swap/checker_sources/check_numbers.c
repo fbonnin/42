@@ -44,7 +44,7 @@ int			get_numbers(int argc, char **argv, int **numbers)
 	i = 0;
 	while (i < argc - 1)
 	{
-		*numbers[i] = ft_atoi(argv[1 + i]);
+		(*numbers)[i] = ft_atoi(argv[1 + i]);
 		i++;
 	}
 	return (0);
