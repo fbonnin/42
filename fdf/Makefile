@@ -12,17 +12,17 @@
 
 NAME = fdf
 
-FILES = \
-	main \
-	check_file \
-	load_file \
-	geometry \
-	calculations1 \
-	calculations2 \
-	draw_result \
-	mlx
+NAMES = \
+main \
+check_file \
+load_file \
+geometry \
+calculations1 \
+calculations2 \
+draw_result \
+mlx
 
-O_FILES = $(addsuffix .o, $(FILES))
+O_FILES = $(addsuffix .o, $(NAMES))
 
 $(NAME): $(O_FILES)
 	cd libft && make
