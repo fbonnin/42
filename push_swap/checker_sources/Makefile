@@ -11,6 +11,7 @@ check_operations
 O_FILES = $(addsuffix .o, $(NAMES))
 
 $(NAME): $(O_FILES)
+	cd ../libft && make
 	gcc $(O_FILES) ../libft/libft.a -o $(NAME)
 
 all: $(NAME) $(O_FILES)

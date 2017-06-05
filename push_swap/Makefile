@@ -1,13 +1,10 @@
-CHECKER_NAME = checker
-
 all:
-	cd libft && make
 	cd checker_sources && make
-	mv checker_sources/checker checker
+	mv checker_sources/checker .
 
-$(CHECKER_NAME):
-	cd checker && make
-	mv checker_sources/checker checker
+checker:
+	cd checker_sources && make
+	mv checker_sources/checker .
 
 clean:
 	cd libft && make clean
@@ -16,5 +13,6 @@ clean:
 fclean:
 	cd libft && make fclean
 	cd checker_sources && make fclean
+	rm -f checker
 
 re: fclean all
