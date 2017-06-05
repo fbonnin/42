@@ -16,8 +16,8 @@
 char					*ft_ullint_to_str(unsigned long long int n,
 						unsigned int base, int uppercase);
 
-unsigned long long int	ft_str_to_ullint(char *s, unsigned int base);
-
 long long int			ft_str_to_llint(char *s);
+
+unsigned long long int	ft_str_to_ullint(char *s, unsigned int base);
 
 #endif
