@@ -15,7 +15,7 @@ static int	check_arg(char *arg)
 	while (arg[i] != 0)
 		if (!ft_isdigit(arg[i++]))
 			return (CHECK_ERROR);
-	number = str_to_llint(arg);
+	number = ft_str_to_llint(arg);
 	if (number < -2147483648 || number > 2147483647)
 		return (CHECK_ERROR);
 	return (0);

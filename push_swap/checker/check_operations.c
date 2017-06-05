@@ -32,7 +32,7 @@ int	do_operations(t_list *a, t_list *b, char *line)
 	else if (ft_strequ(line, "pb"))
 		push(a, b);
 	else
-		return (do_operations_2(a, b, line))
+		return (do_operations_2(a, b, line));
 	return (0);
 }
 
