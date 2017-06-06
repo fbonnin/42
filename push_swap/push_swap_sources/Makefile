@@ -4,7 +4,11 @@ NAMES = \
 push_swap \
 check_numbers \
 bubble_sort \
-insertion_sort
+insertion_sort \
+merge_sort \
+list1 \
+list2 \
+list3
 
 O_FILES = $(addsuffix .o, $(NAMES))
 

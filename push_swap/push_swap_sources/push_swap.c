@@ -80,12 +80,14 @@ void	print_algo_name(int i)
 		ft_printf("Bubble sort :\n");
 	else if (i == 1)
 		ft_printf("Insertion sort :\n");
+	else if (i == 2)
+		ft_printf("Merge sort :\n");
 }
 
 int		main(int argc, char **argv)
 {
 	t_push_swap s;
-	int (*sort_functions[2])(t_push_swap *, int);
+	int (*sort_functions[3])(t_push_swap *, int);
 	int min_nb_operations;
 	int i_min;
 	int i;
@@ -97,10 +99,11 @@ int		main(int argc, char **argv)
 	}
 	sort_functions[0] = &bubble_sort;
 	sort_functions[1] = &insertion_sort;
+	sort_functions[2] = &merge_sort;
 
 	min_nb_operations = 2000000000; // oo
 	i = 0;
-	while (i < 2)
+	while (i < 3)
 	{
 		copy_numbers(&s);
 		s.nb_operations = 0;

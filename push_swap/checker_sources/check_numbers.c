@@ -90,7 +90,10 @@ int			check_duplicates(int *numbers, int nb_numbers)
 	while (i < nb_numbers - 1)
 	{
 		if (copy[i] == copy[i + 1])
+		{
+			free(copy);
 			return (CHECK_ERROR);
+		}
 		i++;
 	}
 	free(copy);

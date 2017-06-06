@@ -90,7 +90,10 @@ int			check_duplicates(t_push_swap *s)
 	while (i < s->nb_numbers - 1)
 	{
 		if (copy[i] == copy[i + 1])
+		{
+			free(copy);
 			return (PS_ERROR);
+		}
 		i++;
 	}
 	free(copy);
