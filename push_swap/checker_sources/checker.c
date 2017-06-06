@@ -21,11 +21,14 @@ static int	check(int argc, char **argv)
 	if (get_numbers(argc, argv, &numbers) == CHECK_ERROR)
 		return (CHECK_ERROR);
 	if (check_duplicates(numbers, argc - 1) == CHECK_ERROR)
-		return (CHECK_ERROR);
+		return (free_everything(numbers, &a, &b));
 	initialize_list(&a);
 	initialize_list(&b);
 	if (numbers_to_a(numbers, argc - 1, &a) == CHECK_ERROR)
 		return (free_everything(numbers, &a, &b));
+	//if (ft_get_next_line(0, &line) == -1)
+	//	return (free_everything(numbers, &a, &b));
+	//ft_printf("%s\n", line);
 	while ((r = ft_get_next_line(0, &line)) == 1)
 	{
 		if (do_operations(&a, &b, line) == CHECK_ERROR)
