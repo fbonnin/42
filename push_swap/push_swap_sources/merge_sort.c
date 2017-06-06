@@ -1,116 +1,123 @@
 #include "push_swap.h"
 
+typedef struct	s_merge_sort
+{
+	t_list	a;
+	t_list	b;
+	int		i;
+	int		size_sub;
+	int		i_list;
+	int		size_a;
+	int		i_a;
+	int		i_sub_a;
+	int		size_b;
+	int		i_b;
+	int		i_sub_b;
+}				t_merge_sort;
+
 int	merge_sort(t_push_swap *s, int save)
 {
-	t_list a;
-	t_list b;
-	int i;
-	int size_sub;
-	int i_a, i_sub_a, size_a;
-	int i_b, i_sub_b, size_b;
-	int i_mod;
+	t_merge_sort v;
 
-	initialize_list(&a);
-	initialize_list(&b);
-	i = 0;
-	while (i < s->nb_numbers)
-		add_first(&a, create_list_elem(s->numbers[i++]));
-	i = 0;
-	while (i++ < s->nb_numbers / 2)
+	initialize_list(&v.a);
+	initialize_list(&v.b);
+	v.i = 0;
+	while (v.i < s->nb_numbers)
+		add_first(&v.a, create_list_elem(s->numbers[v.i++]));
+	v.i = 0;
+	while (v.i++ < s->nb_numbers / 2)
 	{
-		push(&a, &b);
+		push(&v.a, &v.b);
 		do_operation(s, save, pb);
 	}
-	size_sub = 1;
-	while (size_sub < s->nb_numbers)
+	v.size_sub = 1;
+	while (v.size_sub < s->nb_numbers)
 	{
-		size_a = a.size;
-		size_b = b.size;
-		i_a = 0;
-		i_b = 0;
-		i_mod = 0;
-		while (i_a < size_a)
+		v.size_a = v.a.size;
+		v.size_b = v.b.size;
+		v.i_a = 0;
+		v.i_b = 0;
+		v.i_list = 0;
+		while (v.i_a < v.size_a)
 		{
-			i_sub_a = 0;
-			i_sub_b = 0;
-			while (i_a < size_a && i_sub_a < size_sub && i_b < size_b && i_sub_b < size_sub)
+			v.i_sub_a = 0;
+			v.i_sub_b = 0;
+			while (v.i_a < v.size_a && v.i_sub_a < v.size_sub && v.i_b < v.size_b && v.i_sub_b < v.size_sub)
 			{
-				if (i_mod == 0)
+				if (v.i_list == 0)
 				{
-					if (a.last->number < b.last->number)
+					if (v.a.last->number < v.b.last->number)
 					{
-						i_a++;
-						i_sub_a++;
+						v.i_a++;
+						v.i_sub_a++;
 					}
 					else
 					{
-						push(&b, &a);
+						push(&v.b, &v.a);
 						do_operation(s, save, pa);
-						i_b++;
-						i_sub_b++;
+						v.i_b++;
+						v.i_sub_b++;
 					}
-					rotate(&a);
+					rotate(&v.a);
 					do_operation(s, save, ra);
 				}
 				else
 				{
-					if (a.last->number < b.last->number)
+					if (v.a.last->number < v.b.last->number)
 					{
-						push(&a, &b);
+						push(&v.a, &v.b);
 						do_operation(s, save, pb);
-						i_a++;
-						i_sub_a++;
+						v.i_a++;
+						v.i_sub_a++;
 					}
 					else
 					{
-						i_b++;
-						i_sub_b++;
+						v.i_b++;
+						v.i_sub_b++;
 					}
-					rotate(&b);
+					rotate(&v.b);
 					do_operation(s, save, rb);
 				}
 			}
-			while (i_a < size_a && i_sub_a < size_sub)
+			while (v.i_a < v.size_a && v.i_sub_a < v.size_sub)
 			{
-				if (i_mod == 0)
+				if (v.i_list == 0)
 				{
-					rotate(&a);
+					rotate(&v.a);
 					do_operation(s, save, ra);
 				}
 				else
 				{
-					push(&a, &b);
+					push(&v.a, &v.b);
 					do_operation(s, save, pb);
-					rotate(&b);
+					rotate(&v.b);
 					do_operation(s, save, rb);
 				}
-				i_a++;
-				i_sub_a++;
+				v.i_a++;
+				v.i_sub_a++;
 			}
-			while (i_b < size_b && i_sub_b < size_sub)
+			while (v.i_b < v.size_b && v.i_sub_b < v.size_sub)
 			{
-				if (i_mod == 0)
+				if (v.i_list == 0)
 				{
-					push(&b, &a);
+					push(&v.b, &v.a);
 					do_operation(s, save, pa);
-					rotate(&a);
+					rotate(&v.a);
 					do_operation(s, save, ra);
 				}
 				else
 				{
-					rotate(&b);
+					rotate(&v.b);
 					do_operation(s, save, rb);
 				}
-				i_b++;
-				i_sub_b++;
+				v.i_b++;
+				v.i_sub_b++;
 			}
-			i_mod = (i_mod + 1) % 2;
+			v.i_list = (v.i_list + 1) % 2;
 		}
-		size_sub *= 2;
+		v.size_sub *= 2;
 	}
-
-
-	free_list(&a);
-	free_list(&b);
+	free_list(&v.a);
+	free_list(&v.b);
 	return (s->nb_operations);
 }
