@@ -4,7 +4,6 @@ int		get_input(int argc, char **argv, t_push_swap *s)
 {
 	if (get_numbers(argc, argv, s) == PS_ERROR)
 		return (PS_ERROR);
-	s->nb_numbers = argc -1;
 	if (check_duplicates(s) == PS_ERROR)
 	{
 		free(s->numbers);

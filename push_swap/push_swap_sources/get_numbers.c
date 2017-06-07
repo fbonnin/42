@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_numbers.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/06/07 17:47:15 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/06/07 17:55:46 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static int	check_arg(char *arg)
@@ -49,6 +61,7 @@ int			get_numbers(int argc, char **argv, t_push_swap *s)
 		s->numbers[i] = ft_atoi(argv[1 + i]);
 		i++;
 	}
+	s->nb_numbers = argc - 1;
 	return (0);
 }
 
