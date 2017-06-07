@@ -74,20 +74,20 @@ void			ft_putstr_fd(char const *s, int fd);
 void			ft_putendl_fd(char const *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
 
-typedef struct	s_list
+typedef struct	s_std_list
 {
-	void			*content;
-	size_t			content_size;
-	struct s_list	*next;
-}				t_list;
+	void				*content;
+	size_t				content_size;
+	struct s_std_list	*next;
+}				t_std_list;
 
-t_list			*ft_lstnew(void const *content, size_t content_size);
-void			ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
-void			ft_lstdel(t_list **alst, void (*del)(void *, size_t));
-void			ft_lstadd(t_list **alst, t_list *new_elem);
-void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
-t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
-void			ft_lst_push_back(t_list **alst, t_list *new_elem);
+t_std_list		*ft_lstnew(void const *content, size_t content_size);
+void			ft_lstdelone(t_std_list **alst, void (*del)(void *, size_t));
+void			ft_lstdel(t_std_list **alst, void (*del)(void *, size_t));
+void			ft_lstadd(t_std_list **alst, t_std_list *new_elem);
+void			ft_lstiter(t_std_list *lst, void (*f)(t_std_list *elem));
+t_std_list		*ft_lstmap(t_std_list *lst, t_std_list *(*f)(t_std_list *elem));
+void			ft_lst_push_back(t_std_list **alst, t_std_list *new_elem);
 
 int				ft_islower(int c);
 int				ft_isupper(int c);

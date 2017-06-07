@@ -12,7 +12,8 @@
 
 #include "../libft.h"
 
-static void	push_back(t_list **result, t_list *new_elem, t_list **last)
+static void	push_back(t_std_list **result,
+t_std_list *new_elem, t_std_list **last)
 {
 	if (*result == NULL)
 		*result = new_elem;
@@ -27,13 +28,13 @@ static void	del(void *content, size_t content_size)
 		free(content);
 }
 
-t_list		*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
+t_std_list	*ft_lstmap(t_std_list *lst, t_std_list *(*f)(t_std_list *elem))
 {
-	t_list *elem;
-	t_list *next;
-	t_list *result;
-	t_list *new_elem;
-	t_list *last;
+	t_std_list *elem;
+	t_std_list *next;
+	t_std_list *result;
+	t_std_list *new_elem;
+	t_std_list *last;
 
 	if (f == NULL)
 		return (NULL);
