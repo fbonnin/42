@@ -19,6 +19,7 @@ get_numbers \
 bubble_sort \
 insertion_sort \
 merge_sort \
+merge_sort_2 \
 list1 \
 list2 \
 list3

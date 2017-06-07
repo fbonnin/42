@@ -1,0 +1,27 @@
+#ifndef MERGE_SORT_H
+# define MERGE_SORT_H
+
+typedef struct	s_merge_sort
+{
+	t_list	a;
+	t_list	b;
+	int		i;
+	int		size_sub;
+	int		size_a;
+	int		i_a;
+	int		size_b;
+	int		i_b;
+	int		i_list;
+	int		i_sub_a;
+	int		i_sub_b;
+}				t_merge_sort;
+
+
+void			initialize(t_push_swap *s, int save, t_merge_sort *v);
+void			set_indexes(t_merge_sort *v);
+void			push_left(t_push_swap *s, int save, t_merge_sort *v);
+void			push_right(t_push_swap *s, int save, t_merge_sort *v);
+void			empty_a(t_push_swap *s, int save, t_merge_sort *v);
+void			empty_b(t_push_swap *s, int save, t_merge_sort *v);
+
+#endif
