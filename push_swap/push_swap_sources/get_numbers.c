@@ -21,7 +21,7 @@ static int	check_arg(char *arg)
 	return (0);
 }
 
-int			check_args(int argc, char **argv)
+static int	check_args(int argc, char **argv)
 {
 	int i;
 
@@ -38,6 +38,8 @@ int			get_numbers(int argc, char **argv, t_push_swap *s)
 {
 	int i;
 
+	if (check_args(argc, argv) == PS_ERROR)
+		return (PS_ERROR);
 	s->numbers = malloc((argc - 1) * sizeof(int));
 	if (s->numbers == NULL)
 		return (PS_ERROR);

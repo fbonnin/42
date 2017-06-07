@@ -2,11 +2,11 @@ NAME = checker
 
 NAMES = \
 checker \
-check_numbers \
+get_numbers \
+check_operations \
 list1 \
 list2 \
-list3 \
-check_operations
+list3
 
 O_FILES = $(addsuffix .o, $(NAMES))
 

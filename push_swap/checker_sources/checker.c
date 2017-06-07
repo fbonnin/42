@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/06/07 16:45:47 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/06/07 16:54:19 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker.h"
 
 static int	free_everything(int *numbers, t_list *a, t_list *b)
@@ -16,8 +28,6 @@ static int	check(int argc, char **argv)
 	char	*line;
 	int		r;
 
-	if (check_args(argc, argv) == CHECK_ERROR)
-		return (CHECK_ERROR);
 	if (get_numbers(argc, argv, &numbers) == CHECK_ERROR)
 		return (CHECK_ERROR);
 	initialize_list(&a);
@@ -43,6 +53,8 @@ int			main(int argc, char **argv)
 {
 	int r;
 
+	if (argc < 2)
+		return (0);
 	r = check(argc, argv);
 	if (r == CHECK_ERROR)
 		write(2, "Error\n", 6);

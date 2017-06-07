@@ -50,7 +50,6 @@ typedef struct	s_push_swap
 	int			nb_operations;
 }				t_push_swap;
 
-int				check_args(int argc, char **argv);
 int				get_numbers(int argc, char **argv, t_push_swap *s);
 int				check_duplicates(t_push_swap *s);
 

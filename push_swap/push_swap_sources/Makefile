@@ -2,7 +2,7 @@ NAME = push_swap
 
 NAMES = \
 push_swap \
-check_numbers \
+get_numbers \
 bubble_sort \
 insertion_sort \
 merge_sort \

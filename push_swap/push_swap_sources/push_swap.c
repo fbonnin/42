@@ -2,8 +2,6 @@
 
 int		get_input(int argc, char **argv, t_push_swap *s)
 {
-	if (check_args(argc, argv) == PS_ERROR)
-		return (PS_ERROR);
 	if (get_numbers(argc, argv, s) == PS_ERROR)
 		return (PS_ERROR);
 	s->nb_numbers = argc -1;

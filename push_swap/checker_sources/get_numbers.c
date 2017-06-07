@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_numbers.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/06/07 16:38:28 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/06/07 16:48:38 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker.h"
 
 static int	check_arg(char *arg)
@@ -21,7 +33,7 @@ static int	check_arg(char *arg)
 	return (0);
 }
 
-int			check_args(int argc, char **argv)
+static int	check_args(int argc, char **argv)
 {
 	int i;
 
@@ -38,6 +50,8 @@ int			get_numbers(int argc, char **argv, int **numbers)
 {
 	int i;
 
+	if (check_args(argc, argv) == CHECK_ERROR)
+		return (CHECK_ERROR);
 	*numbers = malloc((argc - 1) * sizeof(int));
 	if (*numbers == NULL)
 		return (CHECK_ERROR);

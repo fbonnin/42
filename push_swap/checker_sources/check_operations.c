@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_operations.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/06/07 17:09:22 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/06/07 17:10:13 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "checker.h"
 
-int numbers_to_a(int *numbers, int nb_numbers, t_list *a)
+int	numbers_to_a(int *numbers, int nb_numbers, t_list *a)
 {
 	int			i;
 	t_list_elem	*elem;
@@ -63,7 +75,7 @@ int	do_operations_2(t_list *a, t_list *b, char *line)
 
 int	check_result(t_list *a, t_list *b)
 {
-	t_list_elem * elem;
+	t_list_elem *elem;
 
 	if (b->size != 0)
 		return (0);
