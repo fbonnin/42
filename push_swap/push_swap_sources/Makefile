@@ -6,7 +6,7 @@
 #    By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/06/07 17:47:59 by fbonnin           #+#    #+#              #
-#    Updated: 2017/06/07 17:48:40 by fbonnin          ###   ########.fr        #
+#    Updated: 2017/06/07 19:51:28 by fbonnin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = push_swap
 
 NAMES = \
 push_swap \
+push_swap_2 \
 get_numbers \
 bubble_sort \
 insertion_sort \

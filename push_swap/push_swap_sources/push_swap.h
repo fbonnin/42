@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 17:45:05 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/06/07 17:45:11 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/06/07 19:50:53 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ typedef struct	s_push_swap
 	int			*numbers;
 	int			nb_numbers;
 	int			*numbers2;
+	int			(*sort_functions[3])(struct s_push_swap *, int);
+	int			min_nb_operations;
+	int			i_min;
 	t_operation *operations;
 	int			nb_operations;
 }				t_push_swap;
@@ -48,13 +51,19 @@ typedef struct	s_list
 	unsigned int	size;
 }				t_list;
 
+int				get_input(int argc, char **argv, t_push_swap *s);
 int				get_numbers(int argc, char **argv, t_push_swap *s);
 int				check_duplicates(t_push_swap *s);
 
+void			copy_numbers(t_push_swap *s);
+
 void			do_operation(t_push_swap *s, int save, t_operation operation);
+
+void			print_operations(t_push_swap *);
 
 int				bubble_sort(t_push_swap *s, int save);
 int				insertion_sort(t_push_swap *s, int save);
+int				insertion_sort_2(t_push_swap *s, int save);
 int				merge_sort(t_push_swap *s, int save);
 
 void			initialize_list(t_list *list);
