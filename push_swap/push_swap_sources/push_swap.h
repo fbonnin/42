@@ -36,6 +36,10 @@ typedef struct	s_push_swap
 	int			i_min;
 	t_operation *operations;
 	int			nb_operations;
+	t_operation	*compressed_operations;
+	int			nb_compressed_operations;
+	t_operation	compressed_operation;
+	int			i;
 }				t_push_swap;
 
 typedef struct	s_list_elem
@@ -57,6 +61,7 @@ int				check_duplicates(t_push_swap *s);
 
 void			copy_numbers(t_push_swap *s);
 void			do_operation(t_push_swap *s, int save, t_operation operation);
+void			compress_operations(t_push_swap *s);
 void			print_operations(t_push_swap *s);
 
 int				bubble_sort(t_push_swap *s, int save);

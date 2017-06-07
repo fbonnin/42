@@ -79,7 +79,9 @@ int			main(int argc, char **argv)
 	copy_numbers(&s);
 	s.nb_operations = 0;
 	s.sort_functions[s.i_min](&s, 1);
-	print_algo_name(s.i_min);
+	s.compressed_operations = malloc(s.min_nb_operations * sizeof(t_operation));
+	compress_operations(&s);
+	//print_algo_name(s.i_min);
 	print_operations(&s);
 	free(s.numbers);
 	free(s.numbers2);
