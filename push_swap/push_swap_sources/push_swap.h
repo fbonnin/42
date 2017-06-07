@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 17:45:05 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/06/07 20:00:25 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/06/07 20:47:31 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,12 @@ typedef struct	s_list
 	unsigned int	size;
 }				t_list;
 
-int				get_input(int argc, char **argv, t_push_swap *s);
 int				get_numbers(int argc, char **argv, t_push_swap *s);
 int				check_duplicates(t_push_swap *s);
 
 void			copy_numbers(t_push_swap *s);
-
 void			do_operation(t_push_swap *s, int save, t_operation operation);
-
-void			print_operations(t_push_swap *);
+void			print_operations(t_push_swap *s);
 
 int				bubble_sort(t_push_swap *s, int save);
 int				insertion_sort(t_push_swap *s, int save);

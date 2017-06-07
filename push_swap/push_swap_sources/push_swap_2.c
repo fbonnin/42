@@ -6,28 +6,11 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 18:30:41 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/06/07 19:51:49 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/06/07 20:30:18 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int			get_input(int argc, char **argv, t_push_swap *s)
-{
-	if (get_numbers(argc, argv, s) == PS_ERROR)
-		return (PS_ERROR);
-	if (check_duplicates(s) == PS_ERROR)
-	{
-		free(s->numbers);
-		return (PS_ERROR);
-	}
-	if ((s->numbers2 = malloc(s->nb_numbers * sizeof(int))) == NULL)
-	{
-		free(s->numbers);
-		return (PS_ERROR);
-	}
-	return (0);
-}
 
 void		copy_numbers(t_push_swap *s)
 {
