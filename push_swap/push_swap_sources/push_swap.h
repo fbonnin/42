@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 17:45:05 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/06/07 19:50:53 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/06/07 20:00:25 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct	s_push_swap
 	int			nb_numbers;
 	int			*numbers2;
 	int			(*sort_functions[3])(struct s_push_swap *, int);
+	int			nb_sort_functions;
 	int			min_nb_operations;
 	int			i_min;
 	t_operation *operations;
