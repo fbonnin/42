@@ -30,20 +30,31 @@ int		merge_sort(t_push_swap *s, int save)
 	return (s->nb_operations);
 }
 
-void	initialize(t_push_swap *s, int save, t_merge_sort *v)
+int		initialize(t_push_swap *s, int save, t_merge_sort *v)
 {
+	int			i;
+	t_list_elem	*elem;	
+
 	initialize_list(&v->a);
 	initialize_list(&v->b);
-	v->i = 0;
-	while (v->i < s->nb_numbers)
-		add_first(&v->a, create_list_elem(s->numbers[v->i++]));
-	v->i = 0;
-	while (v->i++ < s->nb_numbers / 2)
+	i = 0;
+	while (i < s->nb_numbers)
+	{
+		if ((elem = create_list_elem(s->numbers[i++])) == NULL)
+		{
+			free_list(&v->a);
+			return (-1);
+		}
+		add_first(&v->a, elem);
+	}
+	i = 0;
+	while (i++ < s->nb_numbers / 2)
 	{
 		push(&v->a, &v->b);
 		do_operation(s, save, pb);
 	}
 	v->size_sub = 1;
+	return (0);
 }
 
 void	set_indexes(t_merge_sort *v)

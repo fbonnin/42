@@ -5,7 +5,6 @@ typedef struct	s_merge_sort
 {
 	t_list	a;
 	t_list	b;
-	int		i;
 	int		size_sub;
 	int		size_a;
 	int		i_a;
@@ -17,7 +16,7 @@ typedef struct	s_merge_sort
 }				t_merge_sort;
 
 
-void			initialize(t_push_swap *s, int save, t_merge_sort *v);
+int				initialize(t_push_swap *s, int save, t_merge_sort *v);
 void			set_indexes(t_merge_sort *v);
 void			push_left(t_push_swap *s, int save, t_merge_sort *v);
 void			push_right(t_push_swap *s, int save, t_merge_sort *v);
