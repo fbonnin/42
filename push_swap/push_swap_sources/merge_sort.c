@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   merge_sort.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/06/09 15:27:39 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/06/09 15:28:42 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 #include "merge_sort.h"
 
@@ -33,7 +45,7 @@ int		merge_sort(t_push_swap *s, int save)
 int		initialize(t_push_swap *s, int save, t_merge_sort *v)
 {
 	int			i;
-	t_list_elem	*elem;	
+	t_list_elem	*elem;
 
 	initialize_list(&v->a);
 	initialize_list(&v->b);
