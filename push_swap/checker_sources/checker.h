@@ -42,6 +42,8 @@ int				check_result(t_list *a, t_list *b);
 void			initialize_list(t_list *list);
 t_list_elem		*create_list_elem(int number);
 void			free_list(t_list *list);
+int				list_min(t_list *list);
+int				list_sorted(t_list *list);
 
 void			add_first(t_list *list, t_list_elem *elem);
 void			add_last(t_list *list, t_list_elem *elem);

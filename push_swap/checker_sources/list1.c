@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 16:20:33 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/06/07 16:20:48 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/06/07 17:00:51 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,37 @@ void		free_list(t_list *list)
 		free(elem);
 		elem = elem->next;
 	}
+}
+
+int			list_min(t_list *list)
+{
+	int			result;
+	t_list_elem	*elem;
+
+	if (list->first == NULL)
+		return (0);
+	result = list->first->number;
+	elem = list->first->next;
+	while (elem != NULL)
+	{
+		result = ft_min(result, elem->number);
+		elem = elem->next;
+	}
+	return (result);
+}
+
+int			list_sorted(t_list *list)
+{
+	t_list_elem *elem;
+
+	if (list->first == NULL)
+		return (1);
+	elem = list->first;
+	while (elem->next != NULL)
+	{
+		if (elem->number < elem->next->number)
+			return (0);
+		elem = elem->next;
+	}
+	return (1);
 }

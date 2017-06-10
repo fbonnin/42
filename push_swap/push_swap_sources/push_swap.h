@@ -30,7 +30,7 @@ typedef struct	s_push_swap
 	int			*numbers;
 	int			nb_numbers;
 	int			*numbers2;
-	int			(*sort_functions[3])(struct s_push_swap *, int);
+	int			(*sort_functions[4])(struct s_push_swap *, int);
 	int			nb_sort_functions;
 	int			min_nb_operations;
 	int			i_min;
@@ -68,10 +68,13 @@ int				bubble_sort(t_push_swap *s, int save);
 int				insertion_sort(t_push_swap *s, int save);
 int				insertion_sort_2(t_push_swap *s, int save);
 int				merge_sort(t_push_swap *s, int save);
+int				selection_sort(t_push_swap *s, int save);
 
 void			initialize_list(t_list *list);
 t_list_elem		*create_list_elem(int number);
 void			free_list(t_list *list);
+int				list_min(t_list *list);
+int				list_sorted(t_list *list);
 
 void			add_first(t_list *list, t_list_elem *elem);
 void			add_last(t_list *list, t_list_elem *elem);
