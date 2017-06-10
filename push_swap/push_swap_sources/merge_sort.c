@@ -55,7 +55,7 @@ int		initialize(t_push_swap *s, int save, t_merge_sort *v)
 		if ((elem = create_list_elem(s->numbers[i++])) == NULL)
 		{
 			free_list(&v->a);
-			return (-1);
+			return (PS_ERROR);
 		}
 		add_first(&v->a, elem);
 	}
