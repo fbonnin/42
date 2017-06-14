@@ -59,6 +59,8 @@ void		print_algo_name(int i)
 		ft_printf("Merge sort\n");
 	else if (i == 3)
 		ft_printf("Selection sort\n");
+	else if (i == 4)
+		ft_printf("Sort3\n");
 }
 
 int			main(int argc, char **argv)
@@ -76,7 +78,8 @@ int			main(int argc, char **argv)
 	s.sort_functions[1] = &insertion_sort;
 	s.sort_functions[2] = &merge_sort;
 	s.sort_functions[3] = &selection_sort;
-	s.nb_sort_functions = 4;
+	s.sort_functions[4] = &sort3;
+	s.nb_sort_functions = 5;
 	find_min(&s);
 	s.operations = malloc(s.min_nb_operations * sizeof(t_operation));
 	copy_numbers(&s);
