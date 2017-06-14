@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 18:05:31 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/06/07 18:05:32 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/06/14 15:40:51 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	sorted(t_push_swap *s)
 	return (1);
 }
 
-int	bubble_sort(t_push_swap *s, int save)
+int			bubble_sort(t_push_swap *s, int save)
 {
 	int i;
 	int t;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   selection_sort.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/06/14 15:41:07 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/06/14 15:41:33 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static int	r_to_min(t_list *a)
@@ -75,7 +87,7 @@ static void	sort(t_push_swap *s, int save, t_list *a, t_list *b)
 	}
 }
 
-int		selection_sort(t_push_swap *s, int save)
+int			selection_sort(t_push_swap *s, int save)
 {
 	t_list		a;
 	t_list		b;

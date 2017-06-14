@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/07 20:28:52 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/06/09 16:42:35 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/06/14 15:42:03 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static void	find_min(t_push_swap *s)
 		copy_numbers(s);
 		s->nb_operations = 0;
 		s->sort_functions[i](s, 0);
-		//ft_printf("nb operations : %d\n", s->nb_operations);
 		if (s->nb_operations < s->min_nb_operations)
 		{
 			s->min_nb_operations = s->nb_operations;
@@ -85,7 +84,6 @@ int			main(int argc, char **argv)
 	s.sort_functions[s.i_min](&s, 1);
 	s.compressed_operations = malloc(s.min_nb_operations * sizeof(t_operation));
 	compress_operations(&s);
-	//print_algo_name(s.i_min);
 	print_operations(&s);
 	free(s.numbers);
 	free(s.numbers2);
