@@ -26,6 +26,7 @@ void	get_input(t_lines *lines, int *nb_nodes_expected)
 			add_line(lines, str);
 	}
 	free(str);
+	*nb_nodes_expected = ft_max(*nb_nodes_expected, 2);
 }
 
 void	get_part1(int *nb_nodes_expected, char *str, int *stop, int *part)
