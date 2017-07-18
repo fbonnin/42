@@ -9,7 +9,7 @@ typedef struct	s_node
 	char 		*name;
 	t_neighbor	*neighbors;
 	int			time_available;
-	int			found;
+	int			reached;
 	int			time_reach;
 	int			previous;
 }				t_node;
