@@ -1,6 +1,6 @@
 #include "lem-in.h"
 
-t_move *list_moves_to_moves(t_list_moves *list_moves)
+t_move	*list_moves_to_moves(t_list_moves *list_moves)
 {
 	t_list_move	*list_move;
 	t_move		*moves;
