@@ -39,7 +39,7 @@ void	get_part1(int *nb_nodes_expected, char *str, int *stop, int *part)
 		*stop = 1;
 	else
 		(*nb_nodes_expected)++;
-	free_words(&words);
+	free_words(words);
 }
 
 void	get_part2(char *str, int *stop)
@@ -52,7 +52,7 @@ void	get_part2(char *str, int *stop)
 		*stop = 1;
 	else
 		nb_links++;
-	free_words(&words);
+	free_words(words);
 }
 
 void	free_words(char **words)
