@@ -95,18 +95,3 @@ void	save_moves(t_node *nodes, t_list_moves *list_moves, int ant)
 		i_node = nodes[i_node].previous;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
