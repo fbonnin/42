@@ -89,9 +89,8 @@ void	save_moves(t_node *nodes, t_list_moves *list_moves, int ant)
 		move.ant = ant;
 		move.destination = i_node;
 		move.time = nodes[i_node].time_reach;
-		list_moves_add(list_moves, move);
-		nodes[nodes[i_node].previous].time_available =
-		nodes[i_node].time_reach;
+		add_list_move(list_moves, move);
+		nodes[nodes[i_node].previous].time_available = nodes[i_node].time_reach;
 		i_node = nodes[i_node].previous;
 	}
 }
