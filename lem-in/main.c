@@ -1,6 +1,5 @@
 #include "lem-in.h"
 
-
 int		find_moves(t_s *s)
 {
 	int i;

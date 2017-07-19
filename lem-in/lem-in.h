@@ -17,6 +17,10 @@ typedef struct	s_s
 	t_move			*moves;
 }				t_s;
 
+int				find_moves(t_s *s);
+void			free_all(t_lines *lines, t_node **nodes, int nb_nodes_expected,
+				t_move *moves);
+
 t_line			*alloc_line();
 void			add_line(t_lines *lines, char *str);
 void			free_lines(t_lines *lines);
