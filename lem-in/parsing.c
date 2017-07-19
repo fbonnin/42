@@ -17,8 +17,7 @@ void	parse_lines(t_params_parsing *p)
 	{
 		if (!parse_sharp(p->nodes, line->str, &stop, &cmd))
 			if (!parse_part0(&p->nb_ants, line->str, &stop, &part))
-				if (p->nb_lines > p->nb_nodes_expected ||
-				!parse_part1(p->nodes, &p->nb_nodes, line->str, &cmd))
+				if (!parse_part1(p->nodes, &p->nb_nodes, line->str, &cmd))
 					parse_part2(p->nodes, p->nb_nodes, line->str, &stop);
 		if (!stop)
 			p->nb_lines++;
@@ -61,6 +60,8 @@ int		parse_part1(t_node *nodes, int *nb_nodes, char *str, int *cmd)
 	char **words;
 
 	words = ft_strsplit(str, ' ');
+	if (words[0] == NULL || words[1] == NULL || words[2] == NULL)
+		return (0);
 	if (name_to_index(nodes, *nb_nodes, words[0]) == -1)
 	{
 		if (*cmd == 1)
