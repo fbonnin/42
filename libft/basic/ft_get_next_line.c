@@ -67,6 +67,7 @@ int			ft_get_next_line(const int fd, char **line)
 	int				i_buff;
 	int				i_line;
 
+	*line = NULL;
 	if (GNL_BUFF_SIZE < 1 || GNL_MAX_NB_FILES < 1 || GNL_MAX_LINE_SIZE < 1)
 		return (-1);
 	i_buff = ft_get_i_buff(&s, fd);

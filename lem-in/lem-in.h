@@ -1,6 +1,10 @@
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
+#include "stdlib.h"
+
+#include "libft/libft.h"
+
 #include "line.h"
 #include "node.h"
 #include "move.h"
@@ -17,6 +21,7 @@ typedef struct	s_s
 	t_move			*moves;
 }				t_s;
 
+int				input(t_s *s);
 int				find_moves(t_s *s);
 void			free_all(t_lines *lines, t_node **nodes, int nb_nodes_expected,
 				t_move *moves);
@@ -47,7 +52,7 @@ int				parse_part1(t_node *nodes, int *nb_nodes, char *str, int *cmd);
 void			parse_part2(t_node *nodes, int nb_nodes, char *str, int *stop);
 
 int				find_path(t_node *nodes, int nb_nodes,
-				t_list_moves *list_moves, int ant)
+				t_list_moves *list_moves, int ant);
 void			initialize_bfs(t_node *nodes, int nb_nodes);
 int				find_closest(t_node *nodes, int nb_nodes);
 void			reach(t_node *nodes, int i_node);
