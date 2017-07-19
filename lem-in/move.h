@@ -1,3 +1,6 @@
+#ifndef MOVE_H
+# define MOVE_H
+
 typedef struct	s_move
 {
 	int ant;
@@ -17,3 +20,5 @@ typedef struct	s_list_moves
 	t_list_move *last;
 	int			nb_moves;
 }				t_list_moves;
+
+#endif

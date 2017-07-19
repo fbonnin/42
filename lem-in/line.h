@@ -1,3 +1,6 @@
+#ifndef LINE_H
+# define LINE_H
+
 typedef struct	s_line
 {
 	char 			*str;
@@ -9,3 +12,5 @@ typedef struct	s_lines
 	t_line *first;
 	t_line *last;
 }				t_lines;
+
+#endif

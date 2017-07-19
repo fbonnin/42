@@ -1,3 +1,6 @@
+#ifndef NODE_H
+# define NODE_H
+
 typedef struct	s_neighbor
 {
 	int					i_node;
@@ -13,3 +16,5 @@ typedef struct	s_node
 	int			time_reach;
 	int			previous;
 }				t_node;
+
+#endif
