@@ -29,3 +29,22 @@ void	free_nodes(t_node **nodes, int nb_nodes_expected)
 	free(*nodes);
 	*nodes = NULL;
 }
+
+int		name_to_index(t_node *nodes, int nb_nodes, char *name)
+{
+	int result;
+	int i;
+
+	result = -1;
+	i = 0;
+	while (i < nb_nodes)
+	{
+		if (ft_strequ(nodes[i].name, name) == 1)
+		{
+			result = i;
+			break;
+		}
+		i++;
+	}
+	return (result);
+}
