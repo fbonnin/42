@@ -1,26 +1,27 @@
 #include "lem-in.h"
 
-void	parse_lines(t_params_parsing *p)
+void	parse_lines(t_s *s)
 {
 	t_line	*line;
 	int		stop;
 	int		part;
 	int		cmd;
 
-	p->nb_lines = 0;
-	p->nb_nodes = 2;
-	line = p->lines.first;
+	s->nb_lines = 0;
+	s->nb_ants = -1;
+	s->nb_nodes = 2;
+	line = s->lines.first;
 	stop = 0;
 	part = 0;
 	cmd = 0;
 	while (line != NULL && !stop)
 	{
-		if (!parse_sharp(p->nodes, line->str, &stop, &cmd))
-			if (!parse_part0(&p->nb_ants, line->str, &stop, &part))
-				if (!parse_part1(p->nodes, &p->nb_nodes, line->str, &cmd))
-					parse_part2(p->nodes, p->nb_nodes, line->str, &stop);
+		if (!parse_sharp(s->nodes, line->str, &stop, &cmd))
+			if (!parse_part0(&s->nb_ants, line->str, &stop, &part))
+				if (!parse_part1(s->nodes, &s->nb_nodes, line->str, &cmd))
+					parse_part2(s->nodes, s->nb_nodes, line->str, &stop);
 		if (!stop)
-			p->nb_lines++;
+			s->nb_lines++;
 		line = line->next;
 	}
 }
