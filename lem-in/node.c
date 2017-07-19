@@ -14,6 +14,7 @@ t_node	*alloc_nodes(int nb_nodes_expected)
 		nodes[i].time_available = 0;
 		i++;
 	}
+	return (nodes);
 }
 
 void	free_nodes(t_node **nodes, int nb_nodes_expected)

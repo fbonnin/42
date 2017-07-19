@@ -67,12 +67,12 @@ void	reach(t_node *nodes, int i_node)
 	neighbor = nodes[i_node].neighbors;
 	while (neighbor != NULL)
 	{
-		time_reach = ft_max(nodes[neighbor.i_node].time_available,
+		time_reach = ft_max(nodes[neighbor->i_node].time_available,
 		nodes[i_node].time_reach + 1);
-		if (time_reach < nodes[neighbor.i_node].time_reach)
+		if (time_reach < nodes[neighbor->i_node].time_reach)
 		{
-			nodes[neighbor.i_node].time_reach = time_reach;
-			nodes[neighbor.i_node].previous = i_node;
+			nodes[neighbor->i_node].time_reach = time_reach;
+			nodes[neighbor->i_node].previous = i_node;
 		}
 		neighbor = neighbor->next;
 	}

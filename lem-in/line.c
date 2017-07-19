@@ -44,7 +44,7 @@ void	print_lines(t_lines lines, int nb_lines)
 	t_line	*line;
 	int		i;
 
-	line = lines->first;
+	line = lines.first;
 	i = 0;
 	while (i < nb_lines)
 	{

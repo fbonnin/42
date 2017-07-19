@@ -40,7 +40,7 @@ void	sort_moves(t_move *moves, int nb_moves)
 	}
 }
 
-void	print_moves(t_move *moves, int nb_moves)
+void	print_moves(t_node *nodes, t_move *moves, int nb_moves)
 {
 	int i;
 	int time;

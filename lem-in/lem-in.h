@@ -1,6 +1,9 @@
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
+# define MAX_NB_NODES 10000
+# define MAX_NB_LINKS 200000
+
 #include "stdlib.h"
 
 #include "libft/libft.h"
@@ -37,7 +40,7 @@ void			get_part1(int *nb_nodes_expected,
 void			get_part2(char *str, int *stop);
 void			free_words(char **words);
 
-void			alloc_nodes(t_node **nodes, int nb_nodes_expected);
+t_node			*alloc_nodes(int nb_nodes_expected);
 void			free_nodes(t_node **nodes, int nb_nodes_expected);
 int				name_to_index(t_node *nodes, int nb_nodes, char *name);
 
@@ -64,6 +67,6 @@ void			free_list_moves(t_list_moves *list_moves);
 
 t_move			*list_moves_to_moves(t_list_moves *list_moves);
 void			sort_moves(t_move *moves, int nb_moves);
-void			print_moves(t_move *moves, int nb_moves);
+void			print_moves(t_node *nodes, t_move *moves, int nb_moves);
 
 #endif
