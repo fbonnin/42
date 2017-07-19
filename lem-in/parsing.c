@@ -58,12 +58,10 @@ int		parse_part0(int *nb_ants, char *str, int *stop, int *part)
 
 int		parse_part1(t_node *nodes, int *nb_nodes, char *str, int *cmd)
 {
-	char	**words;
-	int		i_node;
+	char **words;
 
 	words = ft_strsplit(str, ' ');
-	i_node = name_to_index(nodes, nb_nodes, words[0]);
-	if (i_node == -1)
+	if (name_to_index(nodes, *nb_nodes, words[0]) == -1)
 	{
 		if (*cmd == 1)
 			nodes[0].name = ft_strdup(words[0]);
