@@ -1,5 +1,5 @@
-#ifndef LEM-IN_H
-# define LEM-IN_H
+#ifndef LEM_IN_H
+# define LEM_IN_H
 
 #include "line.h"
 #include "node.h"
