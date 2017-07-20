@@ -47,7 +47,7 @@ int		parse_sharp(t_node *nodes, char *str, int *stop, int *cmd)
 
 int		parse_part0(int *nb_ants, char *str, int *stop, int *part)
 {
-	if (part != 0)
+	if (*part != 0)
 		return (0);
 	*nb_ants = ft_atoi(str);
 	if (*nb_ants < 0)

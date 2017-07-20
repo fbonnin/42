@@ -46,9 +46,7 @@ int		find_closest(t_node *nodes, int nb_nodes)
 	i = 0;
 	while (i < nb_nodes)
 	{
-		if (nodes[i].reached)
-			continue;
-		if (nodes[i].time_reach < min)
+		if (!nodes[i].reached && nodes[i].time_reach < min)
 		{
 			min = nodes[i].time_reach;
 			i_min = i;

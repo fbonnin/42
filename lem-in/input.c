@@ -62,6 +62,9 @@ void	free_words(char **words)
 
 	i = 0;
 	while (words[i] != NULL)
+	{
 		free(words[i]);
+		i++;
+	}
 	free(words);
 }

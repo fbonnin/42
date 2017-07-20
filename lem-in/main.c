@@ -18,7 +18,7 @@ int		main(void)
 int		input(t_s *s)
 {
 	s->lines.first = NULL;
-	s->lines.last = NULL;
+	s->lines.last = NULL;	
 	get_input(&s->lines, &s->nb_nodes_expected);
 	s->nodes = alloc_nodes(s->nb_nodes_expected);
 	parse_lines(s);
