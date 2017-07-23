@@ -1,20 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lem-in.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/23 14:55:39 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/07/23 16:07:30 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
 # define MAX_NB_NODES 10000
 # define MAX_NB_LINKS 200000
 
-#include "stdlib.h"
+# include "stdlib.h"
 
-#include "libft/libft.h"
+# include "libft/libft.h"
 
-#include "line.h"
-#include "node.h"
-#include "move.h"
+# include "line.h"
+# include "node.h"
+# include "move.h"
 
 typedef struct	s_s
 {
-	t_lines 		lines;
+	t_lines			lines;
 	int				nb_lines;
 	int				nb_ants;
 	t_node			*nodes;
@@ -29,7 +41,7 @@ int				find_moves(t_s *s);
 void			free_all(t_lines *lines, t_node **nodes, int nb_nodes_expected,
 				t_move *moves);
 
-t_line			*alloc_line();
+t_line			*alloc_line(void);
 void			add_line(t_lines *lines, char *str);
 void			free_lines(t_lines *lines);
 void			print_lines(t_lines lines, int nb_lines);
@@ -44,7 +56,7 @@ t_node			*alloc_nodes(int nb_nodes_expected);
 void			free_nodes(t_node **nodes, int nb_nodes_expected);
 int				name_to_index(t_node *nodes, int nb_nodes, char *name);
 
-t_neighbor		*alloc_neighbor();
+t_neighbor		*alloc_neighbor(void);
 void			add_neighbor(t_neighbor **neighbors, int i_neighbor);
 void			free_neighbors(t_neighbor **neighbors);
 
@@ -61,7 +73,7 @@ int				find_closest(t_node *nodes, int nb_nodes);
 void			reach(t_node *nodes, int i_node);
 void			save_moves(t_node *nodes, t_list_moves *list_moves, int ant);
 
-t_list_move		*alloc_list_move();
+t_list_move		*alloc_list_move(void);
 void			add_list_move(t_list_moves *list_moves, t_move move);
 void			free_list_moves(t_list_moves *list_moves);
 

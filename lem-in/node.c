@@ -1,8 +1,20 @@
-#include "lem-in.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   node.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/23 14:56:39 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/07/23 16:10:54 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lem_in.h"
 
 t_node	*alloc_nodes(int nb_nodes_expected)
 {
-	t_node *nodes;
+	t_node	*nodes;
 	int		i;
 
 	nodes = malloc(nb_nodes_expected * sizeof(t_node));
@@ -44,7 +56,7 @@ int		name_to_index(t_node *nodes, int nb_nodes, char *name)
 		if (ft_strequ(nodes[i].name, name) == 1)
 		{
 			result = i;
-			break;
+			break ;
 		}
 		i++;
 	}

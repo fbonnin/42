@@ -1,4 +1,16 @@
-#include "lem-in.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/23 14:56:05 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/07/23 16:09:51 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lem_in.h"
 
 int		main(void)
 {
@@ -18,7 +30,7 @@ int		main(void)
 int		input(t_s *s)
 {
 	s->lines.first = NULL;
-	s->lines.last = NULL;	
+	s->lines.last = NULL;
 	get_input(&s->lines, &s->nb_nodes_expected);
 	s->nodes = alloc_nodes(s->nb_nodes_expected);
 	parse_lines(s);

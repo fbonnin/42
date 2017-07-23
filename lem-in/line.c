@@ -1,6 +1,18 @@
-#include "lem-in.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   line.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/23 14:55:51 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/07/23 16:09:36 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-t_line	*alloc_line()
+#include "lem_in.h"
+
+t_line	*alloc_line(void)
 {
 	t_line *line;
 
@@ -49,7 +61,7 @@ void	print_lines(t_lines lines, int nb_lines)
 	while (i < nb_lines)
 	{
 		ft_printf("%s\n", line->str);
-		line = line->next; 
+		line = line->next;
 		i++;
 	}
 }

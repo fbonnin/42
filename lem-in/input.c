@@ -1,4 +1,16 @@
-#include "lem-in.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/07/23 14:55:29 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/07/23 17:02:10 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lem_in.h"
 
 void	get_input(t_lines *lines, int *nb_nodes_expected)
 {
@@ -11,8 +23,8 @@ void	get_input(t_lines *lines, int *nb_nodes_expected)
 	part = 0;
 	while (!stop)
 	{
-		if (ft_get_next_line(0, &str) != 1)
-			break;
+		if ((str = NULL) == NULL && ft_get_next_line(0, &str) != 1)
+			break ;
 		if (str[0] != '#')
 		{
 			if (part == 0)
