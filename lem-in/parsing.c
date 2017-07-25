@@ -98,6 +98,7 @@ void	parse_part2(t_node *nodes, int nb_nodes, char *str, int *stop)
 	words = ft_strsplit(str, '-');
 	i_node1 = name_to_index(nodes, nb_nodes, words[0]);
 	i_node2 = name_to_index(nodes, nb_nodes, words[1]);
+	free_words(words);
 	if (i_node1 == -1 || i_node2 == -1)
 		*stop = 1;
 	else
