@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem-in.h                                           :+:      :+:    :+:   */
+/*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,8 +13,8 @@
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
-# define MAX_NB_NODES 10000
-# define MAX_NB_LINKS 200000
+# define MAX_NB_NODES 100000
+# define MAX_NB_LINKS 100000
 
 # include "stdlib.h"
 
