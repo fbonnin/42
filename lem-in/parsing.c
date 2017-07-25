@@ -30,7 +30,7 @@ void	parse_lines(t_s *s)
 	{
 		if (!parse_sharp(s->nodes, line->str, &stop, &cmd))
 			if (!parse_part0(&s->nb_ants, line->str, &stop, &part))
-				if (!parse_part1(s->nodes, &s->nb_nodes, line->str, &cmd))
+				if (!parse_part1(s, line->str, &part, &cmd))
 					parse_part2(s->nodes, s->nb_nodes, line->str, &stop);
 		if (!stop)
 			s->nb_lines++;
@@ -68,21 +68,24 @@ int		parse_part0(int *nb_ants, char *str, int *stop, int *part)
 	return (1);
 }
 
-int		parse_part1(t_node *nodes, int *nb_nodes, char *str, int *cmd)
+int		parse_part1(t_s *s, char *str, int *part, int *cmd)
 {
 	char **words;
 
 	words = ft_strsplit(str, ' ');
-	if (words[0] == NULL || words[1] == NULL || words[2] == NULL)
+	if (*part != 1 || words[0] == NULL || words[1] == NULL || words[2] == NULL)
+	{
+		*part = 2;
 		return (0);
-	if (name_to_index(nodes, *nb_nodes, words[0]) == -1)
+	}
+	if (name_to_index(s->nodes, s->nb_nodes, words[0]) == -1)
 	{
 		if (*cmd == 1)
-			nodes[0].name = ft_strdup(words[0]);
+			s->nodes[0].name = ft_strdup(words[0]);
 		else if (*cmd == 2)
-			nodes[1].name = ft_strdup(words[0]);
+			s->nodes[1].name = ft_strdup(words[0]);
 		else
-			nodes[(*nb_nodes)++].name = ft_strdup(words[0]);
+			s->nodes[s->nb_nodes++].name = ft_strdup(words[0]);
 	}
 	free_words(words);
 	*cmd = 0;

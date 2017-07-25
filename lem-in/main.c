@@ -23,6 +23,7 @@ int		main(void)
 	sort_moves(s.moves, s.list_moves.nb_moves);
 	print_lines(s.lines, s.nb_lines);
 	print_moves(s.nodes, s.moves, s.list_moves.nb_moves);
+	ft_printf("\n");
 	free_all(&s.lines, &s.nodes, s.nb_nodes_expected, s.moves);
 	return (0);
 }

@@ -63,7 +63,7 @@ void			free_neighbors(t_neighbor **neighbors);
 void			parse_lines(t_s *s);
 int				parse_sharp(t_node *nodes, char *str, int *stop, int *cmd);
 int				parse_part0(int *nb_ants, char *str, int *stop, int *part);
-int				parse_part1(t_node *nodes, int *nb_nodes, char *str, int *cmd);
+int				parse_part1(t_s *s, char *str, int *part, int *cmd);
 void			parse_part2(t_node *nodes, int nb_nodes, char *str, int *stop);
 
 int				find_path(t_node *nodes, int nb_nodes,
