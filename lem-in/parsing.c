@@ -75,6 +75,7 @@ int		parse_part1(t_s *s, char *str, int *part, int *cmd)
 	words = ft_strsplit(str, ' ');
 	if (*part != 1 || words[0] == NULL || words[1] == NULL || words[2] == NULL)
 	{
+		free_words(words);
 		*part = 2;
 		return (0);
 	}
