@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/26 13:59:01 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/05/31 20:21:29 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/08/07 15:36:43 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 
 typedef struct	s_printf
 {
+	int						output;
+
 	const unsigned char		*format;
 	int						i_format;
 	va_list					params;
@@ -64,7 +66,7 @@ typedef struct	s_printf
 	int						i_utf8;
 }				t_printf;
 
-int				ft_printf(const char *format, ...);
+int				ft_printf(int output, const char *format, ...);
 int				ft_put_wchar_to_buffer(t_printf *s, unsigned int c, int w);
 
 void			ft_get_flags(t_printf *s);

@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/26 13:58:05 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/06/01 16:12:29 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/08/07 15:35:58 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int			ft_put_wchar_to_buffer(t_printf *s, unsigned int c, int w)
 	}
 	if (s->i_buffer > PRINTF_BUFFER_SIZE - 4)
 	{
-		if (write(1, s->buffer, s->i_buffer) == -1)
+		if (write(s->output, s->buffer, s->i_buffer) == -1)
 			return (PRINTF_ERROR);
 		s->nb_bytes_written += s->i_buffer;
 		s->i_buffer = 0;
@@ -69,14 +69,20 @@ static int	ft_replace(t_printf *s)
 	return (0);
 }
 
-int			ft_printf(const char *format, ...)
+void		ft_norm(t_printf *s, int output)
+{
+	s->output = output;
+	s->i_format = 0;
+}
+
+int			ft_printf(int output, const char *format, ...)
 {
 	t_printf s;
 
 	if (format == NULL)
 		return (PRINTF_ERROR);
 	s.format = (const unsigned char *)format;
-	s.i_format = 0;
+	ft_norm(&s, output);
 	va_start(s.params, format);
 	s.nb_bytes_written = 0;
 	s.nb_chars_written = 0;
@@ -93,7 +99,7 @@ int			ft_printf(const char *format, ...)
 			return (PRINTF_ERROR);
 	}
 	va_end(s.params);
-	write(1, s.buffer, s.i_buffer);
+	write(output, s.buffer, s.i_buffer);
 	s.nb_bytes_written += s.i_buffer;
 	return (s.nb_bytes_written);
 }
