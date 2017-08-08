@@ -26,6 +26,12 @@ typedef struct	s_asm
 	int				nb_bytes;
 }
 
+char			*get_declaration(char **line);
+t_declaration	*find_declaration(t_declaration *declarations, char *label);
+int				add_declaration(t_declaration **declarations,
+				char **line, int pc);
+void			free_declarations(t_declaration *declarations);
+
 char			*get_call(char **line);
 int				add_call(t_asm *a);
 int				replace_calls(unsigned char *bytecode,
