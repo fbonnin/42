@@ -49,6 +49,15 @@ typedef struct	s_asm
 	t_call			*calls;
 }
 
+void			add_value_to_bytecode(unsigned char *bytecode,
+				long long value, int nb_bytes);
+void			add_value_to_bytecode_2(unsigned char *bytecode,
+				int nb_bytes, int neg);
+void			add_strings_to_bytecode(unsigned char *bytecode,
+				char *prog_name, char *description);
+void			write_bytecode(unsigned char *bytecode,
+				int pc, char *input_name, int len);
+
 int				get_opcode(t_asm *a);
 long long		get_number(char **line, long long mini, long long maxi);
 char			*get_label(char *line);
