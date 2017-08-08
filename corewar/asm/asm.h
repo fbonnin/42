@@ -42,12 +42,11 @@ typedef struct	s_asm
 	int				i_line_byte;
 	int				i_line;
 	char			*line;
+	int				i_op;
+	unsigned char	types_byte;
+	int				nb_bytes;
 
 	t_call			*calls;
-
-	int				i_op;
-
-	int				nb_bytes;
 }
 
 int				get_opcode(t_asm *a);
@@ -57,6 +56,10 @@ char			*get_label(char *line);
 int				get_reg(t_asm *a);
 int				get_dir(t_asm *a);
 int				get_ind(t_asm *a);
+
+int				get_param(t_asm *a, unsigned char *pow4, t_arg_type type);
+int				get_params(t_asm *a);
+int				get_instruction(t_asm *a);
 
 char			*get_declaration(char **line);
 t_declaration	*find_declaration(t_declaration *declarations, char *label);
