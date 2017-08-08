@@ -1,6 +1,7 @@
 #ifndef ASM_H
 # define ASM_H
 
+# include "libft/libft.h"
 # include "op.h"
 
 # define POW_2_63 9223372036854775808
@@ -38,7 +39,6 @@ typedef struct	s_call
 typedef struct	s_asm
 {
 	int				nb_bytes_i_reg;
-
 	unsigned char	*bytecode;
 	int				pc;
 	int				i_line_byte;
