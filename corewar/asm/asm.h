@@ -41,11 +41,14 @@ typedef struct	s_asm
 	int				pc;
 	int				i_line_byte;
 	int				i_line;
+	int				fd;
 	char			*line;
+	char			*prog_name;
+	char			*description;
 	int				i_op;
 	unsigned char	types_byte;
 	int				nb_bytes;
-
+	t_declaration	*declarations;
 	t_call			*calls;
 }
 
@@ -57,6 +60,10 @@ void			add_strings_to_bytecode(unsigned char *bytecode,
 				char *prog_name, char *description);
 void			write_bytecode(unsigned char *bytecode,
 				int pc, char *input_name, int len);
+
+int				get_line(t_asm *a);
+int				end_line(int *i_line, char *line, int r);
+void			ignore_spaces(char **line);
 
 char			*get_string(char **line, int max_len);
 int				get_prog_name(char **line, char **prog_name);

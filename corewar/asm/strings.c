@@ -43,7 +43,8 @@ int		get_prog_name(char **line, char **prog_name)
 		ft_printf(2, "Invalid program name\n");
 		return (-2);
 	}
-	return (0);
+	ignore_spaces(line);
+	return (**line == 0 || **line == COMMENT_CHAR ? 0 : -2);
 }
 
 int		get_description(char **line, char **description)
@@ -66,5 +67,6 @@ int		get_description(char **line, char **description)
 		ft_printf(2, "Invalid program description\n");
 		return (-2);
 	}
-	return (0);
+	ignore_spaces(line);
+	return (**line == 0 || **line == COMMENT_CHAR ? 0 : -2);
 }

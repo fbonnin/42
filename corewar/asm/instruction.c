@@ -65,5 +65,6 @@ int	get_instruction(t_asm *a)
 		ft_printf(2, "The program is too long\n");
 		return (-2);
 	}
-	return (0);
+	ignore_spaces(&a->line);
+	return (a->line[0] == 0 || a->line[0] == COMMENT_CHAR ? 0 : -2);
 }
