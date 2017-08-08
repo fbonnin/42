@@ -1,6 +1,8 @@
 #ifndef ASM_H
 # define ASM_H
 
+# include "op.h"
+
 # define POW_2_63 9223372036854775808
 # define _POW_2_63 -9223372036854775808
 
