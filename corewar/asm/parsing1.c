@@ -41,15 +41,15 @@ long long get_number(char **line, long long mini, long long maxi)
 		len = 1;
 	}
 	if (!ft_isdigit((*line)[len]))
-		return (-pow(2, 63));
+		return (_POW_2_63);
 	while (ft_isdigit((*line)[len]))
 	{
 		result *= 10;
 		result += (*line)[len++] - 48;
 	}
 	result *= sign;
-	if (result < mini ||result > maxi || result == -pow(2, 63))
-		return (-pow(2, 63));
+	if (result < mini ||result > maxi || result == _POW_2_63)
+		return (_POW_2_63);
 	*line += len;
 	return (result);
 }

@@ -1,6 +1,9 @@
 #ifndef ASM_H
 # define ASM_H
 
+# define POW_2_63 9223372036854775808
+# define _POW_2_63 -9223372036854775808
+
 typedef struct	s_op
 {
 	char		*name;
@@ -32,6 +35,8 @@ typedef struct	s_call
 
 typedef struct	s_asm
 {
+	int				nb_bytes_i_reg;
+
 	unsigned char	*bytecode;
 	int				pc;
 	int				i_line_byte;
@@ -40,12 +45,18 @@ typedef struct	s_asm
 
 	t_call			*calls;
 
+	int				i_op;
+
 	int				nb_bytes;
 }
 
 int				get_opcode(t_asm *a);
 long long		get_number(char **line, long long mini, long long maxi);
 char			*get_label(char *line);
+
+int				get_reg(t_asm *a);
+int				get_dir(t_asm *a);
+int				get_ind(t_asm *a);
 
 char			*get_declaration(char **line);
 t_declaration	*find_declaration(t_declaration *declarations, char *label);
