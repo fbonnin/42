@@ -13,6 +13,23 @@ typedef struct	s_op
 	int			index_expected;
 }				t_op;
 
+typedef struct	s_declaration
+{
+	char					*label;
+	int						pc;
+	struct s_declaration	*next;
+}				t_declaration;
+
+typedef struct	s_call
+{
+	char			*label;
+	int				pc;
+	int				i_line_byte;
+	int				nb_bytes;
+	int				i_line;
+	struct s_call	*next;
+}				t_call;
+
 typedef struct	s_asm
 {
 	unsigned char	*bytecode;
@@ -25,6 +42,10 @@ typedef struct	s_asm
 
 	int				nb_bytes;
 }
+
+int				get_opcode(t_asm *a);
+long long		get_number(char **line, long long mini, long long maxi);
+char			*get_label(char *line);
 
 char			*get_declaration(char **line);
 t_declaration	*find_declaration(t_declaration *declarations, char *label);
