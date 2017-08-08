@@ -58,6 +58,10 @@ void			add_strings_to_bytecode(unsigned char *bytecode,
 void			write_bytecode(unsigned char *bytecode,
 				int pc, char *input_name, int len);
 
+char			*get_string(char **line, int max_len);
+int				get_prog_name(char **line, char **prog_name);
+int				get_description(char **line, char **description);
+
 int				get_opcode(t_asm *a);
 long long		get_number(char **line, long long mini, long long maxi);
 char			*get_label(char *line);

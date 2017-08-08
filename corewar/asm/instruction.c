@@ -62,7 +62,7 @@ int	get_instruction(t_asm *a)
 	if (a->pc > 4 + PROG_NAME_LENGTH + 4 +
 	4 + COMMENT_LENGTH + 4 + CHAMP_MAX_SIZE)
 	{
-		ft_printf(2, "The program is too long.\n");
+		ft_printf(2, "The program is too long\n");
 		return (-2);
 	}
 	return (0);
