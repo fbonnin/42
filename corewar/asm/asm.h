@@ -1,6 +1,7 @@
 #ifndef ASM_H
 # define ASM_H
 
+# include "fcntl.h"
 # include "libft/libft.h"
 # include "op.h"
 
@@ -52,11 +53,12 @@ typedef struct	s_asm
 	int				nb_bytes;
 	t_declaration	*declarations;
 	t_call			*calls;
-}
+}				t_asm;
 
 void			find_nb_bytes_i_reg(int *nb_bytes_i_reg);
 void			init_asm(t_asm *a);
 int				end(t_asm *a, char *str, int output);
+long long		ft_pow(long long a, unsigned long long b);
 
 void			add_value_to_bytecode(unsigned char *bytecode,
 				long long value, int nb_bytes);
