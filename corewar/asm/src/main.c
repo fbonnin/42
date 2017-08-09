@@ -38,7 +38,7 @@ void		find_nb_bytes_i_reg(int *nb_bytes_i_reg)
 void		init_asm(t_asm *a)
 {
 	a->bytecode = malloc((4 + PROG_NAME_LENGTH + 4 +
-	4 + COMMENT_LENGTH + 4 + CHAMP_MAX_SIZE + 1 + 1 +
+	4 + COMMENT_LENGTH + 4 + MAX_PROG_SIZE + 1 + 1 +
 	4 * ft_max(a->nb_bytes_i_reg, ft_max(DIR_SIZE, IND_SIZE))) *
 	sizeof(unsigned char));
 	a->pc = 4 + PROG_NAME_LENGTH + 4 + 4 + COMMENT_LENGTH + 4;

@@ -28,7 +28,8 @@ int		get_prog_name(char **line, char **prog_name)
 	int len;
 
 	len = ft_strlen(NAME_CMD_STRING);
-	if (ft_strnequ(*line, NAME_CMD_STRING, len) != 1 || (*line)[len] != ' ')
+	if (ft_strnequ(*line, NAME_CMD_STRING, len) != 1 ||
+	((*line)[len] != ' ' && (*line)[len] != '\t'))
 		return (-1);
 	if (*prog_name != NULL)
 	{
@@ -52,7 +53,8 @@ int		get_description(char **line, char **description)
 	int len;
 
 	len = ft_strlen(COMMENT_CMD_STRING);
-	if (ft_strnequ(*line, COMMENT_CMD_STRING, len) != 1 || (*line)[len] != ' ')
+	if (ft_strnequ(*line, COMMENT_CMD_STRING, len) != 1 ||
+	((*line)[len] != ' ' && (*line)[len] != '\t'))
 		return (-1);
 	if (*description != NULL)
 	{

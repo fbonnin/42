@@ -5,6 +5,7 @@
 # include "libft/libft.h"
 # include "op.h"
 
+# define MAX_PROG_SIZE MEM_SIZE
 # define POW_2_63 9223372036854775808
 # define _POW_2_63 -9223372036854775808
 

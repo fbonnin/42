@@ -60,7 +60,7 @@ int	get_instruction(t_asm *a)
 		add_value_to_bytecode(a->bytecode + a->pc + 1, a->types_byte, 1);
 	a->pc += a->i_line_byte;
 	if (a->pc > 4 + PROG_NAME_LENGTH + 4 +
-	4 + COMMENT_LENGTH + 4 + CHAMP_MAX_SIZE)
+	4 + COMMENT_LENGTH + 4 + MAX_PROG_SIZE)
 	{
 		ft_printf(2, "The program is too long\n");
 		return (-2);
