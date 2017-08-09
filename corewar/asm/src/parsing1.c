@@ -11,7 +11,8 @@ int		get_opcode(t_asm *a)
 	{
 		name = op_tab[i].name;
 		len = ft_strlen(name);
-		if (ft_strnequ(name, a->line, len) == 1 && a->line[len] == ' ')
+		if (ft_strnequ(name, a->line, len) == 1 &&
+		(a->line[len] == ' ' || a->line[len] == '\t'))
 		{
 			a->line += len + 1;
 			break ;
