@@ -2,11 +2,11 @@
 
 int	get_param(t_asm *a, unsigned char *pow4, t_arg_type type)
 {
-	if (T_REG & type == T_REG && get_reg(a) == 0)
+	if ((T_REG & type) == T_REG && get_reg(a) == 0)
 		a->types_byte += REG_CODE * *pow4;
-	else if (T_DIR & type == T_DIR && get_dir(a) == 0)
+	else if ((T_DIR & type) == T_DIR && get_dir(a) == 0)
 		a->types_byte += DIR_CODE * *pow4;
-	else if (T_IND & type == T_IND && get_ind(a) == 0)
+	else if ((T_IND & type) == T_IND && get_ind(a) == 0)
 		a->types_byte += IND_CODE * *pow4;
 	else
 	{
@@ -23,7 +23,7 @@ int	get_params(t_asm *a)
 	unsigned char	pow4;
 
 	i = 0;
-	pow4 = pow(4, 3);
+	pow4 = ft_pow(4, 3);
 	while (i < op_tab[a->i_op].nb_params)
 	{
 		if (get_param(a, &pow4, op_tab[a->i_op].types[i]) == -1)

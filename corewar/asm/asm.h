@@ -12,7 +12,7 @@ typedef struct	s_op
 {
 	char		*name;
 	int			nb_params;
-	t_arg_type	*types;
+	t_arg_type	types[4];
 	int			opcode;
 	int			nb_cycles;
 	char		*description;
@@ -54,6 +54,8 @@ typedef struct	s_asm
 	t_declaration	*declarations;
 	t_call			*calls;
 }				t_asm;
+
+extern t_op		op_tab[17];
 
 void			find_nb_bytes_i_reg(int *nb_bytes_i_reg);
 void			init_asm(t_asm *a);

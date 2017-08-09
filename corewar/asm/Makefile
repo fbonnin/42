@@ -20,7 +20,7 @@ $(NAME): $(O_FILES)
 
 all: $(NAME) $(O_FILES)
 %.o: %.c
-	gcc -c $< -o $@ -Wall -Werror -Wextra
+	gcc -c $< -o $@
 
 clean:
 	cd libft && make clean

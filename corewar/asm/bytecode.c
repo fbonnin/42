@@ -13,7 +13,7 @@ long long value, int nb_bytes)
 	i = 0;
 	while (i < nb_bytes - 8)
 		bytecode[i++] = 0;
-	pow256 = pow(256, nb_bytes - i - 1);
+	pow256 = ft_pow(256, nb_bytes - i - 1);
 	while (pow256 > 0)
 	{
 		bytecode[i++] = value / pow256;
@@ -51,7 +51,7 @@ char *prog_name, char *description)
 	{
 		while (prog_name[i] != 0)
 		{
-			bytecode[4 + i] = prog_name[î];
+			bytecode[4 + i] = prog_name[i];
 			i++;
 		}
 	}
@@ -78,7 +78,7 @@ char *input_name, int len)
 
 	input_name[len - 2] = 0;
 	output_name = ft_strjoin(input_name, ".cor");
-	fd = open(output_name, WR_ONLY);
+	fd = open(output_name, O_WRONLY);
 	free(output_name);
 	if (fd == -1)
 		return ;

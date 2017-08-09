@@ -45,7 +45,7 @@ t_declaration *declarations, t_call *calls)
 		if (declaration == NULL)
 		{
 			ft_printf(2, "Label %s undeclared\n", call->label);
-			ft_printf("Error at line %d\n", call->i_line);
+			ft_printf(2, "Error at line %d\n", call->i_line);
 			return (-1);
 		}
 		add_value_to_bytecode(bytecode + call->pc + call->i_line_byte,
