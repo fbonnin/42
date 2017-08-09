@@ -54,6 +54,10 @@ typedef struct	s_asm
 	t_call			*calls;
 }
 
+void			find_nb_bytes_i_reg(int *nb_bytes_i_reg);
+void			init_asm(t_asm *a);
+int				end(t_asm *a, char *str, int output);
+
 void			add_value_to_bytecode(unsigned char *bytecode,
 				long long value, int nb_bytes);
 void			add_value_to_bytecode_2(unsigned char *bytecode,
