@@ -1,25 +1,25 @@
 #include "stdio.h"
-#include "stdlib.h"
-#include "fcntl.h"
 #include "unistd.h"
-#include "sys/types.h"
+#include "fcntl.h"
 
-int	main()
+int	main(int argc, char **argv)
 {
-	int i = 0;
-	int fd;
-	unsigned char c;
+	int				fd;
+	unsigned char	byte;
+	int				i;
 
-	fd = open("example.cor", O_RDONLY);
-	while (read(fd, &c, 1) != 0)
+	printf("\n\n\n");
+	fd = open(argv[1], O_RDONLY);
+	i = 0;
+	while (read(fd, &byte, 1) != 0)
 	{
+		printf("%4d", byte);
 		i++;
-		printf("%d ", c);
 		if (i % 10 == 0)
 			printf("\n");
 		if (i % 100 == 0)
 			printf("\n\n");
 	}
-	printf("\n%d\n", i);
+	printf("\n\n\n");
 	return (0);
 }

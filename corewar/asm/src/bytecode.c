@@ -76,11 +76,9 @@ char *input_name, int len)
 	char	*output_name;
 	int		fd;
 
-	ft_printf(1, "ICI : %d\n", pc);
 	input_name[len - 2] = 0;
 	output_name = ft_strjoin(input_name, ".cor");
-	ft_printf(1, "output name : %s\n", output_name);
-	fd = open(output_name, O_CREAT | O_WRONLY, 777);
+	fd = open(output_name, O_CREAT | O_WRONLY, 0777);
 	free(output_name);
 	if (fd == -1)
 		return ;
