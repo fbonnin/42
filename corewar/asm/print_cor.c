@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 		if (i % 10 == 0)
 			printf("\n");
 		if (i % 100 == 0)
-			printf("\n\n");
+			printf("%4d\n\n", i / 100);
 	}
 	printf("\n\n\n");
 	return (0);
