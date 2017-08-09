@@ -15,6 +15,10 @@ int	main()
 	{
 		i++;
 		printf("%d ", c);
+		if (i % 10 == 0)
+			printf("\n");
+		if (i % 100 == 0)
+			printf("\n\n");
 	}
 	printf("\n%d\n", i);
 	return (0);
