@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   instruction.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/08/10 20:20:53 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/08/10 20:38:41 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
 int	get_param(t_asm *a, unsigned char *pow4, t_arg_type type)
@@ -24,11 +36,11 @@ int	get_params(t_asm *a)
 
 	i = 0;
 	pow4 = ft_pow(4, 3);
-	while (i < op_tab[a->i_op].nb_params)
+	while (i < g_op_tab[a->i_op].nb_params)
 	{
-		if (get_param(a, &pow4, op_tab[a->i_op].types[i]) == -1)
+		if (get_param(a, &pow4, g_op_tab[a->i_op].types[i]) == -1)
 			return (-1);
-		if (i < op_tab[a->i_op].nb_params - 1)
+		if (i < g_op_tab[a->i_op].nb_params - 1)
 		{
 			ignore_spaces(&a->line);
 			if (a->line[0] == SEPARATOR_CHAR)
@@ -52,11 +64,11 @@ int	get_instruction(t_asm *a)
 	ignore_spaces(&a->line);
 	a->i_line_byte = 1;
 	a->types_byte = 0;
-	if (op_tab[a->i_op].type_required)
+	if (g_op_tab[a->i_op].type_required)
 		a->i_line_byte = 2;
 	if (get_params(a) == -1)
 		return (-2);
-	if (op_tab[a->i_op].type_required)
+	if (g_op_tab[a->i_op].type_required)
 		add_value_to_bytecode(a->bytecode + a->pc + 1, a->types_byte, 1);
 	a->pc += a->i_line_byte;
 	if (a->pc > 4 + PROG_NAME_LENGTH + 4 +

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing2.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/08/10 20:21:58 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/08/10 20:39:54 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
 int	get_reg(t_asm *a)
@@ -28,7 +40,7 @@ int	get_dir(t_asm *a)
 		return (-1);
 	a->line++;
 	a->nb_bytes = DIR_SIZE;
-	if (op_tab[a->i_op].index_expected)
+	if (g_op_tab[a->i_op].index_expected)
 		a->nb_bytes = IND_SIZE;
 	dir = get_number(&a->line,
 	(a->nb_bytes >= 8 ? _POW_2_63 + 1 : -ft_pow(2, a->nb_bytes * 8 - 1)),
@@ -63,7 +75,7 @@ int	get_ind(t_asm *a)
 	}
 	else
 		add_value_to_bytecode(a->bytecode + a->pc + a->i_line_byte,
-		ind, IND_SIZE);	
+		ind, IND_SIZE);
 	a->i_line_byte += IND_SIZE;
 	return (0);
 }

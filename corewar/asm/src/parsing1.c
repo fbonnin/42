@@ -1,15 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing1.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/08/10 20:21:52 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/08/10 20:39:25 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
-int		get_opcode(t_asm *a)
+int			get_opcode(t_asm *a)
 {
-	int 	i;
+	int		i;
 	char	*name;
 	int		len;
 
 	i = 0;
-	while (op_tab[i].opcode != 0)
+	while (g_op_tab[i].opcode != 0)
 	{
-		name = op_tab[i].name;
+		name = g_op_tab[i].name;
 		len = ft_strlen(name);
 		if (ft_strnequ(name, a->line, len) == 1 &&
 		(a->line[len] == ' ' || a->line[len] == '\t'))
@@ -19,14 +31,14 @@ int		get_opcode(t_asm *a)
 		}
 		i++;
 	}
-	if (op_tab[i].opcode == 0)
+	if (g_op_tab[i].opcode == 0)
 		return (-1);
 	a->i_op = i;
-	add_value_to_bytecode(a->bytecode + a->pc, op_tab[i].opcode, 1);
+	add_value_to_bytecode(a->bytecode + a->pc, g_op_tab[i].opcode, 1);
 	return (0);
 }
 
-long long get_number(char **line, long long mini, long long maxi)
+long long	get_number(char **line, long long mini, long long maxi)
 {
 	long long	result;
 	int			sign;
@@ -49,13 +61,13 @@ long long get_number(char **line, long long mini, long long maxi)
 		result += (*line)[len++] - 48;
 	}
 	result *= sign;
-	if (result < mini ||result > maxi || result == _POW_2_63)
+	if (result < mini || result > maxi || result == _POW_2_63)
 		return (_POW_2_63);
 	*line += len;
 	return (result);
 }
 
-char	*get_label(char *line)
+char		*get_label(char *line)
 {
 	char	*result;
 	int		len;

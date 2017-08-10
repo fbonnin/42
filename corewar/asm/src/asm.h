@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   asm.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/08/10 20:20:28 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/08/10 20:35:55 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef ASM_H
 # define ASM_H
 
@@ -56,7 +68,7 @@ typedef struct	s_asm
 	t_call			*calls;
 }				t_asm;
 
-extern t_op		op_tab[17];
+extern t_op		g_op_tab[17];
 
 void			find_nb_bytes_i_reg(int *nb_bytes_i_reg);
 void			init_asm(t_asm *a);

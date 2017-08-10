@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   declaration.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/08/10 20:20:48 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/08/10 20:28:10 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
-char		*get_declaration(char **line)
+char			*get_declaration(char **line)
 {
 	char *result;
 
@@ -16,7 +28,7 @@ char		*get_declaration(char **line)
 	return (result);
 }
 
-t_declaration *find_declaration(t_declaration *declarations, char *label)
+t_declaration	*find_declaration(t_declaration *declarations, char *label)
 {
 	t_declaration *declaration;
 
@@ -30,7 +42,8 @@ t_declaration *find_declaration(t_declaration *declarations, char *label)
 	return (NULL);
 }
 
-int			add_declaration(t_declaration **declarations, char **line, int pc)
+int				add_declaration(t_declaration **declarations,
+char **line, int pc)
 {
 	char			*label;
 	t_declaration	*declaration;
@@ -52,7 +65,7 @@ int			add_declaration(t_declaration **declarations, char **line, int pc)
 	return (1);
 }
 
-void		free_declarations(t_declaration *declarations)
+void			free_declarations(t_declaration *declarations)
 {
 	t_declaration *declaration;
 	t_declaration *next;
