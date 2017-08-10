@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/10 20:21:58 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/08/10 20:39:54 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/08/10 22:19:01 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	get_dir(t_asm *a)
 		a->nb_bytes = IND_SIZE;
 	dir = get_number(&a->line,
 	(a->nb_bytes >= 8 ? _POW_2_63 + 1 : -ft_pow(2, a->nb_bytes * 8 - 1)),
-	(a->nb_bytes >= 8 ? POW_2_63 - 1 : ft_pow(2, a->nb_bytes * 8 - 1) - 1));
+	(a->nb_bytes >= 8 ? POW_2_63 - 1 : ft_pow(2, a->nb_bytes * 8) - 1));
 	if (dir == _POW_2_63)
 	{
 		if (add_call(a) == 0)
@@ -66,7 +66,7 @@ int	get_ind(t_asm *a)
 
 	ind = get_number(&a->line,
 	(IND_SIZE >= 8 ? _POW_2_63 + 1 : -ft_pow(2, IND_SIZE * 8 - 1)),
-	(IND_SIZE >= 8 ? POW_2_63 - 1 : ft_pow(2, IND_SIZE * 8 - 1) - 1));
+	(IND_SIZE >= 8 ? POW_2_63 - 1 : ft_pow(2, IND_SIZE * 8) - 1));
 	if (ind == _POW_2_63)
 	{
 		a->nb_bytes = IND_SIZE;
