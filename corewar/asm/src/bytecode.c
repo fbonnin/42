@@ -26,6 +26,8 @@ unsigned char *bytecode, long long value, int nb_bytes)
 	while (i < nb_bytes - 8)
 		bytecode[i++] = 0;
 	pow256 = ft_pow(256, nb_bytes - i - 1);
+	if (value / pow256 > 255)
+		return ;
 	while (pow256 > 0)
 	{
 		bytecode[i++] = value / pow256;
