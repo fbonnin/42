@@ -21,7 +21,7 @@ int			main(int argc, char **argv)
 	find_nb_bytes_i_reg(&a.nb_bytes_i_reg);
 	init_asm(&a);
 	if (argc != 2)
-		return (end(&a, "usage : ./asm filename.s", 1));
+		return (end(&a, "usage : ./asm sourcefile.s", 1));
 	len = ft_strlen(argv[1]);
 	if (len < 3 || ft_strnequ(&argv[1][len - 2], ".s", 2) != 1)
 		return (end(&a, "Missing .s extension", 2));
