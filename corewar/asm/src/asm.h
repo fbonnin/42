@@ -81,8 +81,8 @@ void			add_value_to_bytecode_2(unsigned char *bytecode,
 				int nb_bytes, int neg);
 void			add_strings_to_bytecode(unsigned char *bytecode,
 				char *prog_name, char *description);
-void			write_bytecode(unsigned char *bytecode,
-				int pc, char *input_name, int len);
+void			write_bytecode(unsigned char *bytecode, int pc,
+				char *input_name, int len);
 
 int				get_line(t_asm *a);
 int				end_line(int *i_line, char *line, int r);
