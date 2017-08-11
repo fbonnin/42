@@ -43,7 +43,7 @@ int			main(int argc, char **argv)
 void		find_nb_bytes_i_reg(int *nb_bytes_i_reg)
 {
 	*nb_bytes_i_reg = 1;
-	while (ft_pow(2, *nb_bytes_i_reg * 8 - 1) - 1 < REG_NUMBER)
+	while (ft_pow(2, *nb_bytes_i_reg * 8) - 1 < REG_NUMBER)
 		(*nb_bytes_i_reg)++;
 }
 

@@ -42,8 +42,8 @@ t_declaration	*find_declaration(t_declaration *declarations, char *label)
 	return (NULL);
 }
 
-int				add_declaration(t_declaration **declarations,
-char **line, int pc)
+int				add_declaration(
+t_declaration **declarations, char **line, int pc)
 {
 	char			*label;
 	t_declaration	*declaration;
