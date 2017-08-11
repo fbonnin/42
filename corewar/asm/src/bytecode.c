@@ -12,8 +12,8 @@
 
 #include "asm.h"
 
-void	add_value_to_bytecode(unsigned char *bytecode,
-long long value, int nb_bytes)
+void	add_value_to_bytecode(
+unsigned char *bytecode, long long value, int nb_bytes)
 {
 	int			i;
 	int			neg;
@@ -35,8 +35,8 @@ long long value, int nb_bytes)
 	add_value_to_bytecode_2(bytecode, nb_bytes, neg);
 }
 
-void	add_value_to_bytecode_2(unsigned char *bytecode,
-int nb_bytes, int neg)
+void	add_value_to_bytecode_2(
+unsigned char *bytecode, int nb_bytes, int neg)
 {
 	int i;
 
