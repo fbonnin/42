@@ -6,7 +6,7 @@
 /*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/10 20:20:36 by fbonnin           #+#    #+#             */
-/*   Updated: 2017/08/10 20:20:37 by fbonnin          ###   ########.fr       */
+/*   Updated: 2017/08/21 15:54:22 by fbonnin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ char *input_name, int len)
 
 	input_name[len - 2] = 0;
 	output_name = ft_strjoin(input_name, ".cor");
-	fd = open(output_name, O_CREAT | O_WRONLY, 0777);
+	fd = open(output_name, O_CREAT | O_WRONLY, 0644);
 	free(output_name);
 	if (fd == -1)
 		return ;
