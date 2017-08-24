@@ -92,7 +92,7 @@ char *input_name, int len)
 
 	input_name[len - 2] = 0;
 	output_name = ft_strjoin(input_name, ".cor");
-	fd = open(output_name, O_CREAT | O_WRONLY, 0644);
+	fd = open(output_name, O_CREAT | O_WRONLY, 0600);
 	free(output_name);
 	if (fd == -1)
 		return ;
