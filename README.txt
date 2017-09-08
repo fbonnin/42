@@ -1,6 +1,3 @@
-Each project has a subject in pdf format.
-
-
 Overview :
 
 - libft : library
@@ -12,3 +9,6 @@ Overview :
 - corewar : virtual machine and compiler
 
 - fdf : parallel projection
+
+
+Each project has a subject in pdf format.
