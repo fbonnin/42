@@ -1,1 +1,1 @@
-Read subject.pdf for each project.
+Each project has a subject in pdf format.
