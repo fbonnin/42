@@ -4,7 +4,7 @@ Overview
 - fillit :      backtracking
 - push_swap :   sorting
 - lem-in :      pathfinding
-- corewar :     parsing, assembler, compiler, virtual machine
+- corewar :     parsing, compiler, assembler, virtual machine
 - fdf :         parallel projection
 
 Each project has a subject in pdf format.
