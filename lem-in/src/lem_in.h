@@ -18,7 +18,7 @@
 
 # include "stdlib.h"
 
-# include "libft/libft.h"
+# include "../libft/libft.h"
 
 # include "line.h"
 # include "node.h"

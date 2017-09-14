@@ -23,7 +23,7 @@ pathfinding \
 move1 \
 move2
 
-O_FILES = $(addsuffix .o, $(NAMES))
+O_FILES = $(addprefix src/, $(addsuffix .o, $(NAMES)))
 
 $(NAME): $(O_FILES)
 	cd libft && make
