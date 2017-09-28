@@ -1,9 +1,7 @@
-void print_file(char *name, int _l, int _a)
+void print_file(char *name, int _l)
 {
 	struct stat info;
 
-	if (name[0] == '.' && !_a)
-		return ;
 	if (_l)
 	{
 		stat(name, &info);
@@ -65,14 +63,14 @@ void print_permissions(mode_t m)
 	ft_printf(m & S_IXOTH ? "x" : "-");
 }
 
-void print_dirents(struct dirent **dirents, int nb_dirents, int _l, int _a)
+void print_dirents(struct dirent **dirents, int nb_dirents, int _l)
 {
 	int i;
 
 	i = 0;
 	while (i < nb_dirents)
 	{
-		print_file(dirents[i]->d_name, _l, _a);
+		print_file(dirents[i]->d_name, _l);
 		i++;
 	}
 }
