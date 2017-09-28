@@ -37,9 +37,9 @@ int		is_lower_name(struct dirent *dirent1, struct dirent *dirent2)
 
 int		is_lower_mtime(struct dirent *dirent1, struct dirent *dirent2)
 {
-	struct stat stat1;
-	struct stat stat2;
-	stat(dirent1->d_name, &stat1);
-	stat(dirent2->d_name, &stat2);
-	return (stat1.st_mtime > stat2.st_mtime);
+	struct stat info1;
+	struct stat info2;
+	stat(dirent1->d_name, &info1);
+	stat(dirent2->d_name, &info2);
+	return (info1.st_mtime > info2.st_mtime);
 }
