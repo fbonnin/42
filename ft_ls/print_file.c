@@ -19,7 +19,6 @@ void print_info(struct stat info)
 	struct group	*group;
 	char			*date;
 
-	stat(name, &info);
 	m = info.st_mode;
 	print_type(m);
 	print_permissions(m);
@@ -68,7 +67,7 @@ void print_permissions(mode_t m)
 
 void print_dirents(struct dirent **dirents, int nb_dirents, int _l, int _a)
 {
-	int			i;
+	int i;
 
 	i = 0;
 	while (i < nb_dirents)
