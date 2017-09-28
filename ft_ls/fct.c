@@ -1,4 +1,4 @@
-int				get_nb_dirents(DIR *dir)
+int				get_nb_dirents(DIR *dir, int _a)
 {
 	int				result;
 	struct dirent	*dirent;
@@ -7,13 +7,14 @@ int				get_nb_dirents(DIR *dir)
 	dirent = readdir(dir);
 	while (dirent != NULL)
 	{
-		result++;
+		if (dirent->d_name[0] != '.' || _a)
+			result++;
 		dirent = readdir(dir);
 	}
 	return (result);
 }
 
-struct dirent	**get_dirents(DIR *dir, int nb_dirents)
+struct dirent	**get_dirents(DIR *dir, int nb_dirents, int _a)
 {
 	struct dirent	**dirents;
 	int				i;
@@ -24,8 +25,11 @@ struct dirent	**get_dirents(DIR *dir, int nb_dirents)
 	dirent = readdir(dir);
 	while (dirent != NULL && i < nb_dirents)
 	{
-		dirents[i] = dirent;
-		i++;
+		if (dirent->d_name[0] != '.' || _a)
+		{
+			dirents[i] = dirent;
+			i++;
+		}
 		dirent = readdir(dir);
 	}
 	return (dirents);
