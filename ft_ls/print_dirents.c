@@ -1,3 +1,21 @@
+void print_dirents(struct dirent **dirents, int nb_dirents, int _l, int _a)
+{
+	int			i;
+	struct stat	info;
+
+	i = 0;
+	while (i < nb_dirents)
+	{
+		if (dirents[i]->d_name[0] != '.' || _a)
+		{
+			stat(dirents[0]->d_name, &info);
+			print_info(info);
+			ft_printf("%s\n", dirents[0]->d_name);
+		}
+		i++;
+	}
+}
+
 void print_info(struct stat info)
 {
 	mode_t			m;
