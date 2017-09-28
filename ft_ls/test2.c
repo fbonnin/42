@@ -57,7 +57,7 @@ int main(int ac, char **av)
 
 	printf("LALA : %ld\n", file_info.st_mtime);
 	char *date = ctime(&file_info.st_mtime) + 4;
-	date[15] = 0;
+	date[12] = 0;
 	printf("Date de derniere modification: %s\n", date);
 
 	return (0);
