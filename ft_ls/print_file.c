@@ -1,19 +1,15 @@
-void print_dirents(struct dirent **dirents, int nb_dirents, int _l, int _a)
+void print_file(char *name, int _l, int _a)
 {
-	int			i;
-	struct stat	info;
+	struct stat info;
 
-	i = 0;
-	while (i < nb_dirents)
+	if (name[0] == '.' && !_a)
+		return ;
+	if (_l)
 	{
-		if (dirents[i]->d_name[0] != '.' || _a)
-		{
-			stat(dirents[0]->d_name, &info);
-			print_info(info);
-			ft_printf("%s\n", dirents[0]->d_name);
-		}
-		i++;
+		stat(name, &info);
+		print_info(info);
 	}
+	ft_printf("%s\n", name);
 }
 
 void print_info(struct stat info)
@@ -23,6 +19,7 @@ void print_info(struct stat info)
 	struct group	*group;
 	char			*date;
 
+	stat(name, &info);
 	m = info.st_mode;
 	print_type(m);
 	print_permissions(m);
@@ -67,4 +64,16 @@ void print_permissions(mode_t m)
 	ft_printf(m & S_IROTH ? "r" : "-");
 	ft_printf(m & S_IWOTH ? "w" : "-");
 	ft_printf(m & S_IXOTH ? "x" : "-");
+}
+
+void print_dirents(struct dirent **dirents, int nb_dirents, int _l, int _a)
+{
+	int			i;
+
+	i = 0;
+	while (i < nb_dirents)
+	{
+		print_file(dirents[i]->d_name, _l, _a);
+		i++;
+	}
 }
