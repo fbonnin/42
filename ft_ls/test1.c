@@ -4,14 +4,14 @@
 int main(int ac, char **av)
 {
 	DIR *dir;
-	struct dirent *entry;
+	struct dirent *dirent;
 
 	dir = opendir(av[1]);
-	entry = readdir(dir);
-	while (entry != NULL)
+	dirent = readdir(dir);
+	while (dirent != NULL)
 	{
-		printf("%s\n", entry->d_name);
-		entry = readdir(dir);
+		printf("%s\n", dirent->d_name);
+		dirent = readdir(dir);
 	}
 	closedir(dir);
 	return (0);
