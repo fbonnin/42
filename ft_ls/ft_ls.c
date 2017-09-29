@@ -1,3 +1,52 @@
+void ls_names(char **names, int nb_names, t_options options)
+{
+	int first;
+
+	first = 1;
+	ls_files(names, nb_names, options, &first);
+	ls_dirs(names, nb_names, options, first);	
+}
+
+void ls_files(char **names, int nb_names, t_options options, int *first)
+{
+	int			i;
+	struct stat	info;
+
+	i = 0;
+	while (i < nb_names)
+	{
+		stat(names[i], &info);
+		if (!S_ISDIR(info.st_mode))
+		{
+			print_file(names[i], options.l);
+			*first = 0;
+		}
+		i++;
+	}
+}
+
+void ls_dirs(char **names, int nb_names, t_options options, int first)
+{
+	int			i;
+	struct stat	info;
+
+	i = 0;
+	while (i < nb_names)
+	{
+		stat(names[i], &info);
+		if (S_ISDIR(info.st_mode))
+		{
+			if (!first)
+				ft_printf("\n");
+			if (nb_names > 1 && !options.R)
+				ft_printf("%s:\n", names[i]);
+			ls_dir(names[i], options);
+			first = 0;
+		}
+		i++;
+	}
+}
+
 void ls_dir(char *name, t_options options)
 {
 	DIR				*dir;
@@ -36,7 +85,7 @@ struct dirent **dirents, int nb_dirents)
 			ft_strcpy(subdir, name);
 			subdir[ft_strlen(name)] = '/';
 			ft_strcpy(subdir + ft_strlen(name) + 1, dirents[i]->d_name);
-			ft_printf("\n\n");
+			ft_printf("\n");
 			ls_dir(subdir, options);
 			free(subdir);
 		}
