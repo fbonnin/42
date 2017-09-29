@@ -7,8 +7,8 @@ void ls_dir(char *name, t_options options)
 	dir = opendir(name);
 	if (options.R)
 		ft_printf("%s:\n", name);
-	nb_dirents = get_nb_dirents(dir, _a);
-	dirents = get_dirents(dir, nb_dirents, _a);
+	nb_dirents = get_nb_dirents(dir, options.a);
+	dirents = get_dirents(dir, nb_dirents, options.a);
 	sort_dirents(dirents, nb_dirents, options.t, options.r);
 	if (options.l)
 		ft_printf("total %d\n", nb_dirents);
@@ -28,7 +28,7 @@ struct dirent **dirents, int nb_dirents)
 	i = 0;
 	while (i < nb_dirents)
 	{
-		stat(dirents[i]->name, &info);
+		stat(dirents[i]->d_name, &info);
 		if (S_ISDIR(info.st_mode))
 		{
 			subdir = ft_strnew(ft_strlen(name) +
