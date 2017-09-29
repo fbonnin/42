@@ -51,15 +51,13 @@ void ls_dirs(char **names, int nb_names, t_options options, int first)
 
 void ls_dir(char *name, t_options options)
 {
-	DIR				*dir;
 	struct dirent	**dirents;
 	int				nb_dirents;
 
-	dir = opendir(name);
 	if (options.R)
 		ft_printf(1, "%s:\n", name);
-	nb_dirents = get_nb_dirents(dir, options.a);
-	dirents = get_dirents(dir, nb_dirents, options.a);
+	nb_dirents = get_nb_dirents(name, options.a);
+	dirents = get_dirents(name, nb_dirents, options.a);
 	sort_dirents(dirents, nb_dirents, options.t, options.r);
 	if (options.l)
 		ft_printf(1, "total %d\n", nb_dirents);

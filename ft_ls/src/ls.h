@@ -39,8 +39,8 @@ void			print_type(mode_t m);
 void			print_permissions(mode_t m);
 void			print_dirents(struct dirent **dirents, int nb_dirents, int _l);
 
-int				get_nb_dirents(DIR *dir, int _a);
-struct dirent	**get_dirents(DIR *dir, int nb_dirents, int _a);
+int				get_nb_dirents(char *name, int _a);
+struct dirent	**get_dirents(char *name, int nb_dirents, int _a);
 
 void			sort_dirents(struct dirent **dirents, int nb_dirents,
 					int _t, int _r);
