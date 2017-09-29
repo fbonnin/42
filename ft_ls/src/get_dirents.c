@@ -1,3 +1,5 @@
+#include "ls.h"
+
 int				get_nb_dirents(DIR *dir, int _a)
 {
 	int				result;

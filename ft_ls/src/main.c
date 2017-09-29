@@ -1,3 +1,5 @@
+#include "ls.h"
+
 int		main(int ac, char **av)
 {
 	char		**names;
@@ -69,7 +71,7 @@ int		parse_option(t_options *options, char option)
 		options->t = 1;
 	else
 	{
-		ft_printf("ls: invalid option -- '%c'\n", option);
+		ft_printf(1, "ls: invalid option -- '%c'\n", option);
 		return (-1);
 	}
 	return (0);

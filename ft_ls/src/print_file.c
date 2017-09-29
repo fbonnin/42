@@ -1,3 +1,5 @@
+#include "ls.h"
+
 void print_file(char *name, int _l)
 {
 	struct stat info;
@@ -7,7 +9,7 @@ void print_file(char *name, int _l)
 		stat(name, &info);
 		print_info(info);
 	}
-	ft_printf("%s\n", name);
+	ft_printf(1, "%s\n", name);
 }
 
 void print_info(struct stat info)
@@ -20,47 +22,47 @@ void print_info(struct stat info)
 	m = info.st_mode;
 	print_type(m);
 	print_permissions(m);
-	ft_printf(" ");
-	ft_printf("%lu ", info.st_nlink);
+	ft_printf(1, " ");
+	ft_printf(1, "%lu ", info.st_nlink);
 	user = getpwuid(info.st_uid);
-	ft_printf("%s ", user->pw_name);
+	ft_printf(1, "%s ", user->pw_name);
 	group = getgrgid(info.st_gid);
-	ft_printf("%s ", user->gr_name);
-	ft_printf("%ld ", info.st_size);
+	ft_printf(1, "%s ", group->gr_name);
+	ft_printf(1, "%ld ", info.st_size);
 	date = ctime(&info.st_mtime) + 4;
 	date[12] = 0;
-	ft_printf("%s ", date);
+	ft_printf(1, "%s ", date);
 }
 
 void print_type(mode_t m)
 {	
 	if (S_ISREG(m))
-		ft_printf("-");
+		ft_printf(1, "-");
 	else if (S_ISBLK(m))
-		ft_printf("b");
+		ft_printf(1, "b");
 	else if (S_ISCHR(m))
-		ft_printf("c");
+		ft_printf(1, "c");
 	else if (S_ISDIR(m))
-		ft_printf("d");
+		ft_printf(1, "d");
 	else if (S_ISLNK(m))
-		ft_printf("l");
+		ft_printf(1, "l");
 	else if (S_ISFIFO(m))
-		ft_printf("p");
+		ft_printf(1, "p");
 	else if (S_ISSOCK(m))
-		ft_printf("s");
+		ft_printf(1, "s");
 }
 
 void print_permissions(mode_t m)
 {
-	ft_printf(m & S_IRUSR ? "r" : "-");
-	ft_printf(m & S_IWUSR ? "w" : "-");
-	ft_printf(m & S_IXUSR ? "x" : "-");
-	ft_printf(m & S_IRGRP ? "r" : "-");
-	ft_printf(m & S_IWGRP ? "w" : "-");
-	ft_printf(m & S_IXGRP ? "x" : "-");
-	ft_printf(m & S_IROTH ? "r" : "-");
-	ft_printf(m & S_IWOTH ? "w" : "-");
-	ft_printf(m & S_IXOTH ? "x" : "-");
+	ft_printf(1, m & S_IRUSR ? "r" : "-");
+	ft_printf(1, m & S_IWUSR ? "w" : "-");
+	ft_printf(1, m & S_IXUSR ? "x" : "-");
+	ft_printf(1, m & S_IRGRP ? "r" : "-");
+	ft_printf(1, m & S_IWGRP ? "w" : "-");
+	ft_printf(1, m & S_IXGRP ? "x" : "-");
+	ft_printf(1, m & S_IROTH ? "r" : "-");
+	ft_printf(1, m & S_IWOTH ? "w" : "-");
+	ft_printf(1, m & S_IXOTH ? "x" : "-");
 }
 
 void print_dirents(struct dirent **dirents, int nb_dirents, int _l)

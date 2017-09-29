@@ -1,3 +1,5 @@
+#include "ls.h"
+
 void	sort_dirents(struct dirent **dirents, int nb_dirents, int _t, int _r)
 {
 	if (_t)
@@ -18,7 +20,7 @@ int (*is_lower)(struct dirent *dirent1, struct dirent *dirent2), int _r)
 	{
 		j = i;
 		while (j > 0 && (
-		(!_r && is_lower(dirents[j], dirents[j - 1]) ||
+		(!_r && is_lower(dirents[j], dirents[j - 1])) ||
 		(_r && is_lower(dirents[j - 1], dirents[j]))))
 		{
 			dirent = dirents[j - 1];
