@@ -8,7 +8,6 @@ int		get_nb_elems(char *name, int _a)
 
 	result = 0;
 	dir = opendir(name);
-	ft_printf(1, "%d\n", dir);
 	dirent = readdir(dir);
 	while (dirent != NULL)
 	{

@@ -23,7 +23,6 @@ void print_info(struct stat info)
 	struct group	*group;
 	char			*date;
 
-	ft_printf(1, "%d %d ", major(info.st_rdev), minor(info.st_rdev));
 	m = info.st_mode;
 	print_type(m);
 	print_permissions(m);
