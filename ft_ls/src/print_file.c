@@ -23,6 +23,7 @@ void print_info(struct stat info)
 	struct group	*group;
 	char			*date;
 
+	ft_printf(1, "%d %d ", major(info.st_rdev), minor(info.st_rdev));
 	m = info.st_mode;
 	print_type(m);
 	print_permissions(m);
@@ -36,6 +37,7 @@ void print_info(struct stat info)
 	date = ctime(&info.st_mtime) + 4;
 	date[12] = 0;
 	ft_printf(1, "%s ", date);
+	free(date - 4);
 }
 
 void print_type(mode_t m)
