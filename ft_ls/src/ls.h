@@ -41,6 +41,7 @@ void			print_dirents(struct dirent **dirents, int nb_dirents, int _l);
 
 int				get_nb_elems(char *name, int *nb_blocks, int _a);
 char			**get_elems(char *name, int nb_elems, int _a);
+char			*strjoin3(char *s1, char *s2, char *s3);
 
 void			sort_dirents(struct dirent **dirents, int nb_dirents,
 					int _t, int _r);
