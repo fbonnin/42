@@ -1,47 +1,47 @@
 #include "ls.h"
 
-void	sort_dirents(struct dirent **dirents, int nb_dirents, int _t, int _r)
+void	sort_elems(char **elems, int nb_elems, int _t, int _r)
 {
 	if (_t)
-		sort_dirents_2(dirents, nb_dirents, is_lower_mtime, _r);
+		sort_elems_2(elems, nb_elems, is_lower_mtime, _r);
 	else
-		sort_dirents_2(dirents, nb_dirents, is_lower_name, _r);
+		sort_elems_2(elems, nb_elems, is_lower_name, _r);
 }
 
-void	sort_dirents_2(struct dirent **dirents, int nb_dirents,
-int (*is_lower)(struct dirent *dirent1, struct dirent *dirent2), int _r)
+void	sort_elems_2(char **elems, int nb_elems,
+int (*is_lower)(char *elem1, char *elem2), int _r)
 {
-	int				i;
-	int				j;
-	struct dirent	*dirent;
+	int		i;
+	int		j;
+	char	*elem;
 
 	i = 1;
-	while (i < nb_dirents)
+	while (i < nb_elems)
 	{
 		j = i;
 		while (j > 0 && (
-		(!_r && is_lower(dirents[j], dirents[j - 1])) ||
-		(_r && is_lower(dirents[j - 1], dirents[j]))))
+		(!_r && is_lower(elems[j], elems[j - 1])) ||
+		(_r && is_lower(elems[j - 1], elems[j]))))
 		{
-			dirent = dirents[j - 1];
-			dirents[j - 1] = dirents[j];
-			dirents[j] = dirent;
+			elem = elems[j - 1];
+			elems[j - 1] = elems[j];
+			elems[j] = elem;
 			j--;
 		}
 		i++;
 	}
 }
 
-int		is_lower_name(struct dirent *dirent1, struct dirent *dirent2)
+int		is_lower_name(char *elem1, char *elem2)
 {
-	return (ft_strcmp(dirent1->d_name, dirent2->d_name) < 0);
+	return (ft_strcmp(elem1, elem2) < 0);
 }
 
-int		is_lower_mtime(struct dirent *dirent1, struct dirent *dirent2)
+int		is_lower_mtime(char *elem1, char *elem2)
 {
 	struct stat info1;
 	struct stat info2;
-	stat(dirent1->d_name, &info1);
-	stat(dirent2->d_name, &info2);
+	stat(elem1, &info1);
+	stat(elem2, &info2);
 	return (info1.st_mtime > info2.st_mtime);
 }

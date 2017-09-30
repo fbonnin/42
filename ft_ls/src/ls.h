@@ -43,12 +43,10 @@ int				get_nb_elems(char *name, int *nb_blocks, int _a);
 char			**get_elems(char *name, int nb_elems, int _a);
 char			*strjoin3(char *s1, char *s2, char *s3);
 
-void			sort_dirents(struct dirent **dirents, int nb_dirents,
-					int _t, int _r);
-void			sort_dirents_2(struct dirent **dirents, int nb_dirents,
-					int (*is_lower)(struct dirent *dirent1,
-					struct dirent *dirent2), int _r);
-int				is_lower_name(struct dirent *dirent1, struct dirent *dirent2);
-int				is_lower_mtime(struct dirent *dirent1, struct dirent *dirent2);
+void			sort_elems(char **elems, int nb_elems, int _t, int _r);
+void			sort_elems_2(char **elems, int nb_elems,
+					int (*is_lower)(char *elem1, char *elem2), int _r);
+int				is_lower_name(char *elem1, char *elem2);
+int				is_lower_mtime(char *elem1, char *elem2);
 
 #endif
