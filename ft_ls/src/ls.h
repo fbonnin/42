@@ -30,6 +30,7 @@ void			ls_files(char **names, int nb_names,
 void			ls_dirs(char **names, int nb_names,
 					t_options options, int first);
 void			ls_dir(char *name, t_options options);
+void			free_elems(char **elems, int nb_elems);
 void			ls_subdirs(t_options options, char **elems, int nb_elems);
 
 void			print_file(char *name, int _l);

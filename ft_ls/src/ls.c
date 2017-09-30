@@ -51,10 +51,17 @@ void ls_dirs(char **names, int nb_names, t_options options, int first)
 
 void ls_dir(char *name, t_options options)
 {
+	DIR		*dir;
 	char	**elems;
 	int		nb_elems;
-	int		i;
 
+	dir = opendir(name);
+	if (dir == NULL)
+	{
+		ft_printf(1, "ls: %s: Permission denied\n", name);
+		return ;
+	}
+	closedir(dir);
 	if (options.R)
 		ft_printf(1, "%s:\n", name);
 	nb_elems = get_nb_elems(name, options.a);
@@ -65,6 +72,13 @@ void ls_dir(char *name, t_options options)
 	print_elems(elems, nb_elems, options.l);
 	if (options.R)
 		ls_subdirs(options, elems, nb_elems);
+	free_elems(elems, nb_elems);
+}
+
+void free_elems(char **elems, int nb_elems)
+{
+	int i;
+
 	i = 0;
 	while (i < nb_elems)
 	{
@@ -77,13 +91,18 @@ void ls_dir(char *name, t_options options)
 void ls_subdirs(t_options options, char **elems, int nb_elems)
 {
 	int			i;
+	int			j;
 	struct stat	info;
 
 	i = 0;
 	while (i < nb_elems)
 	{
+		j = ft_strlen(elems[i]);
+		while (j > 0 && elems[i][j - 1] != '/')
+			j--;
 		stat(elems[i], &info);
-		if (S_ISDIR(info.st_mode))
+		if (S_ISDIR(info.st_mode) &&
+		!ft_strequ(elems[i] + j, ".") && !ft_strequ(elems[i] + j, ".."))
 		{
 			ft_printf(1, "\n");
 			ls_dir(elems[i], options);
