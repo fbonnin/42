@@ -30,18 +30,18 @@ void			ls_files(char **names, int nb_names,
 void			ls_dirs(char **names, int nb_names,
 					t_options options, int first);
 void			ls_dir(char *name, t_options options);
-void			ls_subdirs(char *name, t_options options,
-					struct dirent **dirents, int nb_dirents);
+void			ls_subdirs(t_options options, char **elems, int nb_elems);
 
 void			print_file(char *name, int _l);
 void			print_info(struct stat info);
 void			print_type(mode_t m);
 void			print_permissions(mode_t m);
-void			print_dirents(struct dirent **dirents, int nb_dirents, int _l);
+void			print_elems(char **elems, int nb_elems, int _l);
 
-int				get_nb_elems(char *name, int *nb_blocks, int _a);
+int				get_nb_elems(char *name, int _a);
 char			**get_elems(char *name, int nb_elems, int _a);
 char			*strjoin3(char *s1, char *s2, char *s3);
+int				get_nb_blocks(char **elems, int nb_elems);
 
 void			sort_elems(char **elems, int nb_elems, int _t, int _r);
 void			sort_elems_2(char **elems, int nb_elems,

@@ -51,44 +51,42 @@ void ls_dirs(char **names, int nb_names, t_options options, int first)
 
 void ls_dir(char *name, t_options options)
 {
-	struct dirent	**dirents;
-	int				nb_dirents;
-	int				nb_blocks;
+	char	**elems;
+	int		nb_elems;
+	int		i;
 
 	if (options.R)
 		ft_printf(1, "%s:\n", name);
-	nb_dirents = get_nb_dirents(name, &nb_blocks, options.a);
-	dirents = get_dirents(name, nb_dirents, options.a);
-	sort_dirents(dirents, nb_dirents, options.t, options.r);
+	nb_elems = get_nb_elems(name, options.a);
+	elems = get_elems(name, nb_elems, options.a);
+	sort_elems(elems, nb_elems, options.t, options.r);
 	if (options.l)
-		ft_printf(1, "total %d\n", nb_blocks);
-	print_dirents(dirents, nb_dirents, options.l);
+		ft_printf(1, "total %d\n", get_nb_blocks(elems, nb_elems));
+	print_elems(elems, nb_elems, options.l);
 	if (options.R)
-		ls_subdirs(name, options, dirents, nb_dirents);
-	free(dirents);
+		ls_subdirs(options, elems, nb_elems);
+	i = 0;
+	while (i < nb_elems)
+	{
+		free(elems[i]);
+		i++;
+	}
+	free(elems);
 }
 
-void ls_subdirs(char *name, t_options options,
-struct dirent **dirents, int nb_dirents)
+void ls_subdirs(t_options options, char **elems, int nb_elems)
 {
 	int			i;
 	struct stat	info;
-	char		*subdir;
 
 	i = 0;
-	while (i < nb_dirents)
+	while (i < nb_elems)
 	{
-		stat(dirents[i]->d_name, &info);
+		stat(elems[i], &info);
 		if (S_ISDIR(info.st_mode))
 		{
-			subdir = ft_strnew(ft_strlen(name) +
-			1 + ft_strlen(dirents[i]->d_name));
-			ft_strcpy(subdir, name);
-			subdir[ft_strlen(name)] = '/';
-			ft_strcpy(subdir + ft_strlen(name) + 1, dirents[i]->d_name);
 			ft_printf(1, "\n");
-			ls_dir(subdir, options);
-			free(subdir);
+			ls_dir(elems[i], options);
 		}
 		i++;
 	}

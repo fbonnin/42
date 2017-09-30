@@ -2,6 +2,7 @@
 
 void	sort_elems(char **elems, int nb_elems, int _t, int _r)
 {
+	sort_elems_2(elems, nb_elems, is_lower_name, 0);
 	if (_t)
 		sort_elems_2(elems, nb_elems, is_lower_mtime, _r);
 	else

@@ -3,13 +3,17 @@
 void print_file(char *name, int _l)
 {
 	struct stat info;
+	int			i;
 
 	if (_l)
 	{
 		stat(name, &info);
 		print_info(info);
 	}
-	ft_printf(1, "%s\n", name);
+	i = ft_strlen(name);
+	while (i > 0 && name[i - 1] != '/')
+		i--;
+	ft_printf(1, "%s\n", name + i);
 }
 
 void print_info(struct stat info)
@@ -65,14 +69,14 @@ void print_permissions(mode_t m)
 	ft_printf(1, m & S_IXOTH ? "x" : "-");
 }
 
-void print_dirents(struct dirent **dirents, int nb_dirents, int _l)
+void print_elems(char **elems, int nb_elems, int _l)
 {
 	int i;
 
 	i = 0;
-	while (i < nb_dirents)
+	while (i < nb_elems)
 	{
-		print_file(dirents[i]->d_name, _l);
+		print_file(elems[i], _l);
 		i++;
 	}
 }

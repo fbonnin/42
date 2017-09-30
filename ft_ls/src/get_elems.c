@@ -1,24 +1,18 @@
 #include "ls.h"
 
-int		get_nb_elems(char *name, int *nb_blocks, int _a)
+int		get_nb_elems(char *name, int _a)
 {
 	int				result;
 	DIR				*dir;
 	struct dirent	*dirent;
-	struct stat		info;
 
 	result = 0;
-	*nb_blocks = 0;
 	dir = opendir(name);
 	dirent = readdir(dir);
 	while (dirent != NULL)
 	{
 		if (dirent->d_name[0] != '.' || _a)
-		{
 			result++;
-			stat(dirent->d_name, &info);
-			*nb_blocks += info.st_blocks / 2;
-		}
 		dirent = readdir(dir);
 	}
 	closedir(dir);
@@ -57,5 +51,22 @@ char	*strjoin3(char *s1, char *s2, char *s3)
 	ft_strcpy(result, s1);
 	ft_strcpy(result + ft_strlen(s1), s2);
 	ft_strcpy(result + ft_strlen(s1) + ft_strlen(s2), s3);
+	return (result);
+}
+
+int		get_nb_blocks(char **elems, int nb_elems)
+{
+	int			result;
+	int			i;
+	struct stat	info;
+
+	result = 0;
+	i = 0;
+	while (i < nb_elems)
+	{
+		stat(elems[i], &info);
+		result += info.st_blocks / 2;
+		i++;
+	}
 	return (result);
 }

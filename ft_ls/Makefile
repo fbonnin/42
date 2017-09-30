@@ -4,8 +4,8 @@ NAMES = \
 main \
 ls \
 print_file \
-get_dirents \
-sort_dirents
+get_elems \
+sort_elems
 
 O_FILES = $(addprefix src/, $(addsuffix .o, $(NAMES)))
 
