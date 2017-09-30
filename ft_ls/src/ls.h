@@ -48,5 +48,6 @@ void			sort_elems_2(char **elems, int nb_elems,
 					int (*is_lower)(char *elem1, char *elem2), int _r);
 int				is_lower_name(char *elem1, char *elem2);
 int				is_lower_mtime(char *elem1, char *elem2);
+int				strcmp_ls(const char *s1, const char *s2);
 
 #endif
