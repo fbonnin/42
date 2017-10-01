@@ -17,7 +17,7 @@ void ls_files(char **names, int nb_names, t_options options, int *first)
 	i = 0;
 	while (i < nb_names)
 	{
-		stat(names[i], &info);
+		lstat(names[i], &info);
 		if (!S_ISDIR(info.st_mode))
 		{
 			print_file(names[i], options.l);
@@ -35,7 +35,7 @@ void ls_dirs(char **names, int nb_names, t_options options, int first)
 	i = 0;
 	while (i < nb_names)
 	{
-		stat(names[i], &info);
+		lstat(names[i], &info);
 		if (S_ISDIR(info.st_mode))
 		{
 			if (!first)
@@ -100,7 +100,7 @@ void ls_subdirs(t_options options, char **elems, int nb_elems)
 		j = ft_strlen(elems[i]);
 		while (j > 0 && elems[i][j - 1] != '/')
 			j--;
-		stat(elems[i], &info);
+		lstat(elems[i], &info);
 		if (S_ISDIR(info.st_mode) &&
 		!ft_strequ(elems[i] + j, ".") && !ft_strequ(elems[i] + j, ".."))
 		{

@@ -55,8 +55,8 @@ int		is_lower_mtime(char *elem1, char *elem2)
 {
 	struct stat info1;
 	struct stat info2;
-	stat(elem1, &info1);
-	stat(elem2, &info2);
+	lstat(elem1, &info1);
+	lstat(elem2, &info2);
 	return (info1.st_mtime > info2.st_mtime);
 }
 

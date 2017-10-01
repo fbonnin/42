@@ -2,12 +2,12 @@
 
 void print_file(char *name, int _l)
 {
-	struct stat info;
+	struct stat	info;
 	int			i;
 
 	if (_l)
 	{
-		stat(name, &info);
+		lstat(name, &info);
 		print_info(info);
 	}
 	i = ft_strlen(name);
@@ -36,7 +36,6 @@ void print_info(struct stat info)
 	date = ctime(&info.st_mtime) + 4;
 	date[12] = 0;
 	ft_printf(1, "%s ", date);
-	free(date - 4);
 }
 
 void print_type(mode_t m)

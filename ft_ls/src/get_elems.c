@@ -64,7 +64,7 @@ int		get_nb_blocks(char **elems, int nb_elems)
 	i = 0;
 	while (i < nb_elems)
 	{
-		stat(elems[i], &info);
+		lstat(elems[i], &info);
 		result += info.st_blocks / 2;
 		i++;
 	}
