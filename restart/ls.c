@@ -9,7 +9,7 @@ void	ls_params(char **params, int nb_params, t_options options)
 
 	elems = get_files(params, nb_params, &nb_elems);
 	print_elems(elems, nb_elems, options);
-	free_elems(elems);
+	free_elems(elems, nb_elems);
 	first = (nb_elems > 0);
 	elems = get_dirs(params, nb_params, &nb_elems);
 	i = 0;
@@ -22,9 +22,10 @@ void	ls_params(char **params, int nb_params, t_options options)
 			ft_printf(1, "%s:\n", elems[i]);
 		ls_dir(elems[i++], options);
 	}
+	free_elems(elems, nb_elems);
 }
 
-void ls_dir(char *dir_name, t_options options)
+void	ls_dir(char *dir_name, t_options options)
 {
 	DIR		*dir;
 	char	**elems;
@@ -38,7 +39,7 @@ void ls_dir(char *dir_name, t_options options)
 	}
 	closedir(dir);
 	if (options.R)
-		ft_printf(1, "%s:\n", name);
+		ft_printf(1, "%s:\n", dir_name);
 	nb_elems = get_nb_elems(dir_name, options.a);
 	elems = get_elems(dir_name, nb_elems, options.a);
 	if (options.l)
@@ -49,7 +50,7 @@ void ls_dir(char *dir_name, t_options options)
 	free_elems(elems, nb_elems);
 }
 
-void ls_subdirs(t_options options, char **elems, int nb_elems)
+void	ls_subdirs(t_options options, char **elems, int nb_elems)
 {
 	int			i;
 	int			j;
