@@ -43,7 +43,7 @@ char	**get_dirs(char **params, int nb_params, int *nb_dirs)
 	dirs = malloc(*nb_dirs * sizeof(char *));
 	i_dir = 0;
 	i = 0;
-	while (i < nb_params && i_dir < *nb_dirs)i
+	while (i < nb_params && i_dir < *nb_dirs)
 	{
 		if (lstat(params[i], &info) == 0 && S_ISDIR(info.st_mode))
 			dirs[i_dir++] = params[i];
