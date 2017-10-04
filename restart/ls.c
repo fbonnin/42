@@ -10,8 +10,9 @@ void	ls_params(char **params, int nb_params, t_options options)
 	elems = get_files(params, nb_params, &nb_elems);
 	print_elems(elems, nb_elems, options);
 	free_elems(elems, nb_elems);
-	first = (nb_elems > 0);
+	first = (nb_elems == 0);
 	elems = get_dirs(params, nb_params, &nb_elems);
+	sort_elems(elems, nb_elems, options.t, options.r);
 	i = 0;
 	while (i < nb_elems)
 	{
