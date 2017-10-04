@@ -1,3 +1,5 @@
+#include "ls.h"
+
 int	get_row_1(struct stat info, char **row)
 {
 	struct passwd	*usr;

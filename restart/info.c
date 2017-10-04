@@ -1,3 +1,5 @@
+#include "ls.h"
+
 char get_type(struct stat info)
 {
 	int m;

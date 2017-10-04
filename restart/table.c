@@ -1,3 +1,5 @@
+#include "ls.h"
+
 int		fill_table(char **elems, int nb_elems, char ***table)
 {
 	int			i;

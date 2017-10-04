@@ -1,3 +1,5 @@
+#include "ls.h"
+
 int		get_nb_blocks(char **elems, int nb_elems)
 {
 	int			result;

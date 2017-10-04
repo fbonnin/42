@@ -1,3 +1,5 @@
+#include "ls.h"
+
 char	***alloc_table(int nb_rows)
 {
 	char	***table;

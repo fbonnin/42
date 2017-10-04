@@ -1,3 +1,5 @@
+#include "ls.h"
+
 int	print_elems(char **elems, int nb_elems, t_options options)
 {
 	int i;
