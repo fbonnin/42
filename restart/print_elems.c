@@ -3,6 +3,7 @@ int	print_elems(char **elems, int nb_elems, t_options options)
 	int i;
 	int i_name;
 
+	sort_elems(elems, nb_elems, options.t, options.r);
 	if (options.l)
 		print_elems_l(elems, nb_elems);
 	else
@@ -11,7 +12,7 @@ int	print_elems(char **elems, int nb_elems, t_options options)
 		while (i < nb_elems)
 		{
 			i_name = ft_strlen(elems[i]);
-			while (i > 0 && elems[i][i_name - 1] != '/')
+			while (i_name > 0 && elems[i][i_name - 1] != '/')
 				i_name--;
 			ft_printf(1, "%s\n", elems[i] + i_name);
 			i++;
