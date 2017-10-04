@@ -11,8 +11,7 @@ char	**get_files(char **elems, int nb_elems, int *nb_files)
 	i = 0;
 	while (i < nb_elems)
 	{
-		lstat(elems[i++], &info);
-		if (!S_ISDIR(info.st_mode))
+		if (lstat(elems[i++], &info) == 0 && !S_ISDIR(info.st_mode))
 			(*nb_files)++;
 	}
 	files = malloc(*nb_files * sizeof(char *));
@@ -39,8 +38,7 @@ char	**get_dirs(char **elems, int nb_elems, int *nb_dirs)
 	i = 0;
 	while (i < nb_elems)
 	{
-		lstat(elems[i++], &info);
-		if (S_ISDIR(info.st_mode))
+		if (lstat(elems[i++], &info) == 0 && S_ISDIR(info.st_mode))
 			(*nb_dirs)++;
 	}
 	dirs = malloc(*nb_dirs * sizeof(char *));
