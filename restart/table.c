@@ -1,3 +1,26 @@
+int		print_elems(char **elems, int nb_elems)
+{
+	char	***table;
+	int		widths[9];
+	int		i;
+
+	if ((table = alloc_table(nb_elems)) == NULL)
+		return (-1);
+	if (fill_table(elems, nb_elems, table) == -1)
+	{
+		free_table(table, nb_elems);
+		return (-1);
+	}
+	i = 0;
+	while (i < 9)
+	{
+		widths[i] = get_width(table, nb_elems, i);
+		i++;
+	}
+	print_table(table, nb_elems, widths);
+	return (0);
+}
+
 int		fill_table(char **elems, int nb_elems, char ***table)
 {
 	int			i;
