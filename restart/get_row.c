@@ -39,9 +39,13 @@ int	get_row_2(struct stat info, char **row)
 
 int get_row_3(char *elem, char **row)
 {
+	int		i_name;
 	char	link_contents[101];
 	int		i;
 
+	i_name = ft_strlen(elem);
+	while (i_name > 0 && elem[i_name - 1] != '/')
+		i_name--;
 	if (row[0][0] == 'l')
 	{
 		i = 0;
@@ -49,10 +53,11 @@ int get_row_3(char *elem, char **row)
 			link_contents[i++] = 0;
 		if (readlink(elem, link_contents, 100) == -1)
 			return (-1);
-		if ((row[8] = ft_strjoin3(elem, " -> ", link_contents)) == NULL)
+		if ((row[8] = ft_strjoin3(elem + i_name, " -> ", link_contents))
+		== NULL)
 			return (-1);
 	}
-	if ((row[8] = ft_strdup(elem)) == NULL)
+	if ((row[8] = ft_strdup(elem + i_name)) == NULL)
 		return (-1);
 	return (0);
 }
