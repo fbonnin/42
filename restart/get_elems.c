@@ -1,6 +1,6 @@
 #include "ls.h"
 
-char	**get_files(char **elems, int nb_elems, int *nb_files)
+char	**get_files(char **params, int nb_params, int *nb_files)
 {
 	char		**files;
 	int			i_file;
@@ -9,25 +9,25 @@ char	**get_files(char **elems, int nb_elems, int *nb_files)
 
 	*nb_files = 0;
 	i = 0;
-	while (i < nb_elems)
+	while (i < nb_params)
 	{
-		if (lstat(elems[i++], &info) == 0 && !S_ISDIR(info.st_mode))
+		if (lstat(params[i++], &info) == 0 && !S_ISDIR(info.st_mode))
 			(*nb_files)++;
 	}
 	files = malloc(*nb_files * sizeof(char *));
 	i_file = 0;
 	i = 0;
-	while (i < nb_elems && i_file < *nb_files)
+	while (i < nb_params && i_file < *nb_files)
 	{
-		lstat(elems[i], &info);
+		lstat(params[i], &info);
 		if (!S_ISDIR(info.st_mode))
-			files[i_file++] = elems[i];
+			files[i_file++] = params[i];
 		i++;
 	}
 	return (files);
 }
 
-char	**get_dirs(char **elems, int nb_elems, int *nb_dirs)
+char	**get_dirs(char **params, int nb_params, int *nb_dirs)
 {
 	char		**dirs;
 	int			i_dir;
@@ -36,32 +36,32 @@ char	**get_dirs(char **elems, int nb_elems, int *nb_dirs)
 
 	*nb_dirs = 0;
 	i = 0;
-	while (i < nb_elems)
+	while (i < nb_params)
 	{
-		if (lstat(elems[i++], &info) == 0 && S_ISDIR(info.st_mode))
+		if (lstat(params[i++], &info) == 0 && S_ISDIR(info.st_mode))
 			(*nb_dirs)++;
 	}
 	dirs = malloc(*nb_dirs * sizeof(char *));
 	i_dir = 0;
 	i = 0;
-	while (i < nb_elems && i_dir < *nb_dirs)
+	while (i < nb_params && i_dir < *nb_dirs)
 	{
-		lstat(elems[i], &info);
+		lstat(params[i], &info);
 		if (S_ISDIR(info.st_mode))
-			dirs[i_dir++] = elems[i];
+			dirs[i_dir++] = params[i];
 		i++;
 	}
 	return (dirs);
 }
 
-int		get_nb_elems(char *name, int _a)
+int		get_nb_elems(char *dir_name, int _a)
 {
 	int				result;
 	DIR				*dir;
 	struct dirent	*dirent;
 
 	result = 0;
-	dir = opendir(name);
+	dir = opendir(dir_name);
 	dirent = readdir(dir);
 	while (dirent != NULL)
 	{
@@ -73,7 +73,7 @@ int		get_nb_elems(char *name, int _a)
 	return (result);
 }
 
-char	**get_elems(char *name, int nb_elems, int _a)
+char	**get_elems(char *dir_name, int nb_elems, int _a)
 {
 	char			**elems;
 	int				i;
@@ -82,13 +82,13 @@ char	**get_elems(char *name, int nb_elems, int _a)
 
 	elems = malloc(nb_elems * sizeof(char *));
 	i = 0;
-	dir = opendir(name);
+	dir = opendir(dir_name);
 	dirent = readdir(dir);
 	while (dirent != NULL && i < nb_elems)
 	{
 		if (dirent->d_name[0] != '.' || _a)
 		{
-			elems[i] = strjoin3(name, "/", dirent->d_name);
+			elems[i] = strjoin3(dir_name, "/", dirent->d_name);
 			i++;
 		}
 		dirent = readdir(dir);
@@ -97,7 +97,7 @@ char	**get_elems(char *name, int nb_elems, int _a)
 	return (elems);
 }
 
-void free_elems(char **elems, int nb_elems)
+void	free_elems(char **elems, int nb_elems)
 {
 	int i;
 
