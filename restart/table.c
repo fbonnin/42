@@ -1,45 +1,48 @@
-char	***init_table(int nb_rows)
+int		fill_table(char **elems, int nb_elems, char ***table)
 {
-	char	***table;
-	int		i;
-	int		j;
+	int			i;
+	struct stat	info;
 
-	if ((table = malloc(nb_rows * sizeof(char **))) == NULL)
-		return (NULL);
 	i = 0;
-	while (i < nb_rows)
+	while (i < nb_elems)
 	{
-		if ((table[i] = malloc(9 * sizeof(char *))) == NULL)
-		{
-			while (--i >= 0)
-				free(table[i]);
-			free(table);
-			return (NULL);
-		}
-		j = 0;
-		while (j < 9)
-			table[i][j++] = NULL;
+		if (lstat(elems[i], &info) == -1)
+			return (-1);
+		if (get_row_1(info, table[i]) == -1)
+			return (-1);
+		if (get_row_2(info, table[i]) == -1)
+			return (-1);
+		if (get_row_3(info, table[i]) == -1)
+			return (-1);
 		i++;
 	}
-	return (table);
+	return (0);
 }
 
-void	free_table(char ***table, int nb_rows)
+void	print_table(char ***table, int nb_rows, int *widths)
 {
-	int i;
-	int j;
+	int		i;
+	char	**row;
+	int		width456;
 
 	i = 0;
 	while (i < nb_rows)
 	{
-		j = 0;
-		while (j < 9)
+		row = table[i];
+		ft_printf(1, "%s ", row[0]);
+		ft_printf(1, "%*s ", widths[1], row[1]);
+		ft_printf(1, "%-*s ", widths[2], row[2]);
+		ft_printf(1, "%-*s ", widths[3], row[3]);
+		width456 ft_max(widths[4], widths[5] + 1 + 1 + widths[6]);
+		if (row[0][0] == 'b' || row[0][0] == 'c')
 		{
-			free(table[i][j]);
-			j++;
+			ft_printf(1, "%*s, ", width456 - 1 - 1 - widths[6], row[5]);
+			ft_printf(1, "%*s ", widths[6], row[6]);
 		}
-		free(table[i]);
+		else
+			ft_printf(1, "%*s ", width456, row[4]);
+		ft_printf(1, "%s ", row[7] + 4);
+		ft_printf(1, "%s\n", row[8]);
 		i++;
 	}
-	free(table);
 }
