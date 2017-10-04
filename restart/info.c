@@ -23,7 +23,6 @@ char get_type(struct stat info)
 void get_rights(struct stat info, char *rights)
 {
 	int m
-	int i;
 
 	m = info.st_mode;
 	rights[0] = m & S_IRUSR ? 'r' : '-';
