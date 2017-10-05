@@ -27,6 +27,7 @@ int				end_ls(char **params);
 void			ls_params(char **params, int nb_params, t_options options);
 void			ls_dir(char *dir_name, t_options options);
 void			ls_subdirs(t_options options, char **elems, int nb_elems);
+void			print_non_existent(char **params, int nb_params);
 
 char			**get_files(char **params, int nb_params, int *nb_files);
 char			**get_dirs(char **params, int nb_params, int *nb_dirs);

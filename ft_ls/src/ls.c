@@ -7,6 +7,7 @@ void	ls_params(char **params, int nb_params, t_options options)
 	int		i;
 	int		first;
 
+	print_non_existent(params, nb_params);
 	if ((elems = get_files(params, nb_params, &nb_elems)) != NULL)
 		print_elems(elems, nb_elems, options);
 	free(elems);
@@ -25,6 +26,20 @@ void	ls_params(char **params, int nb_params, t_options options)
 		ls_dir(elems[i++], options);
 	}
 	free(elems);
+}
+
+void	print_non_existent(char **params, int nb_params)
+{
+	int			i;
+	struct stat	info;
+
+	i = 0;
+	while (i < nb_params)
+	{
+		if (lstat(params[i], &info) == -1)
+			ft_printf(1, "ls: %s: No such file or directory\n", params[i]);
+		i++;
+	}
 }
 
 void	ls_dir(char *dir_name, t_options options)
