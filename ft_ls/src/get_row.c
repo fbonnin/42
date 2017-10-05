@@ -59,7 +59,7 @@ int get_row_3(char *elem, char **row)
 		== NULL)
 			return (-1);
 	}
-	if ((row[8] = ft_strdup(elem + i_name)) == NULL)
+	else if ((row[8] = ft_strdup(elem + i_name)) == NULL)
 		return (-1);
 	return (0);
 }
