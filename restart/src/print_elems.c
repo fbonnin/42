@@ -7,7 +7,10 @@ int	print_elems(char **elems, int nb_elems, t_options options)
 
 	sort_elems(elems, nb_elems, options.t, options.r);
 	if (options.l)
-		print_elems_l(elems, nb_elems);
+	{
+		if (print_elems_l(elems, nb_elems) == -1)
+			return (-1);
+	}
 	else
 	{
 		i = 0;
@@ -20,6 +23,7 @@ int	print_elems(char **elems, int nb_elems, t_options options)
 			i++;
 		}
 	}
+	return (0);
 }
 
 

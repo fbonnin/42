@@ -8,7 +8,8 @@ int		main(int ac, char **av)
 	int			i;
 	char		dot[2];
 
-	init_ls(ac, &params, &nb_params, &options);
+	if (init_ls(ac, &params, &nb_params, &options) == -1)
+		return (0);
 	i = 1;
 	while (i < ac)
 	{
@@ -21,21 +22,23 @@ int		main(int ac, char **av)
 	if (nb_params == 0)
 	{
 		params[0] = dot;
-		nb_names = 1;
+		nb_params = 1;
 	}
 	ls_params(params, nb_params, options);
 	return (end_ls(params));
 }
 
-void	init_ls(int ac, char ***params, int *nb_params, t_options *options)
+int		init_ls(int ac, char ***params, int *nb_params, t_options *options)
 {
-	*params = malloc(ft_max(ac, 1) * sizeof(char *));
+	if ((*params = malloc(ft_max(ac, 1) * sizeof(char *))) == NULL)
+		return (-1);
 	*nb_params = 0;
 	options->a = 0;
 	options->l = 0;
 	options->r = 0;
 	options->R = 0;
 	options->t = 0;
+	return (0);
 }
 
 int		parse_av(char **params, int *nb_params, t_options *options, char *av)

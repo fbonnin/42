@@ -9,7 +9,7 @@ int	get_row_1(struct stat info, char **row)
 		return (-1);
 	row[0][0] = get_type(info);
 	get_rights(info, row[0] + 1);
-	if ((row[1] = ft_itoa(info.nlink)) == NULL)
+	if ((row[1] = ft_itoa(info.st_nlink)) == NULL)
 		return (-1);
 	if ((usr = getpwuid(info.st_uid)) == NULL)
 		return (-1);
@@ -33,7 +33,7 @@ int	get_row_2(struct stat info, char **row)
 	}
 	else if ((row[4] = ft_itoa(info.st_size)) == NULL)
 		return (-1);
-	if ((row[7] = ft_strdup(ctime(&info.st_time))) == NULL)
+	if ((row[7] = ft_strdup(ctime(&info.st_mtime))) == NULL)
 		return (-1);
 	row[7][16] = 0;
 	return (0);
@@ -55,7 +55,7 @@ int get_row_3(char *elem, char **row)
 			link_contents[i++] = 0;
 		if (readlink(elem, link_contents, 100) == -1)
 			return (-1);
-		if ((row[8] = ft_strjoin3(elem + i_name, " -> ", link_contents))
+		if ((row[8] = strjoin3(elem + i_name, " -> ", link_contents))
 		== NULL)
 			return (-1);
 	}

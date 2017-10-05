@@ -7,11 +7,12 @@ void	ls_params(char **params, int nb_params, t_options options)
 	int		i;
 	int		first;
 
-	elems = get_files(params, nb_params, &nb_elems);
-	print_elems(elems, nb_elems, options);
-	free_elems(elems, nb_elems);
+	if ((elems = get_files(params, nb_params, &nb_elems)) != NULL)
+		print_elems(elems, nb_elems, options);
+	free(elems);
 	first = (nb_elems == 0);
-	elems = get_dirs(params, nb_params, &nb_elems);
+	if ((elems = get_dirs(params, nb_params, &nb_elems)) == NULL)
+		return ;
 	sort_elems(elems, nb_elems, options.t, options.r);
 	i = 0;
 	while (i < nb_elems)
@@ -23,7 +24,7 @@ void	ls_params(char **params, int nb_params, t_options options)
 			ft_printf(1, "%s:\n", elems[i]);
 		ls_dir(elems[i++], options);
 	}
-	free_elems(elems, nb_elems);
+	free(elems);
 }
 
 void	ls_dir(char *dir_name, t_options options)
