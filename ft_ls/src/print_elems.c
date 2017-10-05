@@ -47,5 +47,6 @@ int	print_elems_l(char **elems, int nb_elems)
 		i++;
 	}
 	print_table(table, nb_elems, widths);
+	free_table(table, nb_elems);
 	return (0);
 }
