@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ls.h                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/06 15:54:00 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/10/06 16:00:30 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef LS_H
 # define LS_H
 
@@ -7,13 +19,14 @@
 # include "grp.h"
 # include "time.h"
 # include "libft/libft.h"
+# include "sys/types.h"
 
 typedef struct	s_options
 {
 	int a;
 	int l;
 	int r;
-	int R;
+	int rr;
 	int t;
 }				t_options;
 
@@ -31,8 +44,8 @@ void			print_non_existent(char **params, int nb_params);
 
 char			**get_files(char **params, int nb_params, int *nb_files);
 char			**get_dirs(char **params, int nb_params, int *nb_dirs);
-int				get_nb_elems(char *dir_name, int _a);
-char			**get_elems(char *dir_name, int nb_elems, int _a);
+int				get_nb_elems(char *dir_name, int a);
+char			**get_elems(char *dir_name, int nb_elems, int a);
 void			free_elems(char **elems, int nb_elems);
 
 int				print_elems(char **elems, int nb_elems, t_options options);
@@ -52,9 +65,9 @@ int				get_row_1(struct stat info, char **row);
 int				get_row_2(struct stat info, char **row);
 int				get_row_3(char *elem, char **row);
 
-void			sort_elems(char **elems, int nb_elems, int _t, int _r);
+void			sort_elems(char **elems, int nb_elems, int t, int r);
 void			sort_elems_2(char **elems, int nb_elems,
-					int (*is_lower)(char *elem1, char *elem2), int _r);
+					int (*is_lower)(char *elem1, char *elem2), int r);
 int				is_lower_name(char *elem1, char *elem2);
 int				is_lower_mtime(char *elem1, char *elem2);
 int				strcmp_ls(const char *s1, const char *s2);

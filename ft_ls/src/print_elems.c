@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_elems.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/06 15:54:20 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/10/06 15:56:07 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ls.h"
 
 int	print_elems(char **elems, int nb_elems, t_options options)
@@ -25,7 +37,6 @@ int	print_elems(char **elems, int nb_elems, t_options options)
 	}
 	return (0);
 }
-
 
 int	print_elems_l(char **elems, int nb_elems)
 {

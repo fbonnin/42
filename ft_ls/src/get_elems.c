@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_elems.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/06 15:53:37 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/10/06 15:58:04 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ls.h"
 
 char	**get_files(char **params, int nb_params, int *nb_files)
@@ -54,7 +66,7 @@ char	**get_dirs(char **params, int nb_params, int *nb_dirs)
 	return (dirs);
 }
 
-int		get_nb_elems(char *dir_name, int _a)
+int		get_nb_elems(char *dir_name, int a)
 {
 	int				result;
 	DIR				*dir;
@@ -65,7 +77,7 @@ int		get_nb_elems(char *dir_name, int _a)
 	dirent = readdir(dir);
 	while (dirent != NULL)
 	{
-		if (dirent->d_name[0] != '.' || _a)
+		if (dirent->d_name[0] != '.' || a)
 			result++;
 		dirent = readdir(dir);
 	}
@@ -73,7 +85,7 @@ int		get_nb_elems(char *dir_name, int _a)
 	return (result);
 }
 
-char	**get_elems(char *dir_name, int nb_elems, int _a)
+char	**get_elems(char *dir_name, int nb_elems, int a)
 {
 	char			**elems;
 	int				i;
@@ -86,7 +98,7 @@ char	**get_elems(char *dir_name, int nb_elems, int _a)
 	dirent = readdir(dir);
 	while (dirent != NULL && i < nb_elems)
 	{
-		if (dirent->d_name[0] != '.' || _a)
+		if (dirent->d_name[0] != '.' || a)
 		{
 			elems[i] = strjoin3(dir_name, "/", dirent->d_name);
 			i++;

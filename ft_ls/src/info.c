@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   info.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/06 15:53:47 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/10/06 15:57:05 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ls.h"
 
-char get_type(struct stat info)
+char	get_type(struct stat info)
 {
 	int m;
 
@@ -22,7 +34,7 @@ char get_type(struct stat info)
 	return ('E');
 }
 
-void get_rights(struct stat info, char *rights)
+void	get_rights(struct stat info, char *rights)
 {
 	int m;
 

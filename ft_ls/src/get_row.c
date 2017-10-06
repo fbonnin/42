@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_row.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/06 15:53:42 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/10/06 15:59:01 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ls.h"
 
 int	get_row_1(struct stat info, char **row)
@@ -39,7 +51,7 @@ int	get_row_2(struct stat info, char **row)
 	return (0);
 }
 
-int get_row_3(char *elem, char **row)
+int	get_row_3(char *elem, char **row)
 {
 	int		i_name;
 	char	link_contents[101];

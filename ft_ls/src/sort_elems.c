@@ -1,16 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_elems.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/06 15:51:23 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/10/06 16:03:00 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ls.h"
 
-void	sort_elems(char **elems, int nb_elems, int _t, int _r)
+void	sort_elems(char **elems, int nb_elems, int t, int r)
 {
 	sort_elems_2(elems, nb_elems, is_lower_name, 0);
-	if (_t)
-		sort_elems_2(elems, nb_elems, is_lower_mtime, _r);
+	if (t)
+		sort_elems_2(elems, nb_elems, is_lower_mtime, r);
 	else
-		sort_elems_2(elems, nb_elems, is_lower_name, _r);
+		sort_elems_2(elems, nb_elems, is_lower_name, r);
 }
 
 void	sort_elems_2(char **elems, int nb_elems,
-int (*is_lower)(char *elem1, char *elem2), int _r)
+int (*is_lower)(char *elem1, char *elem2), int r)
 {
 	int		i;
 	int		j;
@@ -21,8 +33,8 @@ int (*is_lower)(char *elem1, char *elem2), int _r)
 	{
 		j = i;
 		while (j > 0 && (
-		(!_r && is_lower(elems[j], elems[j - 1])) ||
-		(_r && is_lower(elems[j - 1], elems[j]))))
+		(!r && is_lower(elems[j], elems[j - 1])) ||
+		(r && is_lower(elems[j - 1], elems[j]))))
 		{
 			elem = elems[j - 1];
 			elems[j - 1] = elems[j];
@@ -44,10 +56,6 @@ int		is_lower_name(char *elem1, char *elem2)
 	i2 = ft_strlen(elem2);
 	while (i2 > 0 && elem2[i2 - 1] != '/')
 		i2--;
-	if (elem1[i1] == '.')
-		i1++;
-	if (elem2[i2] == '.')
-		i2++;
 	return (ft_strcmp(elem1 + i1, elem2 + i2) < 0);
 }
 
@@ -55,12 +63,13 @@ int		is_lower_mtime(char *elem1, char *elem2)
 {
 	struct stat info1;
 	struct stat info2;
+
 	lstat(elem1, &info1);
 	lstat(elem2, &info2);
 	return (info1.st_mtime > info2.st_mtime);
 }
 
-int	strcmp_ls(const char *s1, const char *s2)
+int		strcmp_ls(const char *s1, const char *s2)
 {
 	int i;
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ls.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/06 15:53:52 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/10/06 16:02:26 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ls.h"
 
 void	ls_params(char **params, int nb_params, t_options options)
@@ -21,7 +33,7 @@ void	ls_params(char **params, int nb_params, t_options options)
 		if (!first)
 			ft_printf(1, "\n");
 		first = 0;
-		if (nb_params > 1 && !options.R)
+		if (nb_params > 1 && !options.rr)
 			ft_printf(1, "%s:\n", elems[i]);
 		ls_dir(elems[i++], options);
 	}
@@ -55,14 +67,14 @@ void	ls_dir(char *dir_name, t_options options)
 		return ;
 	}
 	closedir(dir);
-	if (options.R)
+	if (options.rr)
 		ft_printf(1, "%s:\n", dir_name);
 	nb_elems = get_nb_elems(dir_name, options.a);
 	elems = get_elems(dir_name, nb_elems, options.a);
 	if (options.l)
 		ft_printf(1, "total %d\n", get_nb_blocks(elems, nb_elems));
 	print_elems(elems, nb_elems, options);
-	if (options.R)
+	if (options.rr)
 		ls_subdirs(options, elems, nb_elems);
 	free_elems(elems, nb_elems);
 }

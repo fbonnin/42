@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/10/06 15:54:09 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/10/06 16:01:00 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ls.h"
 
 int		main(int ac, char **av)
@@ -36,7 +48,7 @@ int		init_ls(int ac, char ***params, int *nb_params, t_options *options)
 	options->a = 0;
 	options->l = 0;
 	options->r = 0;
-	options->R = 0;
+	options->rr = 0;
 	options->t = 0;
 	return (0);
 }
@@ -69,7 +81,7 @@ int		parse_option(t_options *options, char option)
 	else if (option == 'r')
 		options->r = 1;
 	else if (option == 'R')
-		options->R = 1;
+		options->rr = 1;
 	else if (option == 't')
 		options->t = 1;
 	else
