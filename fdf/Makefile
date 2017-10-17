@@ -6,7 +6,7 @@
 #    By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/18 13:48:13 by fbonnin           #+#    #+#              #
-#    Updated: 2017/05/18 13:48:55 by fbonnin          ###   ########.fr        #
+#    Updated: 2017/10/17 11:31:01 by fbonnin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,22 +22,22 @@ calculations2 \
 draw_result \
 mlx
 
-O_FILES = $(addsuffix .o, $(NAMES))
+O_FILES = $(addprefix src/, $(addsuffix .o, $(NAMES)))
 
 $(NAME): $(O_FILES)
-	cd libft && make
-	gcc $(O_FILES) libft/libft.a -o $(NAME) -lmlx -framework OpenGL -framework AppKit
+	cd src/libft && make
+	gcc $(O_FILES) src/libft/libft.a -o $(NAME) -lmlx -framework OpenGL -framework AppKit
 
 all: $(NAME) $(O_FILES)
 %.o: %.c
 	gcc -c $< -o $@ -Wall -Werror -Wextra
 
 clean:
-	cd libft && make clean
+	cd src/libft && make clean
 	rm -f $(O_FILES)
 
 fclean: clean
-	cd libft && make fclean
+	cd src/libft && make fclean
 	rm -f $(NAME)
 
 re: fclean all
