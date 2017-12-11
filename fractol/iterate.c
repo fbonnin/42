@@ -33,3 +33,30 @@ int		iterate(t_s *s, t_point point)
 	}
 	return (nb_iterations);
 }
+
+t_point	cell_to_point(t_s *s, int x, int y)
+{
+	t_point point;
+
+	point.x = s->pov.x + (x - s->width / 2) * s->cell_size;
+	point.y = s->pov.y + (s->height / 2 - y) * s->cell_size;
+	return (point);
+}
+
+void	fill_grid(t_s *s)
+{
+	int x;
+	int y;
+
+	x = 0;
+	while (x < s->width)
+	{
+		y = 0;
+		while (y < s->height)
+		{
+			s->grid[y][x] = iterate(s, cell_to_point(s, x, y));
+			y++;
+		}
+		x++;
+	}
+}
