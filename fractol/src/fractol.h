@@ -18,6 +18,31 @@ typedef struct	e_type
 	burning_ship
 }				t_type;
 
+typedef struct	s_s
+{
+	void	*mlx;
+	void	*window;
+	void	*image;
+	int		**grid;
+	int		*colors;
+	int		width;
+	int		height;
+	int		mouse_x;
+	int		mouse_y;
+	t_type	type;
+	t_point	pov;
+	t_point	pov_init;
+	double	arrows_speed;
+	double	cell_size;
+	double	radius_init;
+	double	zoom_speed;
+	int		max_iterations;
+	int		max_iterations_speed;
+	int		max_iterations_max;
+	t_point	point_julia;
+	t_point	point_julia_init;
+}				t_s;
+
 int				usage(void);
 
 void			init(t_s *s);
