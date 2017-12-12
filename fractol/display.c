@@ -46,7 +46,7 @@ void	draw_fractal(t_s *s)
 void	init_display(t_s *s)
 {
 	s->pov = s->pov_init;
-	s->cell_size = s->radius_init / (s->width / 2);
+	s->cell_size = s->radius_init / (ft_min(s->width, s->height) / 2);
 	s->max_iterations = s->max_iterations_init;
 	s->point_julia = s->point_julia_init;
 	s->julia_mode = 1;

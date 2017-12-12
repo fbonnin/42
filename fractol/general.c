@@ -12,8 +12,6 @@ void	settings(t_s *s)
 	s->image = NULL;
 	s->grid = NULL;
 	s->colors = NULL;
-	s->width = 1000 + 1;
-	s->height = 1000 + 1;
 	s->mouse_x = s->width / 2;
 	s->mouse_y = s->height / 2;
 	s->pov_init.x = 0;
