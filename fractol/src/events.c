@@ -13,6 +13,18 @@ int		expose_event(t_s *s)
 	return (0);
 }
 
+int		mouse_event(int button, int x, int y, t_s *s)
+{
+	t_point mouse;
+
+	mouse = cell_to_point(s, x, y);
+	if (button == /*up*/)
+		zoom_in(s, mouse);
+	else if (button == /*down*/)
+		zoom_out(s, mouse);
+	return (0);
+}
+
 int		mouse_move_event(int x, int y, t_s *s)
 {
 	s->mouse_x = x;

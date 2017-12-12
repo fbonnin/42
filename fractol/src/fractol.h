@@ -33,6 +33,7 @@ void			init_display(t_s *s);
 
 void			manage_events(t_s *s);
 int				expose_event(t_s *s);
+int				mouse_event(int button, int x, int y, t_s *s);
 int				mouse_move_event(int x, int y, t_s *s);
 
 int				keyboard_event(int key, t_s *s);
