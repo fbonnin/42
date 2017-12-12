@@ -36,4 +36,5 @@ int		mouse_move_event(int x, int y, t_s *s)
 		s->point_julia = cell_to_point(s, x, y);
 		draw_fractal(s);
 	}
+	return (0);
 }

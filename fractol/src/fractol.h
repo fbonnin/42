@@ -25,11 +25,11 @@ typedef struct	s_s
 	void	*image;
 	int		**grid;
 	int		*colors;
+	t_type	type;
 	int		width;
 	int		height;
 	int		mouse_x;
 	int		mouse_y;
-	t_type	type;
 	t_point	pov;
 	t_point	pov_init;
 	double	arrows_speed;
@@ -41,6 +41,7 @@ typedef struct	s_s
 	int		max_iterations_max;
 	t_point	point_julia;
 	t_point	point_julia_init;
+	int		julia_mode;
 }				t_s;
 
 int				usage(void);
