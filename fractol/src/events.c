@@ -1,3 +1,5 @@
+#include "fractol.h"
+
 void	manage_events(t_s *s)
 {
 	mlx_expose_hook(s->window, expose_event, s);

@@ -1,3 +1,5 @@
+#include "fractol.h"
+
 void	init(t_s *s)
 {
 	settings(s);

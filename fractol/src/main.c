@@ -1,3 +1,5 @@
+#include "fractol.h"
+
 int	main(int ac, char **av)
 {
 	t_s s;

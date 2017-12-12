@@ -1,3 +1,5 @@
+#include "fractol.h"
+
 void	zoom_in(t_s *s, t_point mouse)
 {
 	double shift;

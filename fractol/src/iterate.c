@@ -1,3 +1,5 @@
+#include "fractol.h"
+
 t_point	formula(t_point z, t_point c)
 {
 	t_point result;

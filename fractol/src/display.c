@@ -1,3 +1,5 @@
+#include "fractol.h"
+
 void	generate_colors(t_s *s)
 {
 	int i;

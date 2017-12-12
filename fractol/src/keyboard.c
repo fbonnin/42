@@ -1,3 +1,5 @@
+#include "fractol.h"
+
 int		keyboard_event(int key, t_s *s)
 {
 	if (key == 51)
