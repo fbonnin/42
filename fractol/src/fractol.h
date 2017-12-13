@@ -36,6 +36,8 @@ typedef struct	s_s
 	double	cell_size;
 	double	radius_init;
 	double	zoom_speed;
+	int		nb_zoom;
+	int		nb_zoom_max;
 	int		max_iterations;
 	int		max_iterations_init;
 	int		max_iterations_speed;
@@ -43,6 +45,7 @@ typedef struct	s_s
 	t_point	point_julia;
 	t_point	point_julia_init;
 	int		julia_mode;
+	int		color_set;
 }				t_s;
 
 int				rgb_to_int(int r, int g, int b);
@@ -61,6 +64,7 @@ t_point			cell_to_point(t_s *s, int x, int y);
 void			fill_grid(t_s *s);
 
 void			generate_colors(t_s *s);
+void			random_change(int *c);
 void			grid_to_image(t_s *s);
 void			draw_fractal(t_s *s);
 void			init_display(t_s *s);

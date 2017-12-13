@@ -20,10 +20,18 @@ int		mouse_event(int button, int x, int y, t_s *s)
 	t_point mouse;
 
 	mouse = cell_to_point(s, x, y);
-	if (button == 5)
-		zoom_in(s, mouse);
-	else if (button == 4)
-		zoom_out(s, mouse);
+	if (button == 5 || button == 4)
+	{
+		s->nb_zoom++;
+		if (s->nb_zoom == s->nb_zoom_max)
+		{
+			s->nb_zoom = 0;
+			if (button == 5)
+				zoom_in(s, mouse);
+			else if (button == 4)
+				zoom_out(s, mouse);
+		}
+	}
 	return (0);
 }
 

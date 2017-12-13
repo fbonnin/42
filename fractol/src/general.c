@@ -21,11 +21,14 @@ void	settings(t_s *s)
 	s->arrows_speed = 0.1;
 	s->radius_init = 2;
 	s->zoom_speed = 0.9;
-	s->max_iterations_init = 10;
+	s->nb_zoom = 0;
+	s->nb_zoom_max = 1;
+	s->max_iterations_init = 50;
 	s->max_iterations_speed = 10;
-	s->max_iterations_max = 100;
+	s->max_iterations_max = 1000;
 	s->point_julia_init.x = 0;
 	s->point_julia_init.y = 0;
+	s->color_set = 0;
 }
 
 void	allocate(t_s *s)

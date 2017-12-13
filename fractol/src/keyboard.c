@@ -10,6 +10,11 @@ int		keyboard_event(int key, t_s *s)
 		change_max_iterations(key, s);
 	else if (key == 49)
 		s->julia_mode = 0;
+	else if (key == 257)
+	{
+		generate_colors(s);
+		draw_fractal(s);
+	}
 	else if (key == 53)
 		end(s);
 	return (0);

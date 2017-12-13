@@ -29,10 +29,11 @@ int	main(int ac, char **av)
 
 int	usage(void)
 {
-	ft_printf(1, "usage: ./fractol fractal_name window_width window_height\n");
+	ft_printf(1, "\nusage: ./fractol fractal_name window_width window_height\n");
 	ft_printf(1, "Available fractals :\n");
 	ft_printf(1, "m (mandelbrot)\n");
 	ft_printf(1, "j (julia)\n");
 	ft_printf(1, "b (burning ship)\n");
+	ft_printf(1, "\n");
 	return (0);
 }
