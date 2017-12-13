@@ -11,7 +11,7 @@ typedef struct	s_point
 	double y;
 }				t_point;
 
-typedef struct	e_type
+typedef enum	e_type
 {
 	mandelbrot,
 	julia,
@@ -37,12 +37,16 @@ typedef struct	s_s
 	double	radius_init;
 	double	zoom_speed;
 	int		max_iterations;
+	int		max_iterations_init;
 	int		max_iterations_speed;
 	int		max_iterations_max;
 	t_point	point_julia;
 	t_point	point_julia_init;
 	int		julia_mode;
 }				t_s;
+
+int				rgb_to_int(int r, int g, int b);
+void			put_pixel_to_image(void *image, int x, int y, int color);
 
 int				usage(void);
 

@@ -16,7 +16,7 @@ int	main(int ac, char **av)
 		return (usage());
 	s.width = ft_atoi(av[2]);
 	s.height = ft_atoi(av[3]);
-	if (s.width < 1 || s.height < 1)
+	if (s.width < 1 || s.height < 1)
 		return (usage());
 	if (s.width % 2 == 0)
 		s.width++;

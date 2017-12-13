@@ -6,7 +6,7 @@ int		keyboard_event(int key, t_s *s)
 		init_display(s);
 	else if (key >= 123 && key <= 126)
 		arrow(key, s);
-	else if (key == 69 || key == 78)
+	else if (key == 69 || key == 78)
 		change_max_iterations(key, s);
 	else if (key == 49)
 		s->julia_mode = 0;

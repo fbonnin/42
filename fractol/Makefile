@@ -1,6 +1,7 @@
 NAME = fractol
 
 NAMES = \
+mlx \
 main \
 general \
 iterate \
