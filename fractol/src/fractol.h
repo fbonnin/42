@@ -63,11 +63,14 @@ int				iterate(t_s *s, t_point point);
 t_point			cell_to_point(t_s *s, int x, int y);
 void			fill_grid(t_s *s);
 
-void			generate_colors(t_s *s);
-void			random_change(int *c);
 void			grid_to_image(t_s *s);
 void			draw_fractal(t_s *s);
 void			init_display(t_s *s);
+
+void			generate_colors(t_s *s);
+void			generate_colors_2(t_s *s);
+void			move_c(t_s *s, int i, int *c, int i_c);
+int				random_bit(t_s *s, int i, int i_c);
 
 void			manage_events(t_s *s);
 int				expose_event(t_s *s);

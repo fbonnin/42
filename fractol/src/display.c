@@ -1,6 +1,6 @@
 #include "fractol.h"
 
-void	generate_colors(t_s *s)
+/*void	generate_colors(t_s *s)
 {
 	int i;
 	int r;
@@ -31,26 +31,6 @@ void	generate_colors(t_s *s)
 		i++;
 	}
 	s->color_set = (s->color_set + 1) % 7;
-}
-
-/*void	generate_colors(t_s *s)
-{
-	int i;
-	int c;
-	int variation;
-
-	i = 0;
-	c = 0;
-	while (i <= s->max_iterations_max)
-	{
-		s->colors[i] = rgb_to_int(c, c, c);
-		if (c == 0)
-			variation = 1;
-		else if (c == 255)
-			variation = -1;
-		c += variation;
-		i++;
-	}
 }*/
 
 void	grid_to_image(t_s *s)

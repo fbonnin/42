@@ -6,6 +6,7 @@ main \
 general \
 iterate \
 display \
+colors \
 events \
 keyboard \
 zoom
