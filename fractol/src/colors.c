@@ -7,7 +7,7 @@ void	generate_colors(t_s *s)
 	int variation;
 
 	i = 0;
-	c = 0;
+	c = 128;
 	variation = 1;
 	while (i <= s->max_iterations_max)
 	{
