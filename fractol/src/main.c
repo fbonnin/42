@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/12/15 18:53:13 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/12/15 18:54:11 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
 int	main(int ac, char **av)
@@ -29,7 +41,8 @@ int	main(int ac, char **av)
 
 int	usage(void)
 {
-	ft_printf(1, "\nusage: ./fractol fractal_name window_width window_height\n");
+	ft_printf(1,
+	"\nusage: ./fractol fractal_name window_width window_height\n");
 	ft_printf(1, "Available fractals :\n");
 	ft_printf(1, "m (mandelbrot)\n");
 	ft_printf(1, "j (julia)\n");

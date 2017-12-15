@@ -1,37 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   display.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/12/15 18:52:24 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/12/15 18:52:27 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
-
-/*void	generate_colors(t_s *s)
-{
-	int i;
-	int r;
-	int g;
-	int b;
-	int pas;
-
-	i = 0;
-	r = 128;
-	g = 128;
-	b = 128;
-	pas = 7;
-	while (i <= s->max_iterations_max)
-	{
-		s->colors[i] = rgb_to_int(r, g, b);
-		if (r < 255 && (int)(cos(i * 3) * 1000 * pow(10, s->color_set)) % 2 == 0)
-			r += pas;
-		else if (r > 0)
-			r -= pas;
-		if (g < 255 && (int)(cos(i * 3 + 1) * 1000 * pow(10, s->color_set)) % 2 == 0)
-			g += pas;
-		else if (g > 0)
-			g -= pas;
-		if (b < 255 && (int)(cos(i * 3 + 2) * 1000 * pow(10, s->color_set)) % 2 == 0)
-			b += pas;
-		else if (b > 0)
-			b -= pas;
-		i++;
-	}
-	s->color_set = (s->color_set + 1) % 7;
-}*/
 
 void	grid_to_image(t_s *s)
 {

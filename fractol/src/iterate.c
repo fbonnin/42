@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   iterate.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbonnin <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/12/15 18:52:55 by fbonnin           #+#    #+#             */
+/*   Updated: 2017/12/15 18:55:16 by fbonnin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
 t_point	formula(t_point z, t_point c)
@@ -23,7 +35,7 @@ int		iterate(t_s *s, t_point point)
 	c = point;
 	if (s->type == julia)
 		c = s->point_julia;
-	while (z.x * z.x + z.y * z.y < 4 && nb_iterations <  s->max_iterations)
+	while (z.x * z.x + z.y * z.y < 4 && nb_iterations < s->max_iterations)
 	{
 		if (s->type == burning_ship)
 		{
