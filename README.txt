@@ -11,7 +11,7 @@ PROJET PUSH_SWAP:
 Trier des nombres avec deux piles et un jeu d'instructions limité. Différents algorithmes de tri sont implementes, dont le tri fusion.
 
 PROJET LEM_IN:
-Trouver la manière la plus rapide de déplacer N véhicules dans un graphe depuis un noeud de départ jusqu'à un noeud d'arrivée en prenant en compte les éventuels embouteillages. L'implémentation utilise des parcours en largeur successifs (Dijkstra), en prenant en compte les retards dus aux embouteillages.
+Trouver la manière la plus rapide de déplacer N véhicules dans un graphe depuis un noeud de départ jusqu'à un noeud d'arrivée en prenant en compte les éventuels embouteillages. Pour chaque vehicule, on realise un parcours en largeur (Dijkstra) pour trouver les plus court chemin, en tenant compte des retards provoques par le passage des vehicules precedents.
 
 PROJET FILLIT:
 2 contributeurs
