@@ -10,7 +10,7 @@ Remarque 2 : A 42 il n'est en général pas autorisé d'utiliser des fonctions q
 
 LIBFT:
 Réalisé seul.
-Bibliothèque de fonctions variées réutilisables sur plusieurs projets. Elle est enrichie tout au long du parcours à 42. Elle comporte par exemple la fonction printf qu'il faut recoder.
+Bibliothèque de fonctions variées réutilisables sur plusieurs projets. Elle est enrichie tout au long du parcours à 42. Elle comporte par exemple une imitation de la fonction printf.
 
 
 PROJETS D'ALGORITHMIQUE
