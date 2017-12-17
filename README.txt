@@ -2,16 +2,16 @@ Projets C realises par Florent Bonnin à l'école 42 depuis avril 2017.
 
 
 PROJET LIBFT:
-Bibliothèque de fonctions variées réutilisables dans plusieurs projets, comme la fonction printf. Elle est enrichie tout au long du parcours à 42.
+Bibliothèque de fonctions variées réutilisables dans plusieurs projets. On y trouve une imitation de la fonction printf. La Libft est enrichie tout au long du parcours à 42.
 
 
 PROJETS D'ALGORITHMIQUE:
 
 PROJET PUSH_SWAP:
-Trier des nombres avec deux piles et un jeu d'instructions limité. Différents algorithmes de tri sont utilisés, dont le tri par fusion.
+Trier des nombres avec deux piles et un jeu d'instructions limité. Différents algorithmes de tri sont utilisés, dont le tri fusion.
 
 PROJET LEM_IN:
-Trouver la manière la plus rapide de déplacer N véhicules dans un graphe depuis un noeud de départ jusqu'à un noeud d'arrivée en prenant en compte les éventuels embouteillages. L'implémentation utilise des parcours en largeur successifs (Dijkstra) et en prenant en compte les retards dus aux embouteillages.
+Trouver la manière la plus rapide de déplacer N véhicules dans un graphe depuis un noeud de départ jusqu'à un noeud d'arrivée en prenant en compte les éventuels embouteillages. L'implémentation utilise des parcours en largeur successifs (Dijkstra), en prenant en compte les retards dus aux embouteillages.
 
 PROJET FILLIT:
 2 contributeurs
@@ -25,7 +25,7 @@ Corewar est un jeu dans lequel des programmes s'affrontent dans une arène virtu
 PROJETS D'ENVIRONNEMENT UNIX:
 
 PROJET LS:
-Imitation de la commande unix. Ce projet permet de comprendre en détail le système de fichiers. Il nécessite de lire attentivement la documentation des fonctions de manipulation du système de fichiers. Il faut pouvoir parcourir récursivement un répertoire et ses sous-répertoires.
+Imitation de la commande unix. Parcours recursif d'un repertoire et de ses sous-repertoires. Ce projet permet de comprendre en détail le système de fichiers et sa manipulation par des fonctions standards.
 
 
 PROJETS DE GRAPHISME:
@@ -33,10 +33,10 @@ PROJETS DE GRAPHISME:
 Les projets de graphisme sont realises avec une bibliotheque graphique fournie par l'ecole : la miniLibX. Ils ne peuvent etre compiles qu'a l'ecole.
 
 PROJET FDF:
-Rendu 3D d'un terrain en relief en représentation fil de fer (points reliés par des segments). Réalisation d'une perspective parallèle. La lecture de la documentation de la miniLibX est indispensable.
+Rendu 3D d'un terrain en relief en représentation fil de fer (points reliés par des segments). Réalisation d'une perspective parallèle. Apprentissage d'une bibliotheque graphique bas niveau..
 
 PROJET FRACTOL:
-Logiciel d'exploration de fractales : Mandelbrot, Julia, Burning Ship. Gestion des evenements clavier et souris. Possibilite de zoomer et de se deplacer dans le plan.
+Logiciel d'exploration de fractales : Mandelbrot, Julia, Burning Ship. Gestion des evenements clavier et souris. Possibilite de zoomer et de se deplacer dans le plan. Gestion des couleurs.
 
 
 Remarques:
