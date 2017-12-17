@@ -39,7 +39,7 @@ Les projets de graphisme sont réalisés avec une bibliothèque graphique bas ni
 Rendu 3D d'un terrain en relief en représentation fil de fer (points reliés par des segments). Projection parallèle.
 
 <h3>fractol</h3>
-Logiciel d'exploration de fractales (Mandelbrot, Julia, Burning Ship) avec possibilité de se déplacer dans le plan et de zoomer/dézoomer. Gestion des évènements clavier et souris.
+Logiciel d'exploration de fractales (Mandelbrot, Julia et Burning Ship) avec possibilité de se déplacer dans le plan et de zoomer/dézoomer. Gestion des évènements clavier et souris.
 
 
 <h2>Infos complémentaires</h2>
