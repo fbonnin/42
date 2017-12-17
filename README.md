@@ -20,7 +20,7 @@ Trouver la manière la plus rapide de déplacer N véhicules dans un graphe depu
 <p><em>projet de groupe : 2 personnes</em></p>
 
 <h3>corewar</h3>
-<p>Corewar est un jeu dans lequel des programmes s'affrontent dans une arène virtuelle. L'arène est une mémoire circulaire dans laquelle sont placées les instructions des différents programmes. Les programmes sont exécutés en parallèle dans le même espace mémoire. Ils ont donc la possibilité de s'écrire les uns sur les autres, donnant ansi au jeu une grande  complexité. Le projet consiste à coder d'une part une machine virtuelle capable d'exécuter les programmes, et d'autre part un programme assembleur capable de compiler un code écrit dans un langage type assembleur en bytecode compréhensible par la machine virtuelle.
+<p>Corewar est un jeu dans lequel des programmes s'affrontent dans une arène virtuelle. L'arène est une mémoire circulaire dans laquelle sont placées les instructions des différents programmes. Les programmes sont exécutés en parallèle dans le même espace mémoire. Ils ont donc la possibilité de s'écrire les uns sur les autres, donnant ansi au jeu une grande  complexité. Le projet consiste à coder d'une part une machine virtuelle capable d'exécuter les programmes, et d'autre part un programme assembleur capable de compiler un code, écrit dans un langage type assembleur, en bytecode compréhensible par la machine virtuelle.
 </p>
 <p><em>projet de groupe : 3 personnes</em></p>
 
