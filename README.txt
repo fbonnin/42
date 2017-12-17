@@ -11,7 +11,7 @@ Réalisé seul.
 Bibliothèque de fonctions variées destinée à faciliter la réalisation des autres projets. Elle est enrichie tout au long du parcours à 42.
 
 
-PROJETS D'ALGORITHMIQUE
+Projets d'algorithmique
 
 PUSH_SWAP:
 Réalisé seul.
