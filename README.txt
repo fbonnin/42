@@ -9,11 +9,9 @@ Bibliothèque de fonctions variées réutilisables sur plusieurs projets, comme 
 PROJETS D'ALGORITHMIQUE:
 
 PROJET PUSH_SWAP:
-Réalisé seul.
 Trier des nombres avec deux piles et un jeu d'instructions limité. Différents algorithmes de tri sont utilisés, dont le tri par fusion.
 
 PROJET LEM_IN:
-Réalisé seul.
 Trouver la manière la plus rapide de déplacer N véhicules dans un graphe depuis un noeud de départ jusqu'à un noeud d'arrivée en prenant en compte les éventuels embouteillages. L'implémentation utilise des parcours en largeur successifs (Dijkstra) et en prenant en compte les retards dus aux embouteillages.
 
 PROJET FILLIT:
@@ -28,7 +26,6 @@ Corewar est un jeu dans lequel des programmes s'affrontent dans une arène virtu
 PROJETS D'ENVIRONNEMENT UNIX:
 
 PROJET LS:
-Réalisé seul.
 Imitation de la commande unix. Ce projet permet de comprendre en détail le système de fichiers. Il nécessite de lire attentivement la documentation des fonctions de manipulation du système de fichiers. Il faut pouvoir parcourir récursivement un répertoire et ses sous-répertoires.
 
 
@@ -37,14 +34,16 @@ PROJETS DE GRAPHISME:
 Les projets de graphisme sont realises avec une bibliotheque graphique fournie par l'ecole : la miniLibX. Ils ne peuvent etre compiles qu'a l'ecole.
 
 PROJET FDF:
-Réalisé seul.
 Rendu 3D d'un terrain en relief en représentation fil de fer (points reliés par des segments). Réalisation d'une perspective parallèle. La lecture de la documentation de la miniLibX est indispensable.
 
 PROJET FRACTOL:
-Realise seul.
-Logiciel d'exploration de fractales : Mandelbrot, Julia, Burning Ship. Gestion des evenements clavier et souris. Parmis les fonctionnalites implementees, on trouve le zoom avec a molette de la souris et le deplacement dans le plan avec les fleches du clavier.
+Logiciel d'exploration de fractales : Mandelbrot, Julia, Burning Ship. Gestion des evenements clavier et souris. Possibilite de zoomer et de se deplacer dans le plan.
 
 
-Remarque 1 : Chaque projet a un sujet au format pdf.
+Remarques:
 
-Remarque 2 : A 42 il est en général interdit d'utiliser des fonctions que l'on n'a pas codées soit-même. L'utilisation de la bibliothèque standard n'est pas permise.
+1. Chaque projet a un sujet au format pdf.
+
+2. A 42 il est en général interdit d'utiliser des fonctions que l'on n'a pas codées soit-même. L'utilisation de la bibliothèque standard n'est pas permise.
+
+3. Si le nombre de personnes ayant contribue au projet n'est pas specifie, c'est qu'il s'agit d'un projet solo.
