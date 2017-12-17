@@ -42,8 +42,8 @@ Logiciel d'exploration de fractales (Mandelbrot, Julia, Burning Ship) avec possi
 
 <h2>Infos complémentaires</h2>
 
-1. Chaque projet a un sujet au format pdf.
+1. Si le nombre de contributeurs n'est pas specifié, c'est qu'il s'agit d'un projet solo.
 
-2. A 42 il est généralement interdit d'utiliser des fonctions que l'on n'a pas codées soit-même. L'utilisation de la bibliothèque standard n'est pas permise.
+2. Chaque projet a un sujet au format pdf.
 
-3. Si le nombre de contributeurs n'est pas specifié, c'est qu'il s'agit d'un projet solo.
+3. A 42, il est généralement interdit d'utiliser des fonctions que l'on n'a pas codées soit-même. L'utilisation de la bibliothèque standard n'est pas permise.
