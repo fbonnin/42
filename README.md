@@ -5,7 +5,7 @@
 Bibliothèque de fonctions variées réutilisables dans plusieurs projets. On y trouve une imitation de la fonction printf. La Libft est enrichie tout au long du cursus à 42.
 
 
-PROJETS D'ALGORITHMIQUE:
+<h2>PROJETS D'ALGORITHMIQUE:</h2>
 
 PROJET PUSH_SWAP:
 Trier des nombres avec deux piles et un jeu d'instructions limité. Différents algorithmes de tri sont implémentés, dont le tri fusion. Leurs performances sont évaluées à la correction.
