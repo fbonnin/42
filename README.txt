@@ -25,7 +25,7 @@ Agencer des pièces de forme variable pour former une carré de taille minimale.
 
 PROJET COREWAR:
 Réalisé à 3 personnes.
-Corewar est un jeu dans lequel des programmes s'affrontent dans une arène virtuelle. L'arène est constituée d'une mémoire circulaire dans laquelle sont placées les instructions des différents programmes. Les programmes étant exécutés parallèlement dans le même espace mémoire, ils ont la possibilité de s'écrire les uns sur les autres, donnant ansi au jeu une grande  complexité. Le projet consiste àcoder d'une part une machine virtuelle permettant à la partie de se déouler, et d'autre part un assembleur capable de compiler un programme écrit dans un langage type assembleur en bytecode compréhensible par la machine virtuelle.
+Corewar est un jeu dans lequel des programmes s'affrontent dans une arène virtuelle. L'arène est constituée d'une mémoire circulaire dans laquelle sont placées les instructions des différents programmes. Les programmes étant exécutés parallèlement dans le même espace mémoire, ils ont la possibilité de s'écrire les uns sur les autres, donnant ansi au jeu une grande  complexité. Le projet consiste à coder d'une part une machine virtuelle permettant à la partie de se dérouler, et d'autre part un assembleur capable de compiler un programme écrit dans un langage type assembleur en bytecode compréhensible par la machine virtuelle.
 
 
 PROJETS D'ENVIRONNEMENT UNIX:
@@ -37,9 +37,11 @@ Imitation de la commande unix. Ce projet permet de comprendre en détail le syst
 
 PROJETS DE GRAPHISME:
 
+Les projets de graphisme sont realises avec une bibliotheque graphique fournie par l'ecole : la miniLibX. Ils ne peuvent etre compiles qu'a l'ecole.
+
 PROJET FDF:
 Réalisé seul.
-Rendu 3D d'un terrain en relief en représentation fil de fer (points reliés par des segments). Réalisation d'une perspective parallèle.
+Rendu 3D d'un terrain en relief en représentation fil de fer (points reliés par des segments). Réalisation d'une perspective parallèle. La lecture de la documentation de la miniLibX est indispensable.
 
 
 Remarque 1 : Chaque projet a un sujet au format pdf.
