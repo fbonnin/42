@@ -1,7 +1,7 @@
 <h1>Projets réalisés en C par Florent Bonnin à l'école 42 depuis avril 2017.</h1>
 
 
-PROJET LIBFT:
+<h3>Libft</h3>
 Bibliothèque de fonctions variées réutilisables dans plusieurs projets. On y trouve une imitation de la fonction printf. La Libft est enrichie tout au long du cursus à 42.
 
 
