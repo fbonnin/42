@@ -1,16 +1,16 @@
-Projets réalisés par Florent Bonnin à l'école 42 depuis avril 2017.
+Projets C realises par Florent Bonnin à l'école 42 depuis avril 2017.
 
 
 PROJET LIBFT:
 Réalisé seul.
-Bibliothèque de fonctions variées réutilisables sur plusieurs projets. Elle est enrichie tout au long du parcours à 42. Elle comporte par exemple une imitation de la fonction printf.
+Bibliothèque de fonctions variées réutilisables sur plusieurs projets, comme la fonction printf. Elle est enrichie tout au long du parcours à 42.
 
 
 PROJETS D'ALGORITHMIQUE:
 
 PROJET PUSH_SWAP:
 Réalisé seul.
-Trier des nombres avec deux piles et un jeu d'instructions limité. Différents algorithmes de tri sont utilisés, dont le tri par fusion, qui doit être adapté pour trier avec deux piles.
+Trier des nombres avec deux piles et un jeu d'instructions limité. Différents algorithmes de tri sont utilisés, dont le tri par fusion.
 
 PROJET LEM_IN:
 Réalisé seul.
@@ -18,7 +18,7 @@ Trouver la manière la plus rapide de déplacer N véhicules dans un graphe depu
 
 PROJET FILLIT:
 Réalisé à 2 personnes.
-Agencer des pièces de forme variable pour former une carré de taille minimale. Un algorithme de Backtracking (retour sur trace) est utilisé. S'il est impossible de former un carré de taille N, on tente de former un carré de taille N + 1, et ainsi de suite.
+Agencer des pièces de forme variable pour former un carré de taille minimale. Un algorithme de backtracking (retour sur trace) est utilisé. S'il est impossible de former un carré de taille N, on tente de former un carré de taille N + 1, et ainsi de suite.
 
 PROJET COREWAR:
 Réalisé à 3 personnes.
@@ -29,7 +29,7 @@ PROJETS D'ENVIRONNEMENT UNIX:
 
 PROJET LS:
 Réalisé seul.
-Imitation de la commande unix. Ce projet permet de comprendre en détail le système de fichiers. Il nécessite de lire attentivement la documentation des fonctions d'exploration du système de fichiers. Il faut pouvoir parcourir récursivement un répertoire et ses sous-répertoires.
+Imitation de la commande unix. Ce projet permet de comprendre en détail le système de fichiers. Il nécessite de lire attentivement la documentation des fonctions de manipulation du système de fichiers. Il faut pouvoir parcourir récursivement un répertoire et ses sous-répertoires.
 
 
 PROJETS DE GRAPHISME:
