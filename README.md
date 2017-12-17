@@ -42,7 +42,7 @@ Logiciel d'exploration de fractales (Mandelbrot, Julia, Burning Ship) avec possi
 
 <h2>Infos complémentaires</h2>
 
-1. Si le nombre de contributeurs n'est pas specifié, c'est qu'il s'agit d'un projet solo.
+1. Si le nombre de contributeurs n'est pas précisé, c'est qu'il s'agit d'un projet solo.
 
 2. Chaque projet a un sujet au format pdf.
 
