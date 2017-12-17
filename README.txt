@@ -43,7 +43,11 @@ PROJET FDF:
 Réalisé seul.
 Rendu 3D d'un terrain en relief en représentation fil de fer (points reliés par des segments). Réalisation d'une perspective parallèle. La lecture de la documentation de la miniLibX est indispensable.
 
+PROJET FRACTOL:
+Realise seul.
+Logiciel d'exploration de fractales : Mandelbrot, Julia, Burning Ship. Gestion des evenements clavier et souris. Parmis les fonctionnalites implementees, on trouve le zoom avec a molette de la souris et le deplacement dans le plan avec les fleches du clavier.
+
 
 Remarque 1 : Chaque projet a un sujet au format pdf.
 
-Remarque 2 : A 42 il est en général interdit d'utiliser des fonctions que l'on a pas codées soit-même. L'utilisation de la bibliothèque standard n'est pas permise.
+Remarque 2 : A 42 il est en général interdit d'utiliser des fonctions que l'on n'a pas codées soit-même. L'utilisation de la bibliothèque standard n'est pas permise.
