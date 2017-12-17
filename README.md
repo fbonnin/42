@@ -10,9 +10,11 @@ Bibliothèque de fonctions variées réutilisables dans plusieurs projets. On y 
 
 <h3>push_swap</h3>
 Trier des nombres avec deux piles et un jeu d'instructions limité. Différents algorithmes de tri sont implémentés, dont le tri fusion. Leurs performances sont évaluées à la correction.
+<br>
 
 <h3>lem-in</h3>
 Trouver la manière la plus rapide de déplacer N véhicules dans un graphe depuis un noeud de départ jusqu'à un noeud d'arrivée, en prenant en compte les éventuels embouteillages. Pour chaque véhicule, on effectue un parcours en largeur (Dijkstra) pour trouver le plus court chemin, en prenant en compte les retards provoqués par le passage des véhicules précédents. Par exemple, si un chemin est très fréquenté, il ne constitue plus un bon itinéraire.
+<br>
 
 <h3>fillit</h3>
 Problème d'optimisation. Agencer des pièces de formes variables pour former un carré de taille minimale. Un algorithme de backtracking (retour sur trace) est utilisé. S'il est impossible de former un carré de taille N, on tente de former un carré de taille N + 1, et ainsi de suite.
