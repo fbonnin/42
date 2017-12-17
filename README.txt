@@ -29,18 +29,18 @@ Agencer des pièces de forme variable pour former une carré de taille minimale.
 
 COREWAR:
 Réalisé à 3 personnes.
-Corewar est un jeu dans lequel des programmes s'affrontent dans une arène virtuelle. L'arène est constituée d'une mémoire circulaire dans laquelle sont placées les instructions des différents programmes. Les programmes étant exécutés parallèlement dans le même espace mémoire, ils ont la possibilité de s'écrire les uns sur les autres, donnant ansi au jeu une grande  complexité. Le projet consiste d'une part à coder une machine virtuelle permettant à la partie de se dérouler, et d'autre part un programme qui compile un programme écrit dans un langage type assembleur en bytecode compréhensible par la machine virtuelle.
+Corewar est un jeu dans lequel des programmes s'affrontent dans une arène virtuelle. L'arène est constituée d'une mémoire circulaire dans laquelle sont placées les instructions des différents programmes. Les programmes étant exécutés parallèlement dans le même espace mémoire, ils ont la possibilité de s'écrire les uns sur les autres, donnant ansi au jeu une grande  complexité. Le projet consiste àcoder d'une part une machine virtuelle permettant à la partie de se déouler, et d'autre part un assembleur capable de compiler un programme écrit dans un langage type assembleur en bytecode compréhensible par la machine virtuelle.
 
 
 PROJETS D'ENVIRONNEMENT UNIX
 
 LS:
 Réalisé seul.
-Imitation de la commande unix. Ce projet de comprendre en détail le système de fichiers. Il nécessite de lire attentivement la documentation des fonctions de navigation dans le système de fichiers. Il est nécessaire d'implémenter un algorithme pour parcourir récursivement un répertoire et ses sous-répertoires.
+Imitation de la commande unix. Ce projet permet de comprendre en détail le système de fichiers. Il nécessite de lire attentivement la documentation des fonctions d'exploration du système de fichiers. Il faut pouvoir parcourir récursivement un répertoire et ses sous-répertoires.
 
 
 PROJETS DE GRAPHISME
 
 FDF:
 Réalisé seul.
-Rendu 3D d'un terrain en relief en représentation fil de fer (points reliés par des segments). Une perspective parallèle est réalisée.
+Rendu 3D d'un terrain en relief en représentation fil de fer (points reliés par des segments). Réalisation d'une perspective parallèle.
