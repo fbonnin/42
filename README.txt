@@ -1,7 +1,7 @@
 Projets réalisés par Florent Bonnin à l'école 42 depuis avril 2017.
 
 
-Présentation des différents projets :
+Présentation :
 
 Remarque 1 : Chaque projet a un sujet au format pdf.
 
