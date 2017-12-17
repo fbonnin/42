@@ -35,7 +35,7 @@ Les projets de graphisme sont réalisés avec une bibliothèque graphique bas ni
 <h3>fdf</h3>
 Rendu 3D d'un terrain en relief en représentation fil de fer (points reliés par des segments). Réalisation d'une perspective parallèle.
 
-<h3>fractol</h3>:
+<h3>fractol</h3>
 Logiciel d'exploration de fractales (Mandelbrot, Julia, Burning Ship) avec possibilité de se déplacer dans plan et de zoomer/dézoomer. Gestion des évènements clavier et souris.
 
 
