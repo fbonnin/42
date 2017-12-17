@@ -28,18 +28,18 @@ Corewar est un jeu dans lequel des programmes s'affrontent dans une arène virtu
 Imitation de la commande unix ls. Parcours récursif d'un répertoire et de ses sous-répertoires. Ce projet permet de comprendre en détail le système de fichiers et sa manipulation avec des fonctions standards.
 
 
-PROJETS DE GRAPHISME:
+<h2>Projets de Graphisme</h2>
 
 Les projets de graphisme sont réalisés avec une bibliothèque graphique bas niveau fournie par l'école : la miniLibX. Ils ne peuvent être compilés qu'à l'école.
 
-PROJET FDF:
+<h3>fdf</h3>
 Rendu 3D d'un terrain en relief en représentation fil de fer (points reliés par des segments). Réalisation d'une perspective parallèle.
 
-PROJET FRACTOL:
+<h3>fractol</h3>:
 Logiciel d'exploration de fractales (Mandelbrot, Julia, Burning Ship) avec possibilité de se déplacer dans plan et de zoomer/dézoomer. Gestion des évènements clavier et souris.
 
 
-Remarques:
+<h2>Remarques</h2>
 
 1. Chaque projet a un sujet au format pdf.
 
