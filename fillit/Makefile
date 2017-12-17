@@ -15,20 +15,20 @@ NAME = fillit
 
 FLAGS = -Wall -Werror -Wextra
 
-SRCS =  srcs/can_put.c \
-		srcs/clear_grid.c \
-		srcs/create_grid.c \
-		srcs/fill.c \
-		srcs/find_min_square.c \
-		srcs/get_splited_file.c \
-		srcs/get_tetri.c \
-		srcs/parse_all_tetri.c \
-		srcs/print_grid.c \
-		srcs/put_remove.c \
-		srcs/scale_tetri.c \
-		srcs/tetri_is_valide.c \
-		srcs/tetri_match_rules.c \
-		srcs/main.c
+SRCS =  src/can_put.c \
+		src/clear_grid.c \
+		src/create_grid.c \
+		src/fill.c \
+		src/find_min_square.c \
+		src/get_splited_file.c \
+		src/get_tetri.c \
+		src/parse_all_tetri.c \
+		src/print_grid.c \
+		src/put_remove.c \
+		src/scale_tetri.c \
+		src/tetri_is_valide.c \
+		src/tetri_match_rules.c \
+		src/main.c
 
 OBJS = $(SRCS:.c=.o)
 
