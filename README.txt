@@ -15,11 +15,11 @@ PROJET LEM_IN:
 Trouver la manière la plus rapide de déplacer N véhicules dans un graphe depuis un noeud de départ jusqu'à un noeud d'arrivée en prenant en compte les éventuels embouteillages. L'implémentation utilise des parcours en largeur successifs (Dijkstra) et en prenant en compte les retards dus aux embouteillages.
 
 PROJET FILLIT:
-Réalisé à 2 personnes.
+2 contributeurs
 Agencer des pièces de forme variable pour former un carré de taille minimale. Un algorithme de backtracking (retour sur trace) est utilisé. S'il est impossible de former un carré de taille N, on tente de former un carré de taille N + 1, et ainsi de suite.
 
 PROJET COREWAR:
-Réalisé à 3 personnes.
+3 contributeurs
 Corewar est un jeu dans lequel des programmes s'affrontent dans une arène virtuelle. L'arène est constituée d'une mémoire circulaire dans laquelle sont placées les instructions des différents programmes. Les programmes étant exécutés parallèlement dans le même espace mémoire, ils ont la possibilité de s'écrire les uns sur les autres, donnant ansi au jeu une grande  complexité. Le projet consiste à coder d'une part une machine virtuelle permettant à la partie de se dérouler, et d'autre part un assembleur capable de compiler un programme écrit dans un langage type assembleur en bytecode compréhensible par la machine virtuelle.
 
 
