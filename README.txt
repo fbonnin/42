@@ -1,9 +1,6 @@
 Projets réalisés par Florent Bonnin à l'école 42 depuis avril 2017.
 
 
-Présentation :
-
-
 PROJET LIBFT:
 Réalisé seul.
 Bibliothèque de fonctions variées réutilisables sur plusieurs projets. Elle est enrichie tout au long du parcours à 42. Elle comporte par exemple une imitation de la fonction printf.
