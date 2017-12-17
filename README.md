@@ -40,7 +40,7 @@ Rendu 3D d'un terrain en relief en représentation fil de fer (points reliés pa
 Logiciel d'exploration de fractales (Mandelbrot, Julia, Burning Ship) avec possibilité de se déplacer dans plan et de zoomer/dézoomer. Gestion des évènements clavier et souris.
 
 
-<h2>Remarques</h2>
+<h2>Infos complémentaires</h2>
 
 1. Chaque projet a un sujet au format pdf.
 
