@@ -1,4 +1,4 @@
-Projets réalisés en C par Florent Bonnin à l'école 42 depuis avril 2017.
+<h1>Projets réalisés en C par Florent Bonnin à l'école 42 depuis avril 2017.</h1>
 
 
 PROJET LIBFT:
