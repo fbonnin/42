@@ -3,15 +3,17 @@ Projets réalisés par Florent Bonnin à l'école 42 depuis avril 2017.
 
 Présentation des différents projets :
 
-N.B. : Chaque projet a un sujet au format pdf.
+Remarque 1 : Chaque projet a un sujet au format pdf.
+
+Remarque 2 : A 42 il n'est en général pas autorisé d'utiliser des fonctions que l'on a pas codées. L'utilisation de la bibliothèque standard est interdite. Il faut tout faire soit-même.
 
 
 LIBFT:
 Réalisé seul.
-Bibliothèque de fonctions variées destinée à faciliter la réalisation des autres projets. Elle est enrichie tout au long du parcours à 42.
+Bibliothèque de fonctions variées servant à regrouper les fonctions utilisables de nombreux projets. Elle est enrichie tout au long du parcours à 42. Elle comporte par exemple la fonction printf qu'il est obligatoire de recoder.
 
 
-Projets d'algorithmique
+PROJETS D'ALGORITHMIQUE
 
 PUSH_SWAP:
 Réalisé seul.
@@ -19,7 +21,7 @@ L'objectif est de trier des nombres avec un jeu d'instructions limité. Au dépa
 
 LEM_IN:
 Réalisé seul.
-Trouver la manière la plus rapide de déplacer N véhicules dans un graphe depuis un noeud de départ jusqu'à un noeud d'arrivée en prenant en compte les éventuels bouchons.
+Trouver la manière la plus rapide de déplacer N véhicules dans un graphe depuis un noeud de départ jusqu'à un noeud d'arrivée en prenant en compte les éventuels embouteillages. L'implémentation utilise des parcours en largeur successifs (Dijkstra) et en prenant en compte les retards dus aux embouteillages.
 
 FILLIT:
 Réalisé à 2 personnes.
@@ -34,11 +36,11 @@ PROJETS D'ENVIRONNEMENT UNIX
 
 LS:
 Réalisé seul.
-Imitation de la commande unix. Ce projet nécessite de lire attentivement la documentation des fonctions de navigation dans le système de fichiers. Il est nécessaire d'implémenter un algorithme pour parcourir récursivement un dossier et ses sous-répertoires.
+Imitation de la commande unix. Ce projet de comprendre en détail le système de fichiers. Il nécessite de lire attentivement la documentation des fonctions de navigation dans le système de fichiers. Il est nécessaire d'implémenter un algorithme pour parcourir récursivement un répertoire et ses sous-répertoires.
 
 
 PROJETS DE GRAPHISME
 
 FDF:
 Réalisé seul.
-Rendu 3D d'un terrain en relief en représentation fil de fer ( points reliés par des segments). Une perspective parallèle est réalisée.
+Rendu 3D d'un terrain en relief en représentation fil de fer (points reliés par des segments). Une perspective parallèle est réalisée.
