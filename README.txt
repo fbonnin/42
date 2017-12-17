@@ -5,7 +5,7 @@ Présentation :
 
 Remarque 1 : Chaque projet a un sujet au format pdf.
 
-Remarque 2 : A 42 il n'est en général pas autorisé d'utiliser des fonctions que l'on a pas codées. L'utilisation de la bibliothèque standard est interdite. Il faut tout faire soit-même.
+Remarque 2 : A 42 il est en général interdit d'utiliser des fonctions que l'on a pas codées soit-même. L'utilisation de la bibliothèque standard n'est pas permise.
 
 
 LIBFT:
@@ -25,7 +25,7 @@ Trouver la manière la plus rapide de déplacer N véhicules dans un graphe depu
 
 FILLIT:
 Réalisé à 2 personnes.
-Backtracking.
+Agencer des pièces de forme variable pour former une carré de taille minimale. Un algorithme de Backtracking (retour sur trace) est mis en oeuvre. S'il est impossible de former un carré de taille N, on tente de former un carré de taille N + 1, et ainsi de suite.
 
 COREWAR:
 Réalisé à 3 personnes.
