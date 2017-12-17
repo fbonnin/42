@@ -8,24 +8,24 @@ Bibliothèque de fonctions variées réutilisables dans plusieurs projets. On y 
 PROJETS D'ALGORITHMIQUE:
 
 PROJET PUSH_SWAP:
-Trier des nombres avec deux piles et un jeu d'instructions limité. Différents algorithmes de tri sont implementes, dont le tri fusion.
+Trier des nombres avec deux piles et un jeu d'instructions limité. Différents algorithmes de tri sont implementes, dont le tri fusion. Leurs performances sont notees en soutenance.
 
 PROJET LEM_IN:
-Trouver la manière la plus rapide de déplacer N véhicules dans un graphe depuis un noeud de départ jusqu'à un noeud d'arrivée en prenant en compte les éventuels embouteillages. Pour chaque vehicule, on realise un parcours en largeur (Dijkstra) pour trouver les plus court chemin, en prenant en compte les retards provoques par le passage des vehicules precedents. Par exemple, si un arc du graphe est tres frequente, il ne represente pas une bon itineraire.
+Trouver la manière la plus rapide de déplacer N véhicules dans un graphe depuis un noeud de départ jusqu'à un noeud d'arrivée en prenant en compte les éventuels embouteillages. Pour chaque vehicule, on realise un parcours en largeur (Dijkstra) pour trouver le plus court chemin, en prenant en compte les retards provoques par le passage des vehicules precedents. Par exemple, si un arc du graphe est tres frequente, il ne represente pas une bon itineraire.
 
 PROJET FILLIT:
 2 contributeurs
-Agencer des pièces de forme variable pour former un carré de taille minimale. Un algorithme de backtracking (retour sur trace) est utilisé. S'il est impossible de former un carré de taille N, on tente de former un carré de taille N + 1, et ainsi de suite.
+Probleme d'optimisation. Agencer des pièces de forme variable pour former un carré de taille minimale. Un algorithme de backtracking (retour sur trace) est utilisé. S'il est impossible de former un carré de taille N, on tente de former un carré de taille N + 1, et ainsi de suite.
 
 PROJET COREWAR:
 3 contributeurs
-Corewar est un jeu dans lequel des programmes s'affrontent dans une arène virtuelle. L'arène est constituée d'une mémoire circulaire dans laquelle sont placées les instructions des différents programmes. Les programmes étant exécutés parallèlement dans le même espace mémoire, ils ont la possibilité de s'écrire les uns sur les autres, donnant ansi au jeu une grande  complexité. Le projet consiste à coder d'une part une machine virtuelle permettant à la partie de se dérouler, et d'autre part un assembleur capable de compiler un programme écrit dans un langage type assembleur en bytecode compréhensible par la machine virtuelle.
+Corewar est un jeu dans lequel des programmes s'affrontent dans une arène virtuelle. L'arène est constituée d'une mémoire circulaire dans laquelle sont placées les instructions des différents programmes. Les programmes étant exécutés en parallele dans le même espace mémoire, ils ont la possibilité de s'écrire les uns sur les autres, donnant ansi au jeu une grande  complexité. Le projet consiste à coder d'une part une machine virtuelle permettant à la partie de se dérouler, et d'autre part un assembleur capable de compiler un programme écrit dans un langage type assembleur en bytecode compréhensible par la machine virtuelle.
 
 
 PROJETS D'ENVIRONNEMENT UNIX:
 
 PROJET LS:
-Imitation de la commande unix. Parcours recursif d'un repertoire et de ses sous-repertoires. Ce projet permet de comprendre en détail le système de fichiers et sa manipulation avec des fonctions standards.
+Imitation de la commande unix ls. Parcours recursif d'un repertoire et de ses sous-repertoires. Ce projet permet de comprendre en détail le système de fichiers et sa manipulation avec des fonctions standards.
 
 
 PROJETS DE GRAPHISME:
