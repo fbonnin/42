@@ -1,5 +1,6 @@
 <h1>Travaux de Florent Bonnin à l'école 42 depuis avril 2017.</h1>
 
+Langage : C
 
 <h3>libft</h3>
 Bibliothèque de fonctions variées réutilisables dans plusieurs projets. On y trouve une imitation de la fonction printf. La Libft est enrichie tout au long du cursus à 42.
