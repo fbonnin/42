@@ -2,7 +2,6 @@ Projets C realises par Florent Bonnin à l'école 42 depuis avril 2017.
 
 
 PROJET LIBFT:
-Réalisé seul.
 Bibliothèque de fonctions variées réutilisables sur plusieurs projets, comme la fonction printf. Elle est enrichie tout au long du parcours à 42.
 
 
