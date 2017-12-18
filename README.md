@@ -3,7 +3,10 @@
 Actuellement tous les travaux sont en langage C.
 
 <h3>libft</h3>
-Bibliothèque de fonctions variées réutilisables dans plusieurs projets. On y trouve une imitation de la fonction printf. La Libft est enrichie tout au long du cursus à 42.
+Bibliothèque de fonctions variées réutilisables dans plusieurs projets. La Libft est enrichie tout au long du cursus à 42.
+
+<h3>printf</h3>
+Imitation de la fonction printf, fonction variadique utile pour de nombreux projets. La fonction est incluse dans la bibliothèque Libft.
 
 
 <h2>Projets d'Algorithmique</h2>
