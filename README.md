@@ -47,3 +47,5 @@ Logiciel d'exploration de fractales (Mandelbrot, Julia et Burning Ship) avec pos
 1. Chaque projet a un sujet au format pdf.
 
 2. A 42, il est généralement interdit d'utiliser des fonctions que l'on n'a pas codées soit-même. L'utilisation de la bibliothèque standard n'est pas permise.
+
+3. Le code des projets doit respecter la norme de 42 afin de conserver un code clair et compréhensible par les autres étudiants.
