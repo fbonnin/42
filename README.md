@@ -36,10 +36,10 @@ Imitation de la commande unix ls. Parcours récursif d'un répertoire et de ses 
 
 <h2>Projets de Graphisme</h2>
 
-Les projets de graphisme sont réalisés avec une bibliothèque graphique bas niveau fournie par l'école : la miniLibX. Ils ne peuvent être compilés qu'à l'école.
+Les projets de graphisme sont réalisés avec une bibliothèque graphique bas niveau fournie par l'école : la MiniLibX. Ils ne peuvent être compilés qu'à l'école.
 
 <h3>fdf</h3>
-Rendu 3D d'un terrain en relief en représentation fil de fer (points reliés par des segments). Projection parallèle.
+Rendu 3D d'un terrain en relief, en représentation fil de fer (points reliés par des segments). Projection parallèle.
 
 <h3>fractol</h3>
 Logiciel d'exploration de fractales (Mandelbrot, Julia et Burning Ship) avec possibilité de se déplacer dans le plan et de zoomer/dézoomer. Gestion des évènements clavier et souris.
