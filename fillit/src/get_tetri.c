@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include "../libft/libft.h"
+#include "libft/libft.h"
 #include <string.h>
 #include <stdlib.h>
 
@@ -57,12 +57,10 @@ int				get_tetri(t_tetri **tetri_ptr, char *buffer)
 {
 	int			pc;
 	t_tetri		*tetri;
-	int			ti;
 	int			i;
 
 	i = 0;
 	pc = 0;
-	ti = 0;
 	if ((tetri = malloc(sizeof(t_tetri))) == NULL)
 		return (-1);
 	while (buffer[i++])

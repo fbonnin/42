@@ -14,7 +14,6 @@
 
 int	ft_segcount(char const *s, char c)
 {
-	char	*sptr;
 	int		reading;
 	int		segcount;
 
@@ -22,7 +21,6 @@ int	ft_segcount(char const *s, char c)
 		return (0);
 	reading = 0;
 	segcount = 0;
-	sptr = (char *)s;
 	while (*s)
 	{
 		if (!reading && *s != c)

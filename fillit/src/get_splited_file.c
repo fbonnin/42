@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include "libft/libft.h"
 #include "fillit.h"
 #include "fcntl.h"
 #include "unistd.h"
@@ -76,12 +76,10 @@ static int		split_buff(char *buffer, char **tetris, int tetri_count)
 int				get_splited_file(char *path, char ***ts)
 {
 	char	*buffer;
-	int		index;
 	int		readed;
 	int		tetri_count;
 	char	**tetris;
 
-	index = 0;
 	tetri_count = 1;
 	if ((readed = read_buffer(path, &buffer)) == -1)
 		return (-1);

@@ -35,18 +35,18 @@ OBJS = $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	make -C libft/
-	gcc $(FLAGS) -o $(NAME) $(OBJS) -L./libft -lft
+	make -C src/libft/
+	gcc $(FLAGS) -o $(NAME) $(OBJS) -L./src/libft -lft
 
 %.o: %.c
 	gcc -c $(FLAGS) -o $@ $<
 
 clean:
-	make -C libft/ clean
+	make -C src/libft/ clean
 	rm -f $(OBJS)
 
 fclean: clean
-	make -C libft/ fclean
+	make -C src/libft/ fclean
 	rm -f $(NAME)
 
 re: fclean all

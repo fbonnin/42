@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include "libft/libft.h"
 #include "fillit.h"
 
 int	tetri_match_rules(char *buffer)

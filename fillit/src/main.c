@@ -12,7 +12,7 @@
 
 #include "fillit.h"
 #include "stdlib.h"
-#include "../libft/libft.h"
+#include "libft/libft.h"
 
 int	main(int ac, char **av)
 {

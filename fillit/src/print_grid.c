@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include "libft/libft.h"
 #include "fillit.h"
 
 void	print_grid(t_grid *grid)

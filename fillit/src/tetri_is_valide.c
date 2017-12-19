@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include "libft/libft.h"
 
 int	tetri_is_valide(char *buff)
 {

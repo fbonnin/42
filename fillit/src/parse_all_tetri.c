@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include "../libft/libft.h"
+#include "libft/libft.h"
 #include "stdlib.h"
 
 int	parse_all_tetri(t_tetri ***tetris, char **splited, int count)

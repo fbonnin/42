@@ -12,7 +12,7 @@
 
 #include <stdlib.h>
 #include "fillit.h"
-#include "../libft/libft.h"
+#include "libft/libft.h"
 
 static int	get_min_square(int tetri_count)
 {
