@@ -12,7 +12,7 @@ Imitation de la fonction printf, fonction variadique utile pour de nombreux proj
 <h2>Projets d'Algorithmique</h2>
 
 <h3>push_swap</h3>
-Trier des nombres avec deux piles et un jeu d'instructions limité. Ces contraintes font la difficulté du projet. Différents algorithmes de tri sont implémentés, dont le tri fusion.
+Trier des nombres avec deux piles et un jeu d'instructions limité. Ces contraintes font la difficulté du projet. Différents algorithmes de tri sont implémentés, dont une version adaptée du tri fusion.
 
 <h3>lem-in</h3>
 Trouver la manière la plus rapide de déplacer N véhicules dans un graphe depuis un noeud de départ jusqu'à un noeud d'arrivée, en prenant en compte les éventuels embouteillages. Pour chaque véhicule, on effectue un parcours en largeur (Dijkstra) pour trouver le plus court chemin, en prenant en compte les retards provoqués par le passage des véhicules précédents. Par exemple, si un chemin est trop fréquenté, il ne constitue plus un bon itinéraire.
