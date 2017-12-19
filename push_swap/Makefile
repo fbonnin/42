@@ -11,29 +11,29 @@
 # **************************************************************************** #
 
 all:
-	cd checker_sources && make
-	mv checker_sources/checker .
-	cd push_swap_sources && make
-	mv push_swap_sources/push_swap .
+	cd checker_src && make
+	mv checker_src/checker .
+	cd push_swap_src && make
+	mv push_swap_src/push_swap .
 
 checker:
-	cd checker_sources && make
-	mv checker_sources/checker .
+	cd checker_src && make
+	mv checker_src/checker .
 
 push_swap:
-	cd push_swap_sources && make
-	mv push_swap_sources/push_swap .
+	cd push_swap_src && make
+	mv push_swap_src/push_swap .
 
 clean:
 	cd libft && make clean
-	cd checker_sources && make clean
-	cd push_swap_sources && make clean
+	cd checker_src && make clean
+	cd push_swap_src && make clean
 
 fclean:
 	cd libft && make fclean
-	cd checker_sources && make fclean
+	cd checker_src && make fclean
 	rm -f checker
-	cd push_swap_sources && make fclean
+	cd push_swap_src && make fclean
 	rm -f push_swap
 
 re: fclean all
