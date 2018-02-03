@@ -31,8 +31,8 @@ typedef struct	s_notification
 }				t_notification;
 
 				// parse_pdf.c
-int				parse_pdf(char *input, char *output, char *lien);
-int				end(char *text, t_notification *notification, char *s);
+int				parse_pdf(char *pdf_name, char *output_name, char *lien);
+int				end(char *txt_name, char *text, t_notification *notification, char *s);
 
 				// notification.c
 void			init_transaction(t_transaction *t);
@@ -42,7 +42,7 @@ void			free_notification(t_notification *n);
 int				write_notification(t_notification *n, char *output);
 
 				// tools_file.c
-int				pdf_to_text(char *input);
+int				pdf_to_text(char *pdf_name);
 char			*load_file(char *name);
 
 				// extract_data.c
