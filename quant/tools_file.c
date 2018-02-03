@@ -1,3 +1,24 @@
+// converti pdf en txt
+int		pdf_to_text(char *input)
+{
+	char	*command;
+	int		r;
+
+	if (strlen(input_name) < 4)
+		return -1;
+	command = malloc(strlen("./pdftotext ") + strlen(input_name) + 1);
+	if (command == NULL)
+		return -1;
+	strcpy(command, "./pdftotext ");
+	strcat(command, input_name);
+	r = system(command);
+	free(command);
+	if (r == -1)
+		return -1;
+	strcpy(input_name + strlen(input_name) - 4, ".txt");
+	return 0;
+}
+
 // charge fichier dans string
 char	*load_file(char *name)
 {
@@ -21,25 +42,3 @@ char	*load_file(char *name)
 	fclose(file);
 	return result;
 }
-
-// converti pdf en txt
-int		pdf_to_text(char *input_name)
-{
-	char	*command;
-	int		r;
-
-	if (strlen(input_name) < 4)
-		return -1;
-	command = malloc(strlen("./pdftotext ") + strlen(input_name) + 1);
-	if (command == NULL)
-		return -1;
-	strcpy(command, "./pdftotext ");
-	strcat(command, input_name);
-	r = system(command);
-	free(command);
-	if (r == -1)
-		return -1;
-	strcpy(input_name + strlen(input_name) - 4, ".txt");
-	return 0;
-}
-

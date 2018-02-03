@@ -1,26 +1,3 @@
-int		write_notification(t_notification *n, char *output_name)
-{
-	FILE			*file
-	t_transaction	*t;
-	int				i;
-
-	file = fopen(output_name, "a");
-	if (file == NULL)
-		return -1;
-	i = 0;
-	while (i < n->nb_transactions)
-	{
-		t = &n->transactions[i];
-		fprintf(file, "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n",
-		n->dirigeant, n->type, n->emetteur,
-		t->date, t->lieu, t->nature,
-		t->instrument, t->prix, t->volume, t->lie,
-		n->date, n->commentaires, n->lien);
-		i++;
-	}
-	fclose(file);
-}
-
 void	init_transaction(t_transaction *t)
 {
 	t->date = NULL;
@@ -78,4 +55,27 @@ void	free_notification(t_notification *n)
 	free(n->date);
 	free(n->commentaires);
 	free(n->lien);
+}
+
+int		write_notification(t_notification *n, char *output)
+{
+	FILE			*file
+	t_transaction	*t;
+	int				i;
+
+	file = fopen(output_name, "a");
+	if (file == NULL)
+		return -1;
+	i = 0;
+	while (i < n->nb_transactions)
+	{
+		t = &n->transactions[i];
+		fprintf(file, "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n",
+		n->dirigeant, n->type, n->emetteur,
+		t->date, t->lieu, t->nature,
+		t->instrument, t->prix, t->volume, t->lie,
+		n->date, n->commentaires, n->lien);
+		i++;
+	}
+	fclose(file);
 }
