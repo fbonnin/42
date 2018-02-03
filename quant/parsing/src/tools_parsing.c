@@ -11,8 +11,11 @@ void	read_until(char *text, int *i_text, char *buffer, char *end)
 
 	i = 0;
 	while (text[*i_text] != 0 &&
-	strcmp(text + *i_text, end) != 0)
+	strncmp(text + *i_text, end, strlen(end)) != 0)
+	{
+		//printf("%.10s\n", text + *i_text);
 		buffer[i++] = text[(*i_text)++];
+	}
 	buffer[i] = 0;
 }
 
@@ -23,8 +26,8 @@ void	read_until_2(char *text, int *i_text, char *buffer, char *end1, char *end2)
 
 	i = 0;
 	while (text[*i_text] != 0 &&
-	strcmp(text + *i_text, end1) != 0 &&
-	strcmp(text + *i_text, end2) != 0)
+	strncmp(text + *i_text, end1, strlen(end1)) != 0 &&
+	strncmp(text + *i_text, end2, strlen(end2)) != 0)
 		buffer[i++] = text[(*i_text)++];
 	buffer[i] = 0;
 }

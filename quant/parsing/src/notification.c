@@ -69,6 +69,7 @@ int		write_notification(t_notification *n, char *output)
 	if (file == NULL)
 		return -1;
 	i = 0;
+	printf("nb : %d\n", n->nb_transactions);
 	while (i < n->nb_transactions)
 	{
 		t = &n->transactions[i];
