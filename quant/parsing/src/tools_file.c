@@ -1,4 +1,4 @@
-#include "../parse_pdf.h"
+#include "../parsing.h"
 
 // converti pdf en txt
 int		pdf_to_text(char *input)

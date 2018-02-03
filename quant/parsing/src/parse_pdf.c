@@ -1,4 +1,4 @@
-#include "../parse_pdf.h"
+#include "../parsing.h"
 
 int	parse_pdf(char *input, char *output, char *lien)
 {
