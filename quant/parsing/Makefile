@@ -1,4 +1,4 @@
-NAME = parse_pdf.a
+NAME = parsing.a
 
 NAMES = \
 parse_pdf \
