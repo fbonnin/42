@@ -1,3 +1,5 @@
+#include "../parse_pdf.h"
+
 /*
 fonction de base du parsing
 lit text jusqu'a tomber sur la chaine end

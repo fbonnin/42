@@ -1,11 +1,13 @@
+#include "../parse_pdf.h"
+
 int	parse_pdf(char *input, char *output, char *lien)
 {
 	char			*text;
 	t_notification	notification;
-	int				r;
 
 	text = NULL;
-	init_notification(notification);
+	init_notification(&notification);
+	notification.lien = strdup(lien);
 	if (pdf_to_text(input) == -1)
 		return end(text, &notification, "pdf to text\n");
 	text = load_file(input);

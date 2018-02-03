@@ -1,3 +1,5 @@
+#include "../parse_pdf.h"
+
 void	init_transaction(t_transaction *t)
 {
 	t->date = NULL;
@@ -59,11 +61,11 @@ void	free_notification(t_notification *n)
 
 int		write_notification(t_notification *n, char *output)
 {
-	FILE			*file
+	FILE			*file;
 	t_transaction	*t;
 	int				i;
 
-	file = fopen(output_name, "a");
+	file = fopen(output, "a");
 	if (file == NULL)
 		return -1;
 	i = 0;
@@ -78,4 +80,5 @@ int		write_notification(t_notification *n, char *output)
 		i++;
 	}
 	fclose(file);
+	return 0;
 }

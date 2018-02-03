@@ -1,3 +1,5 @@
+#include "../parse_pdf.h"
+
 #define p text, &i_text, buffer
 
 int extract_data(char *text, t_notification *n)
@@ -36,7 +38,7 @@ int extract_data(char *text, t_notification *n)
 		i_text++;
 		read_until(p, "NATURE");
 		t.lieu = duptrim(buffer);
-		read_until(":");
+		read_until(p, ":");
 		i_text++;
 		read_until(p, "DESCRIPTION");
 		t.nature = duptrim(buffer);
@@ -53,7 +55,8 @@ int extract_data(char *text, t_notification *n)
 		i_text++;
 		read_until_2(p, "DETAIL", "DATE");
 		t.lie = duptrim(buffer);
-		n->transactions[n->nb_transactions++] = t;
+		if (n->nb_transactions < MAX_TRANSACTIONS)
+			n->transactions[n->nb_transactions++] = t;
 	}
 	read_until(p, ":");
 	i_text++;

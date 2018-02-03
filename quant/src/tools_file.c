@@ -1,21 +1,23 @@
+#include "../parse_pdf.h"
+
 // converti pdf en txt
 int		pdf_to_text(char *input)
 {
 	char	*command;
 	int		r;
 
-	if (strlen(input_name) < 4)
+	if (strlen(input) < 4)
 		return -1;
-	command = malloc(strlen("./pdftotext ") + strlen(input_name) + 1);
+	command = malloc(strlen("./pdftotext ") + strlen(input) + 1);
 	if (command == NULL)
 		return -1;
 	strcpy(command, "./pdftotext ");
-	strcat(command, input_name);
+	strcat(command, input);
 	r = system(command);
 	free(command);
 	if (r == -1)
 		return -1;
-	strcpy(input_name + strlen(input_name) - 4, ".txt");
+	strcpy(input + strlen(input) - 4, ".txt");
 	return 0;
 }
 
@@ -34,7 +36,7 @@ char	*load_file(char *name)
 	(result = malloc(length + 1)) == NULL)
 		return NULL;
 	result[length] = 0;
-	if (fread(result, 1, length, file) != length)
+	if ((int)fread(result, 1, length, file) != length)
 	{
 		free(result);
 		result = NULL;
