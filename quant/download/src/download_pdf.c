@@ -2,7 +2,7 @@
 
 int		download_pdfs(char *url)
 {
-	char	*url_A;
+	char	*url_a;
 	int		i_pdf;
 	char	*next;
 
