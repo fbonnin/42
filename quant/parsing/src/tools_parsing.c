@@ -35,7 +35,7 @@ void	read_until_2(char *text, int *i_text, char *buffer, char *end1, char *end2)
 // defini les caracteres inutiles
 int		useless_char(char c)
 {
-	return c < 32;
+	return c <= 32;
 }
 
 // supprime les caracteres inutiles en debut et fin de chaine
@@ -59,9 +59,11 @@ char	*duptrim(char *s)
 	result = malloc(length + 1);
 	result[length] = 0;
 	i = 0;
-	while (i1 + i <= i2)
+	while (i < length)
 	{
 		result[i] = s[i1 + i];
+		if (result[i] == ',')
+			result[i] = ' ';
 		i++;
 	}
 	return result;

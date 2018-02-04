@@ -42,7 +42,7 @@ void			free_notification(t_notification *n);
 int				write_notification(t_notification *n, char *output);
 
 				// tools_file.c
-int				pdf_to_text(char *pdf_name);
+int				pdf_to_text(char *pdf_name, char *txt_name);
 char			*load_file(char *name);
 
 				// extract_data.c

@@ -1,15 +1,18 @@
 #include "../parsing.h"
 
 // converti pdf en txt
-int		pdf_to_text(char *pdf_name)
+int		pdf_to_text(char *pdf_name, char *txt_name)
 {
 	char	*command;
 	int		r;
 
-	command = malloc(strlen("./pdftotext ") + strlen(pdf_name) + 1);
+	command = malloc(strlen("gs -sDEVICE=txtwrite -o ") +
+	strlen(txt_name) + 1 + strlen(pdf_name) + 1);
 	if (command == NULL)
 		return -1;
-	strcpy(command, "./pdftotext ");
+	strcpy(command, "gs -sDEVICE=txtwrite -o ");
+	strcat(command, txt_name);
+	strcat(command, " ");
 	strcat(command, pdf_name);
 	r = system(command);
 	free(command);

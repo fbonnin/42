@@ -14,7 +14,7 @@ int	parse_pdf(char *pdf_name, char *output_name, char *lien)
 	txt_name = strdup(pdf_name);
 	strcpy(txt_name + strlen(txt_name) - 4, ".txt");
 	notification.lien = strdup(lien);
-	if (pdf_to_text(pdf_name) == -1)
+	if (pdf_to_text(pdf_name, txt_name) == -1)
 		return end(txt_name, text, &notification, "error: pdf to text\n");
 	text = load_file(txt_name);
 	remove(txt_name);
