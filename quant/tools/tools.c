@@ -57,6 +57,11 @@ void	read_until_2(char *text, int *i_text, char *buffer, char *end1, char *end2)
 	buffer[i] = 0;
 }
 
+int		strequ(char *s1, char *s2)
+{
+	return strncmp(s1, s2, strlen(s2)) == 0;
+}
+
 // defini les caracteres inutiles
 int		useless_char(char c)
 {

@@ -1,3 +1,7 @@
+#include "../download.h"
+
+#define p text, &i_text, buffer
+
 int	parseB(CURL *session, char *linkB, int i_pdf)
 {
 	char	*text;
@@ -24,8 +28,7 @@ int	parseB(CURL *session, char *linkB, int i_pdf)
 	i_text++;
 	read_until(p, "\"");
 	linkPDF = duptrim(buffer);
-	itoa(i_pdf, pdf_name, 10);
-	strcat(pdf_name, ".pdf");
+	sprintf(pdf_name, "%d.pdf", i_pdf);
 	if (download(session, linkPDF, pdf_name) == -1)
 		return endB(text, buffer, linkPDF);
 	endB(text, buffer, linkPDF);

@@ -1,3 +1,7 @@
+#include "../download.h"
+
+#define p text, &i_text, buffer
+
 char	*parseA(CURL *session, char *linkA, int *i_pdf)
 {
 	char	*text;
