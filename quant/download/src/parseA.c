@@ -9,6 +9,7 @@ char	*parseA(CURL *session, char *linkA, int *i_pdf)
 	char	*buffer;
 	char	*linkB;
 	int		type;
+	int		r;
 
 	text = NULL;
 	buffer = NULL;
@@ -34,18 +35,19 @@ char	*parseA(CURL *session, char *linkA, int *i_pdf)
 		read_until(p, "\"");
 		i_text++;
 		read_until(p, "\"");
-		linkB = malloc(strlen(prefix) + strlen(buffer) + 1);
 		if (type == 0)
 		{
+			linkB = malloc(strlen(prefix) + strlen(buffer) + 1);
 			sprintf(linkB, "%s%s", prefix, buffer);
-			if (parseB(session, linkB, *i_pdf) == -1)
-				return endA(text, buffer);
+			r = parseB(session, linkB, *i_pdf);
 			free(linkB);
+			if (r == -1)
+				return endA(text, buffer);
 			(*i_pdf)++;
 		}
 		else if (type == 1)
 		{
-			sprintf(linkB, "%s", buffer);
+			linkB = strdup(buffer);
 			endA(text, buffer);
 			return linkB;
 		}
