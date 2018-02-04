@@ -3,21 +3,20 @@ NAME = parsing.a
 NAMES = \
 parse_pdf \
 notification \
-tools_file \
-extract_data \
-tools_parsing
+extract_data
 
 O_FILES = $(addprefix src/, $(addsuffix .o, $(NAMES)))
 
 $(NAME): $(O_FILES)
-	ar rc $(NAME) $(O_FILES)
+	ar rc $(NAME) $(O_FILES) tools.o
 
 all: $(NAME) $(O_FILES)
 %.o: %.c
+	gcc -c ../tools/tools.c
 	gcc -c $< -o $@ -Wall -Werror -Wextra
 
 clean:
-	rm -f $(O_FILES)
+	rm -f $(O_FILES) tools.o
 
 fclean: clean
 	rm -f $(NAME)

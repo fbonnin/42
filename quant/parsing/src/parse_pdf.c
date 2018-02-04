@@ -36,3 +36,24 @@ int	end(char *txt_name, char *text, t_notification *notification, char *s)
 	printf("%s", s);
 	return -1;	
 }
+
+// converti pdf en txt
+int		pdf_to_text(char *pdf_name, char *txt_name)
+{
+	char	*command;
+	int		r;
+
+	command = malloc(strlen("gs -sDEVICE=txtwrite -o ") +
+	strlen(txt_name) + 1 + strlen(pdf_name) + 1);
+	if (command == NULL)
+		return -1;
+	strcpy(command, "gs -sDEVICE=txtwrite -o ");
+	strcat(command, txt_name);
+	strcat(command, " ");
+	strcat(command, pdf_name);
+	r = system(command);
+	free(command);
+	if (r == -1)
+		return -1;
+	return 0;
+}
