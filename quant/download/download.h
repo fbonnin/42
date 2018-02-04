@@ -1,10 +1,9 @@
 #ifndef DOWNLOAD_H
 #define DOWNLOAD_H
 
-#include "curl/curl.h"
 #include "../tools/tools.h"
 
-int		download_pdf(char *link);
+int		download_pdfs(char *url);
 int		download(char *url, char *name)
 void	remove_amp(char *s);
 

@@ -1,26 +1,20 @@
 #include "../download.h"
 
-int		download_pdf(char *link)
+int		download_pdfs(char *url)
 {
-	CURL	*session;
-	char	*linkA;
+	char	*url_A;
 	int		i_pdf;
-	char	*r;
+	char	*next;
 
-	session = curl_easy_init();
-	if (session == NULL)
-		return -1;
 	system("mkdir pdf");
-	linkA = strdup(link);
+	url_a = strdup(url);
 	i_pdf = 0;
-	while (linkA != NULL)
+	while (url_a != NULL)
 	{
-		r = parseA(session, linkA, &i_pdf);
-		free(linkA);
-		linkA = r;
-		check_next(linkA);
+		next = parseA(url_a, &i_pdf);
+		free(url_a);
+		url_a = next;
 	}
-	curl_easy_cleanup(session);
 	return 0;
 }
 
