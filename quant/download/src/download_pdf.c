@@ -1,27 +1,6 @@
 #include "../download.h"
 
-void	check_next(char *s)
-{
-	char *cpy;
-	int i;	
-
-	cpy = strdup(s);
-	s[0] = 0;
-	i = 0;
-	while (i < (int)strlen(cpy))
-	{
-		if (strequ(cpy + i, "amp;"))
-			i += 3;
-		else
-		{
-			sprintf(s + strlen(s), "%c", cpy[i]);
-		}
-		i++;
-	}
-	free(cpy);
-}
-
-int	download_pdf(char *link)
+int		download_pdf(char *link)
 {
 	CURL	*session;
 	char	*linkA;
@@ -45,7 +24,7 @@ int	download_pdf(char *link)
 	return 0;
 }
 
-int	download(char *url, char *name)
+int		download(char *url, char *name)
 {
 	char	*command;
 	int		r;
@@ -59,4 +38,24 @@ int	download(char *url, char *name)
 	if (r == -1)
 		return -1;
 	return 0;
+}
+
+void	remove_amp(char *s)
+{
+	char	*s2;
+	int		i;
+	int		i2;
+
+	s2 = strdup(s);
+	s[0] = 0;
+	i = 0;
+	i2 = 0;
+	while (i2 < (int)strlen(s2))
+	{
+		if (strequ(s2 + i2, "amp;"))
+			i2 += 4;
+		else
+			s[i++] = s2[i2++];
+	}
+	free(s2);
 }
