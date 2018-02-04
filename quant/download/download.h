@@ -1,7 +1,7 @@
 #ifndef DOWNLOAD_H
 #define DOWNLOAD_H
 
-#include "../tools/tools.h"
+#include "../parsing/parsing.h"
 
 int		download_pdfs(char *url);
 int		download(char *url, char *name)

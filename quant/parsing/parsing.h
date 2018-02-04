@@ -1,9 +1,6 @@
 #ifndef PARSING_H
 #define PARSING_H
 
-#include "stdio.h"
-#include "stdlib.h"
-#include "string.h"
 #include "../tools/tools.h"
 
 #define MAX_TRANSACTIONS 1000
