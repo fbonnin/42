@@ -45,19 +45,18 @@ int	download_pdf(char *link)
 	return 0;
 }
 
-int	download(CURL *session, char *url, char *name)
+int	download(char *url, char *name)
 {
-	FILE *file;
+	char	*command;
+	int		r;
 
-	file = fopen(name, "w");
-	curl_easy_setopt(session, CURLOPT_URL, url);
-	curl_easy_setopt(session, CURLOPT_WRITEDATA, file);
-	curl_easy_setopt(session, CURLOPT_WRITEFUNCTION, fwrite);
-	if (curl_easy_perform(session) != 0)
-	{
-		fclose(file);
+	command = malloc(strlen("wget \"") + strlen(url) + strlen("\" -O ") + strlen(name) + 1);
+	if (command == NULL)
 		return -1;
-	}
-	fclose(file);
+	sprintf(command, "wget \"%s\" -O %s", url, name);
+	r = system(command);
+	free(command);
+	if (r == -1)
+		return -1;
 	return 0;
 }
