@@ -1,26 +1,28 @@
-NAME = download.a
+NAME = scraping
 
 NAMES = \
-download_pdf \
-parseA \
-parseB
+main \
+download/download_pdf \
+download/parseA \
+download/parseB \
+parsing/parse_pdf \
+parsing/notification \
+parsing/extract_data \
+tools
 
 O_FILES = $(addprefix src/, $(addsuffix .o, $(NAMES)))
 
 $(NAME): $(O_FILES)
-	cd ../parsing && make
-	ar rc $(NAME) $(O_FILES) ../parsing/tools.o ../parsing/parsing.a
+	gcc $(O_FILES) -o $(NAME)
 
 all: $(NAME) $(O_FILES)
 %.o: %.c
 	gcc -c $< -o $@ -Wall -Werror -Wextra
 
 clean:
-	cd ../parsing && make clean
 	rm -f $(O_FILES)
 
 fclean: clean
-	cd ../parsing && make fclean
 	rm -f $(NAME)
 
 re: fclean all

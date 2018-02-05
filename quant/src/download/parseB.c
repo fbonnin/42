@@ -1,4 +1,4 @@
-#include "../download.h"
+#include "../scraping.h"
 
 #define p text, &i_text, buffer
 
