@@ -10,7 +10,7 @@ int		scrape(char *url)
 	system("mkdir pdf");
 	url_a = strdup(url);
 	i_pdf = 0;
-	while (url_a != NULL || i_pdf >= 546 * 10)
+	while (url_a != NULL && i_pdf < 546 * 10)
 	{
 		next = parseA(url_a, &i_pdf);
 		free(url_a);
