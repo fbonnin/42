@@ -2,19 +2,20 @@
 
 #define p text, &i_text, buffer
 
-char	*parseA(CURL *session, char *linkA, int *i_pdf)
+#define prefix http://www.amf-france.org
+
+char	*parseA(char *url_a, int *i_pdf)
 {
 	char	*text;
 	int		i_text;
 	char	*buffer;
-	char	*linkB;
+	char	*url_b;
 	int		type;
 	int		r;
 
 	text = NULL;
 	buffer = NULL;
-	linkB = NULL;
-	if (download(session, linkA, "pageA") == -1)
+	if (download(url_a, "pageA") == -1)
 		return endA(text, buffer);
 	text = load_file("pageA");
 	if (text == NULL)
@@ -37,19 +38,20 @@ char	*parseA(CURL *session, char *linkA, int *i_pdf)
 		read_until(p, "\"");
 		if (type == 0)
 		{
-			linkB = malloc(strlen(prefix) + strlen(buffer) + 1);
-			sprintf(linkB, "%s%s", prefix, buffer);
-			r = parseB(session, linkB, *i_pdf);
-			free(linkB);
+			url_b = malloc(strlen(prefix) + strlen(buffer) + 1);
+			sprintf(url_b, "%s%s", prefix, buffer);
+			r = parseB(url_b, *i_pdf);
+			free(url_b);
 			if (r == -1)
 				return endA(text, buffer);
 			(*i_pdf)++;
 		}
 		else if (type == 1)
 		{
-			linkB = strdup(buffer);
+			url_b = strdup(buffer);
+			remove_amp(url_b);
 			endA(text, buffer);
-			return linkB;
+			return url_b;
 		}
 	}
 	return endA(text, buffer);
@@ -59,6 +61,6 @@ char	*endA(char *text, char *buffer)
 {
 	free(buffer);
 	free(text);
-	//remove("pageA");
+	remove("pageA");
 	return NULL;
 }

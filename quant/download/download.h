@@ -7,7 +7,7 @@ int		download_pdfs(char *url);
 int		download(char *url, char *name)
 void	remove_amp(char *s);
 
-char	*parseA(CURL *session, char *linkA, int *i_pdf);
+char	*parseA(char *url_a, int *i_pdf);
 char	*endA(char *text, char *buffer);
 
 int		parseB(char *url_b, int i_pdf);
