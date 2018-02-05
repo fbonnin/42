@@ -46,6 +46,7 @@ int extract_data(char *text, t_notification *n)
 		i_text++;
 		read_until_2(p, "CODE", "INFORMATION");
 		t.instrument = duptrim(buffer);
+		read_until(p, "AGREGEES");
 		read_until(p, "PRIX");
 		read_until(p, ":");
 		i_text++;
@@ -53,9 +54,9 @@ int extract_data(char *text, t_notification *n)
 		t.prix = duptrim(buffer);
 		read_until(p, ":");
 		i_text++;
-		read_until(p, "INFORMATION");
-		t.volume = duptrim(buffer);
 		read_until(p, "TRANSACTION");
+		t.volume = duptrim(buffer);
+		read_until(p, "LIE");
 		read_until(p, ":");
 		i_text++;
 		read_until_2(p, "DETAIL", "DATE");

@@ -37,10 +37,7 @@ void	read_until(char *text, int *i_text, char *buffer, char *end)
 	i = 0;
 	while (text[*i_text] != 0 &&
 	strncmp(text + *i_text, end, strlen(end)) != 0)
-	{
-		//printf("%.10s\n", text + *i_text);
 		buffer[i++] = text[(*i_text)++];
-	}
 	buffer[i] = 0;
 }
 
@@ -92,7 +89,7 @@ char	*duptrim(char *s)
 	while (i < length)
 	{
 		result[i] = s[i1 + i];
-		if (result[i] == ',')
+		if (result[i] == ',' || result[i] == '\n')
 			result[i] = ' ';
 		i++;
 	}

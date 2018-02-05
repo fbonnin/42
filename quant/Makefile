@@ -2,7 +2,7 @@ NAME = scraping
 
 NAMES = \
 main \
-download/download_pdf \
+download/scraping \
 download/parseA \
 download/parseB \
 parsing/parse_pdf \

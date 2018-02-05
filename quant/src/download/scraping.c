@@ -1,19 +1,21 @@
 #include "../scraping.h"
 
-int		download_pdfs(char *url)
+int		scrape(char *url)
 {
 	char	*url_a;
 	int		i_pdf;
 	char	*next;
 
+	remove("database.csv");
 	system("mkdir pdf");
 	url_a = strdup(url);
 	i_pdf = 0;
-	while (url_a != NULL)
+	while (url_a != NULL || i_pdf >= 546 * 10)
 	{
 		next = parseA(url_a, &i_pdf);
 		free(url_a);
 		url_a = next;
+		printf("url_a = %s\n", url_a);
 	}
 	return 0;
 }
@@ -44,7 +46,7 @@ void	remove_amp(char *s)
 	s[0] = 0;
 	i = 0;
 	i2 = 0;
-	while (i2 < (int)strlen(s2))
+	while (i2 <= (int)strlen(s2))
 	{
 		if (strequ(s2 + i2, "amp;"))
 			i2 += 4;

@@ -8,7 +8,7 @@
 
 // DOWNLOAD
 
-int				download_pdfs(char *url);
+int				scrape(char *url);
 int				download(char *url, char *name);
 void			remove_amp(char *s);
 
