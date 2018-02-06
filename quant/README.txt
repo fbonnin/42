@@ -15,3 +15,7 @@ Au total, 5460 pdf seront téléchargés.
 Le téléchargement peut durer plusieurs heures.
 
 Si vous ne souhaitez pas attendre, vous pouvez trouver le résultat dans le fichier result.csv.
+
+Le projet comporte 3 parties : download, parsing, tools
+
+Le fichier scraping.h indique où se trouve le code de chaque fonction.

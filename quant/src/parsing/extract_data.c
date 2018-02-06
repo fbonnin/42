@@ -2,6 +2,7 @@
 
 #define p text, &i_text, buffer
 
+// extrait les données du pdf et les stocke dans une "notification"
 int extract_data(char *text, t_notification *n)
 {
 	int				i_text;

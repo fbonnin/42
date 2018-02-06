@@ -1,9 +1,10 @@
-#include "../scraping.h"
+#include "../scraping.h"i
 
 #define p text, &i_text, buffer
 
 #define prefix "http://www.amf-france.org"
 
+// analyse une page contenant dix résultats
 char	*parseA(char *url_a, int *i_pdf)
 {
 	char	*text;
@@ -65,6 +66,7 @@ char	*endA(char *text, char *buffer)
 	return NULL;
 }
 
+// supprime les "amp;" d'une url
 void	remove_amp(char *s)
 {
 	char	*s2;

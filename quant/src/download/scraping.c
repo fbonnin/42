@@ -1,5 +1,6 @@
 #include "../scraping.h"
 
+// apelle parseA sur chaque page
 int		scrape(char *url)
 {
 	char	*url_a;
@@ -20,6 +21,7 @@ int		scrape(char *url)
 	return 0;
 }
 
+// télécharge un fichier à partir d'une url
 int		download(char *url, char *name)
 {
 	char	*command;

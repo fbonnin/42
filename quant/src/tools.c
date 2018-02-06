@@ -59,13 +59,13 @@ int		strequ(char *s1, char *s2)
 	return strncmp(s1, s2, strlen(s2)) == 0;
 }
 
-// defini les caracteres inutiles
-int		useless_char(char c)
-{
-	return c <= 32;
-}
-
-// supprime les caracteres inutiles en debut et fin de chaine
+/*
+dup + trim
+duplique une chaine
+supprime les caracteres inutiles en debut et fin de chaine
+remplace également les virgules et retours à la ligne
+par des espaces pour pouvoir stocker le résultat dans un fichier csv
+*/
 char	*duptrim(char *s)
 {
 	char	*result;
@@ -96,3 +96,7 @@ char	*duptrim(char *s)
 	return result;
 }
 
+int		useless_char(char c)
+{
+	return c <= 32;
+}
