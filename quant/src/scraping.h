@@ -8,16 +8,16 @@
 
 // DOWNLOAD
 
-// scraping.c
+				// scraping.c
 int				scrape(char *url);
 int				download(char *url, char *name);
 
-// parseA.c
+				// parseA.c
 char			*parseA(char *url_a, int *i_pdf);
 char			*endA(char *text, char *buffer);
 void			remove_amp(char *s);
 
-// parseB.c
+				// parseB.c
 int				parseB(char *url_b, int i_pdf);
 int				endB(char *text, char *buffer, char *url_pdf);
 
@@ -67,6 +67,7 @@ int				extract_data(char *text, t_notification *n);
 
 // TOOLS
 
+				// tools.c
 char			*load_file(char *name);
 void			read_until(char *text, int *i_text, char *buffer, char *end);
 void			read_until_2(char *text, int *i_text, char *buffer, char *end1, char *end2);
