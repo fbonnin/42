@@ -13,3 +13,5 @@ Les pdf sont placés dans le dossier "pdf" et nommés "0.pdf", "1.pdf", "2.pdf",
 Au total, 5460 pdf seront téléchargés.
 
 Le téléchargement peut durer plusieurs heures.
+
+Si vous ne souhaitez pas attendre, vous pouvez trouver le résultat dans le fichier result.csv.

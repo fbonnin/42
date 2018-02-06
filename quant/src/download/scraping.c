@@ -15,8 +15,8 @@ int		scrape(char *url)
 		next = parseA(url_a, &i_pdf);
 		free(url_a);
 		url_a = next;
-		printf("url_a = %s\n", url_a);
 	}
+	free(url_a);
 	return 0;
 }
 

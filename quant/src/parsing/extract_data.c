@@ -72,5 +72,6 @@ int extract_data(char *text, t_notification *n)
 	i_text++;
 	read_until(p, "\"");
 	n->commentaires = duptrim(buffer);
+	free(buffer);
 	return 0;
 }
