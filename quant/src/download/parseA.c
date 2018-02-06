@@ -64,3 +64,23 @@ char	*endA(char *text, char *buffer)
 	remove("pageA");
 	return NULL;
 }
+
+void	remove_amp(char *s)
+{
+	char	*s2;
+	int		i;
+	int		i2;
+
+	s2 = strdup(s);
+	s[0] = 0;
+	i = 0;
+	i2 = 0;
+	while (i2 <= (int)strlen(s2))
+	{
+		if (strequ(s2 + i2, "amp;"))
+			i2 += 4;
+		else
+			s[i++] = s2[i2++];
+	}
+	free(s2);
+}
