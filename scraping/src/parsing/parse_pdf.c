@@ -1,5 +1,6 @@
 #include "../scraping.h"
 
+// extrait les données d'un pdf et les stocke dans un fichier csv
 int	parse_pdf(char *pdf_name, char *output_name, char *lien)
 {
 	char			*txt_name;

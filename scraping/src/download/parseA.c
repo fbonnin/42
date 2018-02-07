@@ -4,7 +4,7 @@
 
 #define prefix "http://www.amf-france.org"
 
-// analyse une page contenant dix résultats
+// analyse une page contenant plusieurs résultats
 char	*parseA(char *url_a, int *i_pdf)
 {
 	char	*text;

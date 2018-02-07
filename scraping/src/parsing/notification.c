@@ -59,6 +59,7 @@ void	free_notification(t_notification *n)
 	free(n->lien);
 }
 
+// ajoute une ligne à la base de données
 int		write_notification(t_notification *n, char *output)
 {
 	FILE			*file;
