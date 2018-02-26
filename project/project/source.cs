@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace project
 {
-    class SOURCE
+    abstract class SOURCE
     {
         string login;
         string password;

@@ -13,7 +13,14 @@ namespace project
         DATABASE database;
         string table;
 
-        abstract protected void Process_ticker(string ticker);
+        public OPERATION(SOURCE source, string tickers_file_name, DATABASE database, string table)
+        {
+            this.source = source;
+            this.tickers = new TICKERS(tickers_file_name);
+            this.database = database;
+            this.table = table;
+        }
+        protected abstract void Process_ticker(string ticker);
         public void Process_tickers()
         {
             string ticker;

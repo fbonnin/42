@@ -1,0 +1,7 @@
+C:\Users\Florent\Desktop\project\project\bin\Debug\project.exe.config
+C:\Users\Florent\Desktop\project\project\bin\Debug\project.exe
+C:\Users\Florent\Desktop\project\project\bin\Debug\project.pdb
+C:\Users\Florent\Desktop\project\project\obj\Debug\project.csprojResolveAssemblyReference.cache
+C:\Users\Florent\Desktop\project\project\obj\Debug\project.csproj.CoreCompileInputs.cache
+C:\Users\Florent\Desktop\project\project\obj\Debug\project.exe
+C:\Users\Florent\Desktop\project\project\obj\Debug\project.pdb

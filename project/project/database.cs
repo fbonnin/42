@@ -17,7 +17,7 @@ namespace project
         public abstract void Connect();
         public abstract void Disconnect();
 
-        private string Get_insert_query(string table, List<string> columns, List<string> values)
+        private string Get_query_insert(string table, List<string> columns, List<string> values)
         {
             string result = "INSERT INTO " + table + " (";
             for (int i = 0; i < columns.Count; i++)
@@ -36,10 +36,20 @@ namespace project
             result += ");";
             return result;
         }
-        abstract protected string Exec_insert_query(string query);
+        protected abstract void Exec_query_insert(string query);
         public void Insert(string table, List<string> columns, List<string> values)
         {
-            Exec_insert_query(Get_insert_query(table, columns, values));
+            Exec_query_insert(Get_query_insert(table, columns, values));
+        }
+
+        private string Get_query_clear(string table)
+        {
+            return "DELETE FROM " + table;
+        }
+        protected abstract void Exec_query_clear(string query);
+        public void Clear(string table)
+        {
+            Exec_query_clear(Get_query_clear(table));
         }
     }
 }

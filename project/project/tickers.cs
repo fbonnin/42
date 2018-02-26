@@ -10,12 +10,13 @@ namespace project
     {
         string file_name;
         string[] tickers;
-        int i_ticker = 0;
+        int i_ticker;
 
         public TICKERS(string file_name)
         {
             this.file_name = file_name;
             tickers = System.IO.File.ReadAllLines(file_name);
+            i_ticker = 0;
         }
 
         public string Get_ticker()
