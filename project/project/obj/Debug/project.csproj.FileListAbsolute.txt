@@ -5,3 +5,5 @@ C:\Users\Florent\Desktop\project\project\obj\Debug\project.csprojResolveAssembly
 C:\Users\Florent\Desktop\project\project\obj\Debug\project.csproj.CoreCompileInputs.cache
 C:\Users\Florent\Desktop\project\project\obj\Debug\project.exe
 C:\Users\Florent\Desktop\project\project\obj\Debug\project.pdb
+C:\Users\Florent\Desktop\project\project\bin\Debug\MySql.Data.dll
+C:\Users\Florent\Desktop\project\project\bin\Debug\MySql.Data.xml

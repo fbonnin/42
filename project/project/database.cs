@@ -8,15 +8,27 @@ namespace project
 {
     abstract class DATABASE
     {
-        string host;
-        string name;
-        string user;
-        string password;
+        protected string host;
+        protected string name;
+        protected string user;
+        protected string password;
 
+        public DATABASE(string host, string name, string user, string password)
+        {
+            this.host = host;
+            this.name = name;
+            this.user = user;
+            this.password = password;
+            Connect();
+        }
+        ~DATABASE()
+        {
+            Disconnect();
+        }
 
         public abstract void Connect();
         public abstract void Disconnect();
-
+         
         private string Get_query_insert(string table, List<string> columns, List<string> values)
         {
             string result = "INSERT INTO " + table + " (";
@@ -36,20 +48,20 @@ namespace project
             result += ");";
             return result;
         }
-        protected abstract void Exec_query_insert(string query);
         public void Insert(string table, List<string> columns, List<string> values)
         {
-            Exec_query_insert(Get_query_insert(table, columns, values));
+            Execute(Get_query_insert(table, columns, values));
         }
 
         private string Get_query_clear(string table)
         {
             return "DELETE FROM " + table;
         }
-        protected abstract void Exec_query_clear(string query);
         public void Clear(string table)
         {
-            Exec_query_clear(Get_query_clear(table));
+            Execute(Get_query_clear(table));
         }
+
+        protected abstract void Execute(string query);
     }
 }
