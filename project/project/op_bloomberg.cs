@@ -10,25 +10,8 @@ namespace project
 {
     class OP_BLOOMBERG : OPERATION
     {
-        string[] fields;
-        string start_date;
-        string end_date;
-
-        OP_BLOOMBERG(SOURCE source, string ticker, DATABASE database, string table, string[] fields, string start_date, string end_date) : base(source, ticker, database, table)
+        public void Make_request()
         {
-            this.fields = fields;
-            this.start_date = start_date;
-            this.end_date = end_date;
-        }
-
-        Operation_synchronous()
-        {
-            Request request = source.service.CreateRequest("Historical Data Request");
-            request.Append("securities", ticker);
-            foreach (string field in fields)
-                request.Append("securities", field);
-            request.Set("startDate", start_date);
-            request.Set("endDate", end_date);
             session.SendRequest(request, null);
             bool done = false;
             while (!done)
@@ -39,6 +22,34 @@ namespace project
 
                 }
             }
+        }
+    }
+
+    class BLOOM_HISTORICAL_DATA_REQUEST : OPERATION
+    {
+        Request request;
+        string[] fields;
+        string[] tickers;
+        string start_date;
+        string end_date;
+
+        public BLOOM_HISTORICAL_DATA_REQUEST(SOURCE source, DATABASE database, string table, string[] fields, string[] tickers, string start_date, string end_date) : base(source, database, table)
+        {
+            this.fields = fields;
+            this.tickers = tickers;
+            this.start_date = start_date;
+            this.end_date = end_date;
+        }
+
+        private void Make_request()
+        {
+            request = source.service.CreateRequest("Historical Data Request");
+            foreach (string field in fields)
+                request.Append("fields", field);
+            foreach (string ticker in tickers)
+                request.Append("securities", ticker);
+            request.Set("startDate", start_date);
+            request.Set("endDate", end_date);
         }
     }
 }
