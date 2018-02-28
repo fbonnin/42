@@ -28,34 +28,34 @@ namespace project
 
         public abstract void Connect();
         public abstract void Disconnect();
-         
-        private string Get_query_insert(string table, List<string> columns, List<string> values)
+
+        private string Get_query_insert(string table, string[] columns, Object[] values)
         {
             string result = "INSERT INTO " + table + " (";
-            for (int i = 0; i < columns.Count; i++)
+            for (int i = 0; i < columns.Length; i++)
             {
                 result += columns[i];
-                if (i < columns.Count - 1)
+                if (i < columns.Length - 1)
                     result += ", ";
             }
             result += ") VALUES (";
-            for (int i = 0; i < values.Count; i++)
+            for (int i = 0; i < values.Length; i++)
             {
-                result += values[i];
-                if (i < values.Count - 1)
+                result += "'" + values[i].ToString() + "'";
+                if (i < values.Length - 1)
                     result += ", ";
             }
             result += ");";
             return result;
         }
-        public void Insert(string table, List<string> columns, List<string> values)
+        public void Insert(string table, string[] columns, Object[] values)
         {
             Execute(Get_query_insert(table, columns, values));
         }
 
         private string Get_query_clear(string table)
         {
-            return "DELETE FROM " + table;
+            return "DELETE FROM " + table + ";";
         }
         public void Clear(string table)
         {
