@@ -51,11 +51,11 @@ namespace project
                         event_bloom.Type != Event.EventType.PARTIAL_RESPONSE)
                         continue;
                     Element security_data = message.GetElement("securityData");
-                    Element field_datas = security_data.GetElement("fieldData[]");
-                    for (int i = 0; i < field_datas.NumValues; i++)
+                    Element field_data_array = security_data.GetElement("fieldData[]");
+                    for (int i = 0; i < field_data_array.NumValues; i++)
                     {
                         result.Add(new Object[fields.Length]);
-                        Element field_data = field_datas.GetValueAsElement(i);
+                        Element field_data = field_data_array.GetValueAsElement(i);
                         for (int j = 0; j < fields.Length; j++)
                         {
                             result.Last()[j] = field_data.GetElementAsString(fields[j]);
