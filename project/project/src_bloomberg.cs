@@ -50,6 +50,7 @@ namespace project
         public override Object[][] Request1(string[] fields, string ticker, DateTime start_date, DateTime end_date)
         {
             BLOOM_REQUEST1 request1 = new BLOOM_REQUEST1(this, fields, ticker, start_date, end_date);
+            return request1.Make_request();
         }
     }
 }

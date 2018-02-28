@@ -24,6 +24,7 @@ namespace project
             this.ticker = ticker;
             this.start_date = start_date;
             this.end_date = end_date;
+            request = Prepare_request();
         }
 
         private Request Prepare_request()
@@ -37,7 +38,7 @@ namespace project
             return request;
         }
 
-        private Object[][] Make_request()
+        public Object[][] Make_request()
         {
             List<Object[]> result = new List<Object[]>();
 
@@ -70,6 +71,7 @@ namespace project
                 if (event_bloom.Type == Event.EventType.RESPONSE)
                     break;
             }
+            return result.ToArray();
         }
     }
 }
