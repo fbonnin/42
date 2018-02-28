@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-/*
+
 using Bloomberglp.Blpapi;
 
 namespace project
@@ -52,5 +52,32 @@ namespace project
             request.Set("endDate", end_date);
         }
     }
+
+    class BLOOM_REQUEST1
+    {
+        SRC_BLOOM source;
+        string[] fields;
+        string ticker;
+        DateTime start_date;
+        DateTime end_date;
+
+        public BLOOM_REQUEST1(SRC_BLOOMBERG source, string[] fields, string ticker, string start_date, string end_date)
+        {
+            this.source = source;
+            this.fields = fields;
+            this.ticker = ticker;
+            this.start_date = start_date;
+            this.end_date = end_date;
+        }
+
+        private Request Make_request()
+        {
+            request = source.service.CreateRequest("Historical Data Request");
+            foreach (string field in fields)
+                request.Append("fields", field);
+            request.Append("securities", ticker);
+            request.Set("startDate", start_date);
+            request.Set("endDate", end_date);
+        }
+    }
 }
-*/

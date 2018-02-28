@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-/*
+
 using Bloomberglp.Blpapi;
 
 namespace project
@@ -12,12 +12,12 @@ namespace project
     {
     }
 
-    class SRC_BLOOMBERG : SOURCE
+    class SRC_BLOOM : SOURCE
     {
         Session session;
         Service service;
 
-        public SRC_BLOOMBERG()
+        public SRC_BLOOM()
         {
             session = new Session();
             if (!session.Start() ||
@@ -33,4 +33,3 @@ namespace project
         }
     }
 }
-*/
