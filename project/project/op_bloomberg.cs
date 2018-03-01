@@ -27,14 +27,26 @@ namespace project
             request = Prepare_request();
         }
 
+        private string Get_date(DateTime date)
+        {
+            string result = date.Year.ToString();
+            if (date.Month < 10)
+                result += "0";
+            result += date.Month.ToString();
+            if (date.Day < 10)
+                result += "0";
+            result += date.Day.ToString();
+            return result;
+        }
+
         private Request Prepare_request()
         {
-            request = source.Create_request("Historical Data Request");
+            request = source.Create_request("HistoricalDataRequest");
             foreach (string field in fields)
                 request.Append("fields", field);
             request.Append("securities", ticker);
-            request.Set("startDate", start_date);
-            request.Set("endDate", end_date);
+            request.Set("startDate", Get_date(start_date));
+            request.Set("endDate", Get_date(end_date));
             return request;
         }
 
@@ -52,19 +64,19 @@ namespace project
                         event_bloom.Type != Event.EventType.PARTIAL_RESPONSE)
                         continue;
                     Element security_data = message.GetElement("securityData");
-                    Element field_data_array = security_data.GetElement("fieldData[]");
+                    Element field_data_array = security_data.GetElement(3);
                     for (int i = 0; i < field_data_array.NumValues; i++)
                     {
                         result.Add(new Object[fields.Length]);
                         Element field_data = field_data_array.GetValueAsElement(i);
                         for (int j = 0; j < fields.Length; j++)
                         {
-                            result.Last()[j] = field_data.GetElementAsString(fields[j]);
                             Object value;
                             if (fields[j] == "ticker")
                                 value = String.Copy(ticker);
                             else
                                 value = field_data.GetElementAsString(fields[j]);
+                            result.Last()[j] = value;
                         }
                     }
                 }

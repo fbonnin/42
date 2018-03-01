@@ -19,10 +19,21 @@ namespace project
             db_mysql.Insert("table_test", columns, values);*/
 
             SRC_BLOOM src_bloom = new SRC_BLOOM();
-            string[] fields = new string[1];
+            string[] fields = new string[4];
             fields[0] = "PX_LAST";
-
+            fields[1] = "PX_HIGH";
+            fields[2] = "ticker";
+            fields[3] = "date";
             Object[][] request_result = src_bloom.Request1(fields, "IBM US Equity", new DateTime(2017, 1, 1), new DateTime(2018, 1, 1));
+            Console.WriteLine("Number of rows : {0}", request_result.Length);
+            foreach (Object[] row in request_result)
+            {
+                for (int j = 0; j < row.Length; j++)
+                {
+                    Console.Write("{0}:{1}  ", fields[j], row[j]);
+                }
+                Console.WriteLine();
+            }
         }
     }
 }

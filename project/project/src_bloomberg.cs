@@ -17,7 +17,7 @@ namespace project
         protected Session session;
         protected Service service;
 
-        public SRC_BLOOM()
+        public SRC_BLOOM() : base("", "")
         {
             session = new Session();
             if (!session.Start() ||
@@ -27,7 +27,7 @@ namespace project
                 throw new BLOOMBERG_ERROR();
             }
         }
-        ~SRC_BLOOMBERG()
+        ~SRC_BLOOM()
         {
             session.Stop();
         }
