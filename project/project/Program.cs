@@ -17,8 +17,9 @@ namespace project
             Object[] values = new Object[1];
             values[0] = "15";
             db_mysql.Insert("table_test", columns, values);*/
-
-            /*SRC_BLOOM src_bloom = new SRC_BLOOM("", "");
+            
+            /* TEST BLOOM
+            SRC_BLOOM src_bloom = new SRC_BLOOM("", "");
             string[] fields = new string[4];
             fields[0] = "PX_LAST";
             fields[1] = "PX_HIGH";

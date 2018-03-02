@@ -8,6 +8,7 @@ namespace project
 {
     abstract class OPERATION
     {
+        public abstract void Do_operation();
     }
 
     class OPERATION1 : OPERATION
@@ -33,7 +34,7 @@ namespace project
             this.columns = columns;
         }
 
-        public void Do_operation()
+        public override void Do_operation()
         {
             string[] tickers = System.IO.File.ReadAllLines(tickers_file);
             foreach (string ticker in tickers)
