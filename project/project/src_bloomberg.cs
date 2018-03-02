@@ -8,19 +8,19 @@ using Bloomberglp.Blpapi;
 
 namespace project
 {
-    class SRC_BLOOM : SOURCE
+    class SRC_BLOOMBERG : SOURCE
     {
         private Session session;
         private Service service;
 
-        public SRC_BLOOM()
+        public SRC_BLOOMBERG()
         {
             session = new Session();
             session.Start();
             session.OpenService("//blp/refdata");
             service = session.GetService("//blp/refdata");
         }
-        ~SRC_BLOOM()
+        ~SRC_BLOOMBERG()
         {
             session.Stop();
         }

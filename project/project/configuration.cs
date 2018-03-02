@@ -22,23 +22,20 @@ namespace project
         public Dictionary<string, SOURCE> Get_sources()
         {
             Dictionary<string, SOURCE> result = new Dictionary<string, SOURCE>();
-            XmlElement sources = (XmlElement)e_configuration.GetElementsByTagName("sources")[0];
-            XmlNodeList source_list = sources.GetElementsByTagName("source");
+            XmlNodeList source_list = ((XmlElement)e_configuration.GetElementsByTagName("sources")[0]).GetElementsByTagName("source");
             for (int i = 0; i < source_list.Count; i++)
             {
-                XmlElement source = (XmlElement)source_list[i];
-                string name = ((XmlElement)source.GetElementsByTagName("name")[0]).InnerText;
-                string type = ((XmlElement)source.GetElementsByTagName("type")[0]).InnerText;
-                string login = ((XmlElement)source.GetElementsByTagName("login")[0]).InnerText;
-                string password = ((XmlElement)source.GetElementsByTagName("password")[0]).InnerText;
-                SOURCE src = null;
+                XmlElement e_source = (XmlElement)source_list[i];
+                string name = ((XmlElement)e_source.GetElementsByTagName("name")[0]).InnerText;
+                string type = ((XmlElement)e_source.GetElementsByTagName("type")[0]).InnerText;
+                SOURCE source = null;
                 switch (type)
                 {
                     case "bloomberg":
-                        src = new SRC_BLOOM();
+                        source = new SRC_BLOOMBERG();
                         break;
                 }
-                result.Add(name, src);
+                result.Add(name, source);
             }
             return result;
         }
@@ -46,39 +43,38 @@ namespace project
         public Dictionary<string, DATABASE> Get_databases()
         {
             Dictionary<string, DATABASE> result = new Dictionary<string, DATABASE>();
-            XmlElement databases = (XmlElement)e_configuration.GetElementsByTagName("databases")[0];
-            XmlNodeList database_list = databases.GetElementsByTagName("database");
+            XmlNodeList database_list = ((XmlElement)e_configuration.GetElementsByTagName("databases")[0]).GetElementsByTagName("database");
             for (int i = 0; i < database_list.Count; i++)
             {
-                XmlElement database = (XmlElement)database_list[i];
-                string name = ((XmlElement)database.GetElementsByTagName("name")[0]).InnerText;
-                string type = ((XmlElement)database.GetElementsByTagName("type")[0]).InnerText;
-                string host = ((XmlElement)database.GetElementsByTagName("host")[0]).InnerText;
-                string db_name = ((XmlElement)database.GetElementsByTagName("db_name")[0]).InnerText;
-                string user = ((XmlElement)database.GetElementsByTagName("user")[0]).InnerText;
-                string password = ((XmlElement)database.GetElementsByTagName("password")[0]).InnerText;
-                DATABASE db = null;
+                XmlElement e_database = (XmlElement)database_list[i];
+                string name = ((XmlElement)e_database.GetElementsByTagName("name")[0]).InnerText;
+                string type = ((XmlElement)e_database.GetElementsByTagName("type")[0]).InnerText;
+                DATABASE database = null;
                 switch (type)
                 {
                     case "mysql":
-                        db = new DB_MYSQL(host, db_name, user, password);
+                        string host = ((XmlElement)e_database.GetElementsByTagName("host")[0]).InnerText;
+                        string real_name = ((XmlElement)e_database.GetElementsByTagName("real_name")[0]).InnerText;
+                        string user = ((XmlElement)e_database.GetElementsByTagName("user")[0]).InnerText;
+                        string password = ((XmlElement)e_database.GetElementsByTagName("password")[0]).InnerText;
+                        database = new DB_MYSQL(host, real_name, user, password);
                         break;
                 }
-                result.Add(name, db);
+                result.Add(name, database);
             }
+
             return result;
         }
 
         public List<OPERATION> Get_operations(Dictionary<string, SOURCE> sources, Dictionary<string, DATABASE> databases)
         {
             List<OPERATION> result = new List<OPERATION>();
-            XmlElement e_operations = (XmlElement)e_configuration.GetElementsByTagName("operations")[0];
-            XmlNodeList operation_list = e_operations.GetElementsByTagName("operation");
+            XmlNodeList operation_list = ((XmlElement)e_configuration.GetElementsByTagName("operations")[0]).GetElementsByTagName("operation");
             for (int i = 0; i < operation_list.Count; i++)
             {
                 XmlElement e_operation = (XmlElement)operation_list[i];
                 string type = ((XmlElement)e_operation.GetElementsByTagName("type")[0]).InnerText;
-                OPERATION op = null;
+                OPERATION operation = null;
                 switch (type)
                 {
                     case "operation1":
@@ -104,9 +100,10 @@ namespace project
                         string[] columns = new string[column_list.Count];
                         for (int j = 0; j < column_list.Count; j++)
                             columns[j] = ((XmlElement)column_list[j]).InnerText;
-                        op = new OPERATION1(fields, tickers_file, start_date, end_date, sources[source], databases[database], table, columns);
+                        operation = new OPERATION1(fields, tickers_file, start_date, end_date, sources[source], databases[database], table, columns);
                         break;
                 }
+                result.Add(operation);
             }
             return result;
         }

@@ -10,14 +10,14 @@ namespace project
 {
     class BLOOM_REQUEST1
     {
-        SRC_BLOOM source;
+        SRC_BLOOMBERG source;
         string[] fields;
         string ticker;
         DateTime start_date;
         DateTime end_date;
         Request request;
 
-        public BLOOM_REQUEST1(SRC_BLOOM source, string[] fields, string ticker, DateTime start_date, DateTime end_date)
+        public BLOOM_REQUEST1(SRC_BLOOMBERG source, string[] fields, string ticker, DateTime start_date, DateTime end_date)
         {
             this.source = source;
             this.fields = fields;
