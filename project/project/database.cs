@@ -4,30 +4,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using MySql.Data;
+using MySql.Data.MySqlClient;
+
 namespace project
 {
     abstract class DATABASE
     {
-        protected string host;
-        protected string name;
-        protected string user;
-        protected string password;
+        public abstract void Insert(string table, string[] columns, Object[] values);
+        public abstract void Clear(string table);
+    }
 
-        public DATABASE(string host, string name, string user, string password)
+    class DB_MYSQL : DATABASE
+    {
+        MySqlConnection connection;
+
+        public DB_MYSQL(string host, string name, string user, string password)
         {
-            this.host = host;
-            this.name = name;
-            this.user = user;
-            this.password = password;
-            Connect();
+            connection = new MySqlConnection("host=" + host + ";database=" + name + ";user=" + user + ";password=" + password + ";");
+            connection.Open();
         }
-        ~DATABASE()
+        ~DB_MYSQL()
         {
-            Disconnect();
+            connection.Close();
         }
 
-        public abstract void Connect();
-        public abstract void Disconnect();
+        public override void Insert(string table, string[] columns, Object[] values)
+        {
+            Execute(Get_query_insert(table, columns, values));
+        }
+        public override void Clear(string table)
+        {
+            Execute(Get_query_clear(table));
+        }
 
         private string Get_query_insert(string table, string[] columns, Object[] values)
         {
@@ -48,20 +57,15 @@ namespace project
             result += ");";
             return result;
         }
-        public void Insert(string table, string[] columns, Object[] values)
-        {
-            Execute(Get_query_insert(table, columns, values));
-        }
-
         private string Get_query_clear(string table)
         {
             return "DELETE FROM " + table + ";";
         }
-        public void Clear(string table)
-        {
-            Execute(Get_query_clear(table));
-        }
 
-        protected abstract void Execute(string query);
+        private void Execute(string query)
+        {
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.ExecuteNonQuery();
+        }
     }
 }

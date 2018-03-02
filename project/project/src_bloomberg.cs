@@ -8,24 +8,17 @@ using Bloomberglp.Blpapi;
 
 namespace project
 {
-    class BLOOMBERG_ERROR : System.Exception
-    {
-    }
-
     class SRC_BLOOM : SOURCE
     {
-        protected Session session;
-        protected Service service;
+        private Session session;
+        private Service service;
 
-        public SRC_BLOOM() : base("", "")
+        public SRC_BLOOM()
         {
             session = new Session();
-            if (!session.Start() ||
-                !session.OpenService("//blp/refdata") ||
-                (service = session.GetService("//blp/refdata")) == null)
-            {
-                throw new BLOOMBERG_ERROR();
-            }
+            session.Start();
+            session.OpenService("//blp/refdata");
+            service = session.GetService("//blp/refdata");
         }
         ~SRC_BLOOM()
         {
@@ -36,12 +29,10 @@ namespace project
         {
             return service.CreateRequest(type);
         }
-
         public void Send_request(Request request)
         {
             session.SendRequest(request, null);
         }
-
         public Event Next_event()
         {
             return session.NextEvent();

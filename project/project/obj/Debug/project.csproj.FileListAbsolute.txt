@@ -17,3 +17,4 @@ C:\Users\HTL\Desktop\project\project\bin\Debug\project.pdb
 C:\Users\HTL\Desktop\project\project\bin\Debug\Bloomberglp.Blpapi.dll
 C:\Users\HTL\Desktop\project\project\bin\Debug\Bloomberglp.Blpapi.xml
 C:\Users\HTL\Desktop\project\project\bin\Debug\MySql.Data.xml
+C:\Users\Florent\Desktop\project\project\bin\Debug\Bloomberglp.Blpapi.xml

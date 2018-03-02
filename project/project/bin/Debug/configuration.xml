@@ -1,0 +1,12 @@
+<configuration>
+	<databases>
+		<database>
+			<name>db1</name>
+			<type>mysql</type>
+			<host>localhost</host>
+			<db_name>test</db_name>
+			<user>root</user>
+			<password></password>
+		</database>
+	</databases>
+</configuration>

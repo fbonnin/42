@@ -46,10 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="configuration.cs" />
     <Compile Include="database.cs" />
-    <Compile Include="db_mysql.cs" />
     <Compile Include="operation.cs" />
-    <Compile Include="operation1.cs" />
     <Compile Include="op_bloomberg.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

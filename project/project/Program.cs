@@ -18,7 +18,7 @@ namespace project
             values[0] = "15";
             db_mysql.Insert("table_test", columns, values);*/
 
-            SRC_BLOOM src_bloom = new SRC_BLOOM();
+            /*SRC_BLOOM src_bloom = new SRC_BLOOM("", "");
             string[] fields = new string[4];
             fields[0] = "PX_LAST";
             fields[1] = "PX_HIGH";
@@ -33,7 +33,16 @@ namespace project
                     Console.Write("{0}:{1}  ", fields[j], row[j]);
                 }
                 Console.WriteLine();
-            }
+            }*/
+
+            CONFIGURATION configuration = new CONFIGURATION("configuration.xml");
+            Dictionary<string, DATABASE> databases = configuration.Get_databases();
+            Console.WriteLine(databases.Count);
+            string[] columns = new string[1];
+            columns[0] = "name";
+            Object[] values = new object[1];
+            values[0] = "autrrett";
+            databases["db1"].Insert("table_test", columns, values);
         }
     }
 }
