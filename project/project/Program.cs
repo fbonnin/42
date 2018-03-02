@@ -40,10 +40,10 @@ namespace project
             Dictionary<string, DATABASE> databases = configuration.Get_databases();
             Console.WriteLine(databases.Count);
             string[] columns = new string[1];
-            columns[0] = "name";
+            columns[0] = "ticker";
             Object[] values = new object[1];
-            values[0] = "autrrett";
-            databases["db1"].Insert("table_test", columns, values);
+            values[0] = "montickerbidon";
+            databases["database"].Insert("table_test", columns, values);
         }
     }
 }
