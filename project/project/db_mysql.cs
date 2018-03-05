@@ -22,16 +22,6 @@ namespace project
         {
             connection.Close();
         }
-
-        public override void Insert(string table, string[] columns, Object[] values)
-        {
-            Execute(Get_query_insert(table, columns, values));
-        }
-        public override void Clear(string table)
-        {
-            Execute(Get_query_clear(table));
-        }
-
         private string Get_query_insert(string table, string[] columns, Object[] values)
         {
             string result = "INSERT INTO " + table + " (";
@@ -55,11 +45,18 @@ namespace project
         {
             return "DELETE FROM " + table + ";";
         }
-
         private void Execute(string query)
         {
             MySqlCommand command = new MySqlCommand(query, connection);
             command.ExecuteNonQuery();
+        }
+        public override void Insert(string table, string[] columns, Object[] values)
+        {
+            Execute(Get_query_insert(table, columns, values));
+        }
+        public override void Clear(string table)
+        {
+            Execute(Get_query_clear(table));
         }
     }
 }

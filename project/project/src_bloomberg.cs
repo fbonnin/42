@@ -24,7 +24,6 @@ namespace project
         {
             session.Stop();
         }
-
         public Request Create_request(string type)
         {
             return service.CreateRequest(type);
@@ -37,10 +36,9 @@ namespace project
         {
             return session.NextEvent();
         }
-
         public override Object[][] Request1(string[] fields, string ticker, DateTime start_date, DateTime end_date)
         {
-            BLOOM_REQUEST1 request1 = new BLOOM_REQUEST1(this, fields, ticker, start_date, end_date);
+            BLOOM_REQUEST1 request1 = new BLOOM_REQUEST1(this, fields, ticker, new Datetime(start_date), new Datetime(end_date));
             return request1.Make_request();
         }
     }
