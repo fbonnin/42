@@ -18,16 +18,26 @@ namespace project
             doc.Load(file);
             e_configuration = doc.DocumentElement;
         }
-
+        private XmlElement Get_child(XmlNode node, string child_name)
+        {
+            return (XmlElement)node.SelectNodes(child_name)[0];
+        }
+        private XmlElement[] Get_children(XmlNode node, string children_name)
+        {
+            XmlNodeList node_list = node.SelectNodes(children_name);
+            XmlElement[] elements = new XmlElement[node_list.Count];
+            for (int i = 0; i < node_list.Count; i++)
+                elements[i] = (XmlElement)node_list[i];
+            return elements;
+        }
         public Dictionary<string, SOURCE> Get_sources()
         {
             Dictionary<string, SOURCE> result = new Dictionary<string, SOURCE>();
-            XmlNodeList source_list = ((XmlElement)e_configuration.GetElementsByTagName("sources")[0]).GetElementsByTagName("source");
-            for (int i = 0; i < source_list.Count; i++)
+            XmlElement e_sources = Get_child(e_configuration, "sources");
+            foreach (XmlNode e_source in Get_children(e_sources, "source"))
             {
-                XmlElement e_source = (XmlElement)source_list[i];
-                string name = ((XmlElement)e_source.GetElementsByTagName("name")[0]).InnerText;
-                string type = ((XmlElement)e_source.GetElementsByTagName("type")[0]).InnerText;
+                string name = Get_child(e_source, "name").InnerText;
+                string type = Get_child(e_source, "type").InnerText;
                 SOURCE source = null;
                 switch (type)
                 {
@@ -39,33 +49,51 @@ namespace project
             }
             return result;
         }
-
         public Dictionary<string, DATABASE> Get_databases()
         {
             Dictionary<string, DATABASE> result = new Dictionary<string, DATABASE>();
-            XmlNodeList database_list = ((XmlElement)e_configuration.GetElementsByTagName("databases")[0]).GetElementsByTagName("database");
-            for (int i = 0; i < database_list.Count; i++)
+            XmlElement e_databases = Get_child(e_configuration, "databases");
+            foreach (XmlElement e_database in Get_children(e_databases, "database"))
             {
-                XmlElement e_database = (XmlElement)database_list[i];
-                string name = ((XmlElement)e_database.GetElementsByTagName("name")[0]).InnerText;
-                string type = ((XmlElement)e_database.GetElementsByTagName("type")[0]).InnerText;
+                string name = Get_child(e_database, "name").InnerText;
+                string type = Get_child(e_database, "type").InnerText;
                 DATABASE database = null;
                 switch (type)
                 {
                     case "mysql":
-                        string host = ((XmlElement)e_database.GetElementsByTagName("host")[0]).InnerText;
-                        string real_name = ((XmlElement)e_database.GetElementsByTagName("real_name")[0]).InnerText;
-                        string user = ((XmlElement)e_database.GetElementsByTagName("user")[0]).InnerText;
-                        string password = ((XmlElement)e_database.GetElementsByTagName("password")[0]).InnerText;
+                        string host = Get_child(e_database, "host").InnerText;
+                        string real_name = Get_child(e_database, "real_name").InnerText;
+                        string user = Get_child(e_database, "user").InnerText;
+                        string password = Get_child(e_database, "password").InnerText;
                         database = new DB_MYSQL(host, real_name, user, password);
                         break;
                 }
                 result.Add(name, database);
             }
-
             return result;
         }
-
+        /*todo
+        public List<OPERATION> Get_operations(Dictionary<string, SOURCE> sources, Dictionary<string, DATABASE> databases)
+        {
+            List<OPERATION> result = new List<OPERATION>();
+            XmlElement e_operations = Get_child(e_configuration, "operations");
+            foreach (XmlElement e_operation in Get_children(e_operations, "operation"))
+            {
+                string type = Get_child(e_operation, "type").InnerText;
+                OPERATION operation = null;
+                switch (type)
+                {
+                    case "operation1":
+                        XmlElement e_fields = Get_child(e_operation, "fields");
+                        List<string> fields = new List<string>();
+                        foreach (XmlNode e_field in Get_children(e_fields, "field"))
+                            fields.Add(e_field);
+                        break;
+                }
+                result.Add(operation);
+            }
+            return result;
+        }*/
         public List<OPERATION> Get_operations(Dictionary<string, SOURCE> sources, Dictionary<string, DATABASE> databases)
         {
             List<OPERATION> result = new List<OPERATION>();

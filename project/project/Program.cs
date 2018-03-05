@@ -15,8 +15,8 @@ namespace project
             string[] columns = { "ticker", "low", "high" };
             Object[] values = { "ticker_test", -15, 23 };
             db_mysql.Insert("table_test", columns, values);*/
-            
-            /*TEST BLOOM*/
+
+            /*TEST BLOOM
             SRC_BLOOMBERG src_bloom = new SRC_BLOOMBERG();
             string[] fields = { "ticker", "date", "PX_LOW", "PX_HIGH", "PX_LAST" };
             Object[][] result = src_bloom.Request1(fields, "IBM US Equity", new DateTime(2017, 1, 1), new DateTime(2018, 1, 1));
@@ -26,16 +26,17 @@ namespace project
                 for (int j = 0; j < values.Length; j++)
                     Console.Write("{0}:{1}  ", fields[j], values[j]);
                 Console.WriteLine();
-            }
+            }*/
 
-            /*CONFIGURATION configuration = new CONFIGURATION("configuration.xml");
+            /*TEST GET_DATABASES*/
+            CONFIGURATION configuration = new CONFIGURATION("configuration.xml");
             Dictionary<string, DATABASE> databases = configuration.Get_databases();
             Console.WriteLine(databases.Count);
             string[] columns = new string[1];
             columns[0] = "ticker";
             Object[] values = new object[1];
-            values[0] = "montickerbidon";
-            databases["database"].Insert("table_test", columns, values);*/
+            values[0] = "HELLOWORLD";
+            databases["database"].Insert("table_test", columns, values);
         }
     }
 }

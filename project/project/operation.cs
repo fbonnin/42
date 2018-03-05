@@ -33,7 +33,6 @@ namespace project
             this.table = table;
             this.columns = columns;
         }
-
         public override void Do_operation()
         {
             string[] tickers = System.IO.File.ReadAllLines(tickers_file);

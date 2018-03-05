@@ -55,7 +55,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="source.cs" />
     <Compile Include="src_bloomberg.cs" />
-    <Compile Include="tickers.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
