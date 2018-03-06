@@ -1,6 +1,6 @@
 <configuration>
 	<sources>
-			<source>
+		<source>
 			<name>bloomberg</name>
 			<type>bloomberg</type>
 		</source>

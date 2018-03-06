@@ -34,7 +34,7 @@ namespace project
         {
             Dictionary<string, SOURCE> result = new Dictionary<string, SOURCE>();
             XmlElement e_sources = Get_child(e_configuration, "sources");
-            foreach (XmlNode e_source in Get_children(e_sources, "source"))
+            foreach (XmlElement e_source in Get_children(e_sources, "source"))
             {
                 string name = Get_child(e_source, "name").InnerText;
                 string type = Get_child(e_source, "type").InnerText;
