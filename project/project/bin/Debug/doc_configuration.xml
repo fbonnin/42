@@ -1,0 +1,69 @@
+<configuration>
+
+	<sources>
+		<source>
+			<name>bloomberg</name> <!-- give a name to the source -->
+			<type>bloomberg</type> <!-- possible values : bloomberg -->
+		</source>
+		<!-- add as many sources as you want -->
+	</sources>
+
+	<databases>
+		<database>
+			<name>database</name> <!-- give a name to the database -->
+			<type>mysql</type> <!-- possible values : mysql -->
+			<host>localhost</host> <!-- example: localhost -->
+			<real_name>database_test</real_name> <!-- the name of the database -->
+			<user>root</user> 
+			<password></password>
+		</database>
+		<!-- add as many databases as you want -->
+	</databases>
+
+	<operations>
+
+		<operation>
+			<type>operation1</type>
+			<fields> <!-- the informations that you want to get -->
+				<field>ticker</field>
+				<field>date</field>
+				<field>PX_LAST</field>
+				<field>PX_LOW</field>
+				<field>PX_HIGH</field>
+				<!-- add as many fields as you want -->
+			</fields>
+			<tickers_file>tickers.txt</tickers_file> <!-- the path to the file that contains the tickers -->
+			<start_date> <!-- optional -->
+				<year>2017</year>
+				<month>1</month>
+				<day>1</day>
+			</start_date>
+			<end_date> <!-- optional -->
+				<year>2018</year>
+				<month>1</month>
+				<day>1</day>
+			</end_date>
+			<options> <!-- optional -->
+				<option>
+					<name>adjusmentSplit</name>
+					<value>TRUE</value>
+				</option>
+				<!-- add as many options as you want -->
+			</options>
+			<source>bloomberg</source>
+			<database>database</database>
+			<table>table_test</table>
+			<columns> <!-- the names of the columns in which you want to insert the data -->
+				<column>ticker</column>
+				<column>date</column>
+				<column>last</column>
+				<column>low</column>
+				<column>high</column>
+				<!-- add as many columns as you want -->
+			</columns>
+		</operation>
+		
+		<!-- add as many operations as you want -->
+	</operations>
+	
+</configuration>
