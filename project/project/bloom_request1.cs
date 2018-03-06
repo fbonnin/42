@@ -13,11 +13,11 @@ namespace project
         SRC_BLOOMBERG source;
         string[] fields;
         string ticker;
-        Datetime start_date;
-        Datetime end_date;
+        DateTime start_date;
+        DateTime end_date;
         Request request;
 
-        public BLOOM_REQUEST1(SRC_BLOOMBERG source, string[] fields, string ticker, Datetime start_date, Datetime end_date)
+        public BLOOM_REQUEST1(SRC_BLOOMBERG source, string[] fields, string ticker, DateTime start_date, DateTime end_date)
         {
             this.source = source;
             this.fields = fields;
@@ -26,7 +26,7 @@ namespace project
             this.end_date = end_date;
             Prepare_request();
         }
-        /*private string Get_date(DateTime date)
+        private string Get_date(DateTime date)
         {
             string result = date.Year.ToString();
             if (date.Month < 10)
@@ -36,15 +36,15 @@ namespace project
                 result += "0";
             result += date.Day.ToString();
             return result;
-        }*/
+        }
         void Prepare_request()
         {
             request = source.Create_request("HistoricalDataRequest");
             foreach (string field in fields)
                 request.Append("fields", field);
             request.Append("securities", ticker);
-            request.Set("startDate", start_date);
-            request.Set("endDate", end_date);
+            request.Set("startDate", Get_date(start_date));
+            request.Set("endDate", Get_date(end_date));
         }
         public Object[][] Make_request()
         {
