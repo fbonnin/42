@@ -34,7 +34,8 @@ namespace project
         {
             Dictionary<string, SOURCE> result = new Dictionary<string, SOURCE>();
             XmlElement e_sources = Get_child(e_configuration, "sources");
-            foreach (XmlElement e_source in Get_children(e_sources, "source"))
+            XmlElement[] source_list = Get_children(e_sources, "source");
+            foreach (XmlElement e_source in source_list)
             {
                 string name = Get_child(e_source, "name").InnerText;
                 string type = Get_child(e_source, "type").InnerText;
@@ -53,7 +54,8 @@ namespace project
         {
             Dictionary<string, DATABASE> result = new Dictionary<string, DATABASE>();
             XmlElement e_databases = Get_child(e_configuration, "databases");
-            foreach (XmlElement e_database in Get_children(e_databases, "database"))
+            XmlElement[] database_list = Get_children(e_databases, "database");
+            foreach (XmlElement e_database in database_list)
             {
                 string name = Get_child(e_database, "name").InnerText;
                 string type = Get_child(e_database, "type").InnerText;
@@ -72,12 +74,12 @@ namespace project
             }
             return result;
         }
-        /*todo
-        public List<OPERATION> Get_operations(Dictionary<string, SOURCE> sources, Dictionary<string, DATABASE> databases)
+        public OPERATION[] Get_operations(Dictionary<string, SOURCE> sources, Dictionary<string, DATABASE> databases)
         {
             List<OPERATION> result = new List<OPERATION>();
             XmlElement e_operations = Get_child(e_configuration, "operations");
-            foreach (XmlElement e_operation in Get_children(e_operations, "operation"))
+            XmlElement[] operation_list = Get_children(e_operations, "operation");
+            foreach (XmlElement e_operation in operation_list)
             {
                 string type = Get_child(e_operation, "type").InnerText;
                 OPERATION operation = null;
@@ -85,55 +87,35 @@ namespace project
                 {
                     case "operation1":
                         XmlElement e_fields = Get_child(e_operation, "fields");
-                        List<string> fields = new List<string>();
-                        foreach (XmlNode e_field in Get_children(e_fields, "field"))
-                            fields.Add(e_field);
-                        break;
-                }
-                result.Add(operation);
-            }
-            return result;
-        }*/
-        public List<OPERATION> Get_operations(Dictionary<string, SOURCE> sources, Dictionary<string, DATABASE> databases)
-        {
-            List<OPERATION> result = new List<OPERATION>();
-            XmlNodeList operation_list = ((XmlElement)e_configuration.GetElementsByTagName("operations")[0]).GetElementsByTagName("operation");
-            for (int i = 0; i < operation_list.Count; i++)
-            {
-                XmlElement e_operation = (XmlElement)operation_list[i];
-                string type = ((XmlElement)e_operation.GetElementsByTagName("type")[0]).InnerText;
-                OPERATION operation = null;
-                switch (type)
-                {
-                    case "operation1":
-                        XmlNodeList field_list = ((XmlElement)e_operation.GetElementsByTagName("fields")[0]).GetElementsByTagName("field");
-                        string[] fields = new string[field_list.Count];
-                        for (int j = 0; j < field_list.Count; j++)
-                            fields[j] = ((XmlElement)field_list[j]).InnerText;
-                        string tickers_file = ((XmlElement)e_operation.GetElementsByTagName("tickers_file")[0]).InnerText;
-                        XmlElement e_start = (XmlElement)e_operation.GetElementsByTagName("start_date")[0];
-                        int start_year = Int32.Parse(((XmlElement)e_start.GetElementsByTagName("year")[0]).InnerText);
-                        int start_month = Int32.Parse(((XmlElement)e_start.GetElementsByTagName("month")[0]).InnerText);
-                        int start_day = Int32.Parse(((XmlElement)e_start.GetElementsByTagName("day")[0]).InnerText);
+                        XmlElement[] field_list = Get_children(e_fields, "field");
+                        string[] fields = new string[field_list.Length];
+                        for (int i = 0; i < fields.Length; i++)
+                            fields[i] = field_list[i].InnerText;
+                        string tickers_file = Get_child(e_operation, "tickers_file").InnerText;
+                        XmlElement e_start = Get_child(e_operation, "start_date");
+                        int start_year = Int32.Parse(Get_child(e_start, "year").InnerText);
+                        int start_month = Int32.Parse(Get_child(e_start, "month").InnerText);
+                        int start_day = Int32.Parse(Get_child(e_start, "day").InnerText);
                         DateTime start_date = new DateTime(start_year, start_month, start_day);
-                        XmlElement e_end = (XmlElement)e_operation.GetElementsByTagName("end_date")[0];
-                        int end_year = Int32.Parse(((XmlElement)e_end.GetElementsByTagName("year")[0]).InnerText);
-                        int end_month = Int32.Parse(((XmlElement)e_end.GetElementsByTagName("month")[0]).InnerText);
-                        int end_day = Int32.Parse(((XmlElement)e_end.GetElementsByTagName("day")[0]).InnerText);
+                        XmlElement e_end = Get_child(e_operation, "end_date");
+                        int end_year = Int32.Parse(Get_child(e_end, "year").InnerText);
+                        int end_month = Int32.Parse(Get_child(e_end, "month").InnerText);
+                        int end_day = Int32.Parse(Get_child(e_end, "day").InnerText);
                         DateTime end_date = new DateTime(end_year, end_month, end_day);
-                        string source = ((XmlElement)e_operation.GetElementsByTagName("source")[0]).InnerText;
-                        string database = ((XmlElement)e_operation.GetElementsByTagName("database")[0]).InnerText;
-                        string table = ((XmlElement)e_operation.GetElementsByTagName("table")[0]).InnerText;
-                        XmlNodeList column_list = ((XmlElement)e_operation.GetElementsByTagName("columns")[0]).GetElementsByTagName("column");
-                        string[] columns = new string[column_list.Count];
-                        for (int j = 0; j < column_list.Count; j++)
-                            columns[j] = ((XmlElement)column_list[j]).InnerText;
+                        string source = Get_child(e_operation, "source").InnerText;
+                        string database = Get_child(e_operation, "database").InnerText;
+                        string table = Get_child(e_operation, "table").InnerText;
+                        XmlElement e_columns = Get_child(e_operation, "columns");
+                        XmlElement[] column_list = Get_children(e_columns, "column");
+                        string[] columns = new string[column_list.Length];
+                        for (int i = 0; i < columns.Length; i++)
+                            columns[i] = column_list[i].InnerText;
                         operation = new OPERATION1(fields, tickers_file, start_date, end_date, sources[source], databases[database], table, columns);
                         break;
                 }
                 result.Add(operation);
             }
-            return result;
+            return result.ToArray();
         }
     }
 }
