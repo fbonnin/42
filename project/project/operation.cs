@@ -40,7 +40,14 @@ namespace project
             {
                 Object[][] request_result = source.Request1(fields, ticker, start_date, end_date);
                 foreach (Object[] row in request_result)
+                {
+                    /*
+                    for (int j = 0; j < row.Length; j++)
+                        Console.Write("{0}:{1}  ", fields[j], row[j].ToString());
+                    Console.WriteLine();
+                    */
                     database.Insert(table, columns, row);
+                }
             }
         }
     }

@@ -28,3 +28,13 @@ C:\Users\HTL\fbonnin\project\project\obj\Debug\project.csprojResolveAssemblyRefe
 C:\Users\HTL\fbonnin\project\project\obj\Debug\project.csproj.CoreCompileInputs.cache
 C:\Users\HTL\fbonnin\project\project\obj\Debug\project.exe
 C:\Users\HTL\fbonnin\project\project\obj\Debug\project.pdb
+C:\Users\HTL\mdm\project\project\bin\Debug\project.exe.config
+C:\Users\HTL\mdm\project\project\bin\Debug\project.exe
+C:\Users\HTL\mdm\project\project\bin\Debug\project.pdb
+C:\Users\HTL\mdm\project\project\bin\Debug\Bloomberglp.Blpapi.dll
+C:\Users\HTL\mdm\project\project\bin\Debug\Bloomberglp.Blpapi.xml
+C:\Users\HTL\mdm\project\project\bin\Debug\MySql.Data.xml
+C:\Users\HTL\mdm\project\project\obj\Debug\project.csprojResolveAssemblyReference.cache
+C:\Users\HTL\mdm\project\project\obj\Debug\project.csproj.CoreCompileInputs.cache
+C:\Users\HTL\mdm\project\project\obj\Debug\project.exe
+C:\Users\HTL\mdm\project\project\obj\Debug\project.pdb

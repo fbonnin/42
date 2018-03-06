@@ -19,8 +19,11 @@
 		<operation>
 			<type>operation1</type>
 			<fields>
-				<field>low</field>
-				<field>high</field>
+				<field>ticker</field>
+				<field>date</field>
+				<field>PX_LAST</field>
+				<field>PX_LOW</field>
+				<field>PX_HIGH</field>
 			</fields>
 			<tickers_file>tickers.txt</tickers_file>
 			<start_date>
@@ -29,14 +32,17 @@
 				<day>1</day>
 			</start_date>
 			<end_date>
-				<year>2017</year>
+				<year>2018</year>
 				<month>1</month>
 				<day>1</day>
 			</end_date>
 			<source>bloomberg</source>
 			<database>database</database>
-			<table>table</table>
+			<table>table_test</table>
 			<columns>
+				<column>ticker</column>
+				<column>date</column>
+				<column>last</column>
 				<column>low</column>
 				<column>high</column>
 			</columns>

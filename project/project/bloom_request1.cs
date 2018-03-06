@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -72,7 +73,16 @@ namespace project
                                     value = String.Copy(ticker);
                                     break;
                                 case "date":
-                                    value = field_data.GetElementAsDatetime("date");
+                                    value = field_data.GetElementAsDatetime(fields[j]);
+                                    break;
+                                case "PX_LAST":
+                                case "PX_LOW":
+                                case "PX_HIGH":
+                                    NumberFormatInfo nfi = new NumberFormatInfo();
+                                    nfi.NumberDecimalSeparator = ".";
+                                    double n = field_data.GetElementAsFloat64(fields[j]);
+                                    Console.WriteLine("value = {0}", n.ToString(nfi));
+                                    value = n.ToString(nfi);
                                     break;
                                 default:
                                     value = field_data.GetElementAsString(fields[j]);

@@ -39,6 +39,7 @@ namespace project
                     result += ", ";
             }
             result += ");";
+            Console.WriteLine(result);
             return result;
         }
         private string Get_query_clear(string table)

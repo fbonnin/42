@@ -28,13 +28,26 @@ namespace project
                 Console.WriteLine();
             }*/
 
-            /*TEST GET_DATABASES*/
+            /*TEST GET_DATABASES
             CONFIGURATION configuration = new CONFIGURATION("configuration.xml");
             Dictionary<string, DATABASE> databases = configuration.Get_databases();
             Console.WriteLine(databases.Count);
             string[] columns = { "ticker" };
             object[] values = { "TESTT" };
-            databases["database"].Insert("table_test", columns, values);
+            databases["database"].Insert("table_test", columns, values);*/
+
+            CONFIGURATION configuration = new CONFIGURATION("configuration.xml");
+            Dictionary<string, SOURCE> sources = configuration.Get_sources();
+            Console.WriteLine("number of sources : {0}", sources.Count);
+            Dictionary<string, DATABASE> databases = configuration.Get_databases();
+            Console.WriteLine("number of databases : {0}", databases.Count);
+            OPERATION[] operations = configuration.Get_operations(sources, databases);
+            Console.WriteLine("number of operations : {0}", operations.Length);
+            databases["database"].Clear("table_test");
+            foreach (OPERATION operation in operations)
+            {
+                operation.Do_operation();
+            }
         }
     }
 }
