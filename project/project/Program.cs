@@ -36,18 +36,54 @@ namespace project
             object[] values = { "TESTT" };
             databases["database"].Insert("table_test", columns, values);*/
 
+            /*REAL MAIN
             CONFIGURATION configuration = new CONFIGURATION("configuration.xml");
-            Dictionary<string, SOURCE> sources = configuration.Get_sources();
+            Dictionary<string, SOURCE> sources = null;
+            try
+            {
+                sources = configuration.Get_sources();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: Get_sources: " + e.ToString());
+                return;
+            }
             Console.WriteLine("number of sources : {0}", sources.Count);
-            Dictionary<string, DATABASE> databases = configuration.Get_databases();
+            Dictionary<string, DATABASE> databases = null;
+            try
+            {
+                databases = configuration.Get_databases();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: Get_databases: " + e.ToString());
+                return;
+            }
             Console.WriteLine("number of databases : {0}", databases.Count);
-            OPERATION[] operations = configuration.Get_operations(sources, databases);
+            OPERATION[] operations = null;
+            try
+            {
+                operations = configuration.Get_operations(sources, databases);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: Get_operations: " + e.ToString());
+                return;
+            }
             Console.WriteLine("number of operations : {0}", operations.Length);
             databases["database"].Clear("table_test");
-            foreach (OPERATION operation in operations)
+            for (int i = 0; i < operations.Length; i++)
             {
-                operation.Do_operation();
-            }
+                try
+                {
+                    operations[i].Do_operation();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error: operations[{0}]: " + e.ToString(), i);
+                    return;
+                }
+            }*/
         }
     }
 }

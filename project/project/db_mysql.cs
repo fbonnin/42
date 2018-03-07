@@ -22,6 +22,11 @@ namespace project
         {
             connection.Close();
         }
+        public void Execute(string query)
+        {
+            MySqlCommand command = new MySqlCommand(query, connection);
+            command.ExecuteNonQuery();
+        }
         private string Get_query_insert(string table, string[] columns, Object[] values)
         {
             string result = "INSERT INTO " + table + " (";
@@ -39,21 +44,46 @@ namespace project
                     result += ", ";
             }
             result += ");";
-            Console.WriteLine(result);
+            return result;
+        }
+        private string Get_query_insert(string table, string[] columns, Object[][] rows)
+        {
+            string result = "INSERT INTO " + table + " (";
+            for (int i = 0; i < columns.Length; i++)
+            {
+                result += columns[i];
+                if (i < columns.Length - 1)
+                    result += ", ";
+            }
+            result += ") VALUES ";
+            for (int i = 0; i < rows.Length; i++)
+            {
+                Object[] values = rows[i];
+                result += "(";
+                for (int j = 0; j < values.Length; j++)
+                {
+                    result += "'" + values[j].ToString() + "'";
+                    if (j < values.Length - 1)
+                        result += ", ";
+                }
+                result += ")";
+                if (i < rows.Length - 1)
+                    result += ", ";
+            }
+            result += ";";
             return result;
         }
         private string Get_query_clear(string table)
         {
             return "DELETE FROM " + table + ";";
         }
-        private void Execute(string query)
-        {
-            MySqlCommand command = new MySqlCommand(query, connection);
-            command.ExecuteNonQuery();
-        }
         public override void Insert(string table, string[] columns, Object[] values)
         {
             Execute(Get_query_insert(table, columns, values));
+        }
+        public void Insert(string table, string[] columns, Object[][] rows)
+        {
+            Execute(Get_query_insert(table, columns, rows));
         }
         public override void Clear(string table)
         {

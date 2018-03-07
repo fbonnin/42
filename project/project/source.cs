@@ -8,6 +8,6 @@ namespace project
 {
     abstract class SOURCE
     {
-        public abstract Object[][] Request1(string[] fields, string ticker, DateTime start_date, DateTime end_date);
+        public abstract Object[][] Request1(string[] fields, string[] tickers, DateTime start_date, DateTime end_date, OPTION[] options);
     }
 }

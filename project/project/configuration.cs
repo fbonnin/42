@@ -102,6 +102,14 @@ namespace project
                         int end_month = Int32.Parse(Get_child(e_end, "month").InnerText);
                         int end_day = Int32.Parse(Get_child(e_end, "day").InnerText);
                         DateTime end_date = new DateTime(end_year, end_month, end_day);
+                        XmlElement e_options = Get_child(e_operation, "options");
+                        XmlElement[] option_list = Get_children(e_options, "option");
+                        OPTION[] options = new OPTION[option_list.Length];
+                        for (int i = 0; i < options.Length; i++)
+                        {
+                            options[i].name = Get_child(option_list[i], "name").InnerText;
+                            options[i].value = Get_child(option_list[i], "value").InnerText;
+                        }
                         string source = Get_child(e_operation, "source").InnerText;
                         string database = Get_child(e_operation, "database").InnerText;
                         string table = Get_child(e_operation, "table").InnerText;
@@ -110,7 +118,7 @@ namespace project
                         string[] columns = new string[column_list.Length];
                         for (int i = 0; i < columns.Length; i++)
                             columns[i] = column_list[i].InnerText;
-                        operation = new OPERATION1(fields, tickers_file, start_date, end_date, sources[source], databases[database], table, columns);
+                        operation = new OPERATION1(fields, tickers_file, start_date, end_date, options, sources[source], databases[database], table, columns);
                         break;
                 }
                 result.Add(operation);

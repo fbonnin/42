@@ -13,18 +13,20 @@ namespace project
     {
         SRC_BLOOMBERG source;
         string[] fields;
-        string ticker;
+        string[] tickers;
         DateTime start_date;
         DateTime end_date;
+        OPTION[] options;
         Request request;
 
-        public BLOOM_REQUEST1(SRC_BLOOMBERG source, string[] fields, string ticker, DateTime start_date, DateTime end_date)
+        public BLOOM_REQUEST1(SRC_BLOOMBERG source, string[] fields, string[] tickers, DateTime start_date, DateTime end_date, OPTION[] options)
         {
             this.source = source;
             this.fields = fields;
-            this.ticker = ticker;
+            this.tickers = tickers;
             this.start_date = start_date;
             this.end_date = end_date;
+            this.options = options;
             Prepare_request();
         }
         private string Get_date(DateTime date)
@@ -43,9 +45,12 @@ namespace project
             request = source.Create_request("HistoricalDataRequest");
             foreach (string field in fields)
                 request.Append("fields", field);
-            request.Append("securities", ticker);
+            for (int i = 0; i < tickers.Length; i++)
+                request.Append("securities", tickers[i]);
             request.Set("startDate", Get_date(start_date));
             request.Set("endDate", Get_date(end_date));
+            for (int i = 0; i < options.Length; i++)
+                request.Set(options[i].name, options[i].value);
         }
         public Object[][] Make_request()
         {
@@ -70,7 +75,7 @@ namespace project
                             switch (fields[j])
                             {
                                 case "ticker":
-                                    value = String.Copy(ticker);
+                                    value = security_data.GetElementAsString("security");
                                     break;
                                 case "date":
                                     value = field_data.GetElementAsDatetime(fields[j]);

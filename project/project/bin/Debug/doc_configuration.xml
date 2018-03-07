@@ -23,8 +23,10 @@
 	<operations>
 
 		<operation>
+		
 			<type>operation1</type>
-			<fields> <!-- the informations that you want to get -->
+			
+			<fields> <!-- the informations you want to get -->
 				<field>ticker</field>
 				<field>date</field>
 				<field>PX_LAST</field>
@@ -39,18 +41,19 @@
 				<day>1</day>
 			</start_date>
 			<end_date> <!-- optional -->
-				<year>2018</year>
-				<month>1</month>
-				<day>1</day>
+				<year>2017</year>
+				<month>12</month>
+				<day>31</day>
 			</end_date>
 			<options> <!-- optional -->
-				<option>
+				<option> <!-- possible options : see source documentation -->
 					<name>adjusmentSplit</name>
 					<value>TRUE</value>
 				</option>
 				<!-- add as many options as you want -->
 			</options>
 			<source>bloomberg</source>
+			
 			<database>database</database>
 			<table>table_test</table>
 			<columns> <!-- the names of the columns in which you want to insert the data -->
@@ -61,9 +64,11 @@
 				<column>high</column>
 				<!-- add as many columns as you want -->
 			</columns>
+			
 		</operation>
 		
 		<!-- add as many operations as you want -->
+		
 	</operations>
 	
 </configuration>
