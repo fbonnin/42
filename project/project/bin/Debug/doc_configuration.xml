@@ -13,7 +13,7 @@
 			<name>database</name> <!-- give a name to the database -->
 			<type>mysql</type> <!-- possible values : mysql -->
 			<host>localhost</host> <!-- example: localhost -->
-			<real_name>database_test</real_name> <!-- the name of the database -->
+			<real_name>database_test</real_name> <!-- name of the database -->
 			<user>root</user> 
 			<password></password>
 		</database>
@@ -35,9 +35,9 @@
 				<field>PX_HIGH</field>
 				<!-- add as many fields as you want -->
 			</fields>
-			<start_date>20170101</start_date>
+			<start_date>20170101</start_date> <!-- format : YYYYMMDD -->
 			<end_date>20171231</end_date>
-			<periodicity>DAILY</periodicity>
+			<periodicity>DAILY</periodicity> <!-- possible values : DAILY, WEEKLY, MONTHLY, QUARTERLY, SEMI_ANNUALLY, YEARLY -->
 			<options>
 				<option> <!-- possible options : see source documentation -->
 					<name>adjustmentSplit</name>
@@ -49,7 +49,7 @@
 			
 			<database>database</database>
 			<table>table_test</table>
-			<columns> <!-- the names of the columns in which you want to insert the data -->
+			<columns> <!-- names of the columns in which you want to insert the data -->
 				<column>ticker</column>
 				<column>date</column>
 				<column>last</column>
