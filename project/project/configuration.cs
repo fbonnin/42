@@ -97,54 +97,67 @@ namespace project
                 switch (type)
                 {
                     case "operation1":
-                        List<REQUEST_PARAM> request_params = new List<REQUEST_PARAM>();
-                        XmlElement e_securities = Get_child(e_operation, "securities_file");
-                        string securities_file = e_securities.InnerText;
-                        string[] securities = System.IO.File.ReadAllLines(securities_file);
-                        foreach (string security in securities)
-                            request_params.Add(new REQUEST_PARAM("securities", security));
-                        XmlElement e_fields = Get_child(e_operation, "fields", "fields");
-                        XmlElement[] el_field = Get_children(e_fields, "field");
-                        foreach (XmlElement e_field in el_field)
-                            request_params.Add(new REQUEST_PARAM("fields", e_field.InnerText));
-                        XmlElement e_start = Get_child(e_operation, "start_date");
-                        if (e_start != null)
-                            request_params.Add(new REQUEST_PARAM("startDate", e_start.InnerText));
-                        XmlElement e_end = Get_child(e_operation, "endDate");
-                        if (e_end != null)
-                            request_params.Add(new REQUEST_PARAM("endDate", e_end.InnerText));
-                        XmlElement e_options = Get_child(e_operation, "options");
-                        if (e_options != null)
-                        {
-                            XmlElement[] el_option = Get_children(e_options, "option");
-                            foreach (XmlElement e_option in el_option)
-                            {
-                                XmlElement e_option_type = Get_child(e_option, "type");
-                                if (e_option_type == null)
-                                    throw new XML_ELEMENT_MISSING("option type");
-                                string option_type = e_option.InnerText;
-                                XmlElement e_value = Get_child(e_option, "value");
-                                if (e_value == null)
-                                    throw new XML_ELEMENT_MISSING("option value");
-                                string value = e_value.InnerText;
-                                request_params.Add(new REQUEST_PARAM(option_type, value));
-                            }
-                        }
-                        string source = Get_child(e_operation, "source", "operation/source").InnerText;
-                        string database = Get_child(e_operation, "database", "operation/database").InnerText;
-                        string table = Get_child(e_operation, "table", "table").InnerText;
-                        XmlElement e_columns = Get_child(e_operation, "columns", "columns");
-                        XmlElement[] el_column = Get_children(e_columns, "column");
-                        if (el_column.Length != el_field.Length)
-                            throw new XML_PARSING_ERROR("the number of columns does not match the number of fields");
-                        string[] columns = new string[el_column.Length];
-                        for (int j = 0; j < columns.Length; j++)
-                            columns[j] = el_column[j].InnerText;
-                        result[i] = new OPERATION1(request_params.ToArray(), sources[source], databases[database], table, columns);
+                        result[i] = Get_operation1(sources, databases, e_operation);
                         break;
+                    default:
+                        throw new XML_PARSING_ERROR("unknown operation: " + type);
                 }
             }
             return result;
+        }
+        private OPERATION1 Get_operation1(Dictionary<string, SOURCE> sources, Dictionary<string, DATABASE> databases, XmlElement e_operation)
+        {
+            List<REQUEST_PARAM> request_params = new List<REQUEST_PARAM>();
+            XmlElement e_securities = Get_child(e_operation, "securities_file");
+            string securities_file = e_securities.InnerText;
+            string[] securities = System.IO.File.ReadAllLines(securities_file);
+            foreach (string security in securities)
+                request_params.Add(new REQUEST_PARAM("securities", security));
+            XmlElement e_fields = Get_child(e_operation, "fields", "fields");
+            XmlElement[] el_field = Get_children(e_fields, "field");
+            foreach (XmlElement e_field in el_field)
+                request_params.Add(new REQUEST_PARAM("fields", e_field.InnerText));
+            XmlElement e_start = Get_child(e_operation, "start_date");
+            if (e_start != null)
+                request_params.Add(new REQUEST_PARAM("startDate", e_start.InnerText));
+            XmlElement e_end = Get_child(e_operation, "endDate");
+            if (e_end != null)
+                request_params.Add(new REQUEST_PARAM("endDate", e_end.InnerText));
+            XmlElement e_periodicity = Get_child(e_operation, "periodicity");
+            if (e_periodicity != null)
+                request_params.Add(new REQUEST_PARAM("periodicitySelection", e_periodicity.InnerText));
+            XmlElement e_options = Get_child(e_operation, "options");
+            if (e_options != null)
+            {
+                XmlElement[] el_option = Get_children(e_options, "option");
+                foreach (XmlElement e_option in el_option)
+                {
+                    XmlElement e_option_type = Get_child(e_option, "type");
+                    if (e_option_type == null)
+                        throw new XML_ELEMENT_MISSING("option type");
+                    string option_type = e_option.InnerText;
+                    XmlElement e_value = Get_child(e_option, "value");
+                    if (e_value == null)
+                        throw new XML_ELEMENT_MISSING("option value");
+                    string value = e_value.InnerText;
+                    request_params.Add(new REQUEST_PARAM(option_type, value));
+                }
+            }
+            string source = Get_child(e_operation, "source", "operation/source").InnerText;
+            if (!sources.ContainsKey(source))
+                throw new XML_PARSING_ERROR("unknown source" + source);
+            string database = Get_child(e_operation, "database", "operation/database").InnerText;
+            if (!databases.ContainsKey(database))
+                throw new XML_PARSING_ERROR("unknown database: " + database);
+            string table = Get_child(e_operation, "table", "table").InnerText;
+            XmlElement e_columns = Get_child(e_operation, "columns", "columns");
+            XmlElement[] el_column = Get_children(e_columns, "column");
+            if (el_column.Length != el_field.Length)
+                throw new XML_PARSING_ERROR("the number of columns does not match the number of fields");
+            string[] columns = new string[el_column.Length];
+            for (int j = 0; j < columns.Length; j++)
+                columns[j] = el_column[j].InnerText;
+            return new OPERATION1(request_params.ToArray(), sources[source], databases[database], table, columns);
         }
     }
     class XML_PARSING_ERROR : Exception
