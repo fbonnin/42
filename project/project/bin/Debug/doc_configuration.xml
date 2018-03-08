@@ -26,29 +26,22 @@
 		
 			<type>operation1</type>
 			
-			<fields> <!-- the informations you want to get -->
-				<field>ticker</field>
+			<securities_file>securities.txt</securities_file> <!-- file that contains the list of securities -->
+			<fields> <!-- informations to retrieve -->
+				<field>security</field>
 				<field>date</field>
 				<field>PX_LAST</field>
 				<field>PX_LOW</field>
 				<field>PX_HIGH</field>
 				<!-- add as many fields as you want -->
 			</fields>
-			<tickers_file>tickers.txt</tickers_file> <!-- the path to the file that contains the tickers -->
-			<start_date> <!-- optional -->
-				<year>2017</year>
-				<month>1</month>
-				<day>1</day>
-			</start_date>
-			<end_date> <!-- optional -->
-				<year>2017</year>
-				<month>12</month>
-				<day>31</day>
-			</end_date>
-			<options> <!-- optional -->
+			<start_date>20170101</start_date>
+			<end_date>20171231</end_date>
+			<periodicity>DAILY</periodicity>
+			<options>
 				<option> <!-- possible options : see source documentation -->
-					<name>adjusmentSplit</name>
-					<value>TRUE</value>
+					<name>adjustmentSplit</name>
+					<value>true</value>
 				</option>
 				<!-- add as many options as you want -->
 			</options>

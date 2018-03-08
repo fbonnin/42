@@ -14,5 +14,11 @@ namespace project
     {
         public string type;
         public string value;
+
+        public REQUEST_PARAM(string type, string value)
+        {
+            this.type = type;
+            this.value = value;
+        }
     }
 }

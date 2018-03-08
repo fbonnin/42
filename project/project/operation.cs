@@ -19,7 +19,7 @@ namespace project
         string table;
         string[] columns;
 
-        public OPERATION1(SOURCE source, REQUEST_PARAM[] request_params, DATABASE database, string table, string[] columns)
+        public OPERATION1(REQUEST_PARAM[] request_params, SOURCE source, DATABASE database, string table, string[] columns)
         {
             this.source = source;
             this.request_params = request_params;

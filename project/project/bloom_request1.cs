@@ -83,7 +83,6 @@ namespace project
                                     NumberFormatInfo nfi = new NumberFormatInfo();
                                     nfi.NumberDecimalSeparator = ".";
                                     double n = field_data.GetElementAsFloat64(fields[j]);
-                                    Console.WriteLine("value = {0}", n.ToString(nfi));
                                     value = n.ToString(nfi);
                                     break;
                                 default:

@@ -33,6 +33,13 @@ namespace project
                 return null;
             return children[0];
         }
+        private XmlElement Get_child(XmlNode node, string child_name, string error)
+        {
+            XmlElement result = Get_child(node, child_name);
+            if (result == null)
+                throw new XML_ELEMENT_MISSING(error);
+            return result;
+        }
         public Dictionary<string, SOURCE> Get_sources()
         {
             Dictionary<string, SOURCE> result = new Dictionary<string, SOURCE>();
@@ -79,52 +86,91 @@ namespace project
         }
         public OPERATION[] Get_operations(Dictionary<string, SOURCE> sources, Dictionary<string, DATABASE> databases)
         {
-            List<OPERATION> result = new List<OPERATION>();
-            XmlElement e_operations = Get_child(e_configuration, "operations");
-            XmlElement[] operation_list = Get_children(e_operations, "operation");
-            foreach (XmlElement e_operation in operation_list)
+            XmlElement e_operations = Get_child(e_configuration, "operations", "operations");
+            XmlElement[] el_operation = Get_children(e_operations, "operation");
+            OPERATION[] result = new OPERATION[el_operation.Length];
+            for (int i = 0; i < result.Length; i++)
             {
-                string type = Get_child(e_operation, "type").InnerText;
-                OPERATION operation = null;
+                XmlElement e_operation = el_operation[i];
+                XmlElement e_type = Get_child(e_operation, "type", "operation/type");
+                string type = e_type.InnerText;
                 switch (type)
                 {
                     case "operation1":
-                        XmlElement e_fields = Get_child(e_operation, "fields");
-                        XmlElement[] field_list = Get_children(e_fields, "field");
-                        string[] fields = new string[field_list.Length];
-                        for (int i = 0; i < fields.Length; i++)
-                            fields[i] = field_list[i].InnerText;
-                        string tickers_file = Get_child(e_operation, "tickers_file").InnerText;
-                        XmlElement e_start;
-                        string start_date = null;
-                        if ((e_start = Get_child(e_operation, "start_date")) != null)
-                            start_date = e_start.InnerText;
-                        XmlElement e_end;
-                        string end_date = null;
-                        if ((e_end = Get_child(e_operation, "end_date")) != null)
-                            end_date = e_end.InnerText;
+                        List<REQUEST_PARAM> request_params = new List<REQUEST_PARAM>();
+                        XmlElement e_securities = Get_child(e_operation, "securities_file");
+                        string securities_file = e_securities.InnerText;
+                        string[] securities = System.IO.File.ReadAllLines(securities_file);
+                        foreach (string security in securities)
+                            request_params.Add(new REQUEST_PARAM("securities", security));
+                        XmlElement e_fields = Get_child(e_operation, "fields", "fields");
+                        XmlElement[] el_field = Get_children(e_fields, "field");
+                        foreach (XmlElement e_field in el_field)
+                            request_params.Add(new REQUEST_PARAM("fields", e_field.InnerText));
+                        XmlElement e_start = Get_child(e_operation, "start_date");
+                        if (e_start != null)
+                            request_params.Add(new REQUEST_PARAM("startDate", e_start.InnerText));
+                        XmlElement e_end = Get_child(e_operation, "endDate");
+                        if (e_end != null)
+                            request_params.Add(new REQUEST_PARAM("endDate", e_end.InnerText));
                         XmlElement e_options = Get_child(e_operation, "options");
-                        XmlElement[] option_list = Get_children(e_options, "option");
-                        OPTION[] options = new OPTION[option_list.Length];
-                        for (int i = 0; i < options.Length; i++)
+                        if (e_options != null)
                         {
-                            options[i].name = Get_child(option_list[i], "name").InnerText;
-                            options[i].value = Get_child(option_list[i], "value").InnerText;
+                            XmlElement[] el_option = Get_children(e_options, "option");
+                            foreach (XmlElement e_option in el_option)
+                            {
+                                XmlElement e_option_type = Get_child(e_option, "type");
+                                if (e_option_type == null)
+                                    throw new XML_ELEMENT_MISSING("option type");
+                                string option_type = e_option.InnerText;
+                                XmlElement e_value = Get_child(e_option, "value");
+                                if (e_value == null)
+                                    throw new XML_ELEMENT_MISSING("option value");
+                                string value = e_value.InnerText;
+                                request_params.Add(new REQUEST_PARAM(option_type, value));
+                            }
                         }
-                        string source = Get_child(e_operation, "source").InnerText;
-                        string database = Get_child(e_operation, "database").InnerText;
-                        string table = Get_child(e_operation, "table").InnerText;
-                        XmlElement e_columns = Get_child(e_operation, "columns");
-                        XmlElement[] column_list = Get_children(e_columns, "column");
-                        string[] columns = new string[column_list.Length];
-                        for (int i = 0; i < columns.Length; i++)
-                            columns[i] = column_list[i].InnerText;
-                        operation = new OPERATION1(fields, tickers_file, start_date, end_date, options, sources[source], databases[database], table, columns);
+                        string source = Get_child(e_operation, "source", "operation/source").InnerText;
+                        string database = Get_child(e_operation, "database", "operation/database").InnerText;
+                        string table = Get_child(e_operation, "table", "table").InnerText;
+                        XmlElement e_columns = Get_child(e_operation, "columns", "columns");
+                        XmlElement[] el_column = Get_children(e_columns, "column");
+                        if (el_column.Length != el_field.Length)
+                            throw new XML_PARSING_ERROR("the number of columns does not match the number of fields");
+                        string[] columns = new string[el_column.Length];
+                        for (int j = 0; j < columns.Length; j++)
+                            columns[j] = el_column[j].InnerText;
+                        result[i] = new OPERATION1(request_params.ToArray(), sources[source], databases[database], table, columns);
                         break;
                 }
-                result.Add(operation);
             }
-            return result.ToArray();
+            return result;
+        }
+    }
+    class XML_PARSING_ERROR : Exception
+    {
+        string error;
+
+        public XML_PARSING_ERROR(string error)
+        {
+            this.error = error;
+        }
+        public override string ToString()
+        {
+            return "XML parsing error: " + error;
+        }
+    }
+    class XML_ELEMENT_MISSING : Exception
+    {
+        string error;
+
+        public XML_ELEMENT_MISSING(string error)
+        {
+            this.error = error;
+        }
+        public override string ToString()
+        {
+            return "XML element missing: " + error;
         }
     }
 }
