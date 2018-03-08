@@ -12,7 +12,7 @@
 		<database>
 			<name>database</name> <!-- give a name to the database -->
 			<type>mysql</type> <!-- possible values : mysql -->
-			<host>localhost</host> <!-- example: localhost -->
+			<host>localhost</host> <!-- example : localhost -->
 			<real_name>database_test</real_name> <!-- name of the database -->
 			<user>root</user> 
 			<password></password>
@@ -22,7 +22,7 @@
 
 	<operations>
 
-		<operation>
+		<operation> <!-- possible operations : operation1 -->
 		
 			<type>operation1</type>
 			

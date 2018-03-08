@@ -21,10 +21,17 @@ namespace project
         private XmlElement[] Get_children(XmlNode node, string children_name)
         {
             XmlNodeList node_list = node.SelectNodes(children_name);
-            XmlElement[] elements = new XmlElement[node_list.Count];
+            XmlElement[] result = new XmlElement[node_list.Count];
             for (int i = 0; i < node_list.Count; i++)
-                elements[i] = (XmlElement)node_list[i];
-            return elements;
+                result[i] = (XmlElement)node_list[i];
+            return result;
+        }
+        private XmlElement[] Get_children(XmlNode node, string children_name, string error)
+        {
+            XmlElement[] result = Get_children(node, children_name);
+            if (result.Length == 0)
+                throw new XML_ELEMENT_MISSING(error);
+            return result;
         }
         private XmlElement Get_child(XmlNode node, string child_name)
         {
@@ -100,7 +107,7 @@ namespace project
                         result[i] = Get_operation1(sources, databases, e_operation);
                         break;
                     default:
-                        throw new XML_PARSING_ERROR("unknown operation: " + type);
+                        throw new CONFIGURATION_ERROR("unknown operation: " + type);
                 }
             }
             return result;
@@ -110,11 +117,19 @@ namespace project
             List<REQUEST_PARAM> request_params = new List<REQUEST_PARAM>();
             XmlElement e_securities = Get_child(e_operation, "securities_file");
             string securities_file = e_securities.InnerText;
-            string[] securities = System.IO.File.ReadAllLines(securities_file);
+            string[] securities;
+            try
+            {
+                securities = System.IO.File.ReadAllLines(securities_file);
+            }
+            catch (Exception)
+            {
+                throw new CONFIGURATION_ERROR("could not read file: " + securities_file);
+            }
             foreach (string security in securities)
                 request_params.Add(new REQUEST_PARAM("securities", security));
             XmlElement e_fields = Get_child(e_operation, "fields", "fields");
-            XmlElement[] el_field = Get_children(e_fields, "field");
+            XmlElement[] el_field = Get_children(e_fields, "field", "field");
             foreach (XmlElement e_field in el_field)
                 request_params.Add(new REQUEST_PARAM("fields", e_field.InnerText));
             XmlElement e_start = Get_child(e_operation, "start_date");
@@ -145,32 +160,32 @@ namespace project
             }
             string source = Get_child(e_operation, "source", "operation/source").InnerText;
             if (!sources.ContainsKey(source))
-                throw new XML_PARSING_ERROR("unknown source" + source);
+                throw new CONFIGURATION_ERROR("unknown source" + source);
             string database = Get_child(e_operation, "database", "operation/database").InnerText;
             if (!databases.ContainsKey(database))
-                throw new XML_PARSING_ERROR("unknown database: " + database);
+                throw new CONFIGURATION_ERROR("unknown database: " + database);
             string table = Get_child(e_operation, "table", "table").InnerText;
             XmlElement e_columns = Get_child(e_operation, "columns", "columns");
-            XmlElement[] el_column = Get_children(e_columns, "column");
+            XmlElement[] el_column = Get_children(e_columns, "column", "column");
             if (el_column.Length != el_field.Length)
-                throw new XML_PARSING_ERROR("the number of columns does not match the number of fields");
+                throw new CONFIGURATION_ERROR("the number of columns does not match the number of fields");
             string[] columns = new string[el_column.Length];
             for (int j = 0; j < columns.Length; j++)
                 columns[j] = el_column[j].InnerText;
             return new OPERATION1(request_params.ToArray(), sources[source], databases[database], table, columns);
         }
     }
-    class XML_PARSING_ERROR : Exception
+    class CONFIGURATION_ERROR : Exception
     {
         string error;
 
-        public XML_PARSING_ERROR(string error)
+        public CONFIGURATION_ERROR(string error)
         {
             this.error = error;
         }
         public override string ToString()
         {
-            return "XML parsing error: " + error;
+            return "Configuration error: " + error;
         }
     }
     class XML_ELEMENT_MISSING : Exception
