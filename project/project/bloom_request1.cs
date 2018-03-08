@@ -12,24 +12,17 @@ namespace project
     class BLOOM_REQUEST1
     {
         SRC_BLOOMBERG source;
-        string[] fields;
-        string[] tickers;
-        DateTime start_date;
-        DateTime end_date;
-        OPTION[] options;
+        REQUEST_PARAM[] request_params;
+        List<string> fields;
         Request request;
 
-        public BLOOM_REQUEST1(SRC_BLOOMBERG source, string[] fields, string[] tickers, DateTime start_date, DateTime end_date, OPTION[] options)
+        public BLOOM_REQUEST1(SRC_BLOOMBERG source, REQUEST_PARAM[] request_params)
         {
             this.source = source;
-            this.fields = fields;
-            this.tickers = tickers;
-            this.start_date = start_date;
-            this.end_date = end_date;
-            this.options = options;
+            this.request_params = request_params;
             Prepare_request();
         }
-        private string Get_date(DateTime date)
+        /*private string Get_date(DateTime date)
         {
             string result = date.Year.ToString();
             if (date.Month < 10)
@@ -39,18 +32,22 @@ namespace project
                 result += "0";
             result += date.Day.ToString();
             return result;
-        }
+        }*/
         void Prepare_request()
         {
             request = source.Create_request("HistoricalDataRequest");
-            foreach (string field in fields)
-                request.Append("fields", field);
-            for (int i = 0; i < tickers.Length; i++)
-                request.Append("securities", tickers[i]);
-            request.Set("startDate", Get_date(start_date));
-            request.Set("endDate", Get_date(end_date));
-            for (int i = 0; i < options.Length; i++)
-                request.Set(options[i].name, options[i].value);
+            for (int i = 0; i < request_params.Length; i++)
+            {
+                REQUEST_PARAM request_param = request_params[i];
+                if (request_param.type == "securities" || request_param.type == "fields")
+                {
+                    request.Append(request_param.type, request_param.value);
+                    if (request_param.type == "fields")
+                        fields.Add(request_param.value);
+                }
+                else
+                    request.Set(request_param.type, request_param.value);
+            }
         }
         public Object[][] Make_request()
         {
@@ -67,9 +64,9 @@ namespace project
                     Element field_data_array = security_data.GetElement(3);
                     for (int i = 0; i < field_data_array.NumValues; i++)
                     {
-                        Object[] values = new Object[fields.Length];
+                        Object[] values = new Object[fields.Count];
                         Element field_data = field_data_array.GetValueAsElement(i);
-                        for (int j = 0; j < fields.Length; j++)
+                        for (int j = 0; j < fields.Count; j++)
                         {
                             Object value;
                             switch (fields[j])
@@ -103,40 +100,5 @@ namespace project
             }
             return result.ToArray();
         }
-        /*old version
-        public Object[][] Make_request()
-        {
-            List<Object[]> result = new List<Object[]>();
-            source.Send_request(request);
-            while (true)
-            {
-                Event event_bloom = source.Next_event();
-                foreach (Message message in event_bloom)
-                {
-                    if (event_bloom.Type != Event.EventType.RESPONSE &&
-                        event_bloom.Type != Event.EventType.PARTIAL_RESPONSE)
-                        continue;
-                    Element security_data = message.GetElement("securityData");
-                    Element field_data_array = security_data.GetElement(3);
-                    for (int i = 0; i < field_data_array.NumValues; i++)
-                    {
-                        result.Add(new Object[fields.Length]);
-                        Element field_data = field_data_array.GetValueAsElement(i);
-                        for (int j = 0; j < fields.Length; j++)
-                        {
-                            Object value;
-                            if (fields[j] == "ticker")
-                                value = String.Copy(ticker);
-                            else
-                                value = field_data.GetElementAsString(fields[j]);
-                            result.Last()[j] = value;
-                        }
-                    }
-                }
-                if (event_bloom.Type == Event.EventType.RESPONSE)
-                    break;
-            }
-            return result.ToArray();
-        }*/
     }
 }

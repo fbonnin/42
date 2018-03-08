@@ -18,10 +18,6 @@ namespace project
             doc.Load(file);
             e_configuration = doc.DocumentElement;
         }
-        private XmlElement Get_child(XmlNode node, string child_name)
-        {
-            return (XmlElement)node.SelectNodes(child_name)[0];
-        }
         private XmlElement[] Get_children(XmlNode node, string children_name)
         {
             XmlNodeList node_list = node.SelectNodes(children_name);
@@ -29,6 +25,13 @@ namespace project
             for (int i = 0; i < node_list.Count; i++)
                 elements[i] = (XmlElement)node_list[i];
             return elements;
+        }
+        private XmlElement Get_child(XmlNode node, string child_name)
+        {
+            XmlElement[] children = Get_children(node, child_name);
+            if (children.Length == 0)
+                return null;
+            return children[0];
         }
         public Dictionary<string, SOURCE> Get_sources()
         {
@@ -92,16 +95,14 @@ namespace project
                         for (int i = 0; i < fields.Length; i++)
                             fields[i] = field_list[i].InnerText;
                         string tickers_file = Get_child(e_operation, "tickers_file").InnerText;
-                        XmlElement e_start = Get_child(e_operation, "start_date");
-                        int start_year = Int32.Parse(Get_child(e_start, "year").InnerText);
-                        int start_month = Int32.Parse(Get_child(e_start, "month").InnerText);
-                        int start_day = Int32.Parse(Get_child(e_start, "day").InnerText);
-                        DateTime start_date = new DateTime(start_year, start_month, start_day);
-                        XmlElement e_end = Get_child(e_operation, "end_date");
-                        int end_year = Int32.Parse(Get_child(e_end, "year").InnerText);
-                        int end_month = Int32.Parse(Get_child(e_end, "month").InnerText);
-                        int end_day = Int32.Parse(Get_child(e_end, "day").InnerText);
-                        DateTime end_date = new DateTime(end_year, end_month, end_day);
+                        XmlElement e_start;
+                        string start_date = null;
+                        if ((e_start = Get_child(e_operation, "start_date")) != null)
+                            start_date = e_start.InnerText;
+                        XmlElement e_end;
+                        string end_date = null;
+                        if ((e_end = Get_child(e_operation, "end_date")) != null)
+                            end_date = e_end.InnerText;
                         XmlElement e_options = Get_child(e_operation, "options");
                         XmlElement[] option_list = Get_children(e_options, "option");
                         OPTION[] options = new OPTION[option_list.Length];

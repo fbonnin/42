@@ -86,4 +86,9 @@ namespace project
             }*/
         }
     }
+    class OPTION
+    {
+        public string name;
+        public string value;
+    }
 }
