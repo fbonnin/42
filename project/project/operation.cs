@@ -11,15 +11,15 @@ namespace project
         public abstract void Do_operation();
     }
 
-    class OPERATION1 : OPERATION
+    class OPERATION_1 : OPERATION
     {
-        SOURCE source;
         REQUEST_PARAM[] request_params;
+        SOURCE source;
         DATABASE database;
         string table;
         string[] columns;
 
-        public OPERATION1(REQUEST_PARAM[] request_params, SOURCE source, DATABASE database, string table, string[] columns)
+        public OPERATION_1(REQUEST_PARAM[] request_params, SOURCE source, DATABASE database, string table, string[] columns)
         {
             this.source = source;
             this.request_params = request_params;
@@ -33,4 +33,6 @@ namespace project
             database.Insert(table, columns, request_result);
         }
     }
+
+    class OPERATION_1_1
 }
