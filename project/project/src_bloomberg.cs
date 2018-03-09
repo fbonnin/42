@@ -36,11 +36,10 @@ namespace project
         {
             return session.NextEvent();
         }
-        public override Object[][] Request1(REQUEST_PARAM[] request_params)
+        public override object[][] Historical_request(string[] securities, string[] fields, REQUEST_PARAM[] request_params)
         {
-            BLOOM_REQUEST1 request1 = new BLOOM_REQUEST1(this, request_params);
-            return request1.Make_request();
+            BLOOM_HISTORICAL_REQUEST request = new BLOOM_HISTORICAL_REQUEST(this, securities, fields, request_params);
+            return request.Make_request();
         }
-
     }
 }

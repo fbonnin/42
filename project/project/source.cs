@@ -8,16 +8,16 @@ namespace project
 {
     abstract class SOURCE
     {
-        public abstract Object[][] Request1(REQUEST_PARAM[] request_params);
+        public abstract object[][] Historical_request(string[] securities, string[] fields, REQUEST_PARAM[] request_params);
     }
     class REQUEST_PARAM
     {
-        public string type;
+        public string name;
         public string value;
 
-        public REQUEST_PARAM(string type, string value)
+        public REQUEST_PARAM(string name, string value)
         {
-            this.type = type;
+            this.name = name;
             this.value = value;
         }
     }

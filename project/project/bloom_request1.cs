@@ -9,16 +9,19 @@ using Bloomberglp.Blpapi;
 
 namespace project
 {
-    class BLOOM_REQUEST1
+    class BLOOM_HISTORICAL_REQUEST
     {
         SRC_BLOOMBERG source;
+        string[] securities;
+        string[] fields;
         REQUEST_PARAM[] request_params;
-        List<string> fields;
         Request request;
 
-        public BLOOM_REQUEST1(SRC_BLOOMBERG source, REQUEST_PARAM[] request_params)
+        public BLOOM_HISTORICAL_REQUEST(SRC_BLOOMBERG source, string[] securities, string[] fields, REQUEST_PARAM[] request_params)
         {
             this.source = source;
+            this.securities = securities;
+            this.fields = fields;
             this.request_params = request_params;
             Prepare_request();
         }
@@ -36,18 +39,12 @@ namespace project
         void Prepare_request()
         {
             request = source.Create_request("HistoricalDataRequest");
-            for (int i = 0; i < request_params.Length; i++)
-            {
-                REQUEST_PARAM request_param = request_params[i];
-                if (request_param.type == "securities" || request_param.type == "fields")
-                {
-                    request.Append(request_param.type, request_param.value);
-                    if (request_param.type == "fields")
-                        fields.Add(request_param.value);
-                }
-                else
-                    request.Set(request_param.type, request_param.value);
-            }
+            foreach (string security in securities)
+                request.Append("securities", security);
+            foreach (string field in fields)
+                request.Append("fields", field);
+            foreach (REQUEST_PARAM request_param in request_params)
+                request.Set(request_param.name, request_param.value);
         }
         public Object[][] Make_request()
         {
@@ -64,17 +61,17 @@ namespace project
                     Element field_data_array = security_data.GetElement(3);
                     for (int i = 0; i < field_data_array.NumValues; i++)
                     {
-                        Object[] values = new Object[fields.Count];
+                        Object[] values = new Object[fields.Length];
                         Element field_data = field_data_array.GetValueAsElement(i);
-                        for (int j = 0; j < fields.Count; j++)
+                        for (int j = 0; j < fields.Length; j++)
                         {
                             Object value;
                             switch (fields[j])
                             {
-                                case "ticker":
+                                case "security":
                                     value = security_data.GetElementAsString("security");
                                     break;
-                                case "date":
+                                /*case "date":
                                     value = field_data.GetElementAsDatetime(fields[j]);
                                     break;
                                 case "PX_LAST":
@@ -84,7 +81,7 @@ namespace project
                                     nfi.NumberDecimalSeparator = ".";
                                     double n = field_data.GetElementAsFloat64(fields[j]);
                                     value = n.ToString(nfi);
-                                    break;
+                                    break;*/
                                 default:
                                     value = field_data.GetElementAsString(fields[j]);
                                     break;
