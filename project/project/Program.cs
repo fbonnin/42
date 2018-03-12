@@ -36,8 +36,8 @@ namespace project
             object[] values = { "TESTT" };
             databases["database"].Insert("table_test", columns, values);*/
 
-            /*REAL MAIN
-            CONFIGURATION configuration = new CONFIGURATION("configuration.xml");
+            /*REAL MAIN*/
+            CONFIGURATION configuration = new CONFIGURATION("conf_price_stocks.xml");
             Dictionary<string, SOURCE> sources = null;
             try
             {
@@ -83,7 +83,7 @@ namespace project
                     Console.WriteLine("Error: operations[{0}]: " + e.ToString(), i);
                     return;
                 }
-            }*/
+            }
         }
     }
 }

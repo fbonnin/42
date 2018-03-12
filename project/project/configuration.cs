@@ -99,12 +99,12 @@ namespace project
             for (int i = 0; i < result.Length; i++)
             {
                 XmlElement e_operation = el_operation[i];
-                XmlElement e_type = Get_child(e_operation, "type", "operation/type");
-                string type = e_type.InnerText;
+                string type = Get_child(e_operation, "type", "operation/type").InnerText;
                 switch (type)
                 {
-                    case "operation1":
-                        result[i] = Get_operation1(sources, databases, e_operation);
+                    case "histo":
+                    case "histo1":
+                        result[i] = Get_op_historical(sources, databases, e_operation, type);
                         break;
                     default:
                         throw new CONFIGURATION_ERROR("unknown operation: " + type);
@@ -112,52 +112,8 @@ namespace project
             }
             return result;
         }
-        private OPERATION1 Get_operation1(Dictionary<string, SOURCE> sources, Dictionary<string, DATABASE> databases, XmlElement e_operation)
+        private OP_HISTORICAL Get_op_historical(Dictionary<string, SOURCE> sources, Dictionary<string, DATABASE> databases, XmlElement e_operation, string type)
         {
-            List<REQUEST_PARAM> request_params = new List<REQUEST_PARAM>();
-            XmlElement e_securities = Get_child(e_operation, "securities_file");
-            string securities_file = e_securities.InnerText;
-            string[] securities;
-            try
-            {
-                securities = System.IO.File.ReadAllLines(securities_file);
-            }
-            catch (Exception)
-            {
-                throw new CONFIGURATION_ERROR("could not read file: " + securities_file);
-            }
-            foreach (string security in securities)
-                request_params.Add(new REQUEST_PARAM("securities", security));
-            XmlElement e_fields = Get_child(e_operation, "fields", "fields");
-            XmlElement[] el_field = Get_children(e_fields, "field", "field");
-            foreach (XmlElement e_field in el_field)
-                request_params.Add(new REQUEST_PARAM("fields", e_field.InnerText));
-            XmlElement e_start = Get_child(e_operation, "start_date");
-            if (e_start != null)
-                request_params.Add(new REQUEST_PARAM("startDate", e_start.InnerText));
-            XmlElement e_end = Get_child(e_operation, "endDate");
-            if (e_end != null)
-                request_params.Add(new REQUEST_PARAM("endDate", e_end.InnerText));
-            XmlElement e_periodicity = Get_child(e_operation, "periodicity");
-            if (e_periodicity != null)
-                request_params.Add(new REQUEST_PARAM("periodicitySelection", e_periodicity.InnerText));
-            XmlElement e_options = Get_child(e_operation, "options");
-            if (e_options != null)
-            {
-                XmlElement[] el_option = Get_children(e_options, "option");
-                foreach (XmlElement e_option in el_option)
-                {
-                    XmlElement e_option_type = Get_child(e_option, "type");
-                    if (e_option_type == null)
-                        throw new XML_ELEMENT_MISSING("option type");
-                    string option_type = e_option.InnerText;
-                    XmlElement e_value = Get_child(e_option, "value");
-                    if (e_value == null)
-                        throw new XML_ELEMENT_MISSING("option value");
-                    string value = e_value.InnerText;
-                    request_params.Add(new REQUEST_PARAM(option_type, value));
-                }
-            }
             string source = Get_child(e_operation, "source", "operation/source").InnerText;
             if (!sources.ContainsKey(source))
                 throw new CONFIGURATION_ERROR("unknown source" + source);
@@ -165,14 +121,60 @@ namespace project
             if (!databases.ContainsKey(database))
                 throw new CONFIGURATION_ERROR("unknown database: " + database);
             string table = Get_child(e_operation, "table", "table").InnerText;
-            XmlElement e_columns = Get_child(e_operation, "columns", "columns");
-            XmlElement[] el_column = Get_children(e_columns, "column", "column");
-            if (el_column.Length != el_field.Length)
-                throw new CONFIGURATION_ERROR("the number of columns does not match the number of fields");
-            string[] columns = new string[el_column.Length];
-            for (int j = 0; j < columns.Length; j++)
-                columns[j] = el_column[j].InnerText;
-            return new OPERATION1(request_params.ToArray(), sources[source], databases[database], table, columns);
+            XmlElement e_requests = Get_child(e_operation, "requests");
+            XmlElement[] el_request = Get_children(e_requests, "request");
+            RQ_HISTO_INFO[] rq_histo_infos = new RQ_HISTO_INFO[el_request.Length];
+            for (int i = 0; i < el_request.Length; i++)
+            {
+                XmlElement e_request = el_request[i];
+                XmlElement e_securities = Get_child(e_operation, "securities_file");
+                string securities_file = e_securities.InnerText;
+                string[] securities;
+                try
+                {
+                    securities = System.IO.File.ReadAllLines(securities_file);
+                }
+                catch (Exception)
+                {
+                    throw new CONFIGURATION_ERROR("could not read file: " + securities_file);
+                }
+                XmlElement e_fields = Get_child(e_operation, "fields", "fields");
+                XmlElement[] el_field = Get_children(e_fields, "field", "field");
+                FIELD[] fields = new FIELD[el_field.Length];
+                for (int j = 0; j < fields.Length; j++)
+                {
+                    XmlElement e_name = Get_child(el_field[j], "name");
+                    fields[j].name = e_name.InnerText;
+                    XmlElement e_column = Get_child(el_field[j], "column");
+                    fields[j].column = e_column.InnerText;
+                }
+                List<REQUEST_PARAM> request_params = new List<REQUEST_PARAM>();
+                XmlElement e_start = Get_child(e_operation, "start_date");
+                if (e_start != null)
+                    request_params.Add(new REQUEST_PARAM("startDate", e_start.InnerText));
+                XmlElement e_end = Get_child(e_operation, "endDate");
+                if (e_end != null)
+                    request_params.Add(new REQUEST_PARAM("endDate", e_end.InnerText));
+                XmlElement e_periodicity = Get_child(e_operation, "periodicity");
+                if (e_periodicity != null)
+                    request_params.Add(new REQUEST_PARAM("periodicitySelection", e_periodicity.InnerText));
+                XmlElement e_options = Get_child(e_operation, "options");
+                if (e_options != null)
+                {
+                    XmlElement[] el_option = Get_children(e_options, "option");
+                    foreach (XmlElement e_option in el_option)
+                    {
+                        string name = Get_child(e_option, "name", "option name").InnerText;
+                        string value = Get_child(e_option, "value", "option value").InnerText;
+                        request_params.Add(new REQUEST_PARAM(name, value));
+                    }
+                }
+                rq_histo_infos[i] = new RQ_HISTO_INFO(securities, fields, request_params.ToArray());
+            }
+            if (type == "histo")
+                return new OP_HISTORICAL(sources[source], databases[database], table, rq_histo_infos);
+            else //if (type == "histo1")
+                return new OP_HISTO_1(sources[source], databases[database], table, rq_histo_infos);
         }
     }
     class CONFIGURATION_ERROR : Exception

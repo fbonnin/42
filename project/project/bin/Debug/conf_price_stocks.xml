@@ -23,48 +23,67 @@
 	<operations>
 
 		<operation> <!-- possible operations : operation1 -->		
-			<type>histo</type> <!-- possible values : histo, histo1 -->
+			<type>histo1</type> <!-- possible values : histo, histo1 -->
 			<source>bloomberg</source>
 			<database>database</database>
 			<table>table_test</table>
-			<requests>
+			
 				<request>
-					<securities_file>securities.txt</securities_file> <!-- file that contains the list of securities -->
-					<fields> <!-- informations to retrieve -->
-						<field>
-							<name>security</name>
-							<column>security</column> <!-- name of the column in which you want to insert the data -->
-						</field>
-						<field>
-							<name>date</name>
-							<column>date</date>
-						</field>
+					<securities_file>securities.txt</securities_file>
+					<fields>
 						<field>
 							<name>PX_LAST</name>
-							<column>last</column>
+							<column>closeNonAdj</column>
 						</field>
-						<field>
-							<name>PX_LOW</name>
-							<column>low</column>
-						</field>
-						<field>
-							<name>PX_HIGH</name>
-							<column>high</column>
-						</field>
-						<!-- add as many fields as you want -->
 					</fields>
-					<start_date>20170101</start_date> <!-- format : YYYYMMDD -->
+					<start_date>20170101</start_date>
 					<end_date>20171231</end_date>
-					<periodicity>DAILY</periodicity> <!-- possible values : DAILY, WEEKLY, MONTHLY, QUARTERLY, SEMI_ANNUALLY, YEARLY -->
+					<periodicity>DAILY</periodicity>
 					<options>
-						<option> <!-- possible options : see source documentation -->
+						<option>
 							<name>adjustmentSplit</name>
-							<value>true</value>
+							<value>false</value>
 						</option>
-						<!-- add as many options as you want -->
-					</options>	
+					</options>
 				</request>
+				
+				<request>
+					<securities_file>securities.txt</securities_file>
+					<fields>
+						<field>
+							<name>date</name>
+							<column>date</column>
+						</field>
+						<field>
+							<name>security</name>
+							<column>ticker</column>
+						</field>
+						<field>
+							<name>CHG_PCT_1D</name>
+							<column>chg</column>
+						</field>
+						<field>
+							<name>PX_LAST/name>
+							<column>close</column>
+						</field>
+						<field>
+							<name>prvClose</name>
+							<column>PX_CLOSE_1D</column>
+						</field>
+						<start_date>20170101</start_date>
+						<end_date>20171231</end_date>
+						<periodicity>DAILY</periodicity>
+						<options>
+							<option>
+								<name>adjustmentSplit</name>
+								<value>true</value>
+							</option>
+						</options>
+					</fields>
+				</request>
+				
 				<!-- add as many requests as you want -->
+				
 			</requests>					
 		</operation>
 		
