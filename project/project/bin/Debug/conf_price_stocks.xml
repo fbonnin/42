@@ -26,11 +26,19 @@
 			<type>histo1</type> <!-- possible values : histo, histo1 -->
 			<source>bloomberg</source>
 			<database>database</database>
-			<table>table_test</table>
-			
+			<table>table_test_2</table>
+			<requests>
 				<request>
 					<securities_file>securities.txt</securities_file>
 					<fields>
+						<field>
+							<name>security</name>
+							<column>ticker</column>
+						</field>
+						<field>
+							<name>date</name>
+							<column>date</column>
+						</field>
 						<field>
 							<name>PX_LAST</name>
 							<column>closeNonAdj</column>
@@ -63,23 +71,23 @@
 							<column>chg</column>
 						</field>
 						<field>
-							<name>PX_LAST/name>
+							<name>PX_LAST</name>
 							<column>close</column>
 						</field>
 						<field>
-							<name>prvClose</name>
-							<column>PX_CLOSE_1D</column>
+							<name>PX_CLOSE_1D</name>
+							<column>prvClose</column>
 						</field>
-						<start_date>20170101</start_date>
-						<end_date>20171231</end_date>
-						<periodicity>DAILY</periodicity>
-						<options>
-							<option>
-								<name>adjustmentSplit</name>
-								<value>true</value>
-							</option>
-						</options>
 					</fields>
+					<start_date>20170101</start_date>
+					<end_date>20171231</end_date>
+					<periodicity>DAILY</periodicity>
+					<options>
+						<option>
+							<name>adjustmentSplit</name>
+							<value>true</value>
+						</option>
+					</options>
 				</request>
 				
 				<!-- add as many requests as you want -->

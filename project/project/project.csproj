@@ -46,12 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="configuration.cs" />
+    <Compile Include="configuration\configuration.cs" />
     <Compile Include="databases\database.cs" />
     <Compile Include="databases\db_mysql.cs" />
-    <Compile Include="data_sources\bloom_request1.cs" />
+    <Compile Include="data_sources\bloomberg\bloom_rq_historical.cs" />
     <Compile Include="data_sources\source.cs" />
-    <Compile Include="data_sources\src_bloomberg.cs" />
+    <Compile Include="data_sources\bloomberg\src_bloomberg.cs" />
     <Compile Include="operations\operation.cs" />
     <Compile Include="operations\op_histo1.cs" />
     <Compile Include="operations\op_historical.cs" />

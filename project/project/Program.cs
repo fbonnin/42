@@ -36,7 +36,7 @@ namespace project
             object[] values = { "TESTT" };
             databases["database"].Insert("table_test", columns, values);*/
 
-            /*REAL MAIN*/
+            /*REAL MAIN
             CONFIGURATION configuration = new CONFIGURATION("conf_price_stocks.xml");
             Dictionary<string, SOURCE> sources = null;
             try
@@ -84,6 +84,7 @@ namespace project
                     return;
                 }
             }
+            */
         }
     }
 }

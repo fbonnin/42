@@ -27,6 +27,11 @@ namespace project
             MySqlCommand command = new MySqlCommand(query, connection);
             command.ExecuteNonQuery();
         }
+        public override object Execute2(string query)
+        {
+            MySqlCommand command = new MySqlCommand(query, connection);
+            return command.ExecuteNonQuery();
+        }
         private string Get_query_clear(string table)
         {
             return "DELETE FROM " + table + ";";

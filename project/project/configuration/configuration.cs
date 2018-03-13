@@ -127,7 +127,7 @@ namespace project
             for (int i = 0; i < el_request.Length; i++)
             {
                 XmlElement e_request = el_request[i];
-                XmlElement e_securities = Get_child(e_operation, "securities_file");
+                XmlElement e_securities = Get_child(e_request, "securities_file", "securities_file");
                 string securities_file = e_securities.InnerText;
                 string[] securities;
                 try
@@ -138,34 +138,36 @@ namespace project
                 {
                     throw new CONFIGURATION_ERROR("could not read file: " + securities_file);
                 }
-                XmlElement e_fields = Get_child(e_operation, "fields", "fields");
+                XmlElement e_fields = Get_child(e_request, "fields", "fields");
                 XmlElement[] el_field = Get_children(e_fields, "field", "field");
                 FIELD[] fields = new FIELD[el_field.Length];
                 for (int j = 0; j < fields.Length; j++)
+                    fields[j] = new FIELD();
+                for (int j = 0; j < fields.Length; j++)
                 {
-                    XmlElement e_name = Get_child(el_field[j], "name");
+                    XmlElement e_name = Get_child(el_field[j], "name", "field/name");
                     fields[j].name = e_name.InnerText;
-                    XmlElement e_column = Get_child(el_field[j], "column");
+                    XmlElement e_column = Get_child(el_field[j], "column", "field/column");
                     fields[j].column = e_column.InnerText;
                 }
                 List<REQUEST_PARAM> request_params = new List<REQUEST_PARAM>();
-                XmlElement e_start = Get_child(e_operation, "start_date");
+                XmlElement e_start = Get_child(e_request, "start_date");
                 if (e_start != null)
                     request_params.Add(new REQUEST_PARAM("startDate", e_start.InnerText));
-                XmlElement e_end = Get_child(e_operation, "endDate");
+                XmlElement e_end = Get_child(e_request, "end_date");
                 if (e_end != null)
                     request_params.Add(new REQUEST_PARAM("endDate", e_end.InnerText));
-                XmlElement e_periodicity = Get_child(e_operation, "periodicity");
+                XmlElement e_periodicity = Get_child(e_request, "periodicity");
                 if (e_periodicity != null)
                     request_params.Add(new REQUEST_PARAM("periodicitySelection", e_periodicity.InnerText));
-                XmlElement e_options = Get_child(e_operation, "options");
+                XmlElement e_options = Get_child(e_request, "options");
                 if (e_options != null)
                 {
                     XmlElement[] el_option = Get_children(e_options, "option");
                     foreach (XmlElement e_option in el_option)
                     {
-                        string name = Get_child(e_option, "name", "option name").InnerText;
-                        string value = Get_child(e_option, "value", "option value").InnerText;
+                        string name = Get_child(e_option, "name", "option/name").InnerText;
+                        string value = Get_child(e_option, "value", "option/value").InnerText;
                         request_params.Add(new REQUEST_PARAM(name, value));
                     }
                 }

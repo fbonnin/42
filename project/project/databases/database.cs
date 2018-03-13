@@ -8,6 +8,17 @@ namespace project
 {
     abstract class DATABASE
     {
+        /*private string Get_date(DateTime date)
+            {
+                string result = date.Year.ToString();
+                if (date.Month < 10)
+                    result += "0";
+                result += date.Month.ToString();
+                if (date.Day < 10)
+                    result += "0";
+                result += date.Day.ToString();
+                return result;
+            }*/
         public string Get_query_insert(string table, string[] columns, Object[] values)
         {
             string result = "INSERT INTO " + table + " (";
@@ -55,6 +66,7 @@ namespace project
             return result;
         }
         public abstract void Execute(string query);
+        public abstract object Execute2(string query);
         public abstract void Insert(string table, string[] columns, Object[] values);
         public abstract void Clear(string table);
     }

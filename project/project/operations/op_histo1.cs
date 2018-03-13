@@ -25,7 +25,7 @@ namespace project
                     if (i < fields.Length - 1)
                         query += ", ";
                 }
-                query += ") VALUES (" + "'" + values["security"].ToString() + values["date"].ToString() + ", ";
+                query += ") VALUES (" + "'" + values["security"].ToString() + values["date"].ToString() + "'" + ", ";
                 for (int i = 0; i < fields.Length; i++)
                 {
                     query += "'" + values[fields[i].name].ToString() + "'";

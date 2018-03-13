@@ -8,7 +8,7 @@ using Bloomberglp.Blpapi;
 
 namespace project
 {
-    class SRC_BLOOMBERG : SOURCE
+    partial class SRC_BLOOMBERG : SOURCE
     {
         private Session session;
         private Service service;
@@ -23,18 +23,6 @@ namespace project
         ~SRC_BLOOMBERG()
         {
             session.Stop();
-        }
-        public Request Create_request(string type)
-        {
-            return service.CreateRequest(type);
-        }
-        public void Send_request(Request request)
-        {
-            session.SendRequest(request, null);
-        }
-        public Event Next_event()
-        {
-            return session.NextEvent();
         }
         public override Dictionary<string, object>[] Rq_historical(string[] securities, string[] fields, REQUEST_PARAM[] request_params)
         {
