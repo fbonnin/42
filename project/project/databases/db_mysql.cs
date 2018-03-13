@@ -30,7 +30,7 @@ namespace project
         public override object Execute1(string query)
         {
             MySqlCommand command = new MySqlCommand(query, connection);
-            return command.ExecuteNonQuery();
+            return command.ExecuteScalar();
         }
     }
 }

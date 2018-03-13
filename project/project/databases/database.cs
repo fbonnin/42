@@ -12,20 +12,23 @@ namespace project
     {
         public abstract void Execute0(string query);
         public abstract object Execute1(string query);
-        public string Value_to_string(object value)
+
+        private string Value_to_string(object value)
         {
-            NumberFormatInfo nfi = new NumberFormatInfo();
-            nfi.NumberDecimalSeparator = ".";
+            NumberFormatInfo nfi = new NumberFormatInfo
+            {
+                NumberDecimalSeparator = "."
+            };
             string result;
             if (value.GetType() == typeof(float) || value.GetType() == typeof(double))
                 result = ((double)value).ToString(nfi);
             else if (value.GetType() == typeof(DateTime))
-                result = Get_date((DateTime)value);
+                result = Date_to_string((DateTime)value);
             else
                 result = value.ToString();
             return result;
         }
-        private string Get_date(DateTime date)
+        private string Date_to_string(DateTime date)
         {
             string result = date.Year.ToString();
             if (date.Month < 10)
@@ -36,9 +39,10 @@ namespace project
             result += date.Day.ToString();
             return result;
         }
-        public string Get_query_insert(string table, string[] columns, Object[] values)
+
+        public string Get_query_insert(string table, string[] columns, object[] values)
         {
-            string result = "INSERT INTO " + table + " (";
+            string result = "INSERT INTO " + table + "(";
             for (int i = 0; i < columns.Length; i++)
             {
                 result += columns[i];
@@ -55,7 +59,7 @@ namespace project
             result += ");";
             return result;
         }
-        private string Get_query_insert(string table, string[] columns, Object[][] rows)
+        public string Get_query_insert(string table, string[] columns, object[][] rows)
         {
             string result = "INSERT INTO " + table + " (";
             for (int i = 0; i < columns.Length; i++)
@@ -67,7 +71,7 @@ namespace project
             result += ") VALUES ";
             for (int i = 0; i < rows.Length; i++)
             {
-                Object[] values = rows[i];
+                object[] values = rows[i];
                 result += "(";
                 for (int j = 0; j < values.Length; j++)
                 {
@@ -86,11 +90,12 @@ namespace project
         {
             return "DELETE FROM " + table + ";";
         }
-        public void Insert(string table, string[] columns, Object[] values)
+
+        public void Insert(string table, string[] columns, object[] values)
         {
             Execute0(Get_query_insert(table, columns, values));
         }
-        public void Insert(string table, string[] columns, Object[][] rows)
+        public void Insert(string table, string[] columns, object[][] rows)
         {
             Execute0(Get_query_insert(table, columns, rows));
         }
