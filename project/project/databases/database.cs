@@ -13,7 +13,7 @@ namespace project
         public abstract void Execute0(string query);
         public abstract object Execute1(string query);
 
-        private string Value_to_string(object value)
+        static public string Value_to_string(object value)
         {
             NumberFormatInfo nfi = new NumberFormatInfo
             {
@@ -28,7 +28,7 @@ namespace project
                 result = value.ToString();
             return result;
         }
-        private string Date_to_string(DateTime date)
+        static string Date_to_string(DateTime date)
         {
             string result = date.Year.ToString();
             if (date.Month < 10)

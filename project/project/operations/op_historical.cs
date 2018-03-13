@@ -11,25 +11,25 @@ namespace project
         SOURCE source;
         DATABASE database;
         protected string table;
-        RQ_HISTO_INFO[] rq_histo_infos;
+        HISTO_RQ_INFO[] histo_rq_infos;
 
-        public OP_HISTORICAL(SOURCE source, DATABASE database, string table, RQ_HISTO_INFO[] rq_histo_infos)
+        public OP_HISTORICAL(SOURCE source, DATABASE database, string table, HISTO_RQ_INFO[] histo_rq_infos)
         {
             this.source = source;
             this.database = database;
             this.table = table;
-            this.rq_histo_infos = rq_histo_infos;
-            database.Clear(table);
+            this.histo_rq_infos = histo_rq_infos;
         }
         public override void Do_operation()
         {
-            foreach (RQ_HISTO_INFO rq_histo_info in rq_histo_infos)
+            foreach (HISTO_RQ_INFO histo_rq_info in histo_rq_infos)
             {
-                string[] fields = Get_fields(rq_histo_info.fields);
-                Dictionary<string, object>[] request_result = source.Rq_historical(rq_histo_info.securities, fields, rq_histo_info.request_params);
-                string query = Get_query(rq_histo_info.fields, request_result);
+                string[] fields = Get_fields(histo_rq_info.fields);
+                Dictionary<string, object>[] request_result = source.Rq_historical(histo_rq_info.securities, fields, histo_rq_info.request_params);
+                database.Clear(table);
+                string query = Get_query(histo_rq_info.fields, request_result);
                 database.Execute0(query);
-                Update(rq_histo_info.securities);
+                Update(histo_rq_info.securities);
             }
         }
         protected virtual string Get_query(FIELD[] fields, Dictionary<string, object>[] request_result)
@@ -37,28 +37,35 @@ namespace project
             List<object[]> rows = new List<object[]>();
             for (int i = 0; i < request_result.Length; i++)
             {
-                object[] row = new object[fields.Length];
+                if (request_result[i].ContainsKey("security"))
+                    request_result[i]["security"] = Get_short_ticker((string)request_result[i]["security"]);
+                object[] values = new object[fields.Length];
                 for (int j = 0; j < fields.Length; j++)
-                {
-                    row[j] = request_result[i][fields[j].name];
-                }
-                rows.Add(row);
+                    values[j] = request_result[i][fields[j].name];
+                rows.Add(values);
             }
             string[] columns = Get_columns(fields);
             return database.Get_query_insert(table, columns, rows.ToArray());
         }
-        private string[] Get_fields(FIELD[] fields)
+        string[] Get_fields(FIELD[] fields)
         {
             string[] result = new string[fields.Length];
             for (int i = 0; i < fields.Length; i++)
                 result[i] = fields[i].name;
             return result;
         }
-        private string[] Get_columns(FIELD[] fields)
+        string[] Get_columns(FIELD[] fields)
         {
             string[] result = new string[fields.Length];
             for (int i = 0; i < fields.Length; i++)
                 result[i] = fields[i].column;
+            return result;
+        }
+        protected string Get_short_ticker(string ticker)
+        {
+            string result = "";
+            for (int i = 0; i < ticker.Length && ticker[i] != ' '; i++)
+                result += ticker[i];
             return result;
         }
         private void Update(string[] securities)
@@ -69,45 +76,22 @@ namespace project
             database.Execute0(query);
         }
     }
-    class RQ_HISTO_INFO
+    class HISTO_RQ_INFO
     {
         public string[] securities;
         public FIELD[] fields;
         public REQUEST_PARAM[] request_params;
 
-        public RQ_HISTO_INFO(string[] securities, FIELD[] fields, REQUEST_PARAM[] request_params)
+        public HISTO_RQ_INFO(string[] securities, FIELD[] fields, REQUEST_PARAM[] request_params)
         {
             this.securities = securities;
             this.fields = fields;
             this.request_params = request_params;
-        }
-        public void print()
-        {
-            Console.WriteLine("\nsecurities:");
-            foreach (string security in securities)
-                Console.WriteLine(security);
-            Console.WriteLine("\nfields:");
-            foreach (FIELD field in fields)
-                Console.WriteLine(field.name + " " + field.column);
-            Console.WriteLine("\nrequest_params:");
-            foreach (REQUEST_PARAM request_param in request_params)
-                Console.WriteLine(request_param.name + " " + request_param.value);
         }
     }
     class FIELD
     {
         public string name;
         public string column;
-
-        public FIELD()
-        {
-            name = null;
-            column = null;
-        }
-        public FIELD(string name, string column)
-        {
-            this.name = name;
-            this.column = column;
-        }
     }
 }

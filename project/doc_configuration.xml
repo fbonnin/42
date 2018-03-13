@@ -22,7 +22,7 @@
 
 	<operations>
 
-		<operation> <!-- possible operations : operation1 -->		
+		<operation>	
 			<type>histo</type> <!-- possible values : histo, histo1 -->
 			<source>bloomberg</source>
 			<database>database</database>

@@ -70,7 +70,7 @@ namespace project
                                         value = element.GetValueAsDatetime().ToSystemDateTime();
                                         break;
                                     default:
-                                        value = element.GetValue();
+                                        value = element.GetValueAsString();
                                         break;
                                 }
                                 values.Add(field, value);

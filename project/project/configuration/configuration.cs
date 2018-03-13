@@ -123,7 +123,7 @@ namespace project
             string table = Get_child(e_operation, "table", "table").InnerText;
             XmlElement e_requests = Get_child(e_operation, "requests");
             XmlElement[] el_request = Get_children(e_requests, "request");
-            RQ_HISTO_INFO[] rq_histo_infos = new RQ_HISTO_INFO[el_request.Length];
+            HISTO_RQ_INFO[] rq_histo_infos = new HISTO_RQ_INFO[el_request.Length];
             for (int i = 0; i < el_request.Length; i++)
             {
                 XmlElement e_request = el_request[i];
@@ -171,7 +171,7 @@ namespace project
                         request_params.Add(new REQUEST_PARAM(name, value));
                     }
                 }
-                rq_histo_infos[i] = new RQ_HISTO_INFO(securities, fields, request_params.ToArray());
+                rq_histo_infos[i] = new HISTO_RQ_INFO(securities, fields, request_params.ToArray());
             }
             if (type == "histo")
                 return new OP_HISTORICAL(sources[source], databases[database], table, rq_histo_infos);
