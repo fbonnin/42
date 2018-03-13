@@ -22,31 +22,15 @@ namespace project
         {
             connection.Close();
         }
-        public override void Execute(string query)
+        public override void Execute0(string query)
         {
             MySqlCommand command = new MySqlCommand(query, connection);
             command.ExecuteNonQuery();
         }
-        public override object Execute2(string query)
+        public override object Execute1(string query)
         {
             MySqlCommand command = new MySqlCommand(query, connection);
             return command.ExecuteNonQuery();
-        }
-        private string Get_query_clear(string table)
-        {
-            return "DELETE FROM " + table + ";";
-        }
-        public override void Insert(string table, string[] columns, Object[] values)
-        {
-            Execute(Get_query_insert(table, columns, values));
-        }
-        public void Insert(string table, string[] columns, Object[][] rows)
-        {
-            Execute(Get_query_insert(table, columns, rows));
-        }
-        public override void Clear(string table)
-        {
-            Execute(Get_query_clear(table));
         }
     }
 }

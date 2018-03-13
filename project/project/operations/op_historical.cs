@@ -28,7 +28,7 @@ namespace project
                 string[] fields = Get_fields(rq_histo_info.fields);
                 Dictionary<string, object>[] request_result = source.Rq_historical(rq_histo_info.securities, fields, rq_histo_info.request_params);
                 string query = Get_query(rq_histo_info.fields, request_result);
-                database.Execute(query);
+                database.Execute0(query);
                 Update(rq_histo_info.securities);
             }
         }
@@ -66,7 +66,7 @@ namespace project
             string query = "";
             foreach (string security in securities)
                 query += "INSERT INTO " + table + "_update (ticker, date) VALUES (" + "'" + security + "'" + ", CURDATE()) ON DUPLICATE KEY UPDATE date = CURDATE();";
-            database.Execute(query);
+            database.Execute0(query);
         }
     }
     class RQ_HISTO_INFO
