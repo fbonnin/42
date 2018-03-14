@@ -25,7 +25,7 @@ namespace project
             else if (value.GetType() == typeof(DateTime))
                 result = Date_to_string((DateTime)value);
             else
-                result = value.ToString();
+                result = value.ToString().Replace(',', '.');
             return result;
         }
         static string Date_to_string(DateTime date)

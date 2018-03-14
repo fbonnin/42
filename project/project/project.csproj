@@ -49,6 +49,7 @@
     <Compile Include="configuration\configuration.cs" />
     <Compile Include="databases\database.cs" />
     <Compile Include="databases\db_mysql.cs" />
+    <Compile Include="data_sources\bloomberg\bloom_request.cs" />
     <Compile Include="data_sources\bloomberg\bloom_rq_historical.cs" />
     <Compile Include="data_sources\source.cs" />
     <Compile Include="data_sources\bloomberg\src_bloomberg.cs" />

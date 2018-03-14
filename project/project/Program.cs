@@ -10,6 +10,56 @@ namespace project
     {
         static void Main(string[] args)
         {
+            /*REAL MAIN*/
+            CONFIGURATION configuration = new CONFIGURATION("config.xml");
+            Dictionary<string, SOURCE> sources = null;
+            try
+            {
+                sources = configuration.Get_sources();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: Get_sources: " + e.ToString());
+                return;
+            }
+            //Console.WriteLine("number of sources : {0}", sources.Count);
+            Dictionary<string, DATABASE> databases = null;
+            try
+            {
+                databases = configuration.Get_databases();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: Get_databases: " + e.ToString());
+                return;
+            }
+            //Console.WriteLine("number of databases : {0}", databases.Count);
+            OPERATION[] operations = null;
+            try
+            {
+                operations = configuration.Get_operations(sources, databases);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: Get_operations: " + e.ToString());
+                return;
+            }
+
+            //Console.WriteLine("number of operations : {0}", operations.Length);
+            databases["database"].Clear("table_test");
+            for (int i = 0; i < operations.Length; i++)
+            {
+                try
+                {
+                    operations[i].Do_operation();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error: operations[{0}]: " + e.ToString(), i);
+                    return;
+                }
+            }
+
             /*TEST DB
             DB_MYSQL db_mysql = new DB_MYSQL("localhost", "database_test", "root", "");
             string[] columns = { "ticker", "low", "high" };
@@ -35,56 +85,6 @@ namespace project
             string[] columns = { "ticker" };
             object[] values = { "TESTT" };
             databases["database"].Insert("table_test", columns, values);*/
-
-            /*REAL MAIN
-            CONFIGURATION configuration = new CONFIGURATION("conf_price_stocks.xml");
-            Dictionary<string, SOURCE> sources = null;
-            try
-            {
-                sources = configuration.Get_sources();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Error: Get_sources: " + e.ToString());
-                return;
-            }
-            Console.WriteLine("number of sources : {0}", sources.Count);
-            Dictionary<string, DATABASE> databases = null;
-            try
-            {
-                databases = configuration.Get_databases();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Error: Get_databases: " + e.ToString());
-                return;
-            }
-            Console.WriteLine("number of databases : {0}", databases.Count);
-            OPERATION[] operations = null;
-            try
-            {
-                operations = configuration.Get_operations(sources, databases);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Error: Get_operations: " + e.ToString());
-                return;
-            }
-            Console.WriteLine("number of operations : {0}", operations.Length);
-            databases["database"].Clear("table_test");
-            for (int i = 0; i < operations.Length; i++)
-            {
-                try
-                {
-                    operations[i].Do_operation();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("Error: operations[{0}]: " + e.ToString(), i);
-                    return;
-                }
-            }
-            */
         }
     }
 }

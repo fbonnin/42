@@ -48,3 +48,13 @@ C:\Users\HTL\mkt_data_manager\new\project\obj\Debug\project.csprojResolveAssembl
 C:\Users\HTL\mkt_data_manager\new\project\obj\Debug\project.csproj.CoreCompileInputs.cache
 C:\Users\HTL\mkt_data_manager\new\project\obj\Debug\project.exe
 C:\Users\HTL\mkt_data_manager\new\project\obj\Debug\project.pdb
+C:\Users\HTL\Desktop\last_version\project\bin\Debug\project.exe.config
+C:\Users\HTL\Desktop\last_version\project\bin\Debug\project.exe
+C:\Users\HTL\Desktop\last_version\project\bin\Debug\project.pdb
+C:\Users\HTL\Desktop\last_version\project\bin\Debug\Bloomberglp.Blpapi.dll
+C:\Users\HTL\Desktop\last_version\project\bin\Debug\Bloomberglp.Blpapi.xml
+C:\Users\HTL\Desktop\last_version\project\bin\Debug\MySql.Data.xml
+C:\Users\HTL\Desktop\last_version\project\obj\Debug\project.csprojResolveAssemblyReference.cache
+C:\Users\HTL\Desktop\last_version\project\obj\Debug\project.csproj.CoreCompileInputs.cache
+C:\Users\HTL\Desktop\last_version\project\obj\Debug\project.exe
+C:\Users\HTL\Desktop\last_version\project\obj\Debug\project.pdb

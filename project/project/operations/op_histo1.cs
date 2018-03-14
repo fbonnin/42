@@ -48,9 +48,14 @@ namespace project
         }
         private string Get_chg(string value)
         {
-            double nb = double.Parse(value/*, System.Globalization.CultureInfo.InvariantCulture*/);//??????
+            System.Globalization.NumberFormatInfo nfi = new System.Globalization.NumberFormatInfo
+            {
+                NumberDecimalSeparator = "."
+            };
+            value = value.Replace(',', '.');
+            double nb = double.Parse(value, nfi);
             nb /= 100;
-            return nb.ToString(System.Globalization.CultureInfo.InvariantCulture);
+            return nb.ToString(nfi);
         }
     }
 }

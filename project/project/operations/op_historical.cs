@@ -22,11 +22,11 @@ namespace project
         }
         public override void Do_operation()
         {
+            database.Clear(table);
             foreach (HISTO_RQ_INFO histo_rq_info in histo_rq_infos)
             {
                 string[] fields = Get_fields(histo_rq_info.fields);
                 Dictionary<string, object>[] request_result = source.Rq_historical(histo_rq_info.securities, fields, histo_rq_info.request_params);
-                database.Clear(table);
                 string query = Get_query(histo_rq_info.fields, request_result);
                 database.Execute0(query);
                 Update(histo_rq_info.securities);

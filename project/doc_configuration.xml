@@ -22,6 +22,11 @@
 
 	<operations>
 
+		<operation>
+			<type>ref</type>
+			<source>
+		</operation>
+		
 		<operation>	
 			<type>histo</type> <!-- possible values : histo, histo1 -->
 			<source>bloomberg</source>
