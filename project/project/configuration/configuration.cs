@@ -116,19 +116,18 @@ namespace project
         {
             string source = Get_child(e_operation, "source", "operation/source").InnerText;
             if (!sources.ContainsKey(source))
-                throw new CONFIGURATION_ERROR("unknown source" + source);
+                throw new CONFIGURATION_ERROR("unknown source: " + source);
             string database = Get_child(e_operation, "database", "operation/database").InnerText;
             if (!databases.ContainsKey(database))
                 throw new CONFIGURATION_ERROR("unknown database: " + database);
             string table = Get_child(e_operation, "table", "table").InnerText;
-            XmlElement e_requests = Get_child(e_operation, "requests");
-            XmlElement[] el_request = Get_children(e_requests, "request");
-            HISTO_RQ_INFO[] rq_histo_infos = new HISTO_RQ_INFO[el_request.Length];
+            XmlElement e_requests = Get_child(e_operation, "requests", "requests");
+            XmlElement[] el_request = Get_children(e_requests, "request", "request");
+            HISTO_RQ_INFO[] histo_rq_infos = new HISTO_RQ_INFO[el_request.Length];
             for (int i = 0; i < el_request.Length; i++)
             {
                 XmlElement e_request = el_request[i];
-                XmlElement e_securities = Get_child(e_request, "securities_file", "securities_file");
-                string securities_file = e_securities.InnerText;
+                string securities_file = Get_child(e_request, "securities_file", "securities_file").InnerText;
                 string[] securities;
                 try
                 {
@@ -145,10 +144,8 @@ namespace project
                     fields[j] = new FIELD();
                 for (int j = 0; j < fields.Length; j++)
                 {
-                    XmlElement e_name = Get_child(el_field[j], "name", "field/name");
-                    fields[j].name = e_name.InnerText;
-                    XmlElement e_column = Get_child(el_field[j], "column", "field/column");
-                    fields[j].column = e_column.InnerText;
+                    fields[j].name = Get_child(el_field[j], "name", "field/name").InnerText;
+                    fields[j].column = Get_child(el_field[j], "column", "column").InnerText;
                 }
                 List<REQUEST_PARAM> request_params = new List<REQUEST_PARAM>();
                 XmlElement e_start = Get_child(e_request, "start_date");
@@ -171,12 +168,12 @@ namespace project
                         request_params.Add(new REQUEST_PARAM(name, value));
                     }
                 }
-                rq_histo_infos[i] = new HISTO_RQ_INFO(securities, fields, request_params.ToArray());
+                histo_rq_infos[i] = new HISTO_RQ_INFO(securities, fields, request_params.ToArray());
             }
             if (type == "histo")
-                return new OP_HISTORICAL(sources[source], databases[database], table, rq_histo_infos);
+                return new OP_HISTORICAL(sources[source], databases[database], table, histo_rq_infos);
             else //if (type == "histo1")
-                return new OP_HISTO_1(sources[source], databases[database], table, rq_histo_infos);
+                return new OP_HISTO_1(sources[source], databases[database], table, histo_rq_infos);
         }
     }
     class CONFIGURATION_ERROR : Exception

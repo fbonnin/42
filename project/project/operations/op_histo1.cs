@@ -30,7 +30,7 @@ namespace project
                 query += ") VALUES (" + "'" + DATABASE.Value_to_string(values["security"]) + DATABASE.Value_to_string(values["date"]) + "'" + ", ";
                 for (int i = 0; i < fields.Length; i++)
                 {
-                    query += "'" + values[fields[i].name].ToString() + "'";
+                    query += "'" + DATABASE.Value_to_string(values[fields[i].name]) + "'";
                     if (i < fields.Length - 1)
                         query += ", ";
                 }
