@@ -8,7 +8,7 @@ namespace project
 {
     abstract class SOURCE
     {
-        public abstract Dictionary<string, object>[] Rq_historical(string[] securities, string[] fields, REQUEST_PARAM[] request_params);
+        public abstract Dictionary<string, object>[] Request(string type, string[] securities, string[] fields, REQUEST_PARAM[] request_params);
     }
     class REQUEST_PARAM
     {

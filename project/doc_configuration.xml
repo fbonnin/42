@@ -21,17 +21,13 @@
 	</databases>
 
 	<operations>
-
-		<operation>
-			<type>ref</type>
-			<source>
-		</operation>
 		
 		<operation>	
-			<type>histo</type> <!-- possible values : histo, histo1 -->
+			<type>histo</type> <!-- possible values : reference, histo, histo1 -->
 			<source>bloomberg</source>
 			<database>database</database>
 			<table>table_test</table>
+			<update/> <!-- optional -->
 			<requests>
 				<request>
 					<securities_file>securities.txt</securities_file> <!-- file that contains the list of securities -->

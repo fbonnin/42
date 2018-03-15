@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace project
 {
-    class OP_HISTO_1 : OP_HISTORICAL
+    class OP_HISTO1 : OP_REQUEST
     {
-        public OP_HISTO_1(SOURCE source, DATABASE database, string table, HISTO_RQ_INFO[] histo_rq_infos) : base(source, database, table, histo_rq_infos)
+        public OP_HISTO1(string type, SOURCE source, DATABASE database, string table, RQ_INFO[] rq_infos, bool update) : base(type, source, database, table, rq_infos, update)
         {
         }
         protected override string Get_query(FIELD[] fields, Dictionary<string, object>[] request_result)

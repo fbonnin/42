@@ -6,30 +6,36 @@ using System.Threading.Tasks;
 
 namespace project
 {
-    class OP_HISTORICAL : OPERATION
+    class OP_REQUEST : OPERATION
     {
+        string type;
         SOURCE source;
         DATABASE database;
         protected string table;
-        HISTO_RQ_INFO[] histo_rq_infos;
+        RQ_INFO[] rq_infos;
+        bool update;
 
-        public OP_HISTORICAL(SOURCE source, DATABASE database, string table, HISTO_RQ_INFO[] histo_rq_infos)
+        public OP_REQUEST(string type, SOURCE source, DATABASE database, string table, RQ_INFO[] rq_infos, bool update)
         {
+            this.type = type;
             this.source = source;
             this.database = database;
             this.table = table;
-            this.histo_rq_infos = histo_rq_infos;
+            this.rq_infos = rq_infos;
         }
         public override void Do_operation()
         {
-            database.Clear(table);
-            foreach (HISTO_RQ_INFO histo_rq_info in histo_rq_infos)
+            if (update)
+                Remove_up_to_date_securities(rq_infos);
+            else
+                database.Clear(table);
+            foreach (RQ_INFO rq_info in rq_infos)
             {
-                string[] fields = Get_fields(histo_rq_info.fields);
-                Dictionary<string, object>[] request_result = source.Rq_historical(histo_rq_info.securities, fields, histo_rq_info.request_params);
-                string query = Get_query(histo_rq_info.fields, request_result);
+                string[] fields = Get_fields(rq_info.fields);
+                Dictionary<string, object>[] request_result = source.Request(type, rq_info.securities, fields, rq_info.request_params);
+                string query = Get_query(rq_info.fields, request_result);
                 database.Execute0(query);
-                Update(histo_rq_info.securities);
+                Save_last_update(rq_info.securities);
             }
         }
         protected virtual string Get_query(FIELD[] fields, Dictionary<string, object>[] request_result)
@@ -47,14 +53,14 @@ namespace project
             string[] columns = Get_columns(fields);
             return database.Get_query_insert(table, columns, rows.ToArray());
         }
-        string[] Get_fields(FIELD[] fields)
+        protected string[] Get_fields(FIELD[] fields)
         {
             string[] result = new string[fields.Length];
             for (int i = 0; i < fields.Length; i++)
                 result[i] = fields[i].name;
             return result;
         }
-        string[] Get_columns(FIELD[] fields)
+        protected string[] Get_columns(FIELD[] fields)
         {
             string[] result = new string[fields.Length];
             for (int i = 0; i < fields.Length; i++)
@@ -68,7 +74,22 @@ namespace project
                 result += ticker[i];
             return result;
         }
-        private void Update(string[] securities)
+        private void Remove_up_to_date_securities(RQ_INFO[] rq_infos)
+        {
+            foreach (RQ_INFO rq_info in rq_infos)
+            {
+                List<string> securities_to_update = new List<string>();
+                foreach (string security in rq_info.securities)
+                {
+                    object last_update = database.Execute1("SELECT date FROM " + table + "_update WHERE ticker = " + "'" + security + "'" + ";");
+                    object current_date = database.Execute1("SELECT CURDATE();");
+                    if (last_update == null || last_update.ToString() != current_date.ToString())
+                        securities_to_update.Add(security);
+                }
+                rq_info.securities = securities_to_update.ToArray();
+            }
+        }
+        private void Save_last_update(string[] securities)
         {
             string query = "";
             foreach (string security in securities)
@@ -76,13 +97,13 @@ namespace project
             database.Execute0(query);
         }
     }
-    class HISTO_RQ_INFO
+    class RQ_INFO
     {
         public string[] securities;
         public FIELD[] fields;
         public REQUEST_PARAM[] request_params;
 
-        public HISTO_RQ_INFO(string[] securities, FIELD[] fields, REQUEST_PARAM[] request_params)
+        public RQ_INFO(string[] securities, FIELD[] fields, REQUEST_PARAM[] request_params)
         {
             this.securities = securities;
             this.fields = fields;

@@ -10,7 +10,7 @@ namespace project
     {
         static void Main(string[] args)
         {
-            /*REAL MAIN*/
+            /*REAL MAIN
             CONFIGURATION configuration = new CONFIGURATION("config.xml");
             Dictionary<string, SOURCE> sources = null;
             try
@@ -58,7 +58,7 @@ namespace project
                     Console.WriteLine("Error: operations[{0}]: " + e.ToString(), i);
                     return;
                 }
-            }
+            }*/
 
             /*TEST DB
             DB_MYSQL db_mysql = new DB_MYSQL("localhost", "database_test", "root", "");

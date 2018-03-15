@@ -102,9 +102,10 @@ namespace project
                 string type = Get_child(e_operation, "type", "operation/type").InnerText;
                 switch (type)
                 {
+                    case "reference":
                     case "histo":
                     case "histo1":
-                        result[i] = Get_op_historical(sources, databases, e_operation, type);
+                        result[i] = Get_op_request(sources, databases, e_operation, type);
                         break;
                     default:
                         throw new CONFIGURATION_ERROR("unknown operation: " + type);
@@ -112,7 +113,7 @@ namespace project
             }
             return result;
         }
-        private OP_HISTORICAL Get_op_historical(Dictionary<string, SOURCE> sources, Dictionary<string, DATABASE> databases, XmlElement e_operation, string type)
+        private OP_REQUEST Get_op_request(Dictionary<string, SOURCE> sources, Dictionary<string, DATABASE> databases, XmlElement e_operation, string type)
         {
             string source = Get_child(e_operation, "source", "operation/source").InnerText;
             if (!sources.ContainsKey(source))
@@ -121,9 +122,10 @@ namespace project
             if (!databases.ContainsKey(database))
                 throw new CONFIGURATION_ERROR("unknown database: " + database);
             string table = Get_child(e_operation, "table", "table").InnerText;
+            bool update = (Get_child(e_operation, "update") != null);
             XmlElement e_requests = Get_child(e_operation, "requests", "requests");
             XmlElement[] el_request = Get_children(e_requests, "request", "request");
-            HISTO_RQ_INFO[] histo_rq_infos = new HISTO_RQ_INFO[el_request.Length];
+            RQ_INFO[] rq_infos = new RQ_INFO[el_request.Length];
             for (int i = 0; i < el_request.Length; i++)
             {
                 XmlElement e_request = el_request[i];
@@ -168,12 +170,12 @@ namespace project
                         request_params.Add(new REQUEST_PARAM(name, value));
                     }
                 }
-                histo_rq_infos[i] = new HISTO_RQ_INFO(securities, fields, request_params.ToArray());
+                rq_infos[i] = new RQ_INFO(securities, fields, request_params.ToArray());
             }
-            if (type == "histo")
-                return new OP_HISTORICAL(sources[source], databases[database], table, histo_rq_infos);
-            else //if (type == "histo1")
-                return new OP_HISTO_1(sources[source], databases[database], table, histo_rq_infos);
+            if (type == "histo1")
+                return new OP_HISTO1(type, sources[source], databases[database], table, rq_infos, update);
+            else
+                return new OP_REQUEST(type, sources[source], databases[database], table, rq_infos, update);
         }
     }
     class CONFIGURATION_ERROR : Exception

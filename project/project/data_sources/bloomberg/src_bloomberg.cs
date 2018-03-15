@@ -24,9 +24,15 @@ namespace project
         {
             session.Stop();
         }
-        public override Dictionary<string, object>[] Rq_historical(string[] securities, string[] fields, REQUEST_PARAM[] request_params)
+        public override Dictionary<string, object>[] Request(string type, string[] securities, string[] fields, REQUEST_PARAM[] request_params)
         {
-            BLOOM_RQ_HISTORICAL request = new BLOOM_RQ_HISTORICAL(this, securities, fields, request_params);
+            if (type.Substring(0, 5) == "histo")
+                type = "Historical";
+            else if (type.Substring(0, 9) == "reference")
+                type = "Reference";
+            else
+                return null;
+            BLOOM_REQUEST request = new BLOOM_REQUEST(this, securities, fields, request_params, type);
             return request.Make_request();
         }
     }

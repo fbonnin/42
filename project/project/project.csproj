@@ -50,12 +50,11 @@
     <Compile Include="databases\database.cs" />
     <Compile Include="databases\db_mysql.cs" />
     <Compile Include="data_sources\bloomberg\bloom_request.cs" />
-    <Compile Include="data_sources\bloomberg\bloom_rq_historical.cs" />
     <Compile Include="data_sources\source.cs" />
     <Compile Include="data_sources\bloomberg\src_bloomberg.cs" />
     <Compile Include="operations\operation.cs" />
     <Compile Include="operations\op_histo1.cs" />
-    <Compile Include="operations\op_historical.cs" />
+    <Compile Include="operations\op_request.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
