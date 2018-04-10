@@ -30,8 +30,9 @@ class DATABASE :
 		query = self.Get_query_insert(table, columns, values)
 		try :
 			self.Execute(query)
-		except :
+		except Exception as e :
 			print("QUERY=" + query)
+			print(e)
 			input()
 
 class QuotesSpider(scrapy.Spider):
@@ -39,7 +40,7 @@ class QuotesSpider(scrapy.Spider):
 	name = "quotes"
 
 	custom_settings = {
-		'DOWNLOAD_DELAY' : 0.13,
+		'DOWNLOAD_DELAY' : 0.15,
 		'RANDOMIZE_DOWNLOAD_DELAY' : False
 	}
 
@@ -47,6 +48,7 @@ class QuotesSpider(scrapy.Spider):
 	table = "scraping"
 
 	columns0 = [
+	"ID",
 	"filing_date",
 	"accepted",
 	"period_of_report",
@@ -64,7 +66,8 @@ class QuotesSpider(scrapy.Spider):
 	"rptOwnerStreet1",
 	"rptOwnerCity",
 	"rptOwnerState",
-	"rptOwnerZipCode"
+	"rptOwnerZipCode",
+	"derivative"
 	]
 
 	columns1 = [
@@ -92,6 +95,7 @@ class QuotesSpider(scrapy.Spider):
 	"underlyingSecurityShares",
 	"transactionPricePerShare",
 	"sharesOwnedFollowingTransaction",
+	"directOrIndirectOwnership",
 	"natureOfOwnership"
 	]
 
@@ -131,7 +135,7 @@ class QuotesSpider(scrapy.Spider):
 		for e_td in el_td :
 			n = str(e_td.extract())
 			next_url = response.request.url + "/" + n
-			yield response.follow(next_url, self.parse_1)
+			yield response.follow(next_url, self.parse_1, meta = {"ticker" : response.meta["ticker"], "cik" : response.meta["cik"], "name1" : response.meta["name1"], "name2" : response.meta["name2"]})
 
 	def parse_1(self, response) :
 
@@ -140,7 +144,7 @@ class QuotesSpider(scrapy.Spider):
 			text = str(a.xpath("text()").extract_first())
 			next_url = str(a.xpath("@href").extract_first())
 			if text[-11:] == "-index.html" :
-				yield response.follow(next_url, self.parse_2, meta = {"url" : response.request.url})
+				yield response.follow(next_url, self.parse_2, meta = {"ticker" : response.meta["ticker"], "cik" : response.meta["cik"], "name1" : response.meta["name1"], "name2" : response.meta["name2"], "url" : response.request.url})
 
 	def parse_2(self, response) :
 
@@ -161,12 +165,13 @@ class QuotesSpider(scrapy.Spider):
 				text = str(a.xpath("text()").extract_first())
 				if text[-4:] == ".xml" :
 					next_url = a.xpath("@href").extract_first()
-					yield response.follow(next_url, self.parse_3, meta = {"url" : response.meta["url"], "filing_date" : filing_date, "accepted" : accepted, "period_of_report" : period_of_report})
+					yield response.follow(next_url, self.parse_3, meta = {"ticker" : response.meta["ticker"], "cik" : response.meta["cik"], "name1" : response.meta["name1"], "name2" : response.meta["name2"], "url" : response.meta["url"], "filing_date" : filing_date, "accepted" : accepted, "period_of_report" : period_of_report})
 
 	def parse_3(self, response) :
 
 		print("PARSE_3 : " + response.request.url)
-		data0 = {}
+		data0 = {} 
+		parts = response.request.url.split("/")
 		data0["filing_date"] = response.meta["filing_date"]
 		data0["accepted"] = response.meta["accepted"]
 		data0["period_of_report"] = response.meta["period_of_report"]
@@ -175,7 +180,9 @@ class QuotesSpider(scrapy.Spider):
 		e_issuer = response.xpath("issuer")
 		data0["issuerCik"] = e_issuer.xpath("issuerCik/text()").extract_first()
 		data0["issuerName"] = e_issuer.xpath("issuerName/text()").extract_first()
-		data0["issuerTradingSymbol"] = e_issuer.xpath("issuerTradingSymbol/text()").extract_first()
+		#data0["issuerTradingSymbol"] = e_issuer.xpath("issuerTradingSymbol/text()").extract_first()
+		#plutot
+		data0["issuerTradingSymbol"] = response.meta["ticker"]
 		e_reportingOwner = response.xpath("reportingOwner")
 		e_reportingOwnerId = e_reportingOwner.xpath("reportingOwnerId")
 		data0["rptOwnerName"] = e_reportingOwnerId.xpath("rptOwnerName/text()").extract_first()
@@ -204,12 +211,19 @@ class QuotesSpider(scrapy.Spider):
 		file = open("files/" + data0["issuerCik"] + "/" + parts[len(parts) - 2] + ".xml", "wb")
 		file.write(response.body)
 
+		i_transaction = 0
+
 		e_nonDerivativeTable = response.xpath("nonDerivativeTable")
 		el_nonDerivativeTransaction = e_nonDerivativeTable.xpath("nonDerivativeTransaction")
 		for e_nonDerivativeTransaction in el_nonDerivativeTransaction :
 
 			data1 = {}
 			data2 = {}
+
+			data0["ID"] = parts[len(parts) - 3] + "-" + parts[len(parts) - 2] + "-" + str(i_transaction)
+			i_transaction += 1
+
+			data0["derivative"] = "0"
 			data1["securityTitle"] = e_nonDerivativeTransaction.xpath("securityTitle/value/text()").extract_first()
 			data1["transactionDate"] = e_nonDerivativeTransaction.xpath("transactionDate/value/text()").extract_first()
 			e_transactionCoding = e_nonDerivativeTransaction.xpath("transactionCoding")
@@ -233,6 +247,11 @@ class QuotesSpider(scrapy.Spider):
 
 			data1 = {}
 			data2 = {}
+
+			data0["ID"] = parts[len(parts) - 3] + "-" + parts[len(parts) - 2] + "-" + str(i_transaction)
+			i_transaction += 1
+
+			data0["derivative"] = "1"
 			data2["securityTitle"] = e_derivativeTransaction.xpath("securityTitle/value/text()").extract_first()
 			data2["conversionOrExercisePrice"] = e_derivativeTransaction.xpath("conversionOrExercisePrice/value/text()").extract_first()
 			data2["transactionDate"] = e_derivativeTransaction.xpath("transactionDate/value/text()").extract_first()
@@ -250,12 +269,15 @@ class QuotesSpider(scrapy.Spider):
 			#PRICE TODO
 			data2["sharesOwnedFollowingTransaction"] = e_derivativeTransaction.xpath("postTransactionAmounts/sharesOwnedFollowingTransaction/value/text()").extract_first()
 			e_ownershipNature = e_derivativeTransaction.xpath("ownershipNature")
+			print(e_ownershipNature.extract())
 			data2["directOrIndirectOwnership"] = e_ownershipNature.xpath("directOrIndirectOwnership/value/text()").extract_first()
+			print("LA!" + e_ownershipNature.xpath("directOrIndirectOwnership/value/text()").extract_first())
 			data2["natureOfOwnership"] = e_ownershipNature.xpath("natureOfOwnership/value/text()").extract_first()
 			print()
 			self.Print_data(data0, data1, data2)
 			self.Insert_derivative(data0, data2)
 			print()
+
 
 		self.i += 1
 		print("i = " + str(self.i))
