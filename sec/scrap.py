@@ -35,7 +35,7 @@ class DATABASE :
 			print(e)
 			input()
 
-class QuotesSpider(scrapy.Spider):
+class QuotesSpider(scrapy.Spider) :
 
 	name = "quotes"
 
@@ -52,11 +52,14 @@ class QuotesSpider(scrapy.Spider):
 	"filing_date",
 	"accepted",
 	"period_of_report",
+	"owner_cik",
 	"url",
 	"date_extract",
 	"issuerCik",
 	"issuerName",
 	"issuerTradingSymbol",
+	"name1",
+	"name2",
 	"rptOwnerName",
 	"isDirector",
 	"isTenPercentOwner",
@@ -102,6 +105,8 @@ class QuotesSpider(scrapy.Spider):
 	i = 0
 	nb_lines_read = 0
 
+	nb_requests = 0
+
 	def start_requests(self):
 
 		start_time = time.time()
@@ -113,7 +118,7 @@ class QuotesSpider(scrapy.Spider):
 		#input()
 
 		print("\n\n\nHI\n\n\n")
-		file = open("list_test.csv", "r")
+		file = open("list.csv", "r")
 		text = file.read()
 		lines = text.split('\n')
 		for line in lines:
@@ -130,6 +135,9 @@ class QuotesSpider(scrapy.Spider):
 
 	def parse(self, response) :
 
+		self.nb_requests += 1
+		print("nb_requests = " + str(self.nb_requests))
+
 		print("PARSE : " + response.request.url)
 		el_td = response.xpath("descendant::td/a/text()")
 		for e_td in el_td :
@@ -139,6 +147,9 @@ class QuotesSpider(scrapy.Spider):
 
 	def parse_1(self, response) :
 
+		self.nb_requests += 1
+		print("nb_requests = " + str(self.nb_requests))
+
 		print("PARSE_1 : " + response.request.url)
 		for a in response.xpath("descendant::a") :
 			text = str(a.xpath("text()").extract_first())
@@ -147,6 +158,9 @@ class QuotesSpider(scrapy.Spider):
 				yield response.follow(next_url, self.parse_2, meta = {"ticker" : response.meta["ticker"], "cik" : response.meta["cik"], "name1" : response.meta["name1"], "name2" : response.meta["name2"], "url" : response.request.url})
 
 	def parse_2(self, response) :
+
+		self.nb_requests += 1
+		print("nb_requests = " + str(self.nb_requests))
 
 		print("PARSE_2 : " + response.request.url)
 		for div in response.xpath("descendant::div") :
@@ -158,6 +172,16 @@ class QuotesSpider(scrapy.Spider):
 				accepted = text2
 			elif text1 == "Period of Report" :
 				period_of_report = text2
+
+
+		for a in response.xpath("descendant::a") :
+			text = a.xpath("text()").extract_first()
+			if text == "Reporting" :
+				a2 = a.xpath("following-sibling::a")
+				info = a2.xpath("text()").extract_first()
+				#print("ATTENTION : " + info.split(" ")[0])
+				owner_cik = info.split(" ")[0]
+
 		for td in response.xpath("descendant::td") :
 			text = td.xpath("text()").extract_first()
 			if text == "4" :
@@ -165,9 +189,12 @@ class QuotesSpider(scrapy.Spider):
 				text = str(a.xpath("text()").extract_first())
 				if text[-4:] == ".xml" :
 					next_url = a.xpath("@href").extract_first()
-					yield response.follow(next_url, self.parse_3, meta = {"ticker" : response.meta["ticker"], "cik" : response.meta["cik"], "name1" : response.meta["name1"], "name2" : response.meta["name2"], "url" : response.meta["url"], "filing_date" : filing_date, "accepted" : accepted, "period_of_report" : period_of_report})
+					yield response.follow(next_url, self.parse_3, meta = {"ticker" : response.meta["ticker"], "cik" : response.meta["cik"], "name1" : response.meta["name1"], "name2" : response.meta["name2"], "url" : response.meta["url"], "filing_date" : filing_date, "accepted" : accepted, "period_of_report" : period_of_report, "owner_cik" : owner_cik})
 
 	def parse_3(self, response) :
+
+		self.nb_requests += 1
+		print("nb_requests = " + str(self.nb_requests))
 
 		print("PARSE_3 : " + response.request.url)
 		data0 = {} 
@@ -175,6 +202,7 @@ class QuotesSpider(scrapy.Spider):
 		data0["filing_date"] = response.meta["filing_date"]
 		data0["accepted"] = response.meta["accepted"]
 		data0["period_of_report"] = response.meta["period_of_report"]
+		data0["owner_cik"] = response.meta["owner_cik"]
 		data0["url"] = response.meta["url"]
 		data0["date_extract"] = str(datetime.datetime.now())
 		e_issuer = response.xpath("issuer")
@@ -183,6 +211,8 @@ class QuotesSpider(scrapy.Spider):
 		#data0["issuerTradingSymbol"] = e_issuer.xpath("issuerTradingSymbol/text()").extract_first()
 		#plutot
 		data0["issuerTradingSymbol"] = response.meta["ticker"]
+		data0["name1"] = response.meta["name1"]
+		data0["name2"] = response.meta["name2"]
 		e_reportingOwner = response.xpath("reportingOwner")
 		e_reportingOwnerId = e_reportingOwner.xpath("reportingOwnerId")
 		data0["rptOwnerName"] = e_reportingOwnerId.xpath("rptOwnerName/text()").extract_first()

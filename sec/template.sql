@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 13 avr. 2018 à 08:12
+-- Généré le :  ven. 13 avr. 2018 à 13:52
 -- Version du serveur :  5.7.19
 -- Version de PHP :  5.6.31
 
@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS `scraping` (
   `filing_date` varchar(100) DEFAULT NULL,
   `accepted` varchar(100) DEFAULT NULL,
   `period_of_report` varchar(100) DEFAULT NULL,
+  `owner_cik` varchar(100) DEFAULT NULL,
   `url` varchar(1000) DEFAULT NULL,
   `date_extract` datetime DEFAULT NULL,
   `issuerCik` varchar(100) DEFAULT NULL,
