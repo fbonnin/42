@@ -45,7 +45,7 @@ class QuotesSpider(scrapy.Spider) :
 	}
 
 	database = DATABASE()
-	table = "scraping"
+	table = "scraping1"
 
 	columns0 = [
 	"ID",
@@ -111,7 +111,7 @@ class QuotesSpider(scrapy.Spider) :
 
 		start_time = time.time()
 
-		self.database.Connect("localhost", "database_test", "root", "")
+		self.database.Connect("167.114.239.198", "fbonnin", "fbonnin", "q3p@ssFB!!")
 
 		#print("COUCOU")
 		#self.database.Execute("SET @var = 'arbre';")
