@@ -49,7 +49,7 @@ class QuotesSpider(scrapy.Spider) :
 	}
 
 	database = DATABASE()
-	table = "scraping1_test"
+	table = "live6"
 
 	columns0 = [
 	"ID",
@@ -116,14 +116,14 @@ class QuotesSpider(scrapy.Spider) :
 
 		start_time = time.time()
 
-		self.database.Connect("localhost", "database_test", "root", "")
+		self.database.Connect("167.114.239.198", "fbonnin", "fbonnin", "q3p@ssFB!!")
 
 		#print("COUCOU")
 		#self.database.Execute("SET @var = 'arbre';")
 		#input()
 
 		print("\n\n\nHI\n\n\n")
-		file = open("sec/list1-1.csv", "r")
+		file = open("live6.csv", "r")
 		text = file.read()
 		lines = text.split('\n')
 		for line in lines:
