@@ -17,18 +17,22 @@ class DATABASE :
 		self.cursor = self.connection.cursor()
 
 	def Execute(self, query) :
-		print("LOL")
-		self.cursor.execute(query)
-		for (last,) in self.cursor :
-			print("lasttttt = " + str(last))
-			return last
+		try :
+			print("query :: " + query)
+			self.cursor.execute(query)
+			for (last,) in self.cursor :
+				print("lasttttt = " + str(last))
+				return last
+		except Exception as e :
+			print(e)
+			input()
 
 	def Get_query_insert(self, table, columns, values) :
 		separator1 = ", "
 		separator2 = "', '"
 		for i in range(len(values)) :
 			values[i] = values[i].replace("'", "''").replace("\\", "\\\\")
-		return "INSERT INTO " + table + " (" + separator1.join(columns) + ") VALUES ('" + separator2.join(values) + "');"
+		return "INSERT INTO " + table + " (" + separator1.join(columns) + ") VALUES ('" + separator2.join(values) + "') ON DUPLICATE KEY UPDATE ID = VALUES(ID);"
 
 	def Insert(self, table, columns, values) :
 		query = self.Get_query_insert(table, columns, values)
@@ -44,12 +48,12 @@ class QuotesSpider(scrapy.Spider) :
 	name = "quotes"
 
 	custom_settings = {
-		'DOWNLOAD_DELAY' : 0.15,
+		'DOWNLOAD_DELAY' : 0.2,
 		'RANDOMIZE_DOWNLOAD_DELAY' : False
 	}
 
 	database = DATABASE()
-	table = "scraping3_test"
+	table = "live5"
 
 	columns0 = [
 	"ID",
@@ -116,14 +120,14 @@ class QuotesSpider(scrapy.Spider) :
 
 		start_time = time.time()
 
-		self.database.Connect("localhost", "database_test", "root", "")
+		self.database.Connect("167.114.239.198", "fbonnin", "fbonnin", "q3p@ssFB!!")
 
 		#print("COUCOU")
 		#self.database.Execute("SET @var = 'arbre';")
 		#input()
 
 		print("\n\n\nHI\n\n\n")
-		file = open("sec/list-one.csv", "r")
+		file = open("list-one.csv", "r")
 		text = file.read()
 		lines = text.split('\n')
 		for line in lines:
@@ -143,11 +147,19 @@ class QuotesSpider(scrapy.Spider) :
 		print("PARSE : " + response.request.url)
 		doc_ids = response.xpath("descendant::td/a/text()")
 		last = self.Get_last(response.meta["cik"])
+		print(doc_ids[0].extract())
+		input()
 		for i in range(len(doc_ids)) :
 			doc_id = doc_ids[i]
 			n = str(doc_id.extract())
+			DATE = response.xpath("descendant::td/a/text()/../../following-sibling::td[position()=2]/text()")[i].extract()
+			print(DATE)
+			if DATE < "2018-04" :
+				break
 			print("N = " + n)
 			print("LAST = " + last)
+			if last == "None" :
+				print(response.meta["cik"])
 			#print("TTTT: " + n + "_" + last)
 			#input()
 			"""if response.meta["cik"] == '0000882184' :
@@ -156,14 +168,21 @@ class QuotesSpider(scrapy.Spider) :
 				input()"""
 			if n == last :
 				break
-			#if i == 0 :
-		 		#self.Save_last(response.meta["cik"], n)
+			if i == 0 :
+				print("save last : " + response.meta["cik"] + ", " + n + ", " + DATE)
+				input()
+				self.Save_last(response.meta["cik"], n, DATE)
 			next_url = response.request.url + "/" + n
 			yield response.follow(next_url, self.parse_1, meta = {"ticker" : response.meta["ticker"], "cik" : response.meta["cik"], "name1" : response.meta["name1"], "name2" : response.meta["name2"]})
 
-	def Save_last(self, cik, last) :
-		query = "INSERT INTO last (cik, last) VALUES ('" + cik + "', '" + last + "') ON DUPLICATE KEY UPDATE last = VALUES(last);"
-		self.database.Execute(query)
+	def Save_last(self, cik, last, date) :
+		query = "INSERT INTO last (cik, last, date) VALUES ('" + cik + "', '" + last + "', '" + date + "') ON DUPLICATE KEY UPDATE cik=VALUES(cik), last='a', date='b';"#VALUES(last);"
+		print(query)
+		columns = ["pourri"]
+		values = ["aaa"]
+		#self.database.Insert("pourri", columns, values)
+		self.database.Execute("INSERT INTO pourri (ID) VALUES ('aaa');")#query)
+		input()
 
 	def Get_last(self, cik) :
 		query = "SELECT last FROM last WHERE cik = '" + cik + "';"
