@@ -14,14 +14,19 @@ class DATABASE :
 
 	def Connect(self, host, database, user, password) :
 		self.connection = mysql.connector.connect(host = host, database = database, user = user, password = password)
-		self.cursor = self.connection.cursor()
+		self.cursor = self.connection.cursor(buffered=True)
 
 	def Execute(self, query) :
-		print("LOL")
-		self.cursor.execute(query)
-		for (last,) in self.cursor :
-			print("lasttttt = " + str(last))
-			return last
+		try :
+			print("query :: " + query)
+			self.cursor.execute(query)
+			self.connection.commit()
+			for (last,) in self.cursor :
+				print("lasttttt = " + str(last))
+				return last
+		except Exception as e :
+			print(e)
+			input()
 
 	def Get_query_insert(self, table, columns, values) :
 		separator1 = ", "
@@ -49,7 +54,7 @@ class QuotesSpider(scrapy.Spider) :
 	}
 
 	database = DATABASE()
-	table = "live6"
+	table = "live5"
 
 	columns0 = [
 	"ID",
@@ -123,7 +128,7 @@ class QuotesSpider(scrapy.Spider) :
 		#input()
 
 		print("\n\n\nHI\n\n\n")
-		file = open("live6.csv", "r")
+		file = open("list-one.csv", "r")
 		text = file.read()
 		lines = text.split('\n')
 		for line in lines:
@@ -143,6 +148,7 @@ class QuotesSpider(scrapy.Spider) :
 		print("PARSE : " + response.request.url)
 		doc_ids = response.xpath("descendant::td/a/text()")
 		last = self.Get_last(response.meta["cik"])
+		print(doc_ids[0].extract())
 		for i in range(len(doc_ids)) :
 			doc_id = doc_ids[i]
 			n = str(doc_id.extract())
@@ -163,13 +169,17 @@ class QuotesSpider(scrapy.Spider) :
 			if n == last :
 				break
 			if i == 0 :
-		 		self.Save_last(response.meta["cik"], n, DATE)
+				print("save last : " + response.meta["cik"] + ", " + n + ", " + DATE)
+				self.Save_last(response.meta["cik"], n, DATE)
 			next_url = response.request.url + "/" + n
 			yield response.follow(next_url, self.parse_1, meta = {"ticker" : response.meta["ticker"], "cik" : response.meta["cik"], "name1" : response.meta["name1"], "name2" : response.meta["name2"]})
 
 	def Save_last(self, cik, last, date) :
-		query = "INSERT INTO last (cik, last, date) VALUES ('" + cik + "', '" + last + "', '" + date + "') ON DUPLICATE KEY UPDATE last = VALUES(last);"
+		query = "INSERT INTO last (cik, last, date) VALUES ('" + cik + "', '" + last + "', '" + date + "') ON DUPLICATE KEY UPDATE last = VALUES(last), date = VALUES(date);"
 		print(query)
+		columns = ["pourri"]
+		values = ["aaa"]
+		#self.database.Insert("pourri", columns, values)
 		self.database.Execute(query)
 
 	def Get_last(self, cik) :
