@@ -1,4 +1,7 @@
 import scrapy
+from scrapy import signals
+from scrapy.xlib.pydispatch import dispatcher
+
 import mysql.connector
 
 import datetime
@@ -14,23 +17,21 @@ class DATABASE :
 
 	def Connect(self, host, database, user, password) :
 		self.connection = mysql.connector.connect(host = host, database = database, user = user, password = password)
-		self.cursor = self.connection.cursor()
+		self.cursor = self.connection.cursor(buffered=True)
 
 	def Execute(self, query) :
-		print("LOL")
-		self.cursor.execute(query)
-		for (last,) in self.cursor :
-			print("lasttttt = " + str(last))
-			return last
+		try :
+			print("query :: " + query)
+			self.cursor.execute(query)
+			self.connection.commit()
+			for (last,) in self.cursor :
+				print("lasttttt = " + str(last))
+				return last
+		except Exception as e :
+			print(e)
+			input()
 
 	def Get_query_insert(self, table, columns, values) :
-		separator1 = ", "
-		separator2 = "', '"
-		for i in range(len(values)) :
-			values[i] = values[i].replace("'", "''").replace("\\", "\\\\")
-		return "INSERT INTO " + table + " (" + separator1.join(columns) + ") VALUES ('" + separator2.join(values) + "');"
-
-	def Get_query_insert_2(self, table, columns, values) :
 		separator1 = ", "
 		separator2 = "', '"
 		for i in range(len(values)) :
@@ -56,7 +57,7 @@ class QuotesSpider(scrapy.Spider) :
 	}
 
 	database = DATABASE()
-	table = "scraping1_test"
+	table = "live6"
 
 	columns0 = [
 	"ID",
@@ -123,14 +124,16 @@ class QuotesSpider(scrapy.Spider) :
 
 		start_time = time.time()
 
-		self.database.Connect("localhost", "database_test", "root", "")
+		dispatcher.connect(self.spider_closed, signals.spider_closed)
+
+		self.database.Connect("167.114.239.198", "fbonnin", "fbonnin", "q3p@ssFB!!")
 
 		#print("COUCOU")
 		#self.database.Execute("SET @var = 'arbre';")
 		#input()
 
 		print("\n\n\nHI\n\n\n")
-		file = open("sec/list1-1.csv", "r")
+		file = open("live6.csv", "r")
 		text = file.read()
 		lines = text.split('\n')
 		for line in lines:
@@ -150,6 +153,8 @@ class QuotesSpider(scrapy.Spider) :
 		print("PARSE : " + response.request.url)
 		doc_ids = response.xpath("descendant::td/a/text()")
 		last = self.Get_last(response.meta["cik"])
+		last_date = self.Get_last_date(response.meta["cik"])
+		print(doc_ids[0].extract())
 		for i in range(len(doc_ids)) :
 			doc_id = doc_ids[i]
 			n = str(doc_id.extract())
@@ -158,7 +163,6 @@ class QuotesSpider(scrapy.Spider) :
 			if DATE < "2018-04" :
 				break
 			print("N = " + n)
-			
 			print("LAST = " + last)
 			if last == "None" :
 				print(response.meta["cik"])
@@ -168,22 +172,31 @@ class QuotesSpider(scrapy.Spider) :
 				print("ICICICICI")
 				print(n + "&&" + last)
 				input()"""
-			if n == last :
+			if n == last or DATE > last_date :
 				break
 			if i == 0 :
-		 		self.Save_last(response.meta["cik"], n, DATE)
+				print("save last : " + response.meta["cik"] + ", " + n + ", " + DATE)
+				self.Save_last(response.meta["cik"], n, DATE)
 			next_url = response.request.url + "/" + n
 			yield response.follow(next_url, self.parse_1, meta = {"ticker" : response.meta["ticker"], "cik" : response.meta["cik"], "name1" : response.meta["name1"], "name2" : response.meta["name2"]})
 
 	def Save_last(self, cik, last, date) :
-		query = "INSERT INTO last (cik, last, date) VALUES ('" + cik + "', '" + last + "', '" + date + "') ON DUPLICATE KEY UPDATE last = VALUES(last);"
+		query = "INSERT INTO last (cik, last, date) VALUES ('" + cik + "', '" + last + "', '" + date + "') ON DUPLICATE KEY UPDATE last = VALUES(last), date = VALUES(date);"
 		print(query)
+		columns = ["pourri"]
+		values = ["aaa"]
+		#self.database.Insert("pourri", columns, values)
 		self.database.Execute(query)
 
 	def Get_last(self, cik) :
 		query = "SELECT last FROM last WHERE cik = '" + cik + "';"
 		last = str(self.database.Execute(query))
 		return last
+
+	def Get_last_date(self, cik) :
+		query = "SELECT date FROM last WHERE cik = '" + cik + "';"
+		last_date = str(self.database.Execute(query))
+		return last_date
 
 	def parse_1(self, response) :
 		self.nb_requests += 1
@@ -392,6 +405,7 @@ class QuotesSpider(scrapy.Spider) :
 		return "null"
 
 	def spider_closed(self, spider, reason) :
-
-		query = "INSERT INTO tmp SELECT " + table + ".*, liste1.cik FROM " + table + " LEFT JOIN liste1 ON T.issuerTradingSymbol = liste1.ticker;"
+		print("WESH")
+		query = "INSERT INTO tmp SELECT " + self.table + ".*, liste1.cik FROM " + self.table + " LEFT JOIN liste1 ON "+ self.table + ".issuerTradingSymbol = liste1.ticker;"
 		self.database.Execute(query)
+
