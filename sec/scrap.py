@@ -58,6 +58,8 @@ class QuotesSpider(scrapy.Spider) :
 
 	database = DATABASE()
 	table = "live6"
+	listname = "live6.csv"
+	dict_cik_ticker = {}
 
 	columns0 = [
 	"ID",
@@ -83,7 +85,8 @@ class QuotesSpider(scrapy.Spider) :
 	"rptOwnerCity",
 	"rptOwnerState",
 	"rptOwnerZipCode",
-	"derivative"
+	"derivative",
+	"ticker2"
 	]
 
 	columns1 = [
@@ -133,7 +136,7 @@ class QuotesSpider(scrapy.Spider) :
 		#input()
 
 		print("\n\n\nHI\n\n\n")
-		file = open("live6.csv", "r")
+		file = open(self.listname, "r")
 		text = file.read()
 		lines = text.split('\n')
 		for line in lines:
@@ -146,6 +149,14 @@ class QuotesSpider(scrapy.Spider) :
 			file = open("progress.txt", "w")
 			file.write(str(self.nb_lines_read))
 		print("--- %s seconds ---" % (time.time() - start_time))
+
+	def load_dict(self) :
+		file = open(self.listname, "r")
+		text = file.read()
+		lines = text.split('\n')
+		for line in lines :
+			infos = line.split(";")
+			self.dict_cik_ticker[infos[2]] = infos[1]
 
 	def parse(self, response) :
 		self.nb_requests += 1
@@ -280,6 +291,7 @@ class QuotesSpider(scrapy.Spider) :
 		state = e_reportingOwnerAddress.xpath("rptOwnerState/text()").extract_first()
 		data0["rptOwnerState"] = e_reportingOwnerAddress.xpath("rptOwnerState/text()").extract_first()
 		data0["rptOwnerZipCode"] = e_reportingOwnerAddress.xpath("rptOwnerZipCode/text()").extract_first()
+		data0["ticker2"] = self.dict_cik_ticker[data0["issuerCik"]]
 
 		file_path = "files/"
 		directory = os.path.dirname(file_path)
