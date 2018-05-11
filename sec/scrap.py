@@ -131,6 +131,8 @@ class QuotesSpider(scrapy.Spider) :
 
 		self.database.Connect("167.114.239.198", "fbonnin", "fbonnin", "q3p@ssFB!!")
 
+		self.load_dict()
+
 		#print("COUCOU")
 		#self.database.Execute("SET @var = 'arbre';")
 		#input()
@@ -156,7 +158,7 @@ class QuotesSpider(scrapy.Spider) :
 		lines = text.split('\n')
 		for line in lines :
 			infos = line.split(";")
-			self.dict_cik_ticker[infos[2]] = infos[1]
+			self.dict_cik_ticker[infos[1]] = infos[0]
 
 	def parse(self, response) :
 		self.nb_requests += 1
@@ -183,7 +185,14 @@ class QuotesSpider(scrapy.Spider) :
 				print("ICICICICI")
 				print(n + "&&" + last)
 				input()"""
-			if n == last or DATE > last_date :
+			print("YYY:"+DATE)
+			print("ZZZ:"+last_date)
+			
+			if n == last :
+				break
+			if DATE < last_date :
+				print("WOW")
+				#input()
 				break
 			if i == 0 :
 				print("save last : " + response.meta["cik"] + ", " + n + ", " + DATE)
