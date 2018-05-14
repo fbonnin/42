@@ -57,8 +57,8 @@ class QuotesSpider(scrapy.Spider) :
 	}
 
 	database = DATABASE()
-	table = "live6"
-	listname = "live6.csv"
+	table = "live1"
+	listname = "live1.csv"
 	dict_cik_ticker = {}
 
 	columns0 = [
@@ -127,7 +127,7 @@ class QuotesSpider(scrapy.Spider) :
 
 		start_time = time.time()
 
-		dispatcher.connect(self.spider_closed, signals.spider_closed)
+		#dispatcher.connect(self.spider_closed, signals.spider_closed)
 
 		self.database.Connect("167.114.239.198", "fbonnin", "fbonnin", "q3p@ssFB!!")
 
