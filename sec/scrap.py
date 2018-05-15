@@ -127,7 +127,7 @@ class QuotesSpider(scrapy.Spider) :
 
 		start_time = time.time()
 
-		#dispatcher.connect(self.spider_closed, signals.spider_closed)
+		dispatcher.connect(self.spider_closed, signals.spider_closed)
 
 		self.database.Connect("167.114.239.198", "fbonnin", "fbonnin", "q3p@ssFB!!")
 
@@ -168,10 +168,11 @@ class QuotesSpider(scrapy.Spider) :
 		last = self.Get_last(response.meta["cik"])
 		last_date = self.Get_last_date(response.meta["cik"])
 		print(doc_ids[0].extract())
+		DATES = response.xpath("descendant::td/a/text()/../../following-sibling::td[position()=2]/text()")
 		for i in range(len(doc_ids)) :
 			doc_id = doc_ids[i]
 			n = str(doc_id.extract())
-			DATE = response.xpath("descendant::td/a/text()/../../following-sibling::td[position()=2]/text()")[i].extract()
+			DATE = DATES[i].extract()
 			print(DATE)
 			if DATE < "2018-04" :
 				break
