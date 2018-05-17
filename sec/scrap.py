@@ -57,7 +57,8 @@ class QuotesSpider(scrapy.Spider) :
 	}
 
 	database = DATABASE()
-	table = "live1"
+	table = ""
+	table_all = "live1"
 	listname = "live1.csv"
 	dict_cik_ticker = {}
 
@@ -124,6 +125,8 @@ class QuotesSpider(scrapy.Spider) :
 	nb_requests = 0
 
 	def start_requests(self):
+
+		self.table = self.table_all + "_tmp"		
 
 		start_time = time.time()
 
