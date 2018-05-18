@@ -32,4 +32,4 @@ for i in range(1, 7) :
 		file.write("\n")
 
 	query = "DELETE FROM live" + str(i) + "_tmp;"
-	database.cursor.execute(query)
+	#database.cursor.execute(query)
