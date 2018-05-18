@@ -134,7 +134,7 @@ class QuotesSpider(scrapy.Spider) :
 
 		self.database.Connect("167.114.239.198", "fbonnin", "fbonnin", "q3p@ssFB!!")
 
-		self.delete_from_tmp()
+		#self.delete_from_tmp()
 		self.load_dict()
 
 		#print("COUCOU")
@@ -436,6 +436,8 @@ class QuotesSpider(scrapy.Spider) :
 
 	def spider_closed(self, spider, reason) :
 		print("WESH")
+		query = "INSERT INTO " + self.table_all + " SELECT * FROM " + self.table + ";"
+		self.database.Execute(query)
 		#query = "INSERT INTO tmp SELECT " + self.table + ".*, liste1.cik FROM " + self.table + " LEFT JOIN liste1 ON "+ self.table + ".issuerTradingSymbol = liste1.ticker;"
 		#self.database.Execute(query)
 
