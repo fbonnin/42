@@ -1,5 +1,9 @@
 import mysql.connector
 
+import ftplib
+
+import datetime
+
 class DATABASE :
 
 	connection = None
@@ -12,10 +16,18 @@ class DATABASE :
 database = DATABASE()
 database.Connect("167.114.239.198", "fbonnin", "fbonnin", "q3p@ssFB!!")
 
-file = open("merge.csv", "w")
+today = datetime.datetime.now()
+
+yesterday = today - datetime.timedelta(days=1)
+
+filename = "Insiders/" + str(today) + ".csv"
+print(filename)
+print(str(yesterday))
+
+file = open(filename, "w")
 
 for i in range(1, 7) :
-	query = "SELECT * FROM live" + str(i) + "_tmp;"
+	query = "SELECT * FROM live" + str(i) + "_tmp WHERE accepted >= '" + str(yesterday) + "';"
 	print(query)
 	database.cursor.execute(query)
 	database.connection.commit()
@@ -33,3 +45,17 @@ for i in range(1, 7) :
 
 	query = "DELETE FROM live" + str(i) + "_tmp;"
 	#database.cursor.execute(query)
+
+file.close()
+
+session = ftplib.FTP('ftp.q3-technology.com', 'qtechnol-vic0914', 'SMu45pRt8')
+
+file = open(filename, 'rb')
+
+session.storbinary('STOR ' + filename, file)
+
+file.close()
+
+session.quit()
+
+print("merge, export, upload - DONE")
