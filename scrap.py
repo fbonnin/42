@@ -406,3 +406,4 @@ class InsidersSpider(scrapy.Spider) :
 		#self.database.Execute(query)
 		#query = "INSERT INTO tmp SELECT " + self.table + ".*, liste1.cik FROM " + self.table + " LEFT JOIN liste1 ON "+ self.table + ".issuerTradingSymbol = liste1.ticker;"
 		#self.database.Execute(query)
+		print()
