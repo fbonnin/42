@@ -63,6 +63,7 @@ class InsidersSpider(scrapy.Spider) :
 	listname = "live1.csv"
 	dict_cik_ticker = {}
 
+	# Informations communes à toutes les transactions
 	columns0 = [
 	"ID",
 	"cik",
@@ -91,6 +92,7 @@ class InsidersSpider(scrapy.Spider) :
 	"ticker2"
 	]
 
+	# Informations pour une non derivative transaction
 	columns1 = [
 	"securityTitle",
 	"transactionDate",
@@ -103,6 +105,7 @@ class InsidersSpider(scrapy.Spider) :
 	"natureOfOwnership"
 	]
 
+	# Informations pour une derivative transaction
 	columns2 = [
 	"securityTitle",
 	"conversionOrExercisePrice",
@@ -125,6 +128,7 @@ class InsidersSpider(scrapy.Spider) :
 
 	nb_requests = 0
 
+	# Boucle sur la liste de tickers
 	def start_requests(self):	
 
 		dispatcher.connect(self.spider_closed, signals.spider_closed)
@@ -148,6 +152,7 @@ class InsidersSpider(scrapy.Spider) :
 			file.write(str(self.nb_lines_read))
 		print("--- %s seconds ---" % (time.time() - start_time))
 
+	# Prépare un dictionnaire qui associe à chaque cik le ticker correspondant
 	def load_dict(self) :
 		file = open(self.listname, "r")
 		text = file.read()
@@ -156,12 +161,14 @@ class InsidersSpider(scrapy.Spider) :
 			infos = line.split(";")
 			self.dict_cik_ticker[infos[1]] = infos[0]
 
+	# Analyse une page comme : https://www.sec.gov/Archives/edgar/data/51143
 	def parse(self, response) :
+		print("PARSE : " + response.request.url)
 		self.nb_requests += 1
 		print("nb_requests = " + str(self.nb_requests))
-		print("PARSE : " + response.request.url)
 		doc_ids = response.xpath("descendant::td/a/text()")
 		if mode == 1 :
+			# Récupère l'id et la date du dernier document téléchargé pendant l'update précédente
 			last = self.Get_last(response.meta["cik"])
 			last_date = self.Get_last_date(response.meta["cik"])
 		DATES = response.xpath("descendant::td/a/text()/../../following-sibling::td[position()=2]/text()")
@@ -195,23 +202,25 @@ class InsidersSpider(scrapy.Spider) :
 		last_date = str(self.database.Execute(query))
 		return last_date
 
+	# Analyse une page comme : https://www.sec.gov/Archives/edgar/data/51143/000156218018002434
 	def parse_1(self, response) :
+		print("PARSE_1 : " + response.request.url)
 		self.nb_requests += 1
 		print("nb_requests = " + str(self.nb_requests))
-		print("PARSE_1 : " + response.request.url)
 		for a in response.xpath("descendant::a") :
 			text = str(a.xpath("text()").extract_first())
 			next_url = str(a.xpath("@href").extract_first())
 			if text[-11:] == "-index.html" :
 				yield response.follow(next_url, self.parse_2, meta = {"ticker" : response.meta["ticker"], "cik" : response.meta["cik"], "name1" : response.meta["name1"], "name2" : response.meta["name2"], "url" : response.request.url})
 
+	# Analyse une page comme : https://www.sec.gov/Archives/edgar/data/51143/000156218018002434/0001562180-18-002434-index.html
 	def parse_2(self, response) :
 
+		print("PARSE_2 : " + response.request.url)
 		self.nb_requests += 1
 		print("nb_requests = " + str(self.nb_requests))
 
-		print("PARSE_2 : " + response.request.url)
-
+		# Récupère Filing Date, Accepted, Period of Report
 		for div in response.xpath("descendant::div") :
 			text1 = div.xpath("text()").extract_first()
 			text2 = div.xpath("following-sibling::div[position()=1]/text()").extract_first()
@@ -222,6 +231,7 @@ class InsidersSpider(scrapy.Spider) :
 			elif text1 == "Period of Report" :
 				period_of_report = text2
 
+		# Récupère owner_cik
 		for a in response.xpath("descendant::a") :
 			text = a.xpath("text()").extract_first()
 			if text == "Reporting" :
@@ -229,6 +239,7 @@ class InsidersSpider(scrapy.Spider) :
 				info = a2.xpath("text()").extract_first()
 				owner_cik = info.split(" ")[0]
 
+		# Cherche les documents xml de type 4
 		for td in response.xpath("descendant::td") :
 			text = td.xpath("text()").extract_first()
 			if text == "4" :
@@ -238,6 +249,7 @@ class InsidersSpider(scrapy.Spider) :
 					next_url = a.xpath("@href").extract_first()
 					yield response.follow(next_url, self.parse_3, meta = {"ticker" : response.meta["ticker"], "cik" : response.meta["cik"], "name1" : response.meta["name1"], "name2" : response.meta["name2"], "url" : response.meta["url"], "filing_date" : filing_date, "accepted" : accepted, "period_of_report" : period_of_report, "owner_cik" : owner_cik})
 
+	# Analyse un fichier xml comme : https://www.sec.gov/Archives/edgar/data/51143/000156218018002434/primarydocument.xml
 	def parse_3(self, response) :
 
 		self.nb_requests += 1
