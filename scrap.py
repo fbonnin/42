@@ -1,4 +1,7 @@
 import scrapy
+from scrapy import signals
+from scrapy.xlib.pydispatch import dispatcher
+
 import mysql.connector
 
 import datetime
@@ -7,6 +10,8 @@ import time
 
 import os
 
+mode = 1
+
 class DATABASE :
 
 	connection = None
@@ -14,12 +19,13 @@ class DATABASE :
 
 	def Connect(self, host, database, user, password) :
 		self.connection = mysql.connector.connect(host = host, database = database, user = user, password = password)
-		self.cursor = self.connection.cursor()
+		self.cursor = self.connection.cursor(buffered=True)
 
 	def Execute(self, query) :
 		try :
 			print("query :: " + query)
 			self.cursor.execute(query)
+			self.connection.commit()
 			for (last,) in self.cursor :
 				print("lasttttt = " + str(last))
 				return last
@@ -43,7 +49,7 @@ class DATABASE :
 			print(e)
 			input()
 
-class QuotesSpider(scrapy.Spider) :
+class InsidersSpider(scrapy.Spider) :
 
 	name = "quotes"
 
@@ -53,7 +59,9 @@ class QuotesSpider(scrapy.Spider) :
 	}
 
 	database = DATABASE()
-	table = "live5"
+	table = "live1"
+	listname = "live1.csv"
+	dict_cik_ticker = {}
 
 	columns0 = [
 	"ID",
@@ -79,7 +87,8 @@ class QuotesSpider(scrapy.Spider) :
 	"rptOwnerCity",
 	"rptOwnerState",
 	"rptOwnerZipCode",
-	"derivative"
+	"derivative",
+	"ticker2"
 	]
 
 	columns1 = [
@@ -116,18 +125,16 @@ class QuotesSpider(scrapy.Spider) :
 
 	nb_requests = 0
 
-	def start_requests(self):
+	def start_requests(self):	
 
-		start_time = time.time()
+		dispatcher.connect(self.spider_closed, signals.spider_closed)
 
 		self.database.Connect("167.114.239.198", "fbonnin", "fbonnin", "q3p@ssFB!!")
 
-		#print("COUCOU")
-		#self.database.Execute("SET @var = 'arbre';")
-		#input()
+		self.load_dict()
 
 		print("\n\n\nHI\n\n\n")
-		file = open("list-one.csv", "r")
+		file = open(self.listname, "r")
 		text = file.read()
 		lines = text.split('\n')
 		for line in lines:
@@ -141,53 +148,52 @@ class QuotesSpider(scrapy.Spider) :
 			file.write(str(self.nb_lines_read))
 		print("--- %s seconds ---" % (time.time() - start_time))
 
+	def load_dict(self) :
+		file = open(self.listname, "r")
+		text = file.read()
+		lines = text.split('\n')
+		for line in lines :
+			infos = line.split(";")
+			self.dict_cik_ticker[infos[1]] = infos[0]
+
 	def parse(self, response) :
 		self.nb_requests += 1
 		print("nb_requests = " + str(self.nb_requests))
 		print("PARSE : " + response.request.url)
 		doc_ids = response.xpath("descendant::td/a/text()")
-		last = self.Get_last(response.meta["cik"])
-		print(doc_ids[0].extract())
-		input()
+		if mode == 1 :
+			last = self.Get_last(response.meta["cik"])
+			last_date = self.Get_last_date(response.meta["cik"])
+		DATES = response.xpath("descendant::td/a/text()/../../following-sibling::td[position()=2]/text()")
 		for i in range(len(doc_ids)) :
 			doc_id = doc_ids[i]
 			n = str(doc_id.extract())
-			DATE = response.xpath("descendant::td/a/text()/../../following-sibling::td[position()=2]/text()")[i].extract()
-			print(DATE)
-			if DATE < "2018-04" :
-				break
-			print("N = " + n)
-			print("LAST = " + last)
-			if last == "None" :
-				print(response.meta["cik"])
-			#print("TTTT: " + n + "_" + last)
-			#input()
-			"""if response.meta["cik"] == '0000882184' :
-				print("ICICICICI")
-				print(n + "&&" + last)
-				input()"""
-			if n == last :
-				break
+			DATE = DATES[i].extract()
+			if mode == 1 :
+				if DATE < "2018-04" :
+					break
+				if n == last :
+					break
+				if DATE < last_date :
+					break
 			if i == 0 :
-				print("save last : " + response.meta["cik"] + ", " + n + ", " + DATE)
-				input()
 				self.Save_last(response.meta["cik"], n, DATE)
 			next_url = response.request.url + "/" + n
 			yield response.follow(next_url, self.parse_1, meta = {"ticker" : response.meta["ticker"], "cik" : response.meta["cik"], "name1" : response.meta["name1"], "name2" : response.meta["name2"]})
 
 	def Save_last(self, cik, last, date) :
-		query = "INSERT INTO last (cik, last, date) VALUES ('" + cik + "', '" + last + "', '" + date + "') ON DUPLICATE KEY UPDATE cik=VALUES(cik), last='a', date='b';"#VALUES(last);"
-		print(query)
-		columns = ["pourri"]
-		values = ["aaa"]
-		#self.database.Insert("pourri", columns, values)
-		self.database.Execute("INSERT INTO pourri (ID) VALUES ('aaa');")#query)
-		input()
+		query = "INSERT INTO last (cik, last, date) VALUES ('" + cik + "', '" + last + "', '" + date + "') ON DUPLICATE KEY UPDATE last = VALUES(last), date = VALUES(date);"
+		self.database.Execute(query)
 
 	def Get_last(self, cik) :
 		query = "SELECT last FROM last WHERE cik = '" + cik + "';"
 		last = str(self.database.Execute(query))
 		return last
+
+	def Get_last_date(self, cik) :
+		query = "SELECT date FROM last WHERE cik = '" + cik + "';"
+		last_date = str(self.database.Execute(query))
+		return last_date
 
 	def parse_1(self, response) :
 		self.nb_requests += 1
@@ -205,6 +211,7 @@ class QuotesSpider(scrapy.Spider) :
 		print("nb_requests = " + str(self.nb_requests))
 
 		print("PARSE_2 : " + response.request.url)
+
 		for div in response.xpath("descendant::div") :
 			text1 = div.xpath("text()").extract_first()
 			text2 = div.xpath("following-sibling::div[position()=1]/text()").extract_first()
@@ -215,13 +222,11 @@ class QuotesSpider(scrapy.Spider) :
 			elif text1 == "Period of Report" :
 				period_of_report = text2
 
-
 		for a in response.xpath("descendant::a") :
 			text = a.xpath("text()").extract_first()
 			if text == "Reporting" :
 				a2 = a.xpath("following-sibling::a")
 				info = a2.xpath("text()").extract_first()
-				#print("ATTENTION : " + info.split(" ")[0])
 				owner_cik = info.split(" ")[0]
 
 		for td in response.xpath("descendant::td") :
@@ -271,6 +276,7 @@ class QuotesSpider(scrapy.Spider) :
 		state = e_reportingOwnerAddress.xpath("rptOwnerState/text()").extract_first()
 		data0["rptOwnerState"] = e_reportingOwnerAddress.xpath("rptOwnerState/text()").extract_first()
 		data0["rptOwnerZipCode"] = e_reportingOwnerAddress.xpath("rptOwnerZipCode/text()").extract_first()
+		data0["ticker2"] = self.dict_cik_ticker[data0["issuerCik"]]
 
 		file_path = "files/"
 		directory = os.path.dirname(file_path)
@@ -394,3 +400,9 @@ class QuotesSpider(scrapy.Spider) :
 		if key in dictionary :
 			return dictionary[key]
 		return "null"
+
+	def spider_closed(self, spider, reason) :
+		#query = "INSERT INTO " + self.table_all + " SELECT * FROM " + self.table + ";"
+		#self.database.Execute(query)
+		#query = "INSERT INTO tmp SELECT " + self.table + ".*, liste1.cik FROM " + self.table + " LEFT JOIN liste1 ON "+ self.table + ".issuerTradingSymbol = liste1.ticker;"
+		#self.database.Execute(query)
