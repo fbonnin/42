@@ -11,6 +11,8 @@ import time
 import os
 
 mode = 1
+# mode 0 : histo
+# mode 1 : update
 
 class DATABASE :
 
@@ -172,17 +174,20 @@ class InsidersSpider(scrapy.Spider) :
 			last = self.Get_last(response.meta["cik"])
 			last_date = self.Get_last_date(response.meta["cik"])
 		DATES = response.xpath("descendant::td/a/text()/../../following-sibling::td[position()=2]/text()")
+		# Boucle sur les résultats de la page
 		for i in range(len(doc_ids)) :
 			doc_id = doc_ids[i]
 			n = str(doc_id.extract())
 			DATE = DATES[i].extract()
 			if mode == 1 :
+				# Si le document a déjà été téléchargé, on ne va pas plus loin
 				if DATE < "2018-04" :
 					break
 				if n == last :
 					break
-				if DATE < last_date :
+				if DATE <= last_date :
 					break
+			# Met à jour l'id et la date du dernier document téléchargé
 			if i == 0 :
 				self.Save_last(response.meta["cik"], n, DATE)
 			next_url = response.request.url + "/" + n
