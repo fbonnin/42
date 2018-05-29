@@ -10,9 +10,14 @@ import time
 
 import os
 
+table = "live1_tmp"
+listname = "live1.csv"
+
 mode = 1
 # mode 0 : histo
 # mode 1 : update
+
+server = 1
 
 class DATABASE :
 
@@ -54,15 +59,13 @@ class DATABASE :
 class InsidersSpider(scrapy.Spider) :
 
 	name = "Insiders"
-echnol-vic0914	
+
 	custom_settings = {
 		'DOWNLOAD_DELAY' : 0.3,
 		'RANDOMIZE_DOWNLOAD_DELAY' : False
 	}
 
 	database = DATABASE()
-	table = "live1_tmp"
-	listname = "live1.csv"
 	dict_cik_ticker = {}
 
 	# Informations communes à toutes les transactions
@@ -129,6 +132,7 @@ echnol-vic0914
 	nb_lines_read = 0
 
 	nb_requests = 0
+	nb_documents = 0
 
 	# Boucle sur la liste de tickers
 	def start_requests(self):	
@@ -140,7 +144,7 @@ echnol-vic0914
 		self.load_dict()
 
 		print("\n\n\nHI\n\n\n")
-		file = open(self.listname, "r")
+		file = open(listname, "r")
 		text = file.read()
 		lines = text.split('\n')
 		for line in lines:
@@ -156,7 +160,7 @@ echnol-vic0914
 
 	# Prépare un dictionnaire qui associe à chaque cik le ticker correspondant
 	def load_dict(self) :
-		file = open(self.listname, "r")
+		file = open(listname, "r")
 		text = file.read()
 		lines = text.split('\n')
 		for line in lines :
@@ -259,6 +263,7 @@ echnol-vic0914
 
 		self.nb_requests += 1
 		print("nb_requests = " + str(self.nb_requests))
+		self.nb_documents += 1
 
 		print("PARSE_3 : " + response.request.url)
 		data0 = {} 
@@ -398,7 +403,7 @@ echnol-vic0914
 		for i in range(len(values)) :
 			if values[i] == None :
 				values[i] = ""
-		self.database.Insert(self.table, self.columns0 + self.columns1, values)
+		self.database.Insert(table, self.columns0 + self.columns1, values)
 
 	def Insert_derivative(self, data0, data2) :
 
@@ -410,7 +415,7 @@ echnol-vic0914
 		for i in range(len(values)) :
 			if values[i] == None :
 				values[i] = ""
-		self.database.Insert(self.table, self.columns0 + self.columns2, values)
+		self.database.Insert(table, self.columns0 + self.columns2, values)
 
 	def Get_value(self, dictionary, key) :
 
@@ -423,4 +428,6 @@ echnol-vic0914
 		#self.database.Execute(query)
 		#query = "INSERT INTO tmp SELECT " + self.table + ".*, liste1.cik FROM " + self.table + " LEFT JOIN liste1 ON "+ self.table + ".issuerTradingSymbol = liste1.ticker;"
 		#self.database.Execute(query)
+		query  = "INSERT INTO monitoring (date, server, level, description) VALUES (NOW(), '1', '0', '" + str(self.nb_documents) + " documents downloaded');"
+		self.database.Execute(query)
 		print()
