@@ -53,15 +53,15 @@ class DATABASE :
 
 class InsidersSpider(scrapy.Spider) :
 
-	name = "quotes"
-
+	name = "Insiders"
+echnol-vic0914	
 	custom_settings = {
-		'DOWNLOAD_DELAY' : 0.2,
+		'DOWNLOAD_DELAY' : 0.3,
 		'RANDOMIZE_DOWNLOAD_DELAY' : False
 	}
 
 	database = DATABASE()
-	table = "live1"
+	table = "live1_tmp"
 	listname = "live1.csv"
 	dict_cik_ticker = {}
 
