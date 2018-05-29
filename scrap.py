@@ -428,6 +428,7 @@ class InsidersSpider(scrapy.Spider) :
 		#self.database.Execute(query)
 		#query = "INSERT INTO tmp SELECT " + self.table + ".*, liste1.cik FROM " + self.table + " LEFT JOIN liste1 ON "+ self.table + ".issuerTradingSymbol = liste1.ticker;"
 		#self.database.Execute(query)
-		query  = "INSERT INTO monitoring (date, server, level, description) VALUES (NOW(), '1', '0', '" + str(self.nb_documents) + " documents downloaded');"
+		query = "INSERT INTO monitoring (date, server, level, description) VALUES (NOW(), '1', '0', '" + str(self.nb_documents) + " documents downloaded');"
+		query = "INSERT INTO monitoring (date, server, level, description) VALUES (NOW(), '" + str(server) + "', '0', '" + str(self.nb_documents) + " documents downloaded');"
 		self.database.Execute(query)
 		print()
