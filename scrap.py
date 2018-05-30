@@ -10,14 +10,28 @@ import time
 
 import os
 
+############ PARAMETRES DU PROGRAMME ############
+
 table = "live1_tmp"
+# table dans laquelle insérer les données
+
 listname = "live1.csv"
+# fichier contenant la liste de tickers
 
 mode = 1
 # mode 0 : histo
 # mode 1 : update
 
 server = 1
+# numéro du serveur sur lequel le script tourne
+# n°1 : 167.114.239.198
+# n°2 : 213.32.75.53
+# n°3 : 147.135.135.51
+# n°4 : 213.32.29.177
+# n°5 : 167.114.244.188
+# n°6 : 167.114.235.165
+
+#################################################
 
 class DATABASE :
 
@@ -342,7 +356,6 @@ class InsidersSpider(scrapy.Spider) :
 			self.Insert_non_derivative(data0, data1)
 			print()
 
-
 		el_derivativeTransaction = response.xpath("derivativeTable/derivativeTransaction")
 		for e_derivativeTransaction in el_derivativeTransaction :
 
@@ -424,10 +437,5 @@ class InsidersSpider(scrapy.Spider) :
 		return "null"
 
 	def spider_closed(self, spider, reason) :
-		#query = "INSERT INTO " + self.table_all + " SELECT * FROM " + self.table + ";"
-		#self.database.Execute(query)
-		#query = "INSERT INTO tmp SELECT " + self.table + ".*, liste1.cik FROM " + self.table + " LEFT JOIN liste1 ON "+ self.table + ".issuerTradingSymbol = liste1.ticker;"
-		#self.database.Execute(query)
 		query = "INSERT INTO monitoring (date, server, level, description) VALUES (NOW(), '" + str(server) + "', '0', '" + str(self.nb_documents) + " documents downloaded');"
 		self.database.Execute(query)
-		print()
