@@ -13,7 +13,7 @@ import os
 ############ PARAMETRES DU PROGRAMME ############
 
 table = "live1_tmp"
-# table dans laquelle insérer les données
+# table dans laquelle inserer les donnees
 
 listname = "live1.csv"
 # fichier contenant la liste de tickers
