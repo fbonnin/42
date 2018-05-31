@@ -12,31 +12,34 @@ import os
 
 ############ PARAMETRES DU PROGRAMME ############
 
-table = "live2_tmp"
-# table dans laquelle inserer les donnees
+database_server = "167.114.239.198"
+database_name = "fbonnin"
+user = "fbonnin"
+password = "q3p@ssFB!!"
+table = "live1_tmp"
 
-listname = "live2.csv"
+listname = "live1.csv"
 # fichier contenant la liste de tickers
 
 mode = 1
 # mode 0 : histo
 # mode 1 : update
 
-server = 2
-# numero du serveur sur lequel le script tourne
-# server 1 : 167.114.239.198
-# server 2 : 213.32.75.53
-# server 3 : 147.135.135.51
-# server 4 : 213.32.29.177
-# server 5 : 167.114.244.188
-# server 6 : 167.114.235.165
+server = 1
+# numéro du serveur sur lequel le script tourne
+# n°1 : 167.114.239.198
+# n°2 : 213.32.75.53
+# n°3 : 147.135.135.51
+# n°4 : 213.32.29.177
+# n°5 : 167.114.244.188
+# n°6 : 167.114.235.165
 
 #################################################
 
 class DATABASE :
 
 	connection = None
-	cursor = None
+ 	cursor = None
 
 	def Connect(self, host, database, user, password) :
 		self.connection = mysql.connector.connect(host = host, database = database, user = user, password = password)
@@ -82,7 +85,7 @@ class InsidersSpider(scrapy.Spider) :
 	database = DATABASE()
 	dict_cik_ticker = {}
 
-	# Informations communes a toutes les transactions
+	# Informations communes à toutes les transactions
 	columns0 = [
 	"ID",
 	"cik",
@@ -153,7 +156,7 @@ class InsidersSpider(scrapy.Spider) :
 
 		dispatcher.connect(self.spider_closed, signals.spider_closed)
 
-		self.database.Connect("167.114.239.198", "fbonnin", "fbonnin", "q3p@ssFB!!")
+		self.database.Connect(datebase_server, database_name, user, password)
 
 		self.load_dict()
 
@@ -172,7 +175,7 @@ class InsidersSpider(scrapy.Spider) :
 			file.write(str(self.nb_lines_read))
 		print("--- %s seconds ---" % (time.time() - start_time))
 
-	# Prepare un dictionnaire qui associe a chaque cik le ticker correspondant
+	# Prépare un dictionnaire qui associe à chaque cik le ticker correspondant
 	def load_dict(self) :
 		file = open(listname, "r")
 		text = file.read()
@@ -188,24 +191,24 @@ class InsidersSpider(scrapy.Spider) :
 		print("nb_requests = " + str(self.nb_requests))
 		doc_ids = response.xpath("descendant::td/a/text()")
 		if mode == 1 :
-			# Recupere l'id et la date du dernier document telecharge pendant l'update precedente
+			# Récupère l'id et la date du dernier document téléchargé pendant l'update précédente
 			last = self.Get_last(response.meta["cik"])
 			last_date = self.Get_last_date(response.meta["cik"])
 		DATES = response.xpath("descendant::td/a/text()/../../following-sibling::td[position()=2]/text()")
-		# Boucle sur les resultats de la page
+		# Boucle sur les résultats de la page
 		for i in range(len(doc_ids)) :
 			doc_id = doc_ids[i]
 			n = str(doc_id.extract())
 			DATE = DATES[i].extract()
 			if mode == 1 :
-				# Si le document a deja ete telecharge, on ne va pas plus loin
+				# Si le document a déjà été téléchargé, on ne va pas plus loin
 				if DATE < "2018-04" :
 					break
 				if n == last :
 					break
 				if DATE <= last_date :
 					break
-			# Met a jour l'id et la date du dernier document telecharge
+			# Met à jour l'id et la date du dernier document téléchargé
 			if i == 0 :
 				self.Save_last(response.meta["cik"], n, DATE)
 			next_url = response.request.url + "/" + n
@@ -243,7 +246,7 @@ class InsidersSpider(scrapy.Spider) :
 		self.nb_requests += 1
 		print("nb_requests = " + str(self.nb_requests))
 
-		# Recupere Filing Date, Accepted, Period of Report
+		# Récupère Filing Date, Accepted, Period of Report
 		for div in response.xpath("descendant::div") :
 			text1 = div.xpath("text()").extract_first()
 			text2 = div.xpath("following-sibling::div[position()=1]/text()").extract_first()
@@ -254,7 +257,7 @@ class InsidersSpider(scrapy.Spider) :
 			elif text1 == "Period of Report" :
 				period_of_report = text2
 
-		# Recupere owner_cik
+		# Récupère owner_cik
 		for a in response.xpath("descendant::a") :
 			text = a.xpath("text()").extract_first()
 			if text == "Reporting" :
@@ -437,5 +440,5 @@ class InsidersSpider(scrapy.Spider) :
 		return "null"
 
 	def spider_closed(self, spider, reason) :
-		query = "INSERT INTO monitoring (date, server, level, description) VALUES (NOW(), '" + str(server) + "', '0', '" + str(self.nb_documents) + " documents downloaded');"
+		query = "INSERT INTO monitoring (date, server, level, description, nb_documents_downloaded) VALUES (NOW(), '" + str(server) + "', '0', '" + str(self.nb_documents) + " documents downloaded', " + str(self.nb_documents) + ");"
 		self.database.Execute(query)
