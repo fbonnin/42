@@ -156,7 +156,7 @@ class InsidersSpider(scrapy.Spider) :
 
 		dispatcher.connect(self.spider_closed, signals.spider_closed)
 
-		self.database.Connect(datebase_server, database_name, user, password)
+		self.database.Connect(database_server, database_name, user, password)
 
 		self.load_dict()
 
