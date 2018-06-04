@@ -39,7 +39,7 @@ server = 1
 class DATABASE :
 
 	connection = None
- 	cursor = None
+	cursor = None
 
 	def Connect(self, host, database, user, password) :
 		self.connection = mysql.connector.connect(host = host, database = database, user = user, password = password)
