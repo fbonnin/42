@@ -54,7 +54,7 @@ for i in range(len(columns)) :
 	file.write("\"")
 	if i < len(columns) - 1 :
 		file.write(";")
-	file.write("\n")
+file.write("\n")
 
 for i in range(1, 7) :
 	query = "SELECT " + ", ".join(columns) + " FROM live" + str(i) + "_tmp WHERE accepted >= '" + str(begin) + "';"
