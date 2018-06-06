@@ -34,6 +34,9 @@ server = 1
 # server 5 : 167.114.244.188
 # server 6 : 167.114.235.165
 
+nb_updates = 3
+begin = "12"
+
 #################################################
 
 class DATABASE :
@@ -442,3 +445,22 @@ class InsidersSpider(scrapy.Spider) :
 	def spider_closed(self, spider, reason) :
 		query = "INSERT INTO monitoring (date, server, level, description, nb_documents_downloaded) VALUES (NOW(), '" + str(server) + "', '0', '" + str(self.nb_documents) + " documents downloaded', '" + str(self.nb_documents) + "');"
 		self.database.Execute(query)
+
+		now = datetime.datetime.now()
+		today = now.strftime("%Y-%m-%d")
+		file = open("calendar.txt", "r")
+		text = file.read()
+		calendar = text.split("\n")
+		for day in calendar :
+			if day == today :
+				if now.strftime("%H") >= begin :
+					A = now.replace(minute = 0, second = 0, microsecond = 0) - datetime.timedelta(hours = nb_updates - 1)
+					query = "SELECT nb_documents_downloaded FROM monitoring WHERE server '" + str(server) + "' AND date >= '" + str(A) + "' AND date <= '" + str(now) + "';"
+					database.cursor.execute(query)
+					database.connection.commit()
+					problem = True
+					for row in database.cursor :
+						if str(row[0]) != "0" :
+							problem = False
+					if problem :
+						#TODO
