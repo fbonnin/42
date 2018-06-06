@@ -455,12 +455,13 @@ class InsidersSpider(scrapy.Spider) :
 			if day == today :
 				if now.strftime("%H") >= begin :
 					A = now.replace(minute = 0, second = 0, microsecond = 0) - datetime.timedelta(hours = nb_updates - 1)
-					query = "SELECT nb_documents_downloaded FROM monitoring WHERE server '" + str(server) + "' AND date >= '" + str(A) + "' AND date <= '" + str(now) + "';"
-					database.cursor.execute(query)
-					database.connection.commit()
+					query = "SELECT nb_documents_downloaded FROM monitoring WHERE server = '" + str(server) + "' AND date >= '" + str(A) + "' AND date <= '" + str(now) + "';"
+					self.database.cursor.execute(query)
+					self.database.connection.commit()
 					problem = True
-					for row in database.cursor :
+					for row in self.database.cursor :
 						if str(row[0]) != "0" :
 							problem = False
 					if problem :
 						#TODO
+						print()
