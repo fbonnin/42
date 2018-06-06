@@ -39,7 +39,7 @@ server = 1
 # server 6 : 167.114.235.165
 
 nb_updates = 3
-begin = "12"
+begin = "16"
 
 #################################################
 
@@ -470,7 +470,7 @@ class InsidersSpider(scrapy.Spider) :
 						try :
 							msg = MIMEMultipart()
 							msg['From'] = 'htl.insiders@gmail.com'
-							msg['To'] = 'htl.insiders@gmail.com'
+							msg['To'] = 'op@htl-capital.com'
 							msg['Subject'] = 'Insiders - Problem detected (server ' + str(server) + ')'
 							message = 'Insiders - Problem detected (server ' + str(server) + ')'
 							msg.attach(MIMEText(message))
@@ -479,7 +479,7 @@ class InsidersSpider(scrapy.Spider) :
 							mailserver.starttls()
 							mailserver.ehlo()
 							mailserver.login('htl.insiders@gmail.com', 'insiders123')
-							mailserver.sendmail('htl.insiders@gmail.com', 'htl.insiders@gmail.com', msg.as_string())
+							mailserver.sendmail('htl.insiders@gmail.com', 'op@htl-capital.com', msg.as_string())
 							mailserver.quit()
 						except Exception as e :
 							print("Exception")
