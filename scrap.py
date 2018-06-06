@@ -10,6 +10,10 @@ import time
 
 import os
 
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
 ############ PARAMETRES DU PROGRAMME ############
 
 database_server = "167.114.239.198"
@@ -463,5 +467,19 @@ class InsidersSpider(scrapy.Spider) :
 						if str(row[0]) != "0" :
 							problem = False
 					if problem :
-						#TODO
-						print()
+						try :
+							msg = MIMEMultipart()
+							msg['From'] = 'htl.insiders@gmail.com'
+							msg['To'] = 'htl.insiders@gmail.com'
+							msg['Subject'] = 'Insiders - Problem detected (server ' + str(server) + ')'
+							message = 'Insiders - Problem detected (server ' + str(server) + ')'
+							msg.attach(MIMEText(message))
+							mailserver = smtplib.SMTP('smtp.gmail.com', 587)
+							mailserver.ehlo()
+							mailserver.starttls()
+							mailserver.ehlo()
+							mailserver.login('htl.insiders@gmail.com', 'insiders123')
+							mailserver.sendmail('htl.insiders@gmail.com', 'htl.insiders@gmail.com', msg.as_string())
+							mailserver.quit()
+						except Exception as e :
+							print("Exception")
