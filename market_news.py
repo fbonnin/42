@@ -6,8 +6,8 @@ import mysql.connector
 import time
 from dateutil import parser
 
-first_page = 1
-last_page = 51
+first_page = 0
+last_page = 50
 
 database_server = "167.114.239.198"
 database_name = "fbonnin"
@@ -71,9 +71,9 @@ database = DATABASE()
 database.Connect(database_server, database_name, user, password)
 
 url = "https://seekingalpha.com/market-news/all?page="
-page = first_page
+page = first_page + 1
 
-while page < last_page :
+while page <= last_page :
 
 	driver.get(url + str(page))
 
