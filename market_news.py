@@ -7,7 +7,7 @@ import time
 from dateutil import parser
 
 first_page = 0
-last_page = 50
+last_page = 9000
 
 database_server = "167.114.239.198"
 database_name = "fbonnin"
@@ -82,46 +82,72 @@ while page <= last_page :
 
 	for i in range(len(mcs)) :
 
+		print("t")
 		date_titles = mcs[i].find_elements_by_xpath("preceding-sibling::li[@class=\"date-title\"]")
+		print("u")
 		print("len(date_titles) = " + str(len(date_titles)))
 
+		print("m")
 		day = date_titles[len(date_titles) - 1].text
+		print("n")
 		if day[0:5] == "Today" :
+			print("o")
 			day = day[8:len(day)]
+		print("p")
 		print("day = " + day)
 
 		try :
+			print("q")
 			ticker = mcs[i].find_element_by_xpath("div[@class=\"media-left\"]/a").text
 		except :
+			print("r")
 			ticker = ""
+		print("s")
 		print("ticker = " + ticker)
 
+		print("a")
 		body = mcs[i].find_element_by_xpath("div[@class=\"media-body\"]")
 
+		print("b")
 		title_a = body.find_element_by_xpath("div[@class=\"title\"]/a")
 
+		print("c")
 		title_text = title_a.text
+		print("d")
 		print("title_text = " + title_text)
 
+		print("e")
 		title_href = title_a.get_attribute("href")
+		print("f")
 		print("title_href = " + title_href)
 
+		print("g")
 		contents = body.find_element_by_xpath("div[@class=\"bullets\"]").text
+		print("h")
 		print("contents = " + contents)
 
+		print("i")
 		hour = body.find_element_by_xpath("div[@class=\"mc-share-info\"]/span[@class=\"item-date\"]").text
+		print("j")
 		print("hour = " + hour)
 
+		print("k")
 		date = str(parser.parse(day + " " + hour))
+		print("l")
 		print("date = " + date)
 
+		print("v")
 		columns = ["date", "ticker", "title", "url", "contents"]
+		print("w")
 		values = [date, ticker, title_text, title_href, contents]
+		print("x")
 		database.Insert(table, columns, values)
 
 	try :
+		print("y")
 		driver.find_element_by_xpath("descendant::li[@class=\"next\"]")
 	except :
+		print("z")
 		break
 
 	page += 1
