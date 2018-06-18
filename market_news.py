@@ -15,6 +15,8 @@ user = "fbonnin"
 password = "q3p@ssFB!!"
 table = "news"
 
+server = 1
+
 class DATABASE :
 
 	connection = None
@@ -137,9 +139,9 @@ while page <= last_page :
 		print("date = " + date)
 
 		print("v")
-		columns = ["date", "ticker", "title", "url", "contents"]
+		columns = ["date", "ticker", "title", "url", "contents", "server", "date_extract"]
 		print("w")
-		values = [date, ticker, title_text, title_href, contents]
+		values = [date, ticker, title_text, title_href, contents, str(server), str(datetime.datetime.now())]
 		print("x")
 		database.Insert(table, columns, values)
 
