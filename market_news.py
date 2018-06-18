@@ -3,6 +3,7 @@ from selenium.webdriver.common.keys import Keys
 
 import mysql.connector
 
+import datetime
 import time
 from dateutil import parser
 
