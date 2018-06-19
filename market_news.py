@@ -7,8 +7,8 @@ import datetime
 import time
 from dateutil import parser
 
-first_page = 0
-last_page = 10
+first_page = 6750
+last_page = 9000
 
 database_server = "167.114.239.198"
 database_name = "fbonnin"
@@ -16,7 +16,7 @@ user = "fbonnin"
 password = "q3p@ssFB!!"
 table = "news"
 
-server = 1
+server = 6
 
 class DATABASE :
 
@@ -82,11 +82,13 @@ while page <= last_page :
 
 	driver.get(url + str(page))
 
-	try :
-		mcs = driver.find_elements_by_xpath("descendant::li[@class=\"mc\"]")
-		print("len(mcs) = " + str(len(mcs)))
-	except :
+	mcs = driver.find_elements_by_xpath("descendant::li[@class=\"mc\"]")
+	print("len(mcs) = " + str(len(mcs)))
+
+	if len(mcs) == 0 :
+		print("missing pAAAAge !!!")
 		missing_pages.append(page)
+		page += 1
 		continue
 
 	for i in range(len(mcs)) :
