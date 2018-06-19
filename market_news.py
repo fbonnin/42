@@ -8,7 +8,7 @@ import time
 from dateutil import parser
 
 first_page = 0
-last_page = 9000
+last_page = 10
 
 database_server = "167.114.239.198"
 database_name = "fbonnin"
@@ -76,14 +76,22 @@ database.Connect(database_server, database_name, user, password)
 url = "https://seekingalpha.com/market-news/all?page="
 page = first_page + 1
 
+missing_pages = []
+
 while page <= last_page :
 
 	driver.get(url + str(page))
 
-	mcs = driver.find_elements_by_xpath("descendant::li[@class=\"mc\"]")
-	print("len(mcs) = " + str(len(mcs)))
+	try :
+		mcs = driver.find_elements_by_xpath("descendant::li[@class=\"mc\"]")
+		print("len(mcs) = " + str(len(mcs)))
+	except :
+		missing_pages.append(page)
+		continue
 
 	for i in range(len(mcs)) :
+
+		print("i = " + str(i))
 
 		print("t")
 		date_titles = mcs[i].find_elements_by_xpath("preceding-sibling::li[@class=\"date-title\"]")
@@ -108,43 +116,50 @@ while page <= last_page :
 		print("s")
 		print("ticker = " + ticker)
 
-		print("a")
-		body = mcs[i].find_element_by_xpath("div[@class=\"media-body\"]")
+		try :
 
-		print("b")
-		title_a = body.find_element_by_xpath("div[@class=\"title\"]/a")
+			print("a")
+			body = mcs[i].find_element_by_xpath("div[@class=\"media-body\"]")
 
-		print("c")
-		title_text = title_a.text
-		print("d")
-		print("title_text = " + title_text)
+			print("b")
+			title_a = body.find_element_by_xpath("div[@class=\"title\"]/a")
 
-		print("e")
-		title_href = title_a.get_attribute("href")
-		print("f")
-		print("title_href = " + title_href)
+			print("c")
+			title_text = title_a.text
+			print("d")
+			print("title_text = " + title_text)
 
-		print("g")
-		contents = body.find_element_by_xpath("div[@class=\"bullets\"]").text
-		print("h")
-		print("contents = " + contents)
+			print("e")
+			title_href = title_a.get_attribute("href")
+			print("f")
+			print("title_href = " + title_href)
 
-		print("i")
-		hour = body.find_element_by_xpath("div[@class=\"mc-share-info\"]/span[@class=\"item-date\"]").text
-		print("j")
-		print("hour = " + hour)
+			print("g")
+			contents = body.find_element_by_xpath("div[@class=\"bullets\"]").text
+			print("h")
+			print("contents = " + contents)
 
-		print("k")
-		date = str(parser.parse(day + " " + hour))
-		print("l")
-		print("date = " + date)
+			print("i")
+			hour = body.find_element_by_xpath("div[@class=\"mc-share-info\"]/span[@class=\"item-date\"]").text
+			print("j")
+			print("hour = " + hour)
 
-		print("v")
-		columns = ["date", "ticker", "title", "url", "contents", "server", "date_extract"]
-		print("w")
-		values = [date, ticker, title_text, title_href, contents, str(server), str(datetime.datetime.now())]
-		print("x")
-		database.Insert(table, columns, values)
+			print("k")
+			date = str(parser.parse(day + " " + hour))
+			print("l")
+			print("date = " + date)
+
+			print("v")
+			columns = ["date", "ticker", "title", "url", "contents", "server", "date_extract"]
+			print("w")
+			values = [date, ticker, title_text, title_href, contents, str(server), str(datetime.datetime.now())]
+			print("x")
+			database.Insert(table, columns, values)
+
+		except StaleElementReferenceException :
+
+			print("STALE :: " + str(i))
+			input()
 
 	try :
 		print("y")
@@ -155,5 +170,8 @@ while page <= last_page :
 
 	page += 1
 
+print("MISSING PAGES")
+for missing_page in missing_pages :
+	print(missing_page)
 input()
 driver.close()
