@@ -7,8 +7,8 @@ import datetime
 import time
 from dateutil import parser
 
-first_page = 6750
-last_page = 9000
+first_page = 0
+last_page = 10
 
 database_server = "167.114.239.198"
 database_name = "fbonnin"
@@ -16,7 +16,7 @@ user = "fbonnin"
 password = "q3p@ssFB!!"
 table = "news"
 
-server = 6
+server = 1
 
 class DATABASE :
 
@@ -82,13 +82,12 @@ while page <= last_page :
 
 	driver.get(url + str(page))
 
-	mcs = driver.find_elements_by_xpath("descendant::li[@class=\"mc\"]")
-	print("len(mcs) = " + str(len(mcs)))
-
-	if len(mcs) == 0 :
-		print("missing pAAAAge !!!")
+	try :
+		mcs = driver.find_elements_by_xpath("descendant::li[@class=\"mc\"]")
+		print("len(mcs) = " + str(len(mcs)))
+	except :
 		missing_pages.append(page)
-		page += 1
+		time.sleep(60 * 2)
 		continue
 
 	for i in range(len(mcs)) :
@@ -158,7 +157,7 @@ while page <= last_page :
 			print("x")
 			database.Insert(table, columns, values)
 
-		except StaleElementReferenceException :
+		except :
 
 			print("STALE :: " + str(i))
 			input()
