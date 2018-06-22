@@ -472,7 +472,7 @@ class InsidersSpider(scrapy.Spider) :
 							msg['From'] = 'htl.insiders@gmail.com'
 							msg['To'] = 'op@htl-capital.com'
 							msg['Subject'] = 'Insiders - Problem detected (server ' + str(server) + ')'
-							message = 'Insiders - Problem detected (server ' + str(server) + ')'
+							message = 'Insiders - Problem detected (server ' + str(server) + ') : ' + str(nb_updates) + ' updates without data'
 							msg.attach(MIMEText(message))
 							mailserver = smtplib.SMTP('smtp.gmail.com', 587)
 							mailserver.ehlo()
