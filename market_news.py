@@ -8,7 +8,7 @@ import time
 from dateutil import parser
 
 first_page = 0
-last_page = 10
+last_page = 500
 
 database_server = "167.114.239.198"
 database_name = "fbonnin"
@@ -16,7 +16,7 @@ user = "fbonnin"
 password = "q3p@ssFB!!"
 table = "news"
 
-server = 1
+server = 0
 
 class DATABASE :
 
