@@ -8,13 +8,13 @@ import time
 from dateutil import parser
 
 first_page = 0
-last_page = 999
+last_page = 196
 
 database_server = "167.114.239.198"
 database_name = "fbonnin"
 user = "fbonnin"
 password = "q3p@ssFB!!"
-table = "zTech"
+table = "zCommodities"
 
 server = 0
 
@@ -73,7 +73,7 @@ assert "No results found." not in driver.page_source"""
 database = DATABASE()
 database.Connect(database_server, database_name, user, password)
 
-url = "https://seekingalpha.com/market-news/tech?page="
+url = "https://seekingalpha.com/market-news/commodities?page="
 page = first_page + 1
 
 missing_pages = []

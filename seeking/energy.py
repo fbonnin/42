@@ -85,10 +85,15 @@ while page <= last_page :
 	try :
 		mcs = driver.find_elements_by_xpath("descendant::li[@class=\"mc\"]")
 		print("len(mcs) = " + str(len(mcs)))
+		if len(mcs) == 0 :
+			missing_pages.append(page)
+			time.sleep(60 * 2)
+			page += 1
+			continue
 	except :
 		missing_pages.append(page)
 		time.sleep(60 * 2)
-		page = page + 1
+		page += 1
 		continue
 
 	mybool = True
@@ -97,6 +102,7 @@ while page <= last_page :
 
 		try :
 
+			print("page = " + str(page))
 			print("i = " + str(i))
 
 			print("t")
@@ -160,11 +166,11 @@ while page <= last_page :
 			print("x")
 			database.Insert(table, columns, values)
 
-		except :
-
-			print("STALE :: " + str(i))
+		except Exception as e :
+			print(e)
 			mybool = False
-			#input()
+			print("PROBLEM")
+			input()
 			break
 
 	try :
