@@ -1,0 +1,9 @@
+
+HOST = "167.114.235.165"
+USER = "vhuynh"
+PASSWD = "Q3v75!"
+DBNAME = "businessWire"
+CHARSET = 'utf8'
+
+FIRST_PAGE = 0
+LAST_PAGE = 61000
