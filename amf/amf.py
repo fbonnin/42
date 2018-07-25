@@ -265,6 +265,90 @@ class Notification() :
 	def __init__(self) : 
 		self.transactions = []
 
+def parse2(url, text, database) :
+
+	i_text = 0
+
+	part = read_until(text, i_text, "DECLARANT.")
+	i_text += len(part)
+	i_text += 10
+	part = read_until(text, i_text, "DECLARANT")
+	i_text += len(part)
+	emetteur = part
+	part = read_until(text, i_text, ":")
+	i_text += len(part)
+	i_text += 1
+	part = read_until(text, i_text, "INSTRUMENT")
+	i_text += len(part)
+	dirigeant = part
+	part = read_until(text, i_text, ":")
+	i_text += len(part)
+	i_text += 1
+	part = read_until(text, i_text, "NATURE")
+	i_text += len(part)
+	instrument = part
+	part = read_until(text, i_text, ":")
+	i_text += len(part)
+	i_text += 1
+	part = read_until(text, i_text, "DATE")
+	i_text += len(part)
+	nature = part
+	part = read_until(text, i_text, ":")
+	i_text += len(part)
+	i_text += 1
+	part = read_until(text, i_text, "DATE")
+	i_text += len(part)
+	date_transaction = part
+	part = read_until(text, i_text, ":")
+	i_text += len(part)
+	i_text += 1
+	part = read_until(text, i_text, "LIEU")
+	i_text += len(part)
+	date_notification = part
+	part = read_until(text, i_text, ":")
+	i_text += len(part)
+	i_text += 1
+	part = read_until(text, i_text, "PRIX")
+	i_text += len(part)
+	lieu = part
+	part = read_until(text, i_text, ":")
+	i_text += len(part)
+	i_text += 1
+	part = read_until(text, i_text, "MONTANT")
+	i_text += len(part)
+	prix = part
+	part = read_until(text, i_text, ":")
+	i_text += len(part)
+	i_text += 1
+	part = read_until_2(text, i_text, "INFORMATIONS", "\"Les")
+	i_text += len(part)
+	montant = part
+	print(text[i_text : i_text + 4])
+	if text[i_text : i_text + 4] == "INFO" :
+		print("coucou")
+		part = read_until(text, i_text, ":")
+		i_text += len(part)
+		i_text += 1
+		part = read_until(text, i_text, "\"Les")
+		i_text += len(part)
+		commentaires = part
+
+	print(url)
+	print(emetteur)
+	print(dirigeant)
+	print(instrument)
+	print(nature)
+	print(date_transaction)
+	print(date_notification)
+	print(lieu)
+	print(prix)
+	print(montant)
+	print(commentaires)
+
+	columns = ["lien", "dirigeant", "emetteur", "date_transaction", "lieu", "nature", "instrument", "prix", "montant", "date_notification", "commentaires"]
+	values = [url, dirigeant, emetteur, date_transaction, lieu, nature, instrument, prix, montant, date_notification, commentaires]
+	database.Insert(table, columns, values)
+
 def read_until(text, i_text, end) :
 
 	result = ""
