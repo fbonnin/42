@@ -5,12 +5,12 @@ import os
 import mysql.connector
 
 first_page = 0
-last_page = 1
+last_page = 10
 
 database_server = "localhost"
-database_name = "database_test"
-user = "root"
-password = ""
+database_name = "fbonnin"
+user = "fbonnin"
+password = "q3p@ssFB!!"
 table = "amf"
 
 class DATABASE :
@@ -63,7 +63,7 @@ class AMFspider(scrapy.Spider) :
 
 	nb_documents = 0
 	missing_pages = []
-	database = Database()
+	database = DATABASE()
 
 	def __init__(self) :
 
