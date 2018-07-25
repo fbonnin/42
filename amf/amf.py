@@ -4,8 +4,8 @@ from scrapy.xlib.pydispatch import dispatcher
 import os
 import mysql.connector
 
-first_page = 0
-last_page = 10
+first_page = 926
+last_page = 927
 
 database_server = "localhost"
 database_name = "fbonnin"
@@ -46,6 +46,7 @@ class DATABASE :
 	def Insert(self, table, columns, values) :
 		query = self.Get_query_insert(table, columns, values)
 		try :
+		
 			self.Execute(query)
 		except Exception as e :
 			print("QUERY=" + query)
@@ -58,9 +59,11 @@ class AMFspider(scrapy.Spider) :
 
 	custom_settings = {
 		'DOWNLOAD_DELAY' : 0.1,
-		'RANDOMIZE_DOWNLOAD_DELAY' : True
+		'RANDOMIZE_DOWNLOAD_DELAY' : True,
+		'CONCURRENT_REQUESTS' : 1
 	}
 
+	parsing_type = 2
 	nb_documents = 0
 	missing_pages = []
 	database = DATABASE()
@@ -116,7 +119,16 @@ class AMFspider(scrapy.Spider) :
 		f = open(filename + ".txt", "r")
 		text = f.read()
 		f.close()
-		parse1(response.url, text, self.database)
+		"""if response.meta["ID"] == "2016DD449762" :
+			self.parsing_type = 2
+		if self.parsing_type == 1 :
+			parse1(response.url, text, self.database)
+		elif self.parsing_type == 2 :
+			parse2(response.url, text, self.database)"""
+		if response.meta["ID"] > "2016DD449762" and response.meta["ID"] < "208" :
+			parse1(response.url, text, self.database)
+		else :
+			parse2(response.url, text, self.database)
 
 	def spider_closed(self, spider) :
 
@@ -125,6 +137,8 @@ class AMFspider(scrapy.Spider) :
 			print(self.missing_pages[i])
 
 def parse1(url, text, database) :
+
+	print("PARSING 1")
 
 	#print(text)
 	i_text = 0
@@ -267,6 +281,8 @@ class Notification() :
 
 def parse2(url, text, database) :
 
+	print("PARSING 2 : ")
+
 	i_text = 0
 
 	part = read_until(text, i_text, "DECLARANT.")
@@ -323,6 +339,7 @@ def parse2(url, text, database) :
 	part = read_until_2(text, i_text, "INFORMATIONS", "\"Les")
 	i_text += len(part)
 	montant = part
+	commentaires = ""
 	print(text[i_text : i_text + 4])
 	if text[i_text : i_text + 4] == "INFO" :
 		print("coucou")
@@ -333,9 +350,9 @@ def parse2(url, text, database) :
 		i_text += len(part)
 		commentaires = part
 
-	print(url)
-	print(emetteur)
-	print(dirigeant)
+	print("url = " + url)
+	print("emetteur = " + emetteur)
+	print("dirigeant = " + dirigeant)
 	print(instrument)
 	print(nature)
 	print(date_transaction)
