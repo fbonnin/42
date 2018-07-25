@@ -63,7 +63,6 @@ class AMFspider(scrapy.Spider) :
 		'CONCURRENT_REQUESTS' : 1
 	}
 
-	parsing_type = 2
 	nb_documents = 0
 	missing_pages = []
 	database = DATABASE()
@@ -151,13 +150,13 @@ def parse1(url, text, database) :
 	i_text += 1
 	part = read_until(text, i_text, "NOTIFICATION")
 	i_text += len(part)
-	n.dirigeant = part
+	n.dirigeant = part.strip()
 	part = read_until(text, i_text, ":")
 	i_text += len(part)
 	i_text += 1
 	part = read_until(text, i_text, "COORDONNEES")
 	i_text += len(part)
-	n.type_notification = part
+	n.type_notification = part.strip()
 	part = read_until(text, i_text, "NOM")
 	i_text += len(part)
 	part = read_until(text, i_text, ":")
@@ -165,7 +164,7 @@ def parse1(url, text, database) :
 	i_text += 1
 	part = read_until_2(text, i_text, "LEI", "DETAIL")
 	i_text += len(part)
-	n.emetteur = part
+	n.emetteur = part.strip()
 	part = read_until(text, i_text, "DETAIL")
 	i_text += len(part)
 	while text[i_text : i_text + 6] == "DETAIL" :
@@ -177,25 +176,25 @@ def parse1(url, text, database) :
 		i_text += 1
 		part = read_until(text, i_text, "LIEU")
 		i_text += len(part)
-		t.date = part
+		t.date = part.strip()
 		part = read_until(text, i_text, ":")
 		i_text += len(part)
 		i_text += 1
 		part = read_until(text, i_text, "NATURE")
 		i_text += len(part)
-		t.lieu = part
+		t.lieu = part.strip()
 		part = read_until(text, i_text, ":")
 		i_text += len(part)
 		i_text += 1
 		part = read_until(text, i_text, "DESCRIPTION")
 		i_text += len(part)
-		t.nature = part
+		t.nature = part.strip()
 		part = read_until(text, i_text, ":")
 		i_text += len(part)
 		i_text += 1
 		part = read_until_2(text, i_text, "CODE", "INFORMATION")
 		i_text += len(part)
-		t.instrument = part
+		t.instrument = part.strip()
 		part = read_until(text, i_text, "AGREGEES")
 		i_text += len(part)
 		part = read_until(text, i_text, "PRIX")
@@ -205,13 +204,13 @@ def parse1(url, text, database) :
 		i_text += 1
 		part = read_until(text, i_text, "VOLUME")
 		i_text += len(part)
-		t.prix = part
+		t.prix = part.strip()
 		part = read_until(text, i_text, ":")
 		i_text += len(part)
 		i_text += 1
 		part = read_until(text, i_text, "TRANSACTION")
 		i_text += len(part)
-		t.volume = part
+		t.volume = part.strip()
 		part = read_until(text, i_text, "LIE")
 		i_text += len(part)
 		part = read_until(text, i_text, ":")
@@ -219,7 +218,7 @@ def parse1(url, text, database) :
 		i_text += 1
 		part = read_until_2(text, i_text, "DETAIL", "DATE")
 		i_text += len(part)
-		t.lie = part
+		t.lie = part.strip()
 		n.transactions.append(t)
 
 		print(t.date)
@@ -235,13 +234,13 @@ def parse1(url, text, database) :
 	i_text += 1
 	part = read_until(text, i_text, "COMMENTAIRE")
 	i_text += len(part)
-	n.date = part
+	n.date = part.strip()
 	part = read_until(text, i_text, ":")
 	i_text += len(part)
 	i_text += 1
 	part = read_until(text, i_text, "\"")
 	i_text += len(part)
-	n.commentaires = part
+	n.commentaires = part.strip()
 
 	print(n.lien)
 	print(n.dirigeant)
@@ -290,55 +289,55 @@ def parse2(url, text, database) :
 	i_text += 10
 	part = read_until(text, i_text, "DECLARANT")
 	i_text += len(part)
-	emetteur = part
+	emetteur = part.strip()
 	part = read_until(text, i_text, ":")
 	i_text += len(part)
 	i_text += 1
 	part = read_until(text, i_text, "INSTRUMENT")
 	i_text += len(part)
-	dirigeant = part
+	dirigeant = part.strip()
 	part = read_until(text, i_text, ":")
 	i_text += len(part)
 	i_text += 1
 	part = read_until(text, i_text, "NATURE")
 	i_text += len(part)
-	instrument = part
+	instrument = part.strip()
 	part = read_until(text, i_text, ":")
 	i_text += len(part)
 	i_text += 1
 	part = read_until(text, i_text, "DATE")
 	i_text += len(part)
-	nature = part
+	nature = part.strip()
 	part = read_until(text, i_text, ":")
 	i_text += len(part)
 	i_text += 1
 	part = read_until(text, i_text, "DATE")
 	i_text += len(part)
-	date_transaction = part
+	date_transaction = part.strip()
 	part = read_until(text, i_text, ":")
 	i_text += len(part)
 	i_text += 1
 	part = read_until(text, i_text, "LIEU")
 	i_text += len(part)
-	date_notification = part
+	date_notification = part.strip()
 	part = read_until(text, i_text, ":")
 	i_text += len(part)
 	i_text += 1
 	part = read_until(text, i_text, "PRIX")
 	i_text += len(part)
-	lieu = part
+	lieu = part.strip()
 	part = read_until(text, i_text, ":")
 	i_text += len(part)
 	i_text += 1
 	part = read_until(text, i_text, "MONTANT")
 	i_text += len(part)
-	prix = part
+	prix = part.strip()
 	part = read_until(text, i_text, ":")
 	i_text += len(part)
 	i_text += 1
 	part = read_until_2(text, i_text, "INFORMATIONS", "\"Les")
 	i_text += len(part)
-	montant = part
+	montant = part.strip()
 	commentaires = ""
 	print(text[i_text : i_text + 4])
 	if text[i_text : i_text + 4] == "INFO" :
@@ -348,7 +347,7 @@ def parse2(url, text, database) :
 		i_text += 1
 		part = read_until(text, i_text, "\"Les")
 		i_text += len(part)
-		commentaires = part
+		commentaires = part.strip()
 
 	print("url = " + url)
 	print("emetteur = " + emetteur)
