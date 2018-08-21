@@ -1,0 +1,11 @@
+reference :
+Get the current value for the specified securities and fields.
+
+histo :
+Get the historical values for the specified securities, fields and date range.
+
+histo1 :
+Get the historical values for the specified securities, fields and date range.
+Adds an ID (primary key) formed by concatenation of security name and date (example: IBM20180101)
+If the ID already exists in the database, the corresponding data is updated.
+If the "chg" field is requested, it is replaced by CHG_PCT_1D divided by 100.

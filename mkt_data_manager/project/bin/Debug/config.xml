@@ -1,0 +1,93 @@
+﻿<configuration>
+
+	<sources>
+		<source>
+			<id>bloomberg</id> <!-- give a name to the source -->
+			<type>bloomberg</type> <!-- possible values : bloomberg -->
+		</source>
+		<!-- add as many sources as you want -->
+	</sources>
+
+	<databases>
+		<database>
+			<id>database</id> <!-- give a name to the database -->
+			<type>mysql</type> <!-- possible values : mysql -->
+			<host>localhost</host> <!-- example : localhost -->
+			<name>database_test</name> <!-- name of the database -->
+			<user>root</user> 
+			<password></password>
+		</database>
+		<!-- add as many databases as you want -->
+	</databases>
+
+	<operations>
+		
+		<operation>
+		
+			<!-- Exemple d'opération de type histo1 -->
+			<type>reference</type> <!-- possible values : reference, histo, histo1 -->
+			
+			<securities_file>securities.txt</securities_file> <!-- file that contains the list of securities -->
+			<!--<start_date>20180601</start_date>--> <!-- format : YYYYMMDD. min = 19000101 -->
+			<!--<end_date></end_date>--> <!-- an empty date means current date -->
+			<!--<today_included>true</today_included>-->
+			<!--<periodicity>DAILY</periodicity>--> <!-- possible values : DAILY, WEEKLY, MONTHLY, QUARTERLY, SEMI_ANNUALLY, YEARLY -->
+			<source>bloomberg</source> <!-- source id -->
+			<database>database</database> <!-- database id -->
+			<table>test</table> <!-- table in which you want to insert the data -->
+			<update>true</update> <!-- if true, then download data only for securities that have not been downloaded today. optional. default value : false -->
+			<column_security>security</column_security> <!-- name of the column in which you want to insert the name of the security. optional. default value : security -->
+			<!--<column_date>date</column_date>--> <!-- name of the column in which you want to insert the date. optional. default value : date -->
+			
+			<!-- List of the requests to make.
+			The possibility to make several requests allows to set different options for the fields.
+			For example : PX_LAST with adjustmentSplit and PX_LAST without adjustmentSplit -->
+			<requests>
+				<request>
+					<fields>
+						<field>
+							<name>PX_LAST</name>
+							<column>last</column>
+						</field>
+					</fields>
+					<!--<options>
+						<option>
+							<name>adjustmentSplit</name>
+							<value>false</value>
+						</option>
+					</options>-->
+				</request>
+				<request>
+					<fields>
+						<field>
+							<name>PX_LAST</name>
+							<column>last_adj</column>
+						</field>
+					</fields>
+					<!--<options>
+						<option>
+							<name>adjustmentSplit</name>
+							<value>true</value>
+						</option>
+					</options>-->
+				</request>
+				<request>
+					<fields>
+						<field>
+							<name>PX_VOLUME</name>
+							<column>volume</column>
+						</field>
+						<field>
+							<name>SHORT_INT</name>
+							<column>short_int</column>
+						</field>
+					</fields>
+				</request>
+				<!-- add as many requests as you want -->
+			</requests>					
+		</operation>		
+		<!-- add as many operations as you want -->
+		
+	</operations>
+	
+</configuration>
