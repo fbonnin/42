@@ -8,10 +8,8 @@ function ft_split($s)
 	$mode = 0;
 	for ($i = 0; $i < strlen($s); $i++)
 	{
-		echo "$mode\n";
 		if ($s[$i] != ' ')
 		{
-			echo "HERE\n";
 			if ($mode == 0)
 			{
 				$word = $s[$i];
@@ -26,7 +24,6 @@ function ft_split($s)
 		{
 			if ($mode == 1)
 			{
-				echo "THERE\n";
 				$result[$nb_words] = $word;
 				$nb_words++;
 			}
@@ -37,6 +34,7 @@ function ft_split($s)
 	{
 		$result[$nb_words] = $word;
 	}
+	sort($result);
 	return $result;
 }
 
