@@ -6,6 +6,7 @@ function ft_split($s)
 {
 	$nb_words = 0;
 	$mode = 0;
+	$result = array();
 	for ($i = 0; $i < strlen($s); $i++)
 	{
 		if ($s[$i] != ' ')
@@ -36,6 +37,21 @@ function ft_split($s)
 	}
 	sort($result);
 	return $result;
+}
+
+$total = "";
+
+for ($i = 1; $i < count($argv); $i++)
+{
+	$total = $total . $argv[$i] . " ";
+}
+
+
+$array = ft_split($total);
+
+for ($i = 0; $i < count($array); $i++)
+{
+	echo "$array[$i]\n";
 }
 
 ?>

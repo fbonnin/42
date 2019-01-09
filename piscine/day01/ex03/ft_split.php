@@ -1,5 +1,3 @@
-#!/usr/bin/php
-
 <?PHP
 
 function ft_split($s)
@@ -36,21 +34,6 @@ function ft_split($s)
 	}
 	sort($result);
 	return $result;
-}
-
-$total = "";
-
-for ($i = 1; $i < count($argv); $i++)
-{
-	$total = $total . $argv[$i] . " ";
-}
-
-
-$array = ft_split($total);
-
-for ($i = 0; $i < count($array); $i++)
-{
-	echo "$array[$i]\n";
 }
 
 ?>
